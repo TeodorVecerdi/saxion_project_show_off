@@ -1,0 +1,61 @@
+﻿using System;
+using System.Collections.Generic;
+using NaughtyAttributes;
+using Runtime.Data;
+using UnityCommons;
+using UnityEngine;
+
+namespace Runtime {
+    public class InventoryTest : MonoBehaviour {
+        public List<ItemSO> AllItems;
+        public List<CraftingRecipe> AllRecipes;
+        public Inventory Inventory;
+
+        public int RecipeIndex;
+
+        [Button]
+        public void AddRandomItem() {
+            var item = Rand.ListItem(AllItems);
+            var count = Rand.Range(1, 4);
+            Inventory.AddItem(item, count);
+        }
+
+        [Button]
+        public void RemoveRandomItem() {
+            var item = Rand.ListItem(AllItems);
+            var count = Rand.Range(1, 4);
+            try {
+                Inventory.RemoveItem(item, count);
+            } catch {
+                Debug.Log("Not enough items in inventory");
+            }
+        }
+
+        [Button]
+        public void CanCraftSelectedRecipe() {
+            Debug.Log(CanCraftRecipe(AllRecipes[RecipeIndex]) ? "Yes" : "No");
+        }
+
+        [Button]
+        public void CraftSelectedRecipe() {
+            var recipe = AllRecipes[RecipeIndex];
+            if(!CanCraftRecipe(recipe)) return;
+            
+            foreach (var recipeInput in recipe.Inputs) {
+                Inventory.RemoveItem(recipeInput.Item, recipeInput.Count);
+            }
+            foreach (var recipeOutput in recipe.Outputs) {
+                Inventory.AddItem(recipeOutput.Item, recipeOutput.Count);
+            }
+        }
+
+        public bool CanCraftRecipe(CraftingRecipe recipe) {
+            foreach (var recipeInput in recipe.Inputs) {
+                if (Inventory.GetItemCount(recipeInput.Item) < recipeInput.Count) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+}
