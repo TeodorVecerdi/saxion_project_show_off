@@ -10,11 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 75cf08936a57451dafe0b3a1d335c221, type: 3}
-  m_Name: PlasticToPlastic
+  m_Name: PaperPlasticToGlass
   m_EditorClassIdentifier: 
-  Inputs:
-  - Item: {fileID: 11400000, guid: 4bce4b42e3e7157439edede8569afc9e, type: 2}
-    Count: 1
-  Outputs:
-  - Item: {fileID: 11400000, guid: 4bce4b42e3e7157439edede8569afc9e, type: 2}
-    Count: 1
+  inputs:
+  - item: {fileID: 11400000, guid: 4bce4b42e3e7157439edede8569afc9e, type: 2}
+    count: 2
+  - item: {fileID: 11400000, guid: fec93a18793254344b0eb7b9c697fd84, type: 2}
+    count: 5
+  outputs:
+  - item: {fileID: 11400000, guid: 30d4a134f1adb6b479af094e1fdf25f7, type: 2}
+    count: 2
