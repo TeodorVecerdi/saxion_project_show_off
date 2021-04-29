@@ -1,0 +1,4 @@
+[submodule "Project Show Off/Assets/Plugins/UnityCommons"]
+	path = Project Show Off/Assets/Plugins/UnityCommons
+	url = https://github.com/TeodorVecerdi/UnityCommons
+	branch = development
