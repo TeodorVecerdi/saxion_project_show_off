@@ -5,10 +5,10 @@ using UnityEngine;
 namespace Runtime.Data {
     [Serializable]
     public class ItemStack : IEquatable<ItemStack> {
-        [SerializeField] private ItemSO item;
+        [SerializeField] private Item item;
         [SerializeField] private int count;
         
-        public ItemSO Item => item;
+        public Item Item => item;
         
         public int Count {
             get => count;
@@ -16,7 +16,7 @@ namespace Runtime.Data {
         }
         
 
-        public ItemStack(ItemSO item, int count) {
+        public ItemStack(Item item, int count) {
             this.item = item;
             this.count = count;
         }

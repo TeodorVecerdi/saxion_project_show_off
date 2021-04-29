@@ -12,7 +12,7 @@ namespace Runtime.Data {
             items = new List<ItemStack>();
         }
 
-        public void AddItem(ItemSO item, int count) {
+        public void AddItem(Item item, int count) {
             if(count <= 0) return;
             var itemStack = GetItemStack(item);
             
@@ -26,7 +26,7 @@ namespace Runtime.Data {
 
         public void AddItem(ItemStack itemStack) => AddItem(itemStack.Item, itemStack.Count);
 
-        public void RemoveItem(ItemSO item, int count) {
+        public void RemoveItem(Item item, int count) {
             if(count <= 0) return;
             
             var itemStack = GetItemStack(item);
@@ -41,12 +41,12 @@ namespace Runtime.Data {
 
         public void RemoveItem(ItemStack itemStack) => RemoveItem(itemStack.Item, itemStack.Count);
 
-        public int GetItemCount(ItemSO item) {
+        public int GetItemCount(Item item) {
             var itemStack = GetItemStack(item);
             return itemStack == null ? 0 : itemStack.Count;
         }
 
-        private ItemStack GetItemStack(ItemSO item) {
+        private ItemStack GetItemStack(Item item) {
             return items.FirstOrDefault(stack => stack.Item == item);
         }
     }
