@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Runtime.Data {
     [Serializable]
-    public class ItemStack {
+    public class ItemStack : IEquatable<ItemStack> {
         public ItemSO Item => item;
         
         public int Count {
@@ -15,7 +15,12 @@ namespace Runtime.Data {
         [SerializeField] private ItemSO item;
         [SerializeField] private int count;
 
-        protected bool Equals(ItemStack other) {
+        public ItemStack(ItemSO item, int count) {
+            this.item = item;
+            this.count = count;
+        }
+
+        public bool Equals(ItemStack other) {
             return Comparer.Equals(this, other);
         }
 

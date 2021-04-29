@@ -6,4 +6,3 @@ namespace Runtime.Data {
         [SerializeField] private string Name;
     }
 }
-
