@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Runtime {
     public class InventoryTest : MonoBehaviour {
-        public List<ItemSO> AllItems;
+        public List<Item> AllItems;
         public List<CraftingRecipe> AllRecipes;
         public Inventory Inventory;
 

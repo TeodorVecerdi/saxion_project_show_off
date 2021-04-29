@@ -17,7 +17,7 @@ namespace Editor.Utils.Components {
             this.owner = owner;
             this.itemStack = itemStack;
 
-            itemObjectField = new ObjectField("Item") {name = "ItemField", objectType = typeof(ItemSO)};
+            itemObjectField = new ObjectField("Item") {name = "ItemField", objectType = typeof(Item)};
             countField = new IntegerField("Count") {name = "CountField"};
             
             var remove = new Button(OnRemove) {name = "RemoveButton", text = "", tooltip = "Remove"};
