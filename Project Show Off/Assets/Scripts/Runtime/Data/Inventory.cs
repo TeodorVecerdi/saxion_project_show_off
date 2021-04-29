@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace Runtime.Data {
+    [Serializable]
     public class Inventory {
-        private readonly List<ItemStack> items;
+        [SerializeField] private List<ItemStack> items;
 
         public Inventory() {
             items = new List<ItemStack>();
@@ -22,6 +24,8 @@ namespace Runtime.Data {
             itemStack.Count += count;
         }
 
+        public void AddItem(ItemStack itemStack) => AddItem(itemStack.Item, itemStack.Count);
+
         public void RemoveItem(ItemSO item, int count) {
             if(count <= 0) return;
             
@@ -34,6 +38,8 @@ namespace Runtime.Data {
                 items.Remove(itemStack);
             }
         }
+
+        public void RemoveItem(ItemStack itemStack) => RemoveItem(itemStack.Item, itemStack.Count);
 
         public int GetItemCount(ItemSO item) {
             var itemStack = GetItemStack(item);
