@@ -8,7 +8,7 @@ namespace Runtime.Data {
         [SerializeField] private List<ItemStack> inputs;
         [SerializeField] private List<ItemStack> outputs;
 
-        public IReadOnlyList<ItemStack> Inputs => inputs.AsReadOnly();
-        public IReadOnlyList<ItemStack> Outputs => outputs.AsReadOnly();
+        public List<ItemStack> Inputs => inputs;
+        public List<ItemStack> Outputs => outputs;
     }
 }

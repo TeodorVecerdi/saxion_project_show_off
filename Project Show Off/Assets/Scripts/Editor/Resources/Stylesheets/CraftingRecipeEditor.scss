@@ -1,0 +1,96 @@
+﻿#CraftingRecipeEditor {
+    // Fix inspector margin
+    margin-left: -14px;
+    margin-right: -5px;
+    
+    padding: 6px;
+    flex-direction: row;
+    max-height: 400px;
+    
+    // debug
+    //min-height: 150px;
+    
+
+    VisualElement#Inputs {
+        border-color: #797979;
+        border-width: 1px;
+        border-radius: 4px;
+        
+        padding: 10px;
+        flex-grow: 1;
+        
+        justify-content: center;
+        
+        ScrollView#InputsContainer {
+            VisualElement#unity-content-viewport.unity-scroll-view__content-viewport {
+                justify-content: center;
+            }
+            VisualElement#unity-content-container.unity-scroll-view__content-container {
+                // contents
+            }
+        }
+    }
+
+    VisualElement#Outputs {
+        border-color: #797979;
+        border-width: 1px;
+        border-radius: 4px;
+        
+        
+        padding: 10px;
+        flex-grow: 1;
+        justify-content: center;
+        
+        ScrollView#OutputsContainer {
+            VisualElement#unity-content-viewport.unity-scroll-view__content-viewport {
+                justify-content: center;
+            }
+            VisualElement#unity-content-container.unity-scroll-view__content-container {
+                // contents
+            }
+        }
+    }
+    
+    #Middle {
+        flex-shrink: 1;
+        justify-content: center;
+        Image#Arrow {
+            background-image: resource("Images/ArrowRight");
+            width: 48px;
+            height: 48px;
+        }
+    }
+}
+ItemStackElement {
+    ObjectField#ItemField {
+        height: 20px;
+        margin-bottom: 4px;
+        & > Label {
+            min-width: 48px;
+        }
+    }
+    
+    IntegerField#CountField {
+        padding-right: 20px;
+        height: 20px;
+
+        & > Label {
+            min-width: 48px;
+        }
+    }
+    
+    Button#RemoveButton {
+        position: absolute;
+        right: 0;
+        bottom: 2px;
+        padding: 0;
+        
+        background-color: transparent;
+        border-width: 0;
+        
+        background-image: resource("Images/Google/delete");
+        -unity-background-scale-mode: scale-to-fit;
+        height: 16px;
+        width: 16px;
+    }
+}

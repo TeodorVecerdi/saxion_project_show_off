@@ -1,0 +1,67 @@
+#CraftingRecipeEditor {
+  margin-left: -14px;
+  margin-right: -5px;
+  padding: 6px;
+  flex-direction: row;
+  max-height: 400px;
+}
+#CraftingRecipeEditor VisualElement#Inputs {
+  border-color: #797979;
+  border-width: 1px;
+  border-radius: 4px;
+  padding: 10px;
+  flex-grow: 1;
+  justify-content: center;
+}
+#CraftingRecipeEditor VisualElement#Inputs ScrollView#InputsContainer VisualElement#unity-content-viewport.unity-scroll-view__content-viewport {
+  justify-content: center;
+}
+#CraftingRecipeEditor VisualElement#Outputs {
+  border-color: #797979;
+  border-width: 1px;
+  border-radius: 4px;
+  padding: 10px;
+  flex-grow: 1;
+  justify-content: center;
+}
+#CraftingRecipeEditor VisualElement#Outputs ScrollView#OutputsContainer VisualElement#unity-content-viewport.unity-scroll-view__content-viewport {
+  justify-content: center;
+}
+#CraftingRecipeEditor #Middle {
+  flex-shrink: 1;
+  justify-content: center;
+}
+#CraftingRecipeEditor #Middle Image#Arrow {
+  background-image: resource("Images/ArrowRight");
+  width: 48px;
+  height: 48px;
+}
+
+ItemStackElement ObjectField#ItemField {
+  height: 20px;
+  margin-bottom: 4px;
+}
+ItemStackElement ObjectField#ItemField > Label {
+  min-width: 48px;
+}
+ItemStackElement IntegerField#CountField {
+  padding-right: 20px;
+  height: 20px;
+}
+ItemStackElement IntegerField#CountField > Label {
+  min-width: 48px;
+}
+ItemStackElement Button#RemoveButton {
+  position: absolute;
+  right: 0;
+  bottom: 2px;
+  padding: 0;
+  background-color: transparent;
+  border-width: 0;
+  background-image: resource("Images/Google/delete");
+  -unity-background-scale-mode: scale-to-fit;
+  height: 16px;
+  width: 16px;
+}
+
+/*# sourceMappingURL=CraftingRecipeEditor.uss.map */
