@@ -1,0 +1,118 @@
+﻿using System;
+using System.Collections.Generic;
+using JetBrains.Annotations;
+using UnityEngine;
+
+namespace Runtime.Event {
+    public class EventQueue : MonoBehaviour {
+        private readonly Dictionary<EventType, List<IEventSubscriber>> subscribers = new Dictionary<EventType, List<IEventSubscriber>>();
+        private readonly Queue<EventData> eventQueue = new Queue<EventData>();
+
+        /// <summary>
+        /// Subscribes <paramref name="subscriber"/> to receive events of type <paramref name="eventType"/> with a priority.
+        /// </summary>
+        /// <param name="eventType">The type of event that the subscriber wants to receive</param>
+        /// <param name="subscriber">The subscriber which wants to receive events</param>
+        /// <param name="priority">Priority to receive events. The lower this value is, the sooner the subscriber will receive the event</param>
+        /// <returns>An IDisposable that allows the subscriber to unsubscribe from the Event Queue by calling <c>Dispose()</c></returns>
+        [MustUseReturnValue] public IDisposable SubscribeWithPriority(IEventSubscriber subscriber, EventType eventType, int priority) {
+            if(!subscribers.ContainsKey(eventType)) subscribers.Add(eventType, new List<IEventSubscriber>());
+            if (subscribers[eventType].Contains(subscriber)) {
+                Debug.LogWarning($"Attempting to subscribe {subscriber.GetType()} multiple times to the same event [{eventType}]. Ignoring subsequent subscriptions");
+                return new DummyDisposable();
+            }
+
+            if (priority < 0) priority = 0;
+            if (priority > subscribers[eventType].Count) priority = subscribers[eventType].Count;
+            subscribers[eventType].Insert(priority, subscriber);
+            return new UnsubscribeToken(this, eventType, subscriber);
+        }
+
+        /// <summary>
+        /// Subscribes <paramref name="subscriber"/> to receive events of type <paramref name="eventType"/>.
+        /// </summary>
+        /// <param name="subscriber">The subscriber which wants to receive events</param>
+        /// <param name="eventType">The type of event that the subscriber wants to receive</param>
+        /// <returns>An IDisposable that allows the subscriber to unsubscribe from the Event Queue by calling <c>Dispose()</c></returns>
+        [MustUseReturnValue] public IDisposable Subscribe(IEventSubscriber subscriber, EventType eventType) => SubscribeWithPriority(subscriber, eventType, int.MaxValue);
+
+        /// <summary>
+        /// Unsubscribes <paramref name="subscriber"/> from receiving events of type <paramref name="eventType"/>.
+        /// </summary>
+        /// <param name="subscriber">The subscriber which wants to stop receiving events</param>
+        /// <param name="eventType">The type of event the subscriber wants to stop receiving</param>
+        private void Unsubscribe(IEventSubscriber subscriber, EventType eventType) {
+            if (!subscribers.ContainsKey(eventType) || !subscribers[eventType].Contains(subscriber)) {
+                Debug.LogWarning($"Attempting to unsubscribe {subscriber.GetType()} from receiving {eventType} events when not subscribed. Ignoring.");
+                return;
+            }
+
+            subscribers[eventType].Remove(subscriber);
+        }
+
+        /// <summary>
+        /// Queues an event for raising during the next update loop.
+        /// </summary>
+        /// <param name="eventData">Event data that will be raised</param>
+        public void QueueEvent(EventData eventData) => eventQueue.Enqueue(eventData);
+        
+        /// <summary>
+        /// Raises an event immediately
+        /// </summary>
+        /// <param name="eventData">Event data that is raised</param>
+        public void RaiseEventImmediately(EventData eventData) => EmitEvent(eventData);
+        
+        /// <summary>
+        /// Broadcasts an event to all subscribers
+        /// </summary>
+        /// <param name="eventData">Event data that is raised</param>
+        private void EmitEvent(EventData eventData) {
+            if (!subscribers.ContainsKey(eventData.Type)) return;
+
+            foreach (var subscriber in subscribers[eventData.Type]) {
+                if (subscriber.OnEvent(eventData)) {
+                    // stop propagation if event was consumed
+                    break;
+                }
+            }
+        }
+
+        private void Update() {
+            while (eventQueue.Count > 0) {
+                var @event = eventQueue.Dequeue();
+                EmitEvent(@event);
+            }
+        }
+        
+        /// <summary>
+        /// Used for invalid subscriptions that fail (mostly) silently.
+        /// </summary>
+        private class DummyDisposable : IDisposable {
+            public void Dispose() { /* empty */ }
+        }
+
+        private class UnsubscribeToken : IDisposable {
+            private readonly EventQueue source;
+            private readonly EventType eventType;
+            private readonly IEventSubscriber owner;
+            
+            private bool disposed;
+
+            public UnsubscribeToken(EventQueue source, EventType eventType, IEventSubscriber owner) {
+                this.source = source;
+                this.eventType = eventType;
+                this.owner = owner;
+            }
+            
+            public void Dispose() {
+                if (disposed) {
+                    return;
+                }
+
+                source.Unsubscribe(owner, eventType);
+
+                disposed = true;
+            }
+        }
+    }
+}
