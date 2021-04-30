@@ -17,7 +17,7 @@ namespace Runtime {
         public void AddRandomItem() {
             var item = Rand.ListItem(AllItems);
             var count = Rand.Range(1, 4);
-            Inventory.AddItem(item, count);
+            Inventory.Add(item, count);
         }
 
         [Button]
@@ -45,7 +45,7 @@ namespace Runtime {
                 Inventory.RemoveItem(recipeInput.Item, recipeInput.Count);
             }
             foreach (var recipeOutput in recipe.Outputs) {
-                Inventory.AddItem(recipeOutput.Item, recipeOutput.Count);
+                Inventory.Add(recipeOutput.Item, recipeOutput.Count);
             }
         }
 

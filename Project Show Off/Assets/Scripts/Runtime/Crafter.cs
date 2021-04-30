@@ -23,7 +23,7 @@ namespace Runtime {
             }
             
             foreach (var output in recipe.Outputs) {
-                source.AddItem(output);
+                source.Add(output);
             }
         }
     }

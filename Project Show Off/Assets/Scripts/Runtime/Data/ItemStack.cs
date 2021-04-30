@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Runtime.Data {
@@ -33,7 +34,7 @@ namespace Runtime.Data {
         }
 
         public override int GetHashCode() {
-            return (item != null ? item.GetHashCode() : 0);
+            return item!.GetHashCode();
         }
 
         public static bool operator ==(ItemStack left, ItemStack right) {
@@ -56,7 +57,7 @@ namespace Runtime.Data {
             }
 
             public int GetHashCode(ItemStack obj) {
-                return obj.item != null ? obj.item.GetHashCode() : 0;
+                return obj!.item!.GetHashCode();
             }
         }
     }
