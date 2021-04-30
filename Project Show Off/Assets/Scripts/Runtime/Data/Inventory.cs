@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,6 +48,12 @@ namespace Runtime.Data {
         }
 
         public void Remove(ItemStack itemStack) => Remove(itemStack.Item, itemStack.Count);
+
+        public void Remove(Inventory inventory) {
+            foreach (var itemStack in inventory) {
+                Remove(itemStack);
+            }
+        }
 
         public int GetItemCount(Item item) {
             var itemStack = GetItemStack(item);
