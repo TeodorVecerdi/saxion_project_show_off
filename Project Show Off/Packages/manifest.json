@@ -52,6 +52,7 @@
       "url": "https://package.openupm.com",
       "scopes": [
         "com.dbrizov.naughtyattributes",
+        "com.demigiant.dotween",
         "com.openupm"
       ]
     }
