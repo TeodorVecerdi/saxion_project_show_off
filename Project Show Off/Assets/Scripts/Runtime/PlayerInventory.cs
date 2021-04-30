@@ -42,7 +42,7 @@ namespace Runtime {
         public bool OnEvent(EventData eventData) {
             if (eventData is MaterialPickedUpEvent materialPickedUpEvent) {
                 materialInventory.Add(materialPickedUpEvent.MaterialItemStack);
-                // eventQueue.QueueEvent(new InventoryUpdateEvent(this, materialInventory, placeableInventory));
+                eventQueue.QueueEvent(new MaterialInventoryUpdateEvent(this, materialInventory));
                 return false;
             }
 
