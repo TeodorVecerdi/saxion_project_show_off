@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace Runtime {
     public class ItemPickupTest : MonoBehaviour {
-        [SerializeField] private EventQueue eventQueue;
         [SerializeField] private TextMeshProUGUI text;
         [SerializeField] private Transform cameraTransform;
         private Pickup pickupUnderMouse;
@@ -17,7 +16,7 @@ namespace Runtime {
 
             if (pickupUnderMouse != null && Input.GetKeyDown(KeyCode.F)) {
                 Destroy(pickupUnderMouse.gameObject);
-                eventQueue.QueueEvent(new MaterialPickedUpEvent(this, pickupUnderMouse.ItemStack));
+                EventQueue.QueueEvent(new MaterialPickedUpEvent(this, pickupUnderMouse.ItemStack));
                 pickupUnderMouse = null;
                 DoPickupRaycast();
             }

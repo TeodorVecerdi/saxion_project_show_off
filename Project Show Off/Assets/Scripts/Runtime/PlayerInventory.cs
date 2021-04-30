@@ -7,14 +7,13 @@ using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
     public class PlayerInventory : MonoBehaviour, IEventSubscriber {
-        [SerializeField] private EventQueue eventQueue;
         [SerializeField] private Inventory materialInventory;
         [SerializeField] private Inventory placeableInventory;
 
         private readonly List<IDisposable> eventUnsubscribeTokens = new List<IDisposable>();
 
         private void Awake() {
-            eventUnsubscribeTokens.Add(eventQueue.Subscribe(this, EventType.MaterialPickedUp));
+            eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.MaterialPickedUp));
         }
 
         private void OnTriggerEnter(Collider other) {
@@ -42,7 +41,7 @@ namespace Runtime {
         public bool OnEvent(EventData eventData) {
             if (eventData is MaterialPickedUpEvent materialPickedUpEvent) {
                 materialInventory.Add(materialPickedUpEvent.MaterialItemStack);
-                eventQueue.QueueEvent(new MaterialInventoryUpdateEvent(this, materialInventory));
+                EventQueue.QueueEvent(new MaterialInventoryUpdateEvent(this, materialInventory));
                 return false;
             }
 
