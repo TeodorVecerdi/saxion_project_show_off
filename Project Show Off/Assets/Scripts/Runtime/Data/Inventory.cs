@@ -1,18 +1,19 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 namespace Runtime.Data {
     [Serializable]
-    public class Inventory {
+    public class Inventory : IEnumerable {
         [SerializeField] private List<ItemStack> items;
 
         public Inventory() {
             items = new List<ItemStack>();
         }
 
-        public void AddItem(Item item, int count) {
+        public void Add(Item item, int count) {
             if(count <= 0) return;
             var itemStack = GetItemStack(item);
             
@@ -24,7 +25,14 @@ namespace Runtime.Data {
             itemStack.Count += count;
         }
 
-        public void AddItem(ItemStack itemStack) => AddItem(itemStack.Item, itemStack.Count);
+        public void Add(Item item) => Add(item, 1);
+        public void Add(ItemStack itemStack) => Add(itemStack.Item, itemStack.Count);
+
+        public void Add(Inventory inventory) {
+            foreach (var itemStack in inventory) {
+                Add(itemStack);
+            }
+        }
 
         public void RemoveItem(Item item, int count) {
             if(count <= 0) return;
@@ -48,6 +56,24 @@ namespace Runtime.Data {
 
         private ItemStack GetItemStack(Item item) {
             return items.FirstOrDefault(stack => stack.Item == item);
+        }
+
+        private bool Contains(Inventory other) {
+            foreach (var itemStack in other) {
+                var selfStack = GetItemStack(itemStack.Item);
+                if (selfStack == null || selfStack.Count < itemStack.Count) 
+                    return false;
+            }
+
+            return true;
+        }
+
+        public IEnumerator<ItemStack> GetEnumerator() {
+            return items.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() {
+            return GetEnumerator();
         }
     }
 }
