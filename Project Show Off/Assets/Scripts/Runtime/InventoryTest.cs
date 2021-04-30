@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using NaughtyAttributes;
 using Runtime.Data;
@@ -25,7 +25,7 @@ namespace Runtime {
             var item = Rand.ListItem(AllItems);
             var count = Rand.Range(1, 4);
             try {
-                Inventory.RemoveItem(item, count);
+                Inventory.Remove(item, count);
             } catch {
                 Debug.Log("Not enough items in inventory");
             }
@@ -42,7 +42,7 @@ namespace Runtime {
             if(!CanCraftRecipe(recipe)) return;
             
             foreach (var recipeInput in recipe.Inputs) {
-                Inventory.RemoveItem(recipeInput.Item, recipeInput.Count);
+                Inventory.Remove(recipeInput.Item, recipeInput.Count);
             }
             foreach (var recipeOutput in recipe.Outputs) {
                 Inventory.Add(recipeOutput.Item, recipeOutput.Count);

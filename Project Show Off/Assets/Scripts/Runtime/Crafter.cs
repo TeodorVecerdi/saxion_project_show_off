@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Runtime.Data;
 using UnityEngine;
 
@@ -19,7 +19,7 @@ namespace Runtime {
 
         public void Craft(CraftingRecipe recipe, Inventory source, Inventory target) {
             foreach (var input in recipe.Inputs) {
-                source.RemoveItem(input);
+                source.Remove(input);
             }
             
             foreach (var output in recipe.Outputs) {

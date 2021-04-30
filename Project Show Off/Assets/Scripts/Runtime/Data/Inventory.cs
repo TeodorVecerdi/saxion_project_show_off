@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +34,7 @@ namespace Runtime.Data {
             }
         }
 
-        public void RemoveItem(Item item, int count) {
+        public void Remove(Item item, int count) {
             if(count <= 0) return;
             
             var itemStack = GetItemStack(item);
@@ -47,7 +47,7 @@ namespace Runtime.Data {
             }
         }
 
-        public void RemoveItem(ItemStack itemStack) => RemoveItem(itemStack.Item, itemStack.Count);
+        public void Remove(ItemStack itemStack) => Remove(itemStack.Item, itemStack.Count);
 
         public int GetItemCount(Item item) {
             var itemStack = GetItemStack(item);
