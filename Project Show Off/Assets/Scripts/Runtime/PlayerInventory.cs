@@ -16,18 +16,6 @@ namespace Runtime {
             eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.MaterialPickedUp));
         }
 
-        private void OnTriggerEnter(Collider other) {
-            if (other.CompareTag("Crafter")) {
-                // Todo: open crafter UI, load recipes, etc
-            }
-        }
-
-        private void OnTriggerExit(Collider other) {
-            if (other.CompareTag("Crafter")) {
-                // Todo: close crafter UI
-            }
-        }
-
         private void OnDestroy() {
             eventUnsubscribeTokens.ForEach(token => token.Dispose());
             eventUnsubscribeTokens.Clear();
