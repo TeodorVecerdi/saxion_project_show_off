@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 358999eac4ebdd748a61205b8faf554b, type: 3}
   m_Name: Metal
   m_EditorClassIdentifier: 
-  Name: Metal
+  itemName: Metal
+  itemSprite: {fileID: -5383897463847916688, guid: 6f5a68e1ce0ea514b829f1d76c5d590d, type: 3}

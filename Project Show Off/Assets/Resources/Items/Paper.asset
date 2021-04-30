@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 358999eac4ebdd748a61205b8faf554b, type: 3}
   m_Name: Paper
   m_EditorClassIdentifier: 
-  Name: Paper
+  itemName: Paper
+  itemSprite: {fileID: -7680677613899247045, guid: 6f5a68e1ce0ea514b829f1d76c5d590d, type: 3}
