@@ -1,13 +1,12 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Runtime.Data {
     [CreateAssetMenu(fileName = "NewCraftingRecipe", menuName = "Data/Crafting Recipe", order = 0)]
     public class CraftingRecipe : ScriptableObject {
-        [SerializeField] private List<ItemStack> inputs;
-        [SerializeField] private List<ItemStack> outputs;
+        [SerializeField] private Inventory ingredients;
+        [SerializeField] private Inventory results;
 
-        public List<ItemStack> Inputs => inputs;
-        public List<ItemStack> Outputs => outputs;
+        public Inventory Ingredients => ingredients;
+        public Inventory Results => results;
     }
 }

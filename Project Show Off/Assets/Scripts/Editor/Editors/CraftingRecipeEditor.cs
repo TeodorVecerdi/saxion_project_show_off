@@ -29,7 +29,7 @@ namespace Editor.Editors {
 
             var inputs = new VisualElement {name = "Inputs"};
             inputsContainer = inputs.AddGet(new ScrollView(ScrollViewMode.Vertical) {name = "InputsContainer"});
-            foreach (var recipeInput in recipe!.Inputs) {
+            foreach (var recipeInput in recipe!.Ingredients) {
                 inputsContainer.Add(new ItemStackElement(this, recipeInput) {userData = true});
             }
             
@@ -38,7 +38,7 @@ namespace Editor.Editors {
             
             var outputs = new VisualElement {name = "Outputs"};
             outputsContainer = outputs.AddGet(new ScrollView(ScrollViewMode.Vertical) {name = "OutputsContainer"});
-            foreach (var recipeOutput in recipe!.Outputs) {
+            foreach (var recipeOutput in recipe!.Results) {
                 outputsContainer.Add(new ItemStackElement(this, recipeOutput) {userData = false});
             }
             
@@ -59,10 +59,10 @@ namespace Editor.Editors {
             Undo.RegisterCompleteObjectUndo(recipe, "Removed item from recipe");
             if (isInput) {
                 inputsContainer.Remove(itemStackElement);
-                recipe.Inputs.Remove(itemStackElement.ItemStack);
+                recipe.Ingredients.Remove(itemStackElement.ItemStack);
             } else {
                 outputsContainer.Remove(itemStackElement);
-                recipe.Outputs.Remove(itemStackElement.ItemStack);
+                recipe.Results.Remove(itemStackElement.ItemStack);
             }
         }
     }

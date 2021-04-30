@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using NaughtyAttributes;
 using Runtime.Data;
@@ -41,16 +41,16 @@ namespace Runtime {
             var recipe = AllRecipes[RecipeIndex];
             if(!CanCraftRecipe(recipe)) return;
             
-            foreach (var recipeInput in recipe.Inputs) {
+            foreach (var recipeInput in recipe.Ingredients) {
                 Inventory.Remove(recipeInput.Item, recipeInput.Count);
             }
-            foreach (var recipeOutput in recipe.Outputs) {
+            foreach (var recipeOutput in recipe.Results) {
                 Inventory.Add(recipeOutput.Item, recipeOutput.Count);
             }
         }
 
         public bool CanCraftRecipe(CraftingRecipe recipe) {
-            foreach (var recipeInput in recipe.Inputs) {
+            foreach (var recipeInput in recipe.Ingredients) {
                 if (Inventory.GetItemCount(recipeInput.Item) < recipeInput.Count) {
                     return false;
                 }
