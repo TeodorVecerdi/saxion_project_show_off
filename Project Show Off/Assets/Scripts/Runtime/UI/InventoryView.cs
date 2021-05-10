@@ -54,7 +54,7 @@ namespace Runtime {
             foreach (var itemStack in items.Keys.ToList()) {
                 if (inventoryUpdateEvent.Inventory.GetItemCount(itemStack.Item) > 0) continue;
                 
-                Destroy(items[itemStack]);
+                Destroy(items[itemStack].gameObject);
                 items.Remove(itemStack);
             }
         }
