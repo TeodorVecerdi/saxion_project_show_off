@@ -7127,7 +7127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hintText: {fileID: 1166761820}
   hintDuration: 2
-  debug: 1
+  debug: 0
 --- !u!4 &2121497768
 Transform:
   m_ObjectHideFlags: 0
