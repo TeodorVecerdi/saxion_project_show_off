@@ -13,8 +13,8 @@ namespace Runtime {
         [Header("References"), SerializeField] private Image icon;
         [SerializeField] private TextMeshProUGUI nameText;
         [SerializeField] private TextMeshProUGUI countText;
-        
 
+        private CraftingRecipeView owner;
         private ItemStack itemStack;
         private IDisposable inventoryUpdateUnsubscribeToken;
         
@@ -26,7 +26,8 @@ namespace Runtime {
             inventoryUpdateUnsubscribeToken?.Dispose();
         }
 
-        public void Build(ItemStack itemStack, Inventory materialInventory) {
+        public void Build(CraftingRecipeView owner, ItemStack itemStack, Inventory materialInventory) {
+            this.owner = owner;
             this.itemStack = itemStack;
             icon.sprite = itemStack.Item.ItemSprite;
             nameText.text = itemStack.Item.ItemName;
