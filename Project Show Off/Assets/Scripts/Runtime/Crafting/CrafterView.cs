@@ -1,4 +1,6 @@
 ﻿using NaughtyAttributes;
+using Runtime.Data;
+using Runtime.Event;
 using UnityEngine;
 
 namespace Runtime {
@@ -52,12 +54,18 @@ namespace Runtime {
             // Todo: Implement pooling
             foreach (var recipe in currentCrafter.Recipes) {
                 var recipeView = Instantiate(recipePrefab, recipeContainer);
-                recipeView.Build(recipe, playerInventory.MaterialInventory);
+                recipeView.Build(this, recipe, playerInventory.MaterialInventory);
             }
         }
 
+        public void RequestCraft(CraftingRecipe recipe) {
+            if(!playerInventory.MaterialInventory.Contains(recipe.Ingredients)) return;
+            playerInventory.MaterialInventory.Remove(recipe.Ingredients);
+            playerInventory.MaterialInventory.Add(recipe.Result);
+            EventQueue.QueueEvent(new MaterialInventoryUpdateEvent(this, playerInventory.MaterialInventory));
+        }
+
         public void OnCloseButtonClicked() {
-            Debug.Log("OnCloseButtonClicked");
             CloseView();
         }
     }

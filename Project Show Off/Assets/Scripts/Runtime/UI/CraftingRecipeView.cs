@@ -16,25 +16,29 @@ namespace Runtime {
         [SerializeField] private Image resultSprite;
         [SerializeField] private TextMeshProUGUI resultCount;
         [SerializeField] private TextMeshProUGUI resultName;
-        [Space, SerializeField] private RectTransform ingredientsContainer;
+        [SerializeField] private RectTransform ingredientsContainer;
         [SerializeField] private CraftingRecipeItemView itemPrefab;
+        [SerializeField] private Button craftButton;
         [Space, SerializeField] private CanvasGroup canvasGroup;
         [SerializeField] private Image overlayImage;
 
         private bool canCraft;
+        private CrafterView owner;
         private CraftingRecipe recipe;
         private Inventory materialInventory;
         private IDisposable inventoryUpdateUnsubscribeToken;
         
         private void Start() {
             inventoryUpdateUnsubscribeToken = EventQueue.Subscribe(this, EventType.InventoryUpdate);
+            craftButton.onClick.AddListener(OnCraftButtonClicked);
         }
 
         private void OnDestroy() {
             inventoryUpdateUnsubscribeToken?.Dispose();
         }
 
-        public void Build(CraftingRecipe recipe, Inventory materialInventory) {
+        public void Build(CrafterView owner, CraftingRecipe recipe, Inventory materialInventory) {
+            this.owner = owner;
             this.recipe = recipe;
             this.materialInventory = materialInventory;
             foreach (var recipeIngredient in recipe.Ingredients) {
@@ -47,6 +51,10 @@ namespace Runtime {
             resultSprite.sprite = recipe.Result.Item.ItemSprite;
             resultName.text = recipe.Result.Item.ItemName;
             resultCount.text = $"x{recipe.Result.Count}";
+        }
+
+        private void OnCraftButtonClicked() {
+            owner.RequestCraft(recipe);
         }
 
         /// <summary>
@@ -78,6 +86,8 @@ namespace Runtime {
                 break;
             }
 
+            craftButton.interactable = canCraft;
+            
             if (canCraft) {
                 transform.localScale = new Vector3(1, 1, 1);
                 canvasGroup.alpha = 1.0f;
