@@ -8,7 +8,7 @@ namespace Runtime {
     public class UIHintController : MonoSingleton<UIHintController> {
         [SerializeField] private TextMeshProUGUI hintText;
         [SerializeField] private float hintDuration;
-        [SerializeField] private bool debug;
+        [SerializeField] /*debug:*/ private bool debug;
 
         private List<string> hints;
         private float hintTimer;

@@ -3,29 +3,37 @@ using UnityEngine;
 
 namespace Runtime {
     public class CrafterView : MonoBehaviour {
-        [Header("References"), SerializeField] private RectTransform recipeContainer;
+        [Header("References")] [SerializeField] private RectTransform recipeContainer;
         [SerializeField] private GameObject mainUI;
         [SerializeField] private CraftingRecipeView recipePrefab;
-        [SerializeField, ReadOnly] private bool isMenuOpen;
+        [SerializeField, ReadOnly] /*debug:*/ private bool isMenuOpen;
+
         private Crafter currentCrafter;
         private PlayerInventory playerInventory;
-        
+
         public bool IsMenuOpen => isMenuOpen;
-        
+
         public void OpenView(Crafter crafter, PlayerInventory inventory) {
             isMenuOpen = true;
             currentCrafter = crafter;
             playerInventory = inventory;
-            
+
             UIHintController.Instance.RequestHide(this);
+            LookWithMouse.Instance.SetEnabled(false);
+            PlayerMovement.Instance.SetEnabled(false);
             mainUI.SetActive(true);
+            
             LoadUI();
         }
 
         private void CloseView() {
             isMenuOpen = false;
-            mainUI.SetActive(false);
+            
             UIHintController.Instance.ReleaseHide(this);
+            LookWithMouse.Instance.SetEnabled(true);
+            PlayerMovement.Instance.SetEnabled(true);
+            mainUI.SetActive(false);
+            
             // Todo: Implement pooling
             while (recipeContainer.childCount > 0) {
                 var child = recipeContainer.GetChild(0);
