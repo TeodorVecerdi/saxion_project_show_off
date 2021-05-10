@@ -55,7 +55,7 @@ namespace Runtime {
             }
         }
 
-        private void OnInventoryUpdateEvent(MaterialInventoryUpdateEvent inventoryUpdateEvent) {
+        private void OnInventoryUpdateEvent(InventoryUpdateEvent inventoryUpdateEvent) {
             var itemCount = inventoryUpdateEvent.Inventory.GetItemCount(itemStack.Item);
             UpdateItemCount(itemCount);
         }
