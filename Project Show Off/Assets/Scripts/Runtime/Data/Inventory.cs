@@ -64,7 +64,7 @@ namespace Runtime.Data {
             return items.FirstOrDefault(stack => stack.Item == item);
         }
 
-        private bool Contains(Inventory other) {
+        public bool Contains(Inventory other) {
             foreach (var itemStack in other) {
                 var selfStack = GetItemStack(itemStack.Item);
                 if (selfStack == null || selfStack.Count < itemStack.Count) 

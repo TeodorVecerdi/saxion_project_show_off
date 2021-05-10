@@ -10,6 +10,9 @@ namespace Runtime {
         [SerializeField] private Inventory materialInventory;
         [SerializeField] private Inventory placeableInventory;
 
+        public Inventory MaterialInventory => materialInventory;
+        public Inventory PlaceableInventory => placeableInventory;
+
         private readonly List<IDisposable> eventUnsubscribeTokens = new List<IDisposable>();
 
         private void Awake() {
