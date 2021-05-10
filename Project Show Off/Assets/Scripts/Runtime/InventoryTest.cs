@@ -44,9 +44,7 @@ namespace Runtime {
             foreach (var recipeInput in recipe.Ingredients) {
                 Inventory.Remove(recipeInput.Item, recipeInput.Count);
             }
-            foreach (var recipeOutput in recipe.Results) {
-                Inventory.Add(recipeOutput.Item, recipeOutput.Count);
-            }
+            Inventory.Add(recipe.Result);
         }
 
         public bool CanCraftRecipe(CraftingRecipe recipe) {

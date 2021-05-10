@@ -38,9 +38,7 @@ namespace Editor.Editors {
             
             var outputs = new VisualElement {name = "Outputs"};
             outputsContainer = outputs.AddGet(new ScrollView(ScrollViewMode.Vertical) {name = "OutputsContainer"});
-            foreach (var recipeOutput in recipe!.Results) {
-                outputsContainer.Add(new ItemStackElement(this, recipeOutput) {userData = false});
-            }
+           
             
             rootElement.Add(inputs);
             rootElement.Add(middle);
@@ -60,9 +58,6 @@ namespace Editor.Editors {
             if (isInput) {
                 inputsContainer.Remove(itemStackElement);
                 recipe.Ingredients.Remove(itemStackElement.ItemStack);
-            } else {
-                outputsContainer.Remove(itemStackElement);
-                recipe.Results.Remove(itemStackElement.ItemStack);
             }
         }
     }
