@@ -11,11 +11,23 @@ namespace Runtime {
         [SerializeField] private bool debug;
 
         private List<string> hints;
-        private int currentIndex;
         private float hintTimer;
+        private int currentIndex;
+        private HashSet<Component> hideRequesters;
 
         protected override void OnAwake() {
             hints = new List<string>();
+            hideRequesters = new HashSet<Component>();
+        }
+
+        public void RequestHide(Component requester) {
+            if (hideRequesters.Add(requester) && hideRequesters.Count == 1) 
+                hintText.alpha = 0.0f;
+        }
+
+        public void ReleaseHide(Component requester) {
+            if (hideRequesters.Remove(requester) && hideRequesters.Count == 0) 
+                hintText.alpha = 1.0f;
         }
 
         private void Update() {
