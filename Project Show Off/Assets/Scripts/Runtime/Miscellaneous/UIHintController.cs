@@ -44,6 +44,8 @@ namespace Runtime {
         public void Add(string hint) {
             if(hints.Contains(hint)) return;
             hints.Add(hint);
+            if (hints.Count == 1) 
+                hintTimer = hintDuration;
         }
 
         public void Remove(string hint) {
