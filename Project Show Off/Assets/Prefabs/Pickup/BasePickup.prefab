@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 6782581133842966873}
   - component: {fileID: -6213695150693701423}
   m_Layer: 6
-  m_Name: Pickup
+  m_Name: BasePickup
   m_TagString: Pickup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
