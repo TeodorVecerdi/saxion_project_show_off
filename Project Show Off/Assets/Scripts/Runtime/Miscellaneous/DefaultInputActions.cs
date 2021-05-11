@@ -5,10 +5,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
+using Object = UnityEngine.Object;
 
 namespace Runtime {
     public class DefaultInputActions : IInputActionCollection, IDisposable {
-        public InputActionAsset asset { get; }
+        // Player
+        private readonly InputActionMap m_Player;
+        private readonly InputAction m_Player_Fire;
+        private readonly InputAction m_Player_Jump;
+        private readonly InputAction m_Player_Look;
+        private readonly InputAction m_Player_Move;
+        private readonly InputAction m_Player_OpenMenu;
+        private readonly InputAction m_Player_PickUp;
+
+        // UI
+        private readonly InputActionMap m_UI;
+        private readonly InputAction m_UI_Cancel;
+        private readonly InputAction m_UI_Click;
+        private readonly InputAction m_UI_MiddleClick;
+        private readonly InputAction m_UI_Navigate;
+        private readonly InputAction m_UI_Point;
+        private readonly InputAction m_UI_RightClick;
+        private readonly InputAction m_UI_ScrollWheel;
+        private readonly InputAction m_UI_Submit;
+        private readonly InputAction m_UI_TrackedDeviceOrientation;
+        private readonly InputAction m_UI_TrackedDevicePosition;
+        private int m_GamepadSchemeIndex = -1;
+        private int m_KeyboardMouseSchemeIndex = -1;
+        private IPlayerActions m_PlayerActionsCallbackInterface;
+        private IUIActions m_UIActionsCallbackInterface;
 
         public DefaultInputActions() {
             asset = InputActionAsset.FromJson(@"{
@@ -38,6 +63,30 @@ namespace Runtime {
                     ""name"": ""Fire"",
                     ""type"": ""Button"",
                     ""id"": ""6c2ab1b8-8984-453a-af3d-a3c78ae1679a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""5b63f19b-7c28-4620-8776-8ce8d5488ce8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""PickUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""b65a6dd0-8de3-49a4-ab41-d31ff63540a7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""OpenMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""542d5013-d543-446e-91a1-e9f898978809"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -156,28 +205,6 @@ namespace Runtime {
                 },
                 {
                     ""name"": """",
-                    ""id"": ""1635d3fe-58b6-4ba9-a4e2-f4b964f6b5c8"",
-                    ""path"": ""<XRController>/{Primary2DAxis}"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""XR"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""3ea4d645-4504-4529-b061-ab81934c3752"",
-                    ""path"": ""<Joystick>/stick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Joystick"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""c1f7a91b-d0fd-4a62-997e-7fb9b69bf235"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
@@ -193,18 +220,7 @@ namespace Runtime {
                     ""path"": ""<Pointer>/delta"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse;Touch"",
-                    ""action"": ""Look"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""3e5f5442-8668-4b27-a940-df99bad7e831"",
-                    ""path"": ""<Joystick>/{Hatswitch}"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Joystick"",
+                    ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -233,34 +249,45 @@ namespace Runtime {
                 },
                 {
                     ""name"": """",
-                    ""id"": ""886e731e-7071-4ae4-95c0-e61739dad6fd"",
-                    ""path"": ""<Touchscreen>/primaryTouch/tap"",
+                    ""id"": ""f5cf3b69-7b3b-4ad2-ac22-013909c5b04a"",
+                    ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Touch"",
-                    ""action"": ""Fire"",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""ee3d0cd2-254e-47a7-a8cb-bc94d9658c54"",
-                    ""path"": ""<Joystick>/trigger"",
+                    ""id"": ""2b288fc7-f75f-4f67-9127-0467872f6c96"",
+                    ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Joystick"",
-                    ""action"": ""Fire"",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""PickUp"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""8255d333-5683-4943-a58a-ccb207ff1dce"",
-                    ""path"": ""<XRController>/{PrimaryAction}"",
+                    ""id"": ""45d29f34-fb3d-4be4-9968-dae9c3fcb5b3"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""XR"",
-                    ""action"": ""Fire"",
+                    ""groups"": """",
+                    ""action"": ""OpenMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""332ffad3-8bc3-4a7c-8420-1e27bab8b5e6"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -463,61 +490,6 @@ namespace Runtime {
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""Joystick"",
-                    ""id"": ""e25d9774-381c-4a61-b47c-7b6b299ad9f9"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Navigate"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""3db53b26-6601-41be-9887-63ac74e79d19"",
-                    ""path"": ""<Joystick>/stick/up"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Joystick"",
-                    ""action"": ""Navigate"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""0cb3e13e-3d90-4178-8ae6-d9c5501d653f"",
-                    ""path"": ""<Joystick>/stick/down"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Joystick"",
-                    ""action"": ""Navigate"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""0392d399-f6dd-4c82-8062-c1e9c0d34835"",
-                    ""path"": ""<Joystick>/stick/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Joystick"",
-                    ""action"": ""Navigate"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""942a66d9-d42f-43d6-8d70-ecb4ba5363bc"",
-                    ""path"": ""<Joystick>/stick/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Joystick"",
-                    ""action"": ""Navigate"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
                     ""name"": ""Keyboard"",
                     ""id"": ""ff527021-f211-4c02-933e-5976594c46ed"",
                     ""path"": ""2DVector"",
@@ -662,17 +634,6 @@ namespace Runtime {
                 },
                 {
                     ""name"": """",
-                    ""id"": ""5693e57a-238a-46ed-b5ae-e64e6e574302"",
-                    ""path"": ""<Touchscreen>/touch*/position"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Touch"",
-                    ""action"": ""Point"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""4faf7dc9-b979-4210-aa8c-e808e1ef89f5"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
@@ -689,28 +650,6 @@ namespace Runtime {
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Click"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""47c2a644-3ebc-4dae-a106-589b7ca75b59"",
-                    ""path"": ""<Touchscreen>/touch*/press"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Touch"",
-                    ""action"": ""Click"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""bb9e6b34-44bf-4381-ac63-5aa15d19f677"",
-                    ""path"": ""<XRController>/trigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""XR"",
                     ""action"": ""Click"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -747,28 +686,6 @@ namespace Runtime {
                     ""action"": ""RightClick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""7236c0d9-6ca3-47cf-a6ee-a97f5b59ea77"",
-                    ""path"": ""<XRController>/devicePosition"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""XR"",
-                    ""action"": ""TrackedDevicePosition"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""23e01e3a-f935-4948-8d8b-9bcac77714fb"",
-                    ""path"": ""<XRController>/deviceRotation"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""XR"",
-                    ""action"": ""TrackedDeviceOrientation"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -800,39 +717,6 @@ namespace Runtime {
                     ""isOR"": false
                 }
             ]
-        },
-        {
-            ""name"": ""Touch"",
-            ""bindingGroup"": ""Touch"",
-            ""devices"": [
-                {
-                    ""devicePath"": ""<Touchscreen>"",
-                    ""isOptional"": false,
-                    ""isOR"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""Joystick"",
-            ""bindingGroup"": ""Joystick"",
-            ""devices"": [
-                {
-                    ""devicePath"": ""<Joystick>"",
-                    ""isOptional"": false,
-                    ""isOR"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""XR"",
-            ""bindingGroup"": ""XR"",
-            ""devices"": [
-                {
-                    ""devicePath"": ""<XRController>"",
-                    ""isOptional"": false,
-                    ""isOR"": false
-                }
-            ]
         }
     ]
 }");
@@ -841,6 +725,9 @@ namespace Runtime {
             m_Player_Move = m_Player.FindAction("Move", true);
             m_Player_Look = m_Player.FindAction("Look", true);
             m_Player_Fire = m_Player.FindAction("Fire", true);
+            m_Player_Jump = m_Player.FindAction("Jump", true);
+            m_Player_PickUp = m_Player.FindAction("PickUp", true);
+            m_Player_OpenMenu = m_Player.FindAction("OpenMenu", true);
             // UI
             m_UI = asset.FindActionMap("UI", true);
             m_UI_Navigate = m_UI.FindAction("Navigate", true);
@@ -855,8 +742,24 @@ namespace Runtime {
             m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", true);
         }
 
+        public InputActionAsset asset { get; }
+        public PlayerActions Player => new PlayerActions(this);
+        public UIActions UI => new UIActions(this);
+        public InputControlScheme KeyboardMouseScheme {
+            get {
+                if (m_KeyboardMouseSchemeIndex == -1) m_KeyboardMouseSchemeIndex = asset.FindControlSchemeIndex("Keyboard&Mouse");
+                return asset.controlSchemes[m_KeyboardMouseSchemeIndex];
+            }
+        }
+        public InputControlScheme GamepadScheme {
+            get {
+                if (m_GamepadSchemeIndex == -1) m_GamepadSchemeIndex = asset.FindControlSchemeIndex("Gamepad");
+                return asset.controlSchemes[m_GamepadSchemeIndex];
+            }
+        }
+
         public void Dispose() {
-            UnityEngine.Object.Destroy(asset);
+            Object.Destroy(asset);
         }
 
         public InputBinding? bindingMask {
@@ -891,15 +794,8 @@ namespace Runtime {
             asset.Disable();
         }
 
-        // Player
-        private readonly InputActionMap m_Player;
-        private IPlayerActions m_PlayerActionsCallbackInterface;
-        private readonly InputAction m_Player_Move;
-        private readonly InputAction m_Player_Look;
-        private readonly InputAction m_Player_Fire;
-
         public struct PlayerActions {
-            private DefaultInputActions m_Wrapper;
+            private readonly DefaultInputActions m_Wrapper;
 
             public PlayerActions(DefaultInputActions wrapper) {
                 m_Wrapper = wrapper;
@@ -908,6 +804,9 @@ namespace Runtime {
             public InputAction Move => m_Wrapper.m_Player_Move;
             public InputAction Look => m_Wrapper.m_Player_Look;
             public InputAction Fire => m_Wrapper.m_Player_Fire;
+            public InputAction Jump => m_Wrapper.m_Player_Jump;
+            public InputAction PickUp => m_Wrapper.m_Player_PickUp;
+            public InputAction OpenMenu => m_Wrapper.m_Player_OpenMenu;
 
             public InputActionMap Get() {
                 return m_Wrapper.m_Player;
@@ -921,7 +820,7 @@ namespace Runtime {
                 Get().Disable();
             }
 
-            public bool Enabled => Get().enabled;
+            public bool enabled => Get().enabled;
 
             public static implicit operator InputActionMap(PlayerActions set) {
                 return set.Get();
@@ -938,6 +837,15 @@ namespace Runtime {
                     Fire.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
                     Fire.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
                     Fire.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
+                    Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                    Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                    Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                    PickUp.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPickUp;
+                    PickUp.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPickUp;
+                    PickUp.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPickUp;
+                    OpenMenu.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOpenMenu;
+                    OpenMenu.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOpenMenu;
+                    OpenMenu.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOpenMenu;
                 }
 
                 m_Wrapper.m_PlayerActionsCallbackInterface = instance;
@@ -951,28 +859,21 @@ namespace Runtime {
                     Fire.started += instance.OnFire;
                     Fire.performed += instance.OnFire;
                     Fire.canceled += instance.OnFire;
+                    Jump.started += instance.OnJump;
+                    Jump.performed += instance.OnJump;
+                    Jump.canceled += instance.OnJump;
+                    PickUp.started += instance.OnPickUp;
+                    PickUp.performed += instance.OnPickUp;
+                    PickUp.canceled += instance.OnPickUp;
+                    OpenMenu.started += instance.OnOpenMenu;
+                    OpenMenu.performed += instance.OnOpenMenu;
+                    OpenMenu.canceled += instance.OnOpenMenu;
                 }
             }
         }
 
-        public PlayerActions Player => new PlayerActions(this);
-
-        // UI
-        private readonly InputActionMap m_UI;
-        private IUIActions m_UIActionsCallbackInterface;
-        private readonly InputAction m_UI_Navigate;
-        private readonly InputAction m_UI_Submit;
-        private readonly InputAction m_UI_Cancel;
-        private readonly InputAction m_UI_Point;
-        private readonly InputAction m_UI_Click;
-        private readonly InputAction m_UI_ScrollWheel;
-        private readonly InputAction m_UI_MiddleClick;
-        private readonly InputAction m_UI_RightClick;
-        private readonly InputAction m_UI_TrackedDevicePosition;
-        private readonly InputAction m_UI_TrackedDeviceOrientation;
-
         public struct UIActions {
-            private DefaultInputActions m_Wrapper;
+            private readonly DefaultInputActions m_Wrapper;
 
             public UIActions(DefaultInputActions wrapper) {
                 m_Wrapper = wrapper;
@@ -1077,47 +978,13 @@ namespace Runtime {
             }
         }
 
-        public UIActions UI => new UIActions(this);
-        private int m_KeyboardMouseSchemeIndex = -1;
-        public InputControlScheme KeyboardMouseScheme {
-            get {
-                if (m_KeyboardMouseSchemeIndex == -1) m_KeyboardMouseSchemeIndex = asset.FindControlSchemeIndex("Keyboard&Mouse");
-                return asset.controlSchemes[m_KeyboardMouseSchemeIndex];
-            }
-        }
-        private int m_GamepadSchemeIndex = -1;
-        public InputControlScheme GamepadScheme {
-            get {
-                if (m_GamepadSchemeIndex == -1) m_GamepadSchemeIndex = asset.FindControlSchemeIndex("Gamepad");
-                return asset.controlSchemes[m_GamepadSchemeIndex];
-            }
-        }
-        private int m_TouchSchemeIndex = -1;
-        public InputControlScheme TouchScheme {
-            get {
-                if (m_TouchSchemeIndex == -1) m_TouchSchemeIndex = asset.FindControlSchemeIndex("Touch");
-                return asset.controlSchemes[m_TouchSchemeIndex];
-            }
-        }
-        private int m_JoystickSchemeIndex = -1;
-        public InputControlScheme JoystickScheme {
-            get {
-                if (m_JoystickSchemeIndex == -1) m_JoystickSchemeIndex = asset.FindControlSchemeIndex("Joystick");
-                return asset.controlSchemes[m_JoystickSchemeIndex];
-            }
-        }
-        private int m_XRSchemeIndex = -1;
-        public InputControlScheme XRScheme {
-            get {
-                if (m_XRSchemeIndex == -1) m_XRSchemeIndex = asset.FindControlSchemeIndex("XR");
-                return asset.controlSchemes[m_XRSchemeIndex];
-            }
-        }
-
         public interface IPlayerActions {
             void OnMove(InputAction.CallbackContext context);
             void OnLook(InputAction.CallbackContext context);
             void OnFire(InputAction.CallbackContext context);
+            void OnJump(InputAction.CallbackContext context);
+            void OnPickUp(InputAction.CallbackContext context);
+            void OnOpenMenu(InputAction.CallbackContext context);
         }
 
         public interface IUIActions {
