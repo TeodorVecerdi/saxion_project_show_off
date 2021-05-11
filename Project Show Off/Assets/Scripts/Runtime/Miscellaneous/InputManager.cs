@@ -1,12 +1,13 @@
-﻿using UnityCommons;
+﻿using UnityEngine;
 
 namespace Runtime {
-    public class InputManager : MonoSingleton<InputManager> {
-        public static DefaultInputActions Actions => Instance.inputActions; 
-        
-        private DefaultInputActions inputActions;
-        protected override void OnAwake() {
-            inputActions = new DefaultInputActions();
+    public static class InputManager {
+        public static DefaultInputActions Actions { get; private set; }
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        private static void Initialize() {
+            Actions = new DefaultInputActions();
+            Actions.Enable();
         }
     }
 }
