@@ -2,11 +2,14 @@
 using Runtime.Data;
 using Runtime.Event;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 namespace Runtime {
     public class CrafterView : MonoBehaviour {
         [Header("References")] [SerializeField] private RectTransform recipeContainer;
         [SerializeField] private GameObject mainUI;
+        [SerializeField] private Button closeButton;
         [SerializeField] private CraftingRecipeView recipePrefab;
         [SerializeField, ReadOnly] /*debug:*/ private bool isMenuOpen;
 
@@ -14,6 +17,16 @@ namespace Runtime {
         private PlayerInventory playerInventory;
 
         public bool IsMenuOpen => isMenuOpen;
+        
+        private void OnEnable() {
+            InputManager.Actions.UI.Cancel.performed += CloseViewPerformed;
+            closeButton.onClick.AddListener(CloseView);
+        }
+
+        private void OnDisable() {
+            InputManager.Actions.UI.Cancel.performed -= CloseViewPerformed;
+            closeButton.onClick.RemoveListener(CloseView);
+        }
 
         public void OpenView(Crafter crafter, PlayerInventory inventory) {
             isMenuOpen = true;
@@ -29,6 +42,7 @@ namespace Runtime {
         }
 
         private void CloseView() {
+            if(!isMenuOpen) return;
             isMenuOpen = false;
             
             UIHintController.Instance.ReleaseHide(this);
@@ -65,7 +79,7 @@ namespace Runtime {
             EventQueue.QueueEvent(new MaterialInventoryUpdateEvent(this, playerInventory.MaterialInventory));
         }
 
-        public void OnCloseButtonClicked() {
+        public void CloseViewPerformed(InputAction.CallbackContext context) {
             CloseView();
         }
     }
