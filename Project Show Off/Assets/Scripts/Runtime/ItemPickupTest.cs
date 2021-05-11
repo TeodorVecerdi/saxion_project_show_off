@@ -1,6 +1,8 @@
+using System;
 using Runtime.Event;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Runtime {
     public class ItemPickupTest : MonoBehaviour {
@@ -8,16 +10,18 @@ namespace Runtime {
         [SerializeField] private Transform cameraTransform;
         private Pickup pickupUnderMouse;
 
+        private void OnEnable() {
+            InputManager.Actions.Player.PickUp.performed += PickupPerformed;
+        }
+
+        private void OnDisable() {
+            InputManager.Actions.Player.PickUp.performed -= PickupPerformed;
+        }
+
+
         private void Update() {
             if (transform.hasChanged) {
                 transform.hasChanged = false;
-                DoPickupRaycast();
-            }
-
-            if (pickupUnderMouse != null && Input.GetKeyDown(KeyCode.F)) {
-                Destroy(pickupUnderMouse.gameObject);
-                EventQueue.QueueEvent(new MaterialPickedUpEvent(this, pickupUnderMouse.ItemStack));
-                pickupUnderMouse = null;
                 DoPickupRaycast();
             }
         }
@@ -31,6 +35,15 @@ namespace Runtime {
                 pickupUnderMouse = null;
                 text.text = "None";
             }
+        }
+
+        private void PickupPerformed(InputAction.CallbackContext context) {
+            if (pickupUnderMouse == null) return;
+            
+            Destroy(pickupUnderMouse.gameObject);
+            EventQueue.QueueEvent(new MaterialPickedUpEvent(this, pickupUnderMouse.ItemStack));
+            pickupUnderMouse = null;
+            DoPickupRaycast();
         }
     }
 }
