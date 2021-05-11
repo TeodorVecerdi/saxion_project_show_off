@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Runtime.Data;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Runtime {
     public class Crafter : MonoBehaviour {
@@ -16,11 +16,17 @@ namespace Runtime {
 
         public List<CraftingRecipe> Recipes => recipes;
 
-        private void Update() {
+        private void OnEnable() {
+            InputManager.Actions.Player.OpenMenu.performed += OpenMenuPerformed;
+        }
+        
+        private void OnDisable() {
+            InputManager.Actions.Player.OpenMenu.performed -= OpenMenuPerformed;
+        }
+
+        private void OpenMenuPerformed(InputAction.CallbackContext context) {
             if(!canOpenMenu || crafterView.IsMenuOpen) return;
-            if (Input.GetKeyDown(openCrafterKey)) {
-                crafterView.OpenView(this, playerInventory);
-            }
+            crafterView.OpenView(this, playerInventory);
         }
 
         private void OnTriggerEnter(Collider other) {
