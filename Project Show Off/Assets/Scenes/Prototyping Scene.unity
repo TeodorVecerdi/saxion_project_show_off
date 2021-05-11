@@ -1145,6 +1145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recipeContainer: {fileID: 8362908}
   mainUI: {fileID: 662444362}
+  closeButton: {fileID: 1456746074}
   recipePrefab: {fileID: 4166180361186008984, guid: 4dbf08fdac103e44cb053f4e204126bd, type: 3}
   isMenuOpen: 0
 --- !u!1 &526681273
@@ -5610,13 +5611,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 521239266}
-        m_TargetAssemblyTypeName: Runtime.CrafterView, Game.Runtime
-        m_MethodName: OnCloseButtonClicked
+      - m_Target: {fileID: 521239264}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
