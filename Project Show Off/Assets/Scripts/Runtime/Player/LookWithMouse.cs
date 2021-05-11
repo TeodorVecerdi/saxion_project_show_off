@@ -1,39 +1,52 @@
 using UnityCommons;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-namespace Runtime {
-    public class LookWithMouse : MonoSingleton<LookWithMouse> {
-        [SerializeField] private float mouseSensitivity = 100f;
-        [SerializeField] private Transform playerBody;
+public class LookWithMouse : MonoSingleton<LookWithMouse> {
+    [SerializeField] private float mouseSensitivity = 100f;
+    [SerializeField] private Transform playerBody;
 
-        private float xRotation;
-        private bool isEnabled;
-
-        public void SetEnabled(bool state) {
-            isEnabled = state;
-            if (isEnabled) {
-                Cursor.lockState = CursorLockMode.Locked;
-                return;
-            }
-
-            Cursor.lockState = CursorLockMode.None;
+    private bool isEnabled;
+    private float xRotation;
+    
+    public void SetEnabled(bool state) {
+        isEnabled = state;
+        if (isEnabled) {
+            Cursor.lockState = CursorLockMode.Locked;
+            return;
         }
 
-        private void Start() {
-            SetEnabled(true);
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+    private void Start() {
+        SetEnabled(true);
+    }
+
+    private void Update() {
+        if(!isEnabled) return;
+        float mouseX = 0, mouseY = 0;
+
+        if (Mouse.current != null) {
+            var delta = Mouse.current.delta.ReadValue() / 15.0f;
+            mouseX += delta.x;
+            mouseY += delta.y;
         }
 
-        private void Update() {
-            if(!isEnabled) return;
-            var mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-            var mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
-
-            xRotation -= mouseY;
-            xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-
-            transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-
-            playerBody.Rotate(Vector3.up * mouseX);
+        if (Gamepad.current != null) {
+            var value = Gamepad.current.rightStick.ReadValue() * 2;
+            mouseX += value.x;
+            mouseY += value.y;
         }
+
+        mouseX *= mouseSensitivity * Time.deltaTime;
+        mouseY *= mouseSensitivity * Time.deltaTime;
+
+        xRotation -= mouseY;
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+
+        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+
+        playerBody.Rotate(Vector3.up * mouseX);
     }
 }
