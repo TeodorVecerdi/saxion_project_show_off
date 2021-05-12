@@ -11,20 +11,20 @@ namespace Runtime {
         [SerializeField] private GameObject mainUI;
         [SerializeField] private Button closeButton;
         [SerializeField] private CraftingRecipeView recipePrefab;
-        [SerializeField, ReadOnly] /*debug:*/ private bool isMenuOpen;
 
+        private bool isMenuOpen;
         private Crafter currentCrafter;
         private PlayerInventory playerInventory;
 
         public bool IsMenuOpen => isMenuOpen;
         
         private void OnEnable() {
-            InputManager.Actions.UI.Cancel.performed += CloseViewPerformed;
+            InputManager.UIActions.Cancel.performed += CloseViewPerformed;
             closeButton.onClick.AddListener(CloseView);
         }
 
         private void OnDisable() {
-            InputManager.Actions.UI.Cancel.performed -= CloseViewPerformed;
+            InputManager.UIActions.Cancel.performed -= CloseViewPerformed;
             closeButton.onClick.RemoveListener(CloseView);
         }
 
@@ -34,8 +34,8 @@ namespace Runtime {
             playerInventory = inventory;
 
             UIHintController.Instance.RequestHide(this);
-            LookWithMouse.Instance.SetEnabled(false);
-            PlayerMovement.Instance.SetEnabled(false);
+            InputManager.PlayerActions.Disable();
+            MouseLook.SetMouseLock(false);
             mainUI.SetActive(true);
             
             LoadUI();
@@ -46,8 +46,8 @@ namespace Runtime {
             isMenuOpen = false;
             
             UIHintController.Instance.ReleaseHide(this);
-            LookWithMouse.Instance.SetEnabled(true);
-            PlayerMovement.Instance.SetEnabled(true);
+            InputManager.PlayerActions.Enable();
+            MouseLook.SetMouseLock(true);
             mainUI.SetActive(false);
             
             // Todo: Implement pooling
