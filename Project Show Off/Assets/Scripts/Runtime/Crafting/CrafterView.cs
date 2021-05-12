@@ -35,7 +35,7 @@ namespace Runtime {
 
             UIHintController.Instance.RequestHide(this);
             InputManager.PlayerActions.Disable();
-            LookWithMouse.SetMouseLock(false);
+            MouseLook.SetMouseLock(false);
             mainUI.SetActive(true);
             
             LoadUI();
@@ -47,7 +47,7 @@ namespace Runtime {
             
             UIHintController.Instance.ReleaseHide(this);
             InputManager.PlayerActions.Enable();
-            LookWithMouse.SetMouseLock(true);
+            MouseLook.SetMouseLock(true);
             mainUI.SetActive(false);
             
             // Todo: Implement pooling
