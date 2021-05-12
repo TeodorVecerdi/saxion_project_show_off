@@ -11,20 +11,20 @@ namespace Runtime {
         [SerializeField] private GameObject mainUI;
         [SerializeField] private Button closeButton;
         [SerializeField] private CraftingRecipeView recipePrefab;
-        [SerializeField, ReadOnly] /*debug:*/ private bool isMenuOpen;
 
+        private bool isMenuOpen;
         private Crafter currentCrafter;
         private PlayerInventory playerInventory;
 
         public bool IsMenuOpen => isMenuOpen;
         
         private void OnEnable() {
-            InputManager.Actions.UI.Cancel.performed += CloseViewPerformed;
+            InputManager.UI.Cancel.performed += CloseViewPerformed;
             closeButton.onClick.AddListener(CloseView);
         }
 
         private void OnDisable() {
-            InputManager.Actions.UI.Cancel.performed -= CloseViewPerformed;
+            InputManager.UI.Cancel.performed -= CloseViewPerformed;
             closeButton.onClick.RemoveListener(CloseView);
         }
 

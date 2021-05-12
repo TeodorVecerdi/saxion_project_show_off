@@ -17,11 +17,11 @@ namespace Runtime {
         public List<CraftingRecipe> Recipes => recipes;
 
         private void OnEnable() {
-            InputManager.Actions.Player.OpenMenu.performed += OpenMenuPerformed;
+            InputManager.Player.OpenMenu.performed += OpenMenuPerformed;
         }
         
         private void OnDisable() {
-            InputManager.Actions.Player.OpenMenu.performed -= OpenMenuPerformed;
+            InputManager.Player.OpenMenu.performed -= OpenMenuPerformed;
         }
 
         private void OpenMenuPerformed(InputAction.CallbackContext context) {
