@@ -14,14 +14,14 @@ namespace Runtime {
             Enable();
         }
 
-        public static DefaultInputActions.PlayerActions Player => actions.Player;
-        public static DefaultInputActions.UIActions UI => actions.UI;
+        public static DefaultInputActions.PlayerActions PlayerActions => actions.Player;
+        public static DefaultInputActions.UIActions UIActions => actions.UI;
         
-        public static Vector2 GetPlayerMovement() => Player.Move.ReadValue<Vector2>();
-        public static Vector2 GetPlayerLook() => Player.Look.ReadValue<Vector2>();
-        public static bool WasJumpTriggered() => Player.Jump.triggered;
-        public static bool WasPickupTriggered() => Player.PickUp.triggered;
-        public static bool WasOpenMenuTriggered() => Player.OpenMenu.triggered;
+        public static Vector2 PlayerMovement => PlayerActions.Move.ReadValue<Vector2>();
+        public static bool WasJumpTriggered => PlayerActions.Jump.triggered;
+        public static bool WasPickupTriggered => PlayerActions.PickUp.triggered;
+        public static bool WasOpenMenuTriggered => PlayerActions.OpenMenu.triggered;
+        public static Vector2 MouseDelta => PlayerActions.Look.ReadValue<Vector2>();
         
         public static void Enable() {
             actions.Enable();

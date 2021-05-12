@@ -1,4 +1,4 @@
-﻿using NaughtyAttributes;
+using NaughtyAttributes;
 using Runtime.Data;
 using Runtime.Event;
 using UnityEngine;
@@ -19,12 +19,12 @@ namespace Runtime {
         public bool IsMenuOpen => isMenuOpen;
         
         private void OnEnable() {
-            InputManager.UI.Cancel.performed += CloseViewPerformed;
+            InputManager.UIActions.Cancel.performed += CloseViewPerformed;
             closeButton.onClick.AddListener(CloseView);
         }
 
         private void OnDisable() {
-            InputManager.UI.Cancel.performed -= CloseViewPerformed;
+            InputManager.UIActions.Cancel.performed -= CloseViewPerformed;
             closeButton.onClick.RemoveListener(CloseView);
         }
 
