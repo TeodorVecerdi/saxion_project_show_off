@@ -1,4 +1,4 @@
-using NaughtyAttributes;
+﻿using NaughtyAttributes;
 using Runtime.Data;
 using Runtime.Event;
 using UnityEngine;
@@ -34,8 +34,8 @@ namespace Runtime {
             playerInventory = inventory;
 
             UIHintController.Instance.RequestHide(this);
-            LookWithMouse.Instance.SetEnabled(false);
-            PlayerMovement.Instance.SetEnabled(false);
+            InputManager.PlayerActions.Disable();
+            LookWithMouse.SetMouseLock(false);
             mainUI.SetActive(true);
             
             LoadUI();
@@ -46,8 +46,8 @@ namespace Runtime {
             isMenuOpen = false;
             
             UIHintController.Instance.ReleaseHide(this);
-            LookWithMouse.Instance.SetEnabled(true);
-            PlayerMovement.Instance.SetEnabled(true);
+            InputManager.PlayerActions.Enable();
+            LookWithMouse.SetMouseLock(true);
             mainUI.SetActive(false);
             
             // Todo: Implement pooling
