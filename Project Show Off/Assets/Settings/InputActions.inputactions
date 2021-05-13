@@ -667,7 +667,15 @@
                     "name": "Zoom",
                     "type": "PassThrough",
                     "id": "42265744-9fd9-4a8c-a2ea-f375d5218d61",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Rotation",
+                    "type": "PassThrough",
+                    "id": "fe6afbbd-b025-4f54-9b9f-12b6c07c968b",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": ""
                 },
@@ -783,18 +791,18 @@
                 {
                     "name": "",
                     "id": "20360876-7766-4032-870a-d9e951c04570",
-                    "path": "<Mouse>/scroll",
+                    "path": "<Mouse>/scroll/y",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "Normalize(min=-1,max=1)",
                     "groups": "Keyboard&Mouse",
                     "action": "Zoom",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "Keyboard",
-                    "id": "d194ac14-3bb8-4e1c-a775-23dc7c86545d",
-                    "path": "2DVector",
+                    "name": "1D Axis",
+                    "id": "0814b994-d61c-40e5-b507-3780df38a510",
+                    "path": "1DAxis",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -803,45 +811,23 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "up",
-                    "id": "dcdb3e31-2d9b-4738-ab92-4255914fcf51",
-                    "path": "<Keyboard>/r",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Zoom",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "1b4dc635-06c8-4880-9324-bd8f7831ab7c",
+                    "name": "negative",
+                    "id": "0b0d5a0c-2466-48dc-b46e-4ffd694dbfbb",
                     "path": "<Keyboard>/f",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "Zoom",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "left",
-                    "id": "8276b608-7113-412a-af40-ec92a53f672c",
-                    "path": "",
+                    "name": "positive",
+                    "id": "b0cfef58-ad67-4749-bc56-286d710be789",
+                    "path": "<Keyboard>/r",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "Zoom",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "065d2b1a-55c2-41e0-9f6f-982289f565e3",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "Zoom",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -856,6 +842,39 @@
                     "action": "Boost",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "728c0f90-7cfc-4c92-bd97-0f1f1f12d8ad",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotation",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "Negative",
+                    "id": "c5cd5062-412d-42b3-ac37-19fb77ada257",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotation",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Positive",
+                    "id": "2fb4f509-ee46-40dd-8a63-55a6447f551e",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotation",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         }

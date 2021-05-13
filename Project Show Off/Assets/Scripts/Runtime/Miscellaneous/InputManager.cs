@@ -28,7 +28,8 @@ namespace Runtime {
         
         // BuildModeActions
         internal static Vector2 CameraKeyboardPan => BuildModeActions.KeyboardPan.ReadValue<Vector2>();
-        internal static Vector2 Zoom => BuildModeActions.Zoom.ReadValue<Vector2>();
+        internal static float Rotation => BuildModeActions.Rotation.ReadValue<float>();
+        internal static float RawZoom => BuildModeActions.Zoom.ReadValue<float>();
         internal static bool IsBoosting => BuildModeActions.Boost.phase == InputActionPhase.Started;
         
         
