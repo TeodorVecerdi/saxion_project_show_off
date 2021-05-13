@@ -656,7 +656,7 @@
             "id": "38cf9798-d15a-4323-b410-9b4fbdb270e7",
             "actions": [
                 {
-                    "name": "Pan",
+                    "name": "KeyboardPan",
                     "type": "PassThrough",
                     "id": "1a979c29-5164-4443-a9b5-7fee1bca1a18",
                     "expectedControlType": "Vector2",
@@ -670,28 +670,25 @@
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Boost",
+                    "type": "Button",
+                    "id": "3f84e2cf-e1da-4f6e-b130-afea4d229552",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
                 {
-                    "name": "",
-                    "id": "96d8b578-ce3c-49dd-8952-8201bbd21cb0",
-                    "path": "<Mouse>/delta",
-                    "interactions": "Hold",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Pan",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "WASD",
+                    "name": "WASD/Arrow Keys",
                     "id": "82727bbc-edd9-4c9e-9c10-1b82a38e3359",
                     "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Pan",
+                    "action": "KeyboardPan",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -702,7 +699,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Pan",
+                    "action": "KeyboardPan",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -713,7 +710,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Pan",
+                    "action": "KeyboardPan",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -724,7 +721,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Pan",
+                    "action": "KeyboardPan",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -735,7 +732,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Pan",
+                    "action": "KeyboardPan",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -746,7 +743,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Pan",
+                    "action": "KeyboardPan",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -757,7 +754,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Pan",
+                    "action": "KeyboardPan",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -768,7 +765,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Pan",
+                    "action": "KeyboardPan",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -779,7 +776,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Pan",
+                    "action": "KeyboardPan",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -791,6 +788,72 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Zoom",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "Keyboard",
+                    "id": "d194ac14-3bb8-4e1c-a775-23dc7c86545d",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Zoom",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "dcdb3e31-2d9b-4738-ab92-4255914fcf51",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Zoom",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "1b4dc635-06c8-4880-9324-bd8f7831ab7c",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Zoom",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "8276b608-7113-412a-af40-ec92a53f672c",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Zoom",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "065d2b1a-55c2-41e0-9f6f-982289f565e3",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Zoom",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "ccec3a6f-0786-48e7-9556-e7f194e927b9",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Boost",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

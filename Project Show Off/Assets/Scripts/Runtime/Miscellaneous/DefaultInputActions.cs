@@ -671,7 +671,7 @@ namespace Runtime
             ""id"": ""38cf9798-d15a-4323-b410-9b4fbdb270e7"",
             ""actions"": [
                 {
-                    ""name"": ""Pan"",
+                    ""name"": ""KeyboardPan"",
                     ""type"": ""PassThrough"",
                     ""id"": ""1a979c29-5164-4443-a9b5-7fee1bca1a18"",
                     ""expectedControlType"": ""Vector2"",
@@ -685,28 +685,25 @@ namespace Runtime
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Boost"",
+                    ""type"": ""Button"",
+                    ""id"": ""3f84e2cf-e1da-4f6e-b130-afea4d229552"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
                 {
-                    ""name"": """",
-                    ""id"": ""96d8b578-ce3c-49dd-8952-8201bbd21cb0"",
-                    ""path"": ""<Mouse>/delta"",
-                    ""interactions"": ""Hold"",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Pan"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""WASD"",
+                    ""name"": ""WASD/Arrow Keys"",
                     ""id"": ""82727bbc-edd9-4c9e-9c10-1b82a38e3359"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Pan"",
+                    ""action"": ""KeyboardPan"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -717,7 +714,7 @@ namespace Runtime
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Pan"",
+                    ""action"": ""KeyboardPan"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -728,7 +725,7 @@ namespace Runtime
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Pan"",
+                    ""action"": ""KeyboardPan"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -739,7 +736,7 @@ namespace Runtime
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Pan"",
+                    ""action"": ""KeyboardPan"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -750,7 +747,7 @@ namespace Runtime
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Pan"",
+                    ""action"": ""KeyboardPan"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -761,7 +758,7 @@ namespace Runtime
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Pan"",
+                    ""action"": ""KeyboardPan"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -772,7 +769,7 @@ namespace Runtime
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Pan"",
+                    ""action"": ""KeyboardPan"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -783,7 +780,7 @@ namespace Runtime
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Pan"",
+                    ""action"": ""KeyboardPan"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -794,7 +791,7 @@ namespace Runtime
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Pan"",
+                    ""action"": ""KeyboardPan"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -806,6 +803,72 @@ namespace Runtime
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Keyboard"",
+                    ""id"": ""d194ac14-3bb8-4e1c-a775-23dc7c86545d"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""dcdb3e31-2d9b-4738-ab92-4255914fcf51"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""1b4dc635-06c8-4880-9324-bd8f7831ab7c"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""8276b608-7113-412a-af40-ec92a53f672c"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""065d2b1a-55c2-41e0-9f6f-982289f565e3"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ccec3a6f-0786-48e7-9556-e7f194e927b9"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Boost"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -864,8 +927,9 @@ namespace Runtime
             m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
             // Build Mode
             m_BuildMode = asset.FindActionMap("Build Mode", throwIfNotFound: true);
-            m_BuildMode_Pan = m_BuildMode.FindAction("Pan", throwIfNotFound: true);
+            m_BuildMode_KeyboardPan = m_BuildMode.FindAction("KeyboardPan", throwIfNotFound: true);
             m_BuildMode_Zoom = m_BuildMode.FindAction("Zoom", throwIfNotFound: true);
+            m_BuildMode_Boost = m_BuildMode.FindAction("Boost", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -1093,14 +1157,16 @@ namespace Runtime
         // Build Mode
         private readonly InputActionMap m_BuildMode;
         private IBuildModeActions m_BuildModeActionsCallbackInterface;
-        private readonly InputAction m_BuildMode_Pan;
+        private readonly InputAction m_BuildMode_KeyboardPan;
         private readonly InputAction m_BuildMode_Zoom;
+        private readonly InputAction m_BuildMode_Boost;
         public struct BuildModeActions
         {
             private @DefaultInputActions m_Wrapper;
             public BuildModeActions(@DefaultInputActions wrapper) { m_Wrapper = wrapper; }
-            public InputAction @Pan => m_Wrapper.m_BuildMode_Pan;
+            public InputAction @KeyboardPan => m_Wrapper.m_BuildMode_KeyboardPan;
             public InputAction @Zoom => m_Wrapper.m_BuildMode_Zoom;
+            public InputAction @Boost => m_Wrapper.m_BuildMode_Boost;
             public InputActionMap Get() { return m_Wrapper.m_BuildMode; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -1110,22 +1176,28 @@ namespace Runtime
             {
                 if (m_Wrapper.m_BuildModeActionsCallbackInterface != null)
                 {
-                    @Pan.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnPan;
-                    @Pan.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnPan;
-                    @Pan.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnPan;
+                    @KeyboardPan.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnKeyboardPan;
+                    @KeyboardPan.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnKeyboardPan;
+                    @KeyboardPan.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnKeyboardPan;
                     @Zoom.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnZoom;
                     @Zoom.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnZoom;
                     @Zoom.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnZoom;
+                    @Boost.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnBoost;
+                    @Boost.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnBoost;
+                    @Boost.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnBoost;
                 }
                 m_Wrapper.m_BuildModeActionsCallbackInterface = instance;
                 if (instance != null)
                 {
-                    @Pan.started += instance.OnPan;
-                    @Pan.performed += instance.OnPan;
-                    @Pan.canceled += instance.OnPan;
+                    @KeyboardPan.started += instance.OnKeyboardPan;
+                    @KeyboardPan.performed += instance.OnKeyboardPan;
+                    @KeyboardPan.canceled += instance.OnKeyboardPan;
                     @Zoom.started += instance.OnZoom;
                     @Zoom.performed += instance.OnZoom;
                     @Zoom.canceled += instance.OnZoom;
+                    @Boost.started += instance.OnBoost;
+                    @Boost.performed += instance.OnBoost;
+                    @Boost.canceled += instance.OnBoost;
                 }
             }
         }
@@ -1172,8 +1244,9 @@ namespace Runtime
         }
         public interface IBuildModeActions
         {
-            void OnPan(InputAction.CallbackContext context);
+            void OnKeyboardPan(InputAction.CallbackContext context);
             void OnZoom(InputAction.CallbackContext context);
+            void OnBoost(InputAction.CallbackContext context);
         }
     }
 }
