@@ -2,6 +2,7 @@
 using System;
 using Cinemachine;
 using NaughtyAttributes;
+using UnityCommons;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -31,6 +32,8 @@ namespace Runtime {
         [SerializeField] private float boostZoomSpeed = 3.0f;
         [ShowIf(nameof(unlinkTimeVariables)), OnValueChanged("OnTimeSettingsChanged"), SerializeField]
         private float zoomTime = 5.0f;
+        [SerializeField] private float minZoom = 40;
+        [SerializeField] private float maxZoom = 100;
         // ReSharper restore InconsistentNaming
 
         private float movementSpeed;
@@ -120,6 +123,8 @@ namespace Runtime {
             newPosition += movementDelta.x * movementSpeed * transform.right + movementDelta.y * movementSpeed * transform.forward;
             newRotation *= Quaternion.Euler(rotationDelta * rotationSpeed * Vector3.up);
             newZoom += zoomDelta * new Vector3(0, -zoomSpeed, zoomSpeed);
+            newZoom.y = newZoom.y.Clamped(minZoom, maxZoom);
+            newZoom.z = newZoom.z.Clamped(-maxZoom, -minZoom);
             
             transform.position = Vector3.Lerp(transform.position, newPosition, Time.deltaTime * actualMovementTime);
             transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, Time.deltaTime * actualRotationTime);
