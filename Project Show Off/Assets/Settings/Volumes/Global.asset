@@ -415,7 +415,7 @@ MonoBehaviour:
     min: 0
   maximumVelocity:
     m_OverrideState: 0
-    m_Value: 200
+    m_Value: 899
     min: 0
     max: 1500
   minimumVelocity:
