@@ -16,7 +16,7 @@ MonoBehaviour:
   - m_From: FPS Camera
     m_To: Build Camera
     m_Blend:
-      m_Style: 1
+      m_Style: 0
       m_Time: 0.4
       m_CustomCurve:
         serializedVersion: 2
@@ -45,7 +45,7 @@ MonoBehaviour:
   - m_From: Build Camera
     m_To: FPS Camera
     m_Blend:
-      m_Style: 1
+      m_Style: 0
       m_Time: 0.4
       m_CustomCurve:
         serializedVersion: 2

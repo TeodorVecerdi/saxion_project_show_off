@@ -17,7 +17,7 @@ namespace Runtime {
         private void ToggleGameMode(InputAction.CallbackContext callbackContext) {
             isBuildModeActive = !isBuildModeActive;
             EventQueue.QueueEvent(new ChangeMouseLockEvent(this, !isBuildModeActive));
-            EventQueue.QueueEvent(new EmptyEvent(this, EventType.GameModeToggle));
+            EventQueue.QueueEvent(new EmptyEvent(this, EventType.GameModeChange));
         }
     }
 }

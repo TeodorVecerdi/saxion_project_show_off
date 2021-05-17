@@ -157,13 +157,11 @@ namespace Runtime {
             newZoom = cameraTransform.localPosition;
             OnTimeSettingsChanged();
 
-            InputManager.BuildModeActions.Enable();
             virtualCamera.Priority = 100;
         }
 
         private void DisableBuildMode() {
             isEnabled = false;
-            InputManager.BuildModeActions.Disable();
             virtualCamera.Priority = 0;
         }
 

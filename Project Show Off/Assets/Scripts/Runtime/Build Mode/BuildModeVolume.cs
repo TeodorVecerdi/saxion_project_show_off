@@ -14,6 +14,7 @@ namespace Runtime {
             gameModeToggleEventUnsubscriber = EventQueue.Subscribe(this, EventType.GameModeToggle);
             volume = GetComponent<Volume>();
             volume.weight = 0.0f;
+            isBuildMode = false;
         }
 
         private void OnDestroy() {
