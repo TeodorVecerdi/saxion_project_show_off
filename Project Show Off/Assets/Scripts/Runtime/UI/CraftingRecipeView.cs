@@ -54,7 +54,7 @@ namespace Runtime {
         }
 
         private void OnCraftButtonClicked() {
-            owner.RequestCraft(recipe);
+            EventQueue.QueueEvent(new CraftRequestEvent(this, recipe));
         }
 
         /// <summary>
@@ -64,11 +64,11 @@ namespace Runtime {
         /// <returns><c>true</c> if event propagation should be stopped, <c>false</c> otherwise.</returns>
         public bool OnEvent(EventData eventData) {
             switch (eventData) {
-                case MaterialInventoryUpdateEvent inventoryUpdateEvent:
+                case MaterialInventoryUpdateEvent inventoryUpdateEvent: {
                     OnInventoryUpdateEvent(inventoryUpdateEvent);
                     return false;
-                default:
-                    return false;
+                }
+                default: return false;
             }
         }
 
