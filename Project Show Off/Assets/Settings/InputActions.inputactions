@@ -877,6 +877,33 @@
                     "isPartOfComposite": true
                 }
             ]
+        },
+        {
+            "name": "General",
+            "id": "e203be58-a2e6-4a76-a19e-c1553939e865",
+            "actions": [
+                {
+                    "name": "ToggleGameMode",
+                    "type": "Button",
+                    "id": "58b637be-2ce7-4678-b3b5-144744875875",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "e3f13209-b3cf-47df-9542-e4a4824253e6",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "ToggleGameMode",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

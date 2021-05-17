@@ -892,6 +892,33 @@ namespace Runtime
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""General"",
+            ""id"": ""e203be58-a2e6-4a76-a19e-c1553939e865"",
+            ""actions"": [
+                {
+                    ""name"": ""ToggleGameMode"",
+                    ""type"": ""Button"",
+                    ""id"": ""58b637be-2ce7-4678-b3b5-144744875875"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""e3f13209-b3cf-47df-9542-e4a4824253e6"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ToggleGameMode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -950,6 +977,9 @@ namespace Runtime
             m_BuildMode_Zoom = m_BuildMode.FindAction("Zoom", throwIfNotFound: true);
             m_BuildMode_Rotation = m_BuildMode.FindAction("Rotation", throwIfNotFound: true);
             m_BuildMode_Boost = m_BuildMode.FindAction("Boost", throwIfNotFound: true);
+            // General
+            m_General = asset.FindActionMap("General", throwIfNotFound: true);
+            m_General_ToggleGameMode = m_General.FindAction("ToggleGameMode", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -1230,6 +1260,39 @@ namespace Runtime
             }
         }
         public BuildModeActions @BuildMode => new BuildModeActions(this);
+
+        // General
+        private readonly InputActionMap m_General;
+        private IGeneralActions m_GeneralActionsCallbackInterface;
+        private readonly InputAction m_General_ToggleGameMode;
+        public struct GeneralActions
+        {
+            private @DefaultInputActions m_Wrapper;
+            public GeneralActions(@DefaultInputActions wrapper) { m_Wrapper = wrapper; }
+            public InputAction @ToggleGameMode => m_Wrapper.m_General_ToggleGameMode;
+            public InputActionMap Get() { return m_Wrapper.m_General; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(GeneralActions set) { return set.Get(); }
+            public void SetCallbacks(IGeneralActions instance)
+            {
+                if (m_Wrapper.m_GeneralActionsCallbackInterface != null)
+                {
+                    @ToggleGameMode.started -= m_Wrapper.m_GeneralActionsCallbackInterface.OnToggleGameMode;
+                    @ToggleGameMode.performed -= m_Wrapper.m_GeneralActionsCallbackInterface.OnToggleGameMode;
+                    @ToggleGameMode.canceled -= m_Wrapper.m_GeneralActionsCallbackInterface.OnToggleGameMode;
+                }
+                m_Wrapper.m_GeneralActionsCallbackInterface = instance;
+                if (instance != null)
+                {
+                    @ToggleGameMode.started += instance.OnToggleGameMode;
+                    @ToggleGameMode.performed += instance.OnToggleGameMode;
+                    @ToggleGameMode.canceled += instance.OnToggleGameMode;
+                }
+            }
+        }
+        public GeneralActions @General => new GeneralActions(this);
         private int m_KeyboardMouseSchemeIndex = -1;
         public InputControlScheme KeyboardMouseScheme
         {
@@ -1276,6 +1339,10 @@ namespace Runtime
             void OnZoom(InputAction.CallbackContext context);
             void OnRotation(InputAction.CallbackContext context);
             void OnBoost(InputAction.CallbackContext context);
+        }
+        public interface IGeneralActions
+        {
+            void OnToggleGameMode(InputAction.CallbackContext context);
         }
     }
 }

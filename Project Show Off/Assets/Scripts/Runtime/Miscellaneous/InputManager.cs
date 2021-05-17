@@ -18,6 +18,7 @@ namespace Runtime {
         internal static DefaultInputActions.PlayerActions PlayerActions => actions.Player;
         internal static DefaultInputActions.UIActions UIActions => actions.UI;
         internal static DefaultInputActions.BuildModeActions BuildModeActions => actions.BuildMode;
+        internal static DefaultInputActions.GeneralActions GeneralActions => actions.General;
         
         // PlayerActions
         internal static Vector2 PlayerMovement => PlayerActions.Move.ReadValue<Vector2>(); 
@@ -32,6 +33,8 @@ namespace Runtime {
         internal static float RawZoom => BuildModeActions.Zoom.ReadValue<float>();
         internal static bool IsBoosting => BuildModeActions.Boost.phase == InputActionPhase.Started;
         
+        // GeneralActions
+        internal static bool WasGameModeSwitchTriggered => GeneralActions.ToggleGameMode.triggered;
         
         internal static void Enable() {
             actions.Enable();
