@@ -43,11 +43,15 @@ namespace Runtime {
                     return true;
                 }
                 case CraftRequestEvent craftRequestEvent: {
-                    if (materialInventory.Contains(craftRequestEvent.Recipe.Ingredients)) {
-                        materialInventory.Remove(craftRequestEvent.Recipe.Ingredients);
-                        // TODO!: Change to placeable inventory once system is in place 
-                        materialInventory.Add(craftRequestEvent.Recipe.Result);
-                    }
+                    if (!materialInventory.Contains(craftRequestEvent.Recipe.Ingredients)) return true;
+                    
+                    materialInventory.Remove(craftRequestEvent.Recipe.Ingredients);
+                    // TODO!: Change to placeable inventory once system is in place 
+                    materialInventory.Add(craftRequestEvent.Recipe.Result);
+                    EventQueue.QueueEvent(new MaterialInventoryUpdateEvent(this, materialInventory));
+                    
+                    // placeableInventory.Add(craftRequestEvent.Recipe.Result);
+                    // EventQueue.QueueEvent(new PlaceableInventoryUpdateEvent(this, placeableInventory));
                     return true;
                 }
                 default: return false;
