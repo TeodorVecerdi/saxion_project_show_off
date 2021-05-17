@@ -1,13 +1,14 @@
-﻿
-using System;
+﻿using System;
 using Cinemachine;
 using NaughtyAttributes;
+using Runtime.Event;
 using UnityCommons;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
-    public class BuildModeCamera : MonoBehaviour {
+    public class BuildModeCamera : MonoBehaviour, IEventSubscriber {
         // ReSharper disable InconsistentNaming
         [HorizontalLine(color: EColor.Green, order = 1), Header("General")]
         [SerializeField, OnValueChanged("OnTimeSettingsChanged")]
@@ -36,6 +37,7 @@ namespace Runtime {
         [SerializeField] private float maxZoom = 100;
         // ReSharper restore InconsistentNaming
 
+        // Settings variables
         private float movementSpeed;
         private float zoomSpeed;
         private float rotationSpeed;
@@ -43,6 +45,7 @@ namespace Runtime {
         private float actualZoomTime;
         private float actualRotationTime;
 
+        // Working variables
         private Vector3 dragStartPosition;
         private Vector3 dragCurrentPosition;
         private Vector3 rotateStartPosition;
@@ -50,20 +53,29 @@ namespace Runtime {
         private Vector3 newPosition;
         private Vector3 newZoom;
         private Quaternion newRotation;
-
+        
         private Transform cameraTransform;
         private Plane dragPlane;
+        private Mouse mouse;
+        private bool isEnabled = false;
 
         private void Awake() {
             cameraTransform = virtualCamera.transform;
             dragPlane = new Plane(Vector3.up, Vector3.zero);
+            mouse = Mouse.current;
         }
 
-        /*debug:*/ private void Start() {
-            EnableBuildMode();
+        private void OnEnable() {
+            InputSystem.onDeviceChange += OnDeviceChanged;
+        }
+        
+        private void OnDisable() {
+            InputSystem.onDeviceChange -= OnDeviceChanged;
         }
 
         private void Update() {
+            if (!isEnabled) return;
+
             if (InputManager.IsBoosting) {
                 movementSpeed = boostMovementSpeed;
                 rotationSpeed = boostRotationSpeed;
@@ -73,17 +85,15 @@ namespace Runtime {
                 rotationSpeed = normalRotationSpeed;
                 zoomSpeed = normalZoomSpeed;
             }
-            
             HandleDragInput();
             HandleInput();
         }
 
         private void HandleDragInput() {
-            var mouse = Mouse.current;
             if (mouse == null) return;
 
             var mousePosition = (Vector3) mouse.position.ReadValue();
-            
+
             // Pan / Move
             if (mouse.leftButton.wasPressedThisFrame) {
                 var ray = actualCamera.ScreenPointToRay(mousePosition);
@@ -99,7 +109,7 @@ namespace Runtime {
                     newPosition = transform.position + dragStartPosition - dragCurrentPosition;
                 }
             }
-            
+
             // Rotate
             if (mouse.rightButton.wasPressedThisFrame) {
                 rotateStartPosition = mousePosition;
@@ -117,7 +127,7 @@ namespace Runtime {
             var movementDelta = InputManager.CameraKeyboardPan * Time.deltaTime;
             var rotationDelta = InputManager.Rotation * Time.deltaTime;
             var zoomDelta = InputManager.RawZoom;
-            if (!Mathf.Approximately(zoomDelta, 0.0f)) 
+            if (!Mathf.Approximately(zoomDelta, 0.0f))
                 zoomDelta = Mathf.Sign(zoomDelta);
 
             newPosition += movementDelta.x * movementSpeed * transform.right + movementDelta.y * movementSpeed * transform.forward;
@@ -125,13 +135,14 @@ namespace Runtime {
             newZoom += zoomDelta * new Vector3(0, -zoomSpeed, zoomSpeed);
             newZoom.y = newZoom.y.Clamped(minZoom, maxZoom);
             newZoom.z = newZoom.z.Clamped(-maxZoom, -minZoom);
-            
+
             transform.position = Vector3.Lerp(transform.position, newPosition, Time.deltaTime * actualMovementTime);
             transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, Time.deltaTime * actualRotationTime);
             cameraTransform.localPosition = Vector3.Lerp(cameraTransform.localPosition, newZoom, Time.deltaTime * actualZoomTime);
         }
 
         private void EnableBuildMode() {
+            isEnabled = true;
             var baseTransform = transform; // reason: repeated property access of built in component is inefficient 
             newPosition = baseTransform.position;
             newRotation = baseTransform.rotation;
@@ -144,6 +155,7 @@ namespace Runtime {
         }
 
         private void DisableBuildMode() {
+            isEnabled = false;
             InputManager.BuildModeActions.Disable();
             InputManager.PlayerActions.Enable();
             virtualCamera.Priority = 0;
@@ -158,6 +170,30 @@ namespace Runtime {
             }
 
             actualMovementTime = actualRotationTime = actualZoomTime = movementTime;
+        }
+
+        private void ToggleCameraMode() {
+            if (isEnabled) DisableBuildMode();
+            else EnableBuildMode();
+        }
+        
+        private void OnDeviceChanged(InputDevice device, InputDeviceChange change) {
+            mouse = Mouse.current;
+        }
+
+        /// <summary>
+        /// <para>Receives an event from the Event Queue</para>
+        /// </summary>
+        /// <param name="eventData">Event data raised</param>
+        /// <returns><c>true</c> if event propagation should be stopped, <c>false</c> otherwise.</returns>
+        public bool OnEvent(EventData eventData) {
+            switch (eventData) {
+                case EmptyEvent {Type: EventType.GameModeToggle}: {
+                    ToggleCameraMode();
+                    return false;
+                }
+                default: return false;
+            }
         }
     }
 }
