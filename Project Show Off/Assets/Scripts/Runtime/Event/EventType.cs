@@ -1,4 +1,4 @@
-namespace Runtime.Event {
+﻿namespace Runtime.Event {
     public enum EventType {
         MaterialPickedUp,
         InventoryUpdate,
@@ -6,5 +6,6 @@ namespace Runtime.Event {
         ChangeMouseLock,
         InventoryRequest,
         InventoryResponse,
+        CraftRequest
     }
 }
