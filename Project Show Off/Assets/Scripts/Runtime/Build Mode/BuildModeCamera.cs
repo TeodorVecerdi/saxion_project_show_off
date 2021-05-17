@@ -58,11 +58,15 @@ namespace Runtime {
         private Plane dragPlane;
         private Mouse mouse;
         private bool isEnabled = false;
+        private IDisposable gameModeToggleEventUnsubscriber;
 
         private void Awake() {
             cameraTransform = virtualCamera.transform;
             dragPlane = new Plane(Vector3.up, Vector3.zero);
             mouse = Mouse.current;
+            gameModeToggleEventUnsubscriber = EventQueue.Subscribe(this, EventType.GameModeToggle);
+            
+            DisableBuildMode();
         }
 
         private void OnEnable() {
@@ -71,6 +75,10 @@ namespace Runtime {
         
         private void OnDisable() {
             InputSystem.onDeviceChange -= OnDeviceChanged;
+        }
+
+        private void OnDestroy() {
+            gameModeToggleEventUnsubscriber.Dispose();
         }
 
         private void Update() {
@@ -150,14 +158,12 @@ namespace Runtime {
             OnTimeSettingsChanged();
 
             InputManager.BuildModeActions.Enable();
-            InputManager.PlayerActions.Disable();
             virtualCamera.Priority = 100;
         }
 
         private void DisableBuildMode() {
             isEnabled = false;
             InputManager.BuildModeActions.Disable();
-            InputManager.PlayerActions.Enable();
             virtualCamera.Priority = 0;
         }
 

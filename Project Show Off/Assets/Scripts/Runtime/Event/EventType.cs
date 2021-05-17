@@ -2,6 +2,7 @@
     public enum EventType {
         MaterialPickedUp,
         InventoryUpdate,
-        GameModeToggle
+        GameModeToggle,
+        ChangeMouseLock
     }
 }

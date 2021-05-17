@@ -1,3 +1,4 @@
+using System;
 using Runtime.Event;
 using UnityEngine;
 using EventType = Runtime.Event.EventType;
@@ -13,11 +14,20 @@ namespace Runtime {
         private CharacterController controller;
         private Vector3 velocity;
         private bool isEnabled;
+        private IDisposable gameModeToggleEventUnsubscriber;
 
         private void Awake() {
             controller = GetComponent<CharacterController>();
+            gameModeToggleEventUnsubscriber = EventQueue.Subscribe(this, EventType.GameModeToggle);
+            
+            isEnabled = true;
+            InputManager.PlayerActions.Enable();
         }
 
+        private void OnDestroy() {
+            gameModeToggleEventUnsubscriber.Dispose();
+        }
+        
         private void Update() {
             var grounded = controller.isGrounded;
             if (grounded && velocity.y < 0.0f) velocity.y = 0.0f;
