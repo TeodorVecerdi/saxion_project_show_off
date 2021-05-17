@@ -665,6 +665,260 @@ namespace Runtime
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Build Mode"",
+            ""id"": ""38cf9798-d15a-4323-b410-9b4fbdb270e7"",
+            ""actions"": [
+                {
+                    ""name"": ""KeyboardPan"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""1a979c29-5164-4443-a9b5-7fee1bca1a18"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Zoom"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""42265744-9fd9-4a8c-a2ea-f375d5218d61"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Rotation"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""fe6afbbd-b025-4f54-9b9f-12b6c07c968b"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Boost"",
+                    ""type"": ""Button"",
+                    ""id"": ""3f84e2cf-e1da-4f6e-b130-afea4d229552"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""WASD/Arrow Keys"",
+                    ""id"": ""82727bbc-edd9-4c9e-9c10-1b82a38e3359"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""KeyboardPan"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""2ccf42b0-4a61-4ef0-b800-8c4a1973f6ce"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""KeyboardPan"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""574f964a-bfd2-408a-ba0a-2f1226aaaf63"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""KeyboardPan"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""20513fe3-72c3-443e-a29c-01212059f6f6"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""KeyboardPan"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""3e8c4225-1829-4f3f-9e61-3ff608ab8bd8"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""KeyboardPan"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""ab5db8ad-473d-437c-9ed5-593030239957"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""KeyboardPan"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""7b28a665-2d5e-4415-ab1d-1b352051cedf"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""KeyboardPan"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""d4fed46c-22af-4fc9-8078-63aaa9029d2f"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""KeyboardPan"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""66290b17-fd18-42e8-aea5-435fa0ca0bbd"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""KeyboardPan"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""20360876-7766-4032-870a-d9e951c04570"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": ""Normalize(min=-1,max=1)"",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""0814b994-d61c-40e5-b507-3780df38a510"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""0b0d5a0c-2466-48dc-b46e-4ffd694dbfbb"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""b0cfef58-ad67-4749-bc56-286d710be789"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ccec3a6f-0786-48e7-9556-e7f194e927b9"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Boost"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""728c0f90-7cfc-4c92-bd97-0f1f1f12d8ad"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotation"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Negative"",
+                    ""id"": ""c5cd5062-412d-42b3-ac37-19fb77ada257"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Positive"",
+                    ""id"": ""2fb4f509-ee46-40dd-8a63-55a6447f551e"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                }
+            ]
+        },
+        {
+            ""name"": ""General"",
+            ""id"": ""e203be58-a2e6-4a76-a19e-c1553939e865"",
+            ""actions"": [
+                {
+                    ""name"": ""ToggleGameMode"",
+                    ""type"": ""Button"",
+                    ""id"": ""58b637be-2ce7-4678-b3b5-144744875875"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""e3f13209-b3cf-47df-9542-e4a4824253e6"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ToggleGameMode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -717,6 +971,15 @@ namespace Runtime
             m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
             m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
             m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
+            // Build Mode
+            m_BuildMode = asset.FindActionMap("Build Mode", throwIfNotFound: true);
+            m_BuildMode_KeyboardPan = m_BuildMode.FindAction("KeyboardPan", throwIfNotFound: true);
+            m_BuildMode_Zoom = m_BuildMode.FindAction("Zoom", throwIfNotFound: true);
+            m_BuildMode_Rotation = m_BuildMode.FindAction("Rotation", throwIfNotFound: true);
+            m_BuildMode_Boost = m_BuildMode.FindAction("Boost", throwIfNotFound: true);
+            // General
+            m_General = asset.FindActionMap("General", throwIfNotFound: true);
+            m_General_ToggleGameMode = m_General.FindAction("ToggleGameMode", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -940,6 +1203,96 @@ namespace Runtime
             }
         }
         public UIActions @UI => new UIActions(this);
+
+        // Build Mode
+        private readonly InputActionMap m_BuildMode;
+        private IBuildModeActions m_BuildModeActionsCallbackInterface;
+        private readonly InputAction m_BuildMode_KeyboardPan;
+        private readonly InputAction m_BuildMode_Zoom;
+        private readonly InputAction m_BuildMode_Rotation;
+        private readonly InputAction m_BuildMode_Boost;
+        public struct BuildModeActions
+        {
+            private @DefaultInputActions m_Wrapper;
+            public BuildModeActions(@DefaultInputActions wrapper) { m_Wrapper = wrapper; }
+            public InputAction @KeyboardPan => m_Wrapper.m_BuildMode_KeyboardPan;
+            public InputAction @Zoom => m_Wrapper.m_BuildMode_Zoom;
+            public InputAction @Rotation => m_Wrapper.m_BuildMode_Rotation;
+            public InputAction @Boost => m_Wrapper.m_BuildMode_Boost;
+            public InputActionMap Get() { return m_Wrapper.m_BuildMode; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(BuildModeActions set) { return set.Get(); }
+            public void SetCallbacks(IBuildModeActions instance)
+            {
+                if (m_Wrapper.m_BuildModeActionsCallbackInterface != null)
+                {
+                    @KeyboardPan.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnKeyboardPan;
+                    @KeyboardPan.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnKeyboardPan;
+                    @KeyboardPan.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnKeyboardPan;
+                    @Zoom.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnZoom;
+                    @Zoom.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnZoom;
+                    @Zoom.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnZoom;
+                    @Rotation.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnRotation;
+                    @Rotation.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnRotation;
+                    @Rotation.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnRotation;
+                    @Boost.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnBoost;
+                    @Boost.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnBoost;
+                    @Boost.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnBoost;
+                }
+                m_Wrapper.m_BuildModeActionsCallbackInterface = instance;
+                if (instance != null)
+                {
+                    @KeyboardPan.started += instance.OnKeyboardPan;
+                    @KeyboardPan.performed += instance.OnKeyboardPan;
+                    @KeyboardPan.canceled += instance.OnKeyboardPan;
+                    @Zoom.started += instance.OnZoom;
+                    @Zoom.performed += instance.OnZoom;
+                    @Zoom.canceled += instance.OnZoom;
+                    @Rotation.started += instance.OnRotation;
+                    @Rotation.performed += instance.OnRotation;
+                    @Rotation.canceled += instance.OnRotation;
+                    @Boost.started += instance.OnBoost;
+                    @Boost.performed += instance.OnBoost;
+                    @Boost.canceled += instance.OnBoost;
+                }
+            }
+        }
+        public BuildModeActions @BuildMode => new BuildModeActions(this);
+
+        // General
+        private readonly InputActionMap m_General;
+        private IGeneralActions m_GeneralActionsCallbackInterface;
+        private readonly InputAction m_General_ToggleGameMode;
+        public struct GeneralActions
+        {
+            private @DefaultInputActions m_Wrapper;
+            public GeneralActions(@DefaultInputActions wrapper) { m_Wrapper = wrapper; }
+            public InputAction @ToggleGameMode => m_Wrapper.m_General_ToggleGameMode;
+            public InputActionMap Get() { return m_Wrapper.m_General; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(GeneralActions set) { return set.Get(); }
+            public void SetCallbacks(IGeneralActions instance)
+            {
+                if (m_Wrapper.m_GeneralActionsCallbackInterface != null)
+                {
+                    @ToggleGameMode.started -= m_Wrapper.m_GeneralActionsCallbackInterface.OnToggleGameMode;
+                    @ToggleGameMode.performed -= m_Wrapper.m_GeneralActionsCallbackInterface.OnToggleGameMode;
+                    @ToggleGameMode.canceled -= m_Wrapper.m_GeneralActionsCallbackInterface.OnToggleGameMode;
+                }
+                m_Wrapper.m_GeneralActionsCallbackInterface = instance;
+                if (instance != null)
+                {
+                    @ToggleGameMode.started += instance.OnToggleGameMode;
+                    @ToggleGameMode.performed += instance.OnToggleGameMode;
+                    @ToggleGameMode.canceled += instance.OnToggleGameMode;
+                }
+            }
+        }
+        public GeneralActions @General => new GeneralActions(this);
         private int m_KeyboardMouseSchemeIndex = -1;
         public InputControlScheme KeyboardMouseScheme
         {
@@ -979,6 +1332,17 @@ namespace Runtime
             void OnRightClick(InputAction.CallbackContext context);
             void OnTrackedDevicePosition(InputAction.CallbackContext context);
             void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
+        }
+        public interface IBuildModeActions
+        {
+            void OnKeyboardPan(InputAction.CallbackContext context);
+            void OnZoom(InputAction.CallbackContext context);
+            void OnRotation(InputAction.CallbackContext context);
+            void OnBoost(InputAction.CallbackContext context);
+        }
+        public interface IGeneralActions
+        {
+            void OnToggleGameMode(InputAction.CallbackContext context);
         }
     }
 }
