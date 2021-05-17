@@ -11,36 +11,33 @@ namespace Runtime {
         [SerializeField] private CrafterView crafterView;
         [SerializeField] private KeyCode openCrafterKey = KeyCode.F;
         
-        private PlayerInventory playerInventory;
         private bool canOpenMenu;
 
         public List<CraftingRecipe> Recipes => recipes;
 
         private void OnEnable() {
-            InputManager.Actions.Player.OpenMenu.performed += OpenMenuPerformed;
+            InputManager.PlayerActions.OpenMenu.performed += OpenMenuPerformed;
         }
         
         private void OnDisable() {
-            InputManager.Actions.Player.OpenMenu.performed -= OpenMenuPerformed;
+            InputManager.PlayerActions.OpenMenu.performed -= OpenMenuPerformed;
         }
 
         private void OpenMenuPerformed(InputAction.CallbackContext context) {
             if(!canOpenMenu || crafterView.IsMenuOpen) return;
-            crafterView.OpenView(this, playerInventory);
+            crafterView.OpenView(this);
         }
 
         private void OnTriggerEnter(Collider other) {
             if(!other.CompareTag("Player")) return;
             canOpenMenu = true;
             UIHintController.Instance.Add(string.Format(kOpenCrafterHintFormat, openCrafterKey));
-            playerInventory = other.GetComponent<PlayerInventory>();
         }
 
         private void OnTriggerExit(Collider other) {
             if(!other.CompareTag("Player")) return;
             canOpenMenu = false;
             UIHintController.Instance.Remove(string.Format(kOpenCrafterHintFormat, openCrafterKey));
-            playerInventory = null;
         }
     }
 }

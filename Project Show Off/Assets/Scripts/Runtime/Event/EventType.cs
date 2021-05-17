@@ -2,6 +2,11 @@
     public enum EventType {
         MaterialPickedUp,
         InventoryUpdate,
-        ObjectCrafted
+        GameModeToggle, // triggered when components should respond to the change
+        GameModeChange, // triggered when starting a game mode transition
+        ChangeMouseLock,
+        InventoryRequest,
+        InventoryResponse,
+        CraftRequest
     }
 }

@@ -11,11 +11,11 @@ namespace Runtime {
         private Pickup pickupUnderMouse;
 
         private void OnEnable() {
-            InputManager.Actions.Player.PickUp.performed += PickupPerformed;
+            InputManager.PlayerActions.PickUp.performed += PickupPerformed;
         }
 
         private void OnDisable() {
-            InputManager.Actions.Player.PickUp.performed -= PickupPerformed;
+            InputManager.PlayerActions.PickUp.performed -= PickupPerformed;
         }
 
 

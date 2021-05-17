@@ -1,55 +1,66 @@
-﻿using NaughtyAttributes;
+﻿using System;
+using NaughtyAttributes;
 using Runtime.Data;
 using Runtime.Event;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
-    public class CrafterView : MonoBehaviour {
+    public class CrafterView : MonoBehaviour, IEventSubscriber {
         [Header("References")] [SerializeField] private RectTransform recipeContainer;
         [SerializeField] private GameObject mainUI;
         [SerializeField] private Button closeButton;
         [SerializeField] private CraftingRecipeView recipePrefab;
-        [SerializeField, ReadOnly] /*debug:*/ private bool isMenuOpen;
 
+        private bool isMenuOpen;
+        private bool isWaitingForInventory;
         private Crafter currentCrafter;
-        private PlayerInventory playerInventory;
+        private IDisposable inventoryResponseEventUnsubscriber;
 
         public bool IsMenuOpen => isMenuOpen;
-        
+
+        private void Awake() {
+            inventoryResponseEventUnsubscriber = EventQueue.Subscribe(this, EventType.InventoryResponse);
+        }
+
         private void OnEnable() {
-            InputManager.Actions.UI.Cancel.performed += CloseViewPerformed;
+            InputManager.UIActions.Cancel.performed += CloseViewPerformed;
             closeButton.onClick.AddListener(CloseView);
         }
 
         private void OnDisable() {
-            InputManager.Actions.UI.Cancel.performed -= CloseViewPerformed;
+            InputManager.UIActions.Cancel.performed -= CloseViewPerformed;
             closeButton.onClick.RemoveListener(CloseView);
         }
 
-        public void OpenView(Crafter crafter, PlayerInventory inventory) {
+        private void OnDestroy() {
+            inventoryResponseEventUnsubscriber.Dispose();
+        }
+
+        public void OpenView(Crafter crafter) {
             isMenuOpen = true;
             currentCrafter = crafter;
-            playerInventory = inventory;
 
             UIHintController.Instance.RequestHide(this);
-            LookWithMouse.Instance.SetEnabled(false);
-            PlayerMovement.Instance.SetEnabled(false);
+            InputManager.PlayerActions.Disable();
+            EventQueue.QueueEvent(new ChangeMouseLockEvent(this, false));
             mainUI.SetActive(true);
-            
-            LoadUI();
+
+            EventQueue.QueueEvent(new EmptyEvent(this, EventType.InventoryRequest));
+            isWaitingForInventory = true;
         }
 
         private void CloseView() {
-            if(!isMenuOpen) return;
+            if (!isMenuOpen) return;
             isMenuOpen = false;
-            
+
             UIHintController.Instance.ReleaseHide(this);
-            LookWithMouse.Instance.SetEnabled(true);
-            PlayerMovement.Instance.SetEnabled(true);
+            InputManager.PlayerActions.Enable();
+            EventQueue.QueueEvent(new ChangeMouseLockEvent(this, true));
             mainUI.SetActive(false);
-            
+
             // Todo: Implement pooling
             while (recipeContainer.childCount > 0) {
                 var child = recipeContainer.GetChild(0);
@@ -58,8 +69,8 @@ namespace Runtime {
             }
         }
 
-        private void LoadUI() {
-            if (currentCrafter == null || playerInventory == null) {
+        private void LoadUI(Inventory materialInventory) {
+            if (currentCrafter == null) {
                 Debug.LogError("Attempting to load crafter UI without a crafter or player inventory");
                 CloseView();
                 return;
@@ -68,19 +79,29 @@ namespace Runtime {
             // Todo: Implement pooling
             foreach (var recipe in currentCrafter.Recipes) {
                 var recipeView = Instantiate(recipePrefab, recipeContainer);
-                recipeView.Build(this, recipe, playerInventory.MaterialInventory);
+                recipeView.Build(this, recipe, materialInventory);
             }
-        }
-
-        public void RequestCraft(CraftingRecipe recipe) {
-            if(!playerInventory.MaterialInventory.Contains(recipe.Ingredients)) return;
-            playerInventory.MaterialInventory.Remove(recipe.Ingredients);
-            playerInventory.MaterialInventory.Add(recipe.Result);
-            EventQueue.QueueEvent(new MaterialInventoryUpdateEvent(this, playerInventory.MaterialInventory));
         }
 
         public void CloseViewPerformed(InputAction.CallbackContext context) {
             CloseView();
+        }
+
+        /// <summary>
+        /// <para>Receives an event from the Event Queue</para>
+        /// </summary>
+        /// <param name="eventData">Event data raised</param>
+        /// <returns><c>true</c> if event propagation should be stopped, <c>false</c> otherwise.</returns>
+        public bool OnEvent(EventData eventData) {
+            switch (eventData) {
+                case InventoryResponseEvent responseEvent: {
+                    if (!isWaitingForInventory) return false;
+                    isWaitingForInventory = false;
+                    LoadUI(responseEvent.MaterialInventory);
+                    return false;
+                }
+                default: return false;
+            }
         }
     }
 }

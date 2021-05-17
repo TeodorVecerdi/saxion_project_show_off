@@ -27,7 +27,7 @@ namespace Runtime {
             Instantiate(pickup, new Vector3(spawnX, 10, spawnZ), Quaternion.Euler(Rand.Float * 360, Rand.Float * 360, Rand.Float * 360));
         }
 
-        private void OnDrawGizmos() {
+        private void OnDrawGizmosSelected() {
             Gizmos.color = Color.red;
             Gizmos.DrawSphere(From, 0.5f);
             Gizmos.color = Color.blue;
