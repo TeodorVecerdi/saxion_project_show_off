@@ -12,12 +12,12 @@ namespace Runtime {
         [SerializeField] private TextMeshProUGUI countText;
 
         public void Build(ItemStack itemStack) {
-            icon.sprite = itemStack.Item.ItemSprite;
-            UpdateItemCount(itemStack.Count);
+            icon.sprite = itemStack.TrashCategory.CategorySprite;
+            UpdateItemCount(itemStack.Mass);
         }
 
-        public void UpdateItemCount(int itemCount) {
-            countText.text = $"{itemCount}";
+        public void UpdateItemCount(float mass) {
+            countText.text = $"{mass} MU";
         }
     }
 }

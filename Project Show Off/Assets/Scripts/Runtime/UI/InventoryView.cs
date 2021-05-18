@@ -46,13 +46,13 @@ namespace Runtime {
                     itemView.Build(itemStack);
                     items.Add(itemStack, itemView);
                 } else {
-                    items[itemStack].UpdateItemCount(itemStack.Count);
+                    items[itemStack].UpdateItemCount(itemStack.Mass);
                 }
             }
             
             // Remove empty items
             foreach (var itemStack in items.Keys.ToList()) {
-                if (inventoryUpdateEvent.Inventory.GetItemCount(itemStack.Item) > 0) continue;
+                if (inventoryUpdateEvent.Inventory.GetTrashCategoryMass(itemStack.TrashCategory) > 0) continue;
                 
                 Destroy(items[itemStack].gameObject);
                 items.Remove(itemStack);
