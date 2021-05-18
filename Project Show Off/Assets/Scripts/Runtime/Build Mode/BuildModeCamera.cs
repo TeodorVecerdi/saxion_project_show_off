@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
+    [RequireComponent(typeof(BuildModeCameraBoundaries))]
     public class BuildModeCamera : MonoBehaviour, IEventSubscriber {
         // ReSharper disable InconsistentNaming
         [HorizontalLine(color: EColor.Green, order = 1), Header("General")]
@@ -55,13 +56,15 @@ namespace Runtime {
         private Quaternion newRotation;
         
         private Transform cameraTransform;
+        private BuildModeCameraBoundaries cameraBoundaries;
         private Plane dragPlane;
         private Mouse mouse;
-        private bool isEnabled = false;
+        private bool isEnabled;
         private IDisposable gameModeToggleEventUnsubscriber;
 
         private void Awake() {
             cameraTransform = virtualCamera.transform;
+            cameraBoundaries = GetComponent<BuildModeCameraBoundaries>();
             dragPlane = new Plane(Vector3.up, Vector3.zero);
             mouse = Mouse.current;
             gameModeToggleEventUnsubscriber = EventQueue.Subscribe(this, EventType.GameModeToggle);
@@ -143,6 +146,10 @@ namespace Runtime {
             newZoom += zoomDelta * new Vector3(0, -zoomSpeed, zoomSpeed);
             newZoom.y = newZoom.y.Clamped(minZoom, maxZoom);
             newZoom.z = newZoom.z.Clamped(-maxZoom, -minZoom);
+
+            // Limit to boundaries
+            newPosition.x = newPosition.x.Clamped(cameraBoundaries.MinimumPosition.x, cameraBoundaries.MaximumPosition.x);
+            newPosition.z = newPosition.z.Clamped(cameraBoundaries.MinimumPosition.y, cameraBoundaries.MaximumPosition.y);
 
             transform.position = Vector3.Lerp(transform.position, newPosition, Time.deltaTime * actualMovementTime);
             transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, Time.deltaTime * actualRotationTime);

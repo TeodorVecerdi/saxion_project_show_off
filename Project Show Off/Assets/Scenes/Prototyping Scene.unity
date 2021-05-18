@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1481.7451, g: 1835.5391, b: 2429.8105, a: 1}
+  m_IndirectSpecularColor: {r: 1481.7754, g: 1835.8867, b: 2430.4492, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5251,6 +5251,7 @@ GameObject:
   m_Component:
   - component: {fileID: 882174909}
   - component: {fileID: 882174910}
+  - component: {fileID: 882174911}
   m_Layer: 0
   m_Name: Build Camera Controller
   m_TagString: Untagged
@@ -5299,6 +5300,20 @@ MonoBehaviour:
   zoomTime: 5
   minZoom: 50
   maxZoom: 170
+--- !u!114 &882174911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 882174908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c123a60b51b4ad7b0ff2a0b95a59b27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minimumPosition: {x: -15, y: -15}
+  maximumPosition: {x: 15, y: 15}
 --- !u!1 &891822836
 GameObject:
   m_ObjectHideFlags: 0
