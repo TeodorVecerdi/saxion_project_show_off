@@ -7,26 +7,25 @@ using UnityEngine;
 namespace Runtime.Data {
     [Serializable]
     public class Inventory : IEnumerable {
-        [SerializeField] private List<ItemStack> items;
+        [SerializeField] private List<ItemStack> contents;
 
         public Inventory() {
-            items = new List<ItemStack>();
+            contents = new List<ItemStack>();
         }
 
-        public void Add(Item item, int count) {
-            if(count <= 0) return;
-            var itemStack = GetItemStack(item);
+        public void Add(TrashCategory trashCategory, float mass) {
+            if(mass <= 0) return;
+            var itemStack = GetItemStack(trashCategory);
             
             if (itemStack == null) {
-                itemStack = new ItemStack(item, 0);
-                items.Add(itemStack);
+                itemStack = new ItemStack(trashCategory, 0);
+                contents.Add(itemStack);
             }
 
-            itemStack.Count += count;
+            itemStack.Mass += mass;
         }
 
-        public void Add(Item item) => Add(item, 1);
-        public void Add(ItemStack itemStack) => Add(itemStack.Item, itemStack.Count);
+        public void Add(ItemStack itemStack) => Add(itemStack.TrashCategory, itemStack.Mass);
 
         public void Add(Inventory inventory) {
             foreach (var itemStack in inventory) {
@@ -34,20 +33,20 @@ namespace Runtime.Data {
             }
         }
 
-        public void Remove(Item item, int count) {
-            if(count <= 0) return;
+        public void Remove(TrashCategory trashCategory, float mass) {
+            if(mass <= 0) return;
             
-            var itemStack = GetItemStack(item);
-            var inventoryCount = itemStack == null ? 0 : itemStack.Count;
-            if (itemStack == null || inventoryCount < count) throw new Exception("Attempting to remove more items than inventory contains");
+            var itemStack = GetItemStack(trashCategory);
+            var inventoryMass = itemStack == null ? 0.0f : itemStack.Mass;
+            if (itemStack == null || inventoryMass < mass) throw new Exception("Attempting to remove more items than inventory contains");
 
-            itemStack.Count -= count;
-            if (itemStack.Count <= 0) {
-                items.Remove(itemStack);
+            itemStack.Mass -= mass;
+            if (itemStack.Mass <= 0) {
+                contents.Remove(itemStack);
             }
         }
 
-        public void Remove(ItemStack itemStack) => Remove(itemStack.Item, itemStack.Count);
+        public void Remove(ItemStack itemStack) => Remove(itemStack.TrashCategory, itemStack.Mass);
 
         public void Remove(Inventory inventory) {
             foreach (var itemStack in inventory) {
@@ -55,19 +54,19 @@ namespace Runtime.Data {
             }
         }
 
-        public int GetItemCount(Item item) {
-            var itemStack = GetItemStack(item);
-            return itemStack == null ? 0 : itemStack.Count;
+        public float GetTrashCategoryMass(TrashCategory trashCategory) {
+            var itemStack = GetItemStack(trashCategory);
+            return itemStack == null ? 0 : itemStack.Mass;
         }
 
-        private ItemStack GetItemStack(Item item) {
-            return items.FirstOrDefault(stack => stack.Item == item);
+        private ItemStack GetItemStack(TrashCategory trashCategory) {
+            return contents.FirstOrDefault(stack => stack.TrashCategory == trashCategory);
         }
 
         public bool Contains(Inventory other) {
             foreach (var itemStack in other) {
-                var selfStack = GetItemStack(itemStack.Item);
-                if (selfStack == null || selfStack.Count < itemStack.Count) 
+                var selfStack = GetItemStack(itemStack.TrashCategory);
+                if (selfStack == null || selfStack.Mass < itemStack.Mass) 
                     return false;
             }
 
@@ -75,7 +74,7 @@ namespace Runtime.Data {
         }
 
         public IEnumerator<ItemStack> GetEnumerator() {
-            return items.GetEnumerator();
+            return contents.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator() {
