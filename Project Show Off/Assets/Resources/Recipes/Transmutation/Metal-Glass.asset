@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Metal-Glass
   m_EditorClassIdentifier: 
   ingredients:
-    items:
-    - item: {fileID: 11400000, guid: 2484c42e7f6c4d949b8bb98b18aedf0b, type: 2}
-      count: 1
+    contents:
+    - trashCategory: {fileID: 11400000, guid: 2484c42e7f6c4d949b8bb98b18aedf0b, type: 2}
+      mass: 0.25
   result:
-    item: {fileID: 11400000, guid: 30d4a134f1adb6b479af094e1fdf25f7, type: 2}
-    count: 1
+    trashCategory: {fileID: 11400000, guid: 30d4a134f1adb6b479af094e1fdf25f7, type: 2}
+    mass: 0.25

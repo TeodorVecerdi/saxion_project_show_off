@@ -6,20 +6,19 @@ using UnityEngine;
 namespace Runtime.Data {
     [Serializable]
     public class ItemStack : IEquatable<ItemStack> {
-        [SerializeField] private Item item;
-        [SerializeField] private int count;
+        [SerializeField] private TrashCategory trashCategory;
+        [SerializeField] private float mass;
         
-        public Item Item => item;
+        public TrashCategory TrashCategory => trashCategory;
         
-        public int Count {
-            get => count;
-            set => count = value;
+        public float Mass {
+            get => mass;
+            set => mass = value;
         }
-        
 
-        public ItemStack(Item item, int count) {
-            this.item = item;
-            this.count = count;
+        public ItemStack(TrashCategory trashCategory, float mass) {
+            this.trashCategory = trashCategory;
+            this.mass = mass;
         }
 
         public bool Equals(ItemStack other) {
@@ -34,7 +33,7 @@ namespace Runtime.Data {
         }
 
         public override int GetHashCode() {
-            return item!.GetHashCode();
+            return trashCategory.GetHashCode();
         }
 
         public static bool operator ==(ItemStack left, ItemStack right) {
@@ -53,11 +52,11 @@ namespace Runtime.Data {
                 if (ReferenceEquals(x, null)) return false;
                 if (ReferenceEquals(y, null)) return false;
                 if (x.GetType() != y.GetType()) return false;
-                return Equals(x.item, y.item);
+                return Equals(x.trashCategory, y.trashCategory);
             }
 
             public int GetHashCode(ItemStack obj) {
-                return obj!.item!.GetHashCode();
+                return obj.trashCategory.GetHashCode();
             }
         }
     }

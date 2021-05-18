@@ -14,7 +14,6 @@ namespace Runtime {
         [SerializeField] private TextMeshProUGUI nameText;
         [SerializeField] private TextMeshProUGUI countText;
 
-        private CraftingRecipeView owner;
         private ItemStack itemStack;
         private IDisposable inventoryUpdateUnsubscribeToken;
         
@@ -26,17 +25,16 @@ namespace Runtime {
             inventoryUpdateUnsubscribeToken?.Dispose();
         }
 
-        public void Build(CraftingRecipeView owner, ItemStack itemStack, Inventory materialInventory) {
-            this.owner = owner;
+        public void Build(ItemStack itemStack, Inventory materialInventory) {
             this.itemStack = itemStack;
-            icon.sprite = itemStack.Item.ItemSprite;
-            nameText.text = itemStack.Item.ItemName;
-            UpdateItemCount(materialInventory.GetItemCount(itemStack.Item));
+            icon.sprite = itemStack.TrashCategory.CategorySprite;
+            nameText.text = itemStack.TrashCategory.CategoryName;
+            UpdateItemCount(materialInventory.GetTrashCategoryMass(itemStack.TrashCategory));
         }
 
-        private void UpdateItemCount(int itemCount) {
-            countText.text = $"{itemCount}/{itemStack.Count}";
-            if (itemCount >= itemStack.Count) countText.color = nameText.color = normalColor;
+        private void UpdateItemCount(float mass) {
+            countText.text = $"{mass:F2} <b>MU</b>/{itemStack.Mass:F2} <b>MU</b>";
+            if (mass >= itemStack.Mass) countText.color = nameText.color = normalColor;
             else countText.color = nameText.color = invalidColor;
         }
 
@@ -56,8 +54,8 @@ namespace Runtime {
         }
 
         private void OnInventoryUpdateEvent(InventoryUpdateEvent inventoryUpdateEvent) {
-            var itemCount = inventoryUpdateEvent.Inventory.GetItemCount(itemStack.Item);
-            UpdateItemCount(itemCount);
+            var mass = inventoryUpdateEvent.Inventory.GetTrashCategoryMass(itemStack.TrashCategory);
+            UpdateItemCount(mass);
         }
     }
 }

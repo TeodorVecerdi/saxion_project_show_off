@@ -1,10 +1,7 @@
-﻿using System;
-using Runtime.Data;
-using Runtime.Event;
+﻿using Runtime.Data;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
     public class InventoryItemView : MonoBehaviour {
@@ -12,12 +9,12 @@ namespace Runtime {
         [SerializeField] private TextMeshProUGUI countText;
 
         public void Build(ItemStack itemStack) {
-            icon.sprite = itemStack.Item.ItemSprite;
-            UpdateItemCount(itemStack.Count);
+            icon.sprite = itemStack.TrashCategory.CategorySprite;
+            UpdateItemCount(itemStack.Mass);
         }
 
-        public void UpdateItemCount(int itemCount) {
-            countText.text = $"{itemCount}";
+        public void UpdateItemCount(float mass) {
+            countText.text = $"{mass:F2} <b>MU</b>";
         }
     }
 }

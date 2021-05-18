@@ -61,7 +61,7 @@ namespace Runtime {
             EventQueue.QueueEvent(new ChangeMouseLockEvent(this, true));
             mainUI.SetActive(false);
 
-            // Todo: Implement pooling
+            // Todo: Use object pooling
             while (recipeContainer.childCount > 0) {
                 var child = recipeContainer.GetChild(0);
                 child.SetParent(null);
@@ -76,10 +76,10 @@ namespace Runtime {
                 return;
             }
 
-            // Todo: Implement pooling
+            // Todo: Use object pooling
             foreach (var recipe in currentCrafter.Recipes) {
                 var recipeView = Instantiate(recipePrefab, recipeContainer);
-                recipeView.Build(this, recipe, materialInventory);
+                recipeView.Build(recipe, materialInventory);
             }
         }
 
