@@ -8,7 +8,10 @@ namespace Runtime.Data {
     [Serializable]
     public class Inventory : IEnumerable {
         [SerializeField] private List<ItemStack> contents;
+        [SerializeField] private float totalMass;
 
+        public float TotalMass => totalMass;
+        
         public Inventory() {
             contents = new List<ItemStack>();
         }
@@ -22,6 +25,7 @@ namespace Runtime.Data {
                 contents.Add(itemStack);
             }
 
+            totalMass += mass;
             itemStack.Mass += mass;
         }
 
@@ -41,6 +45,7 @@ namespace Runtime.Data {
             if (itemStack == null || inventoryMass < mass) throw new Exception("Attempting to remove more items than inventory contains");
 
             itemStack.Mass -= mass;
+            totalMass -= mass;
             if (itemStack.Mass <= 0) {
                 contents.Remove(itemStack);
             }
