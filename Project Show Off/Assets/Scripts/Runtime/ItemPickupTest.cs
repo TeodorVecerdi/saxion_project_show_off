@@ -1,4 +1,5 @@
 using System;
+using Runtime.Data;
 using Runtime.Event;
 using TMPro;
 using UnityEngine;
@@ -30,7 +31,7 @@ namespace Runtime {
             var ray = new Ray(cameraTransform.position, cameraTransform.forward);
             if (Physics.Raycast(ray, out var hitInfo, 10, LayerMask.GetMask("Pickup"))) {
                 pickupUnderMouse = hitInfo.transform.GetComponent<Pickup>();
-                text.text = pickupUnderMouse.ItemStack.Item.ItemName;
+                text.text = $"{pickupUnderMouse.Item.ItemName} ({pickupUnderMouse.Item.TrashCategory.CategoryName})";
             } else {
                 pickupUnderMouse = null;
                 text.text = "None";
@@ -41,7 +42,7 @@ namespace Runtime {
             if (pickupUnderMouse == null) return;
             
             Destroy(pickupUnderMouse.gameObject);
-            EventQueue.QueueEvent(new MaterialPickedUpEvent(this, pickupUnderMouse.ItemStack));
+            EventQueue.QueueEvent(new MaterialPickedUpEvent(this, new ItemStack(pickupUnderMouse.Item.TrashCategory, pickupUnderMouse.Mass)));
             pickupUnderMouse = null;
             DoPickupRaycast();
         }
