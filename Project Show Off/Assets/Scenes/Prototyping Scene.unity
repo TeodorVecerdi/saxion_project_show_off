@@ -7659,7 +7659,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 0}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -8600,10 +8600,15 @@ MonoBehaviour:
   To: {x: 11.5, y: 3, z: 10}
   SpawnTime: 3
   Pickups:
-  - {fileID: 2346935513933802946, guid: 68664aed65053d344b7ad1d55755203e, type: 3}
   - {fileID: 2346935513933802946, guid: d06699974a2287d459a61c93411dc159, type: 3}
+  - {fileID: 2346935513933802946, guid: cffc879df520ed24892ebbceff5d55d0, type: 3}
+  - {fileID: 2346935513933802946, guid: 1fd0fb375ae35be4db353c0a6cdfa1d8, type: 3}
+  - {fileID: 2346935513933802946, guid: 68664aed65053d344b7ad1d55755203e, type: 3}
   - {fileID: 2346935513933802946, guid: 83bf5c4666ab69d48883e10134b30bf3, type: 3}
-  - {fileID: 2346935513933802946, guid: d9aa2f74584df6d4f8717c34b69c1df4, type: 3}
+  - {fileID: 2346935513933802946, guid: 2c9a3d4a70431044992fce2c06935e92, type: 3}
+  - {fileID: 2346935513933802946, guid: 27c199666ff081e43b6d1b335df1d51d, type: 3}
+  - {fileID: 2346935513933802946, guid: 297df8f864149ee459fcaa0c877fb5f3, type: 3}
+  - {fileID: 2346935513933802946, guid: 433df02414664914fb6a6c79c68296f4, type: 3}
 --- !u!114 &2121497770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8756,9 +8761,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   materialInventory:
-    items: []
+    contents: []
   placeableInventory:
-    items: []
+    contents: []
 --- !u!4 &738646681827304401
 Transform:
   m_ObjectHideFlags: 0

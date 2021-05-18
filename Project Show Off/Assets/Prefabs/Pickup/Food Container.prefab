@@ -10,18 +10,22 @@ PrefabInstance:
     - target: {fileID: 5100389314723402863, guid: 1570f7654d1782e47bc0380284842b02, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 815f8dd896fab7f43baed6d2e54d89a2, type: 2}
+      objectReference: {fileID: 2100000, guid: 8fdfaef01d5aba742a20a812e99253be, type: 2}
+    - target: {fileID: 6782581133842966873, guid: 1570f7654d1782e47bc0380284842b02, type: 3}
+      propertyPath: item
+      value: 
+      objectReference: {fileID: 11400000, guid: 8671be0a030325041b9db437bb69aea1, type: 2}
     - target: {fileID: 6782581133842966873, guid: 1570f7654d1782e47bc0380284842b02, type: 3}
       propertyPath: itemStack.item
       value: 
-      objectReference: {fileID: 11400000, guid: fec93a18793254344b0eb7b9c697fd84, type: 2}
+      objectReference: {fileID: 11400000, guid: 4bce4b42e3e7157439edede8569afc9e, type: 2}
     - target: {fileID: 6782581133842966873, guid: 1570f7654d1782e47bc0380284842b02, type: 3}
       propertyPath: itemStack.count
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6782581133842966878, guid: 1570f7654d1782e47bc0380284842b02, type: 3}
       propertyPath: m_Name
-      value: Paper
+      value: FoodContainer
       objectReference: {fileID: 0}
     - target: {fileID: 6782581133842966879, guid: 1570f7654d1782e47bc0380284842b02, type: 3}
       propertyPath: m_RootOrder

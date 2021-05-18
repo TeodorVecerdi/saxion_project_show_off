@@ -12,6 +12,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 150931f6fcd4e3945b1ae0d12491230c, type: 2}
     - target: {fileID: 6782581133842966873, guid: 1570f7654d1782e47bc0380284842b02, type: 3}
+      propertyPath: item
+      value: 
+      objectReference: {fileID: 11400000, guid: 3a277ce06a3eda74185b2e9fdd455dd3, type: 2}
+    - target: {fileID: 6782581133842966873, guid: 1570f7654d1782e47bc0380284842b02, type: 3}
       propertyPath: itemStack.item
       value: 
       objectReference: {fileID: 11400000, guid: 2484c42e7f6c4d949b8bb98b18aedf0b, type: 2}
@@ -21,7 +25,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6782581133842966878, guid: 1570f7654d1782e47bc0380284842b02, type: 3}
       propertyPath: m_Name
-      value: Metal
+      value: BeerCan
       objectReference: {fileID: 0}
     - target: {fileID: 6782581133842966879, guid: 1570f7654d1782e47bc0380284842b02, type: 3}
       propertyPath: m_RootOrder
