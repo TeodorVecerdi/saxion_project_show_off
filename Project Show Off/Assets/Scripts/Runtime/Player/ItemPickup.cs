@@ -1,15 +1,24 @@
 using System;
-using Runtime.Data;
 using Runtime.Event;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
-    public class ItemPickupTest : MonoBehaviour {
+    public class ItemPickup : MonoBehaviour, IEventSubscriber {
         [SerializeField] private TextMeshProUGUI text;
         [SerializeField] private Transform cameraTransform;
         private Pickup pickupUnderMouse;
+        private IDisposable itemPickupSuccessEventUnsubscriber;
+
+        private void Awake() {
+            itemPickupSuccessEventUnsubscriber = EventQueue.Subscribe(this, EventType.ItemPickupSuccess);
+        }
+
+        private void OnDestroy() {
+            itemPickupSuccessEventUnsubscriber.Dispose();
+        }
 
         private void OnEnable() {
             InputManager.PlayerActions.PickUp.performed += PickupPerformed;
@@ -40,11 +49,23 @@ namespace Runtime {
 
         private void PickupPerformed(InputAction.CallbackContext context) {
             if (pickupUnderMouse == null) return;
-            
-            Destroy(pickupUnderMouse.gameObject);
-            EventQueue.QueueEvent(new MaterialPickedUpEvent(this, new ItemStack(pickupUnderMouse.Item.TrashCategory, pickupUnderMouse.Mass)));
-            pickupUnderMouse = null;
-            DoPickupRaycast();
+            EventQueue.QueueEvent(new ItemPickupEvent(this, EventType.ItemPickupRequest, pickupUnderMouse));
+        }
+
+        /// <summary>
+        /// <para>Receives an event from the Event Queue</para>
+        /// </summary>
+        /// <param name="eventData">Event data raised</param>
+        /// <returns><c>true</c> if event propagation should be stopped, <c>false</c> otherwise.</returns>
+        public bool OnEvent(EventData eventData) {
+            switch (eventData) {
+                case ItemPickupEvent {Type: EventType.ItemPickupSuccess} itemPickupSuccessEvent: {
+                    Destroy(itemPickupSuccessEvent.Pickup.gameObject);
+                    DoPickupRaycast();
+                    return true;
+                }
+                default: return false;
+            }
         }
     }
 }
