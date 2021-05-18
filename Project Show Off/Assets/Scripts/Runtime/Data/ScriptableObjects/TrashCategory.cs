@@ -6,8 +6,10 @@ namespace Runtime.Data {
     public class TrashCategory : ScriptableObject {
         [SerializeField] private string categoryName;
         [SerializeField] private Sprite categorySprite;
+        [SerializeField] private float badness;
         
         public string CategoryName => categoryName;
         public Sprite CategorySprite => categorySprite;
+        public float Badness => badness;
     }
 }
