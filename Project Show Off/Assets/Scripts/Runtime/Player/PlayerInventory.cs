@@ -18,7 +18,7 @@ namespace Runtime {
         private readonly List<IDisposable> eventUnsubscribeTokens = new List<IDisposable>();
 
         private void Awake() {
-            eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.MaterialPickedUp));
+            eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.ItemPickupRequest));
             eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.InventoryRequest));
             eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.CraftRequest));
         }
@@ -35,10 +35,13 @@ namespace Runtime {
         /// <returns><c>true</c> if event propagation should be stopped, <c>false</c> otherwise.</returns>
         public bool OnEvent(EventData eventData) {
             switch (eventData) {
-                case MaterialPickedUpEvent materialPickedUpEvent: {
-                    materialInventory.Add(materialPickedUpEvent.MaterialItemStack);
+                case ItemPickupEvent {Type: EventType.ItemPickupRequest} itemPickupEvent: {
+                    var mass = itemPickupEvent.Pickup.Mass;
+                    if(materialInventory.TotalMass + mass > MaximumCarryMass) return true;
+                    materialInventory.Add(itemPickupEvent.Pickup.Item.TrashCategory, itemPickupEvent.Pickup.Mass);
+                    EventQueue.QueueEvent(new ItemPickupEvent(this, EventType.ItemPickupSuccess, itemPickupEvent.Pickup));
                     EventQueue.QueueEvent(new MaterialInventoryUpdateEvent(this, materialInventory));
-                    return false;
+                    return true;
                 }
                 case EmptyEvent {Type: EventType.InventoryRequest}: {
                     EventQueue.QueueEvent(new InventoryResponseEvent(this, materialInventory, placeableInventory));
@@ -48,10 +51,10 @@ namespace Runtime {
                     if (!materialInventory.Contains(craftRequestEvent.Recipe.Ingredients)) return true;
                     
                     materialInventory.Remove(craftRequestEvent.Recipe.Ingredients);
-                    // TODO!: Change to placeable inventory once system is in place 
                     materialInventory.Add(craftRequestEvent.Recipe.Result);
                     EventQueue.QueueEvent(new MaterialInventoryUpdateEvent(this, materialInventory));
                     
+                    // TODO!: Change to placeable inventory once system is in place 
                     // placeableInventory.Add(craftRequestEvent.Recipe.Result);
                     // EventQueue.QueueEvent(new PlaceableInventoryUpdateEvent(this, placeableInventory));
                     return true;
