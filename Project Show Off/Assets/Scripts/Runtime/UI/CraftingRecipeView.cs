@@ -50,7 +50,7 @@ namespace Runtime {
 
             resultSprite.sprite = recipe.Result.TrashCategory.CategorySprite;
             resultName.text = recipe.Result.TrashCategory.CategoryName;
-            resultCount.text = $"{recipe.Result.Mass} <b>MU</b>";
+            resultCount.text = $"{recipe.Result.Mass:F2} <b>MU</b>";
         }
 
         private void OnCraftButtonClicked() {

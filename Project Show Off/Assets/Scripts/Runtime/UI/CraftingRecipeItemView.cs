@@ -33,7 +33,7 @@ namespace Runtime {
         }
 
         private void UpdateItemCount(float mass) {
-            countText.text = $"{mass} <b>MU</b>/{itemStack.Mass} <b>MU</b>";
+            countText.text = $"{mass:F2} <b>MU</b>/{itemStack.Mass:F2} <b>MU</b>";
             if (mass >= itemStack.Mass) countText.color = nameText.color = normalColor;
             else countText.color = nameText.color = invalidColor;
         }

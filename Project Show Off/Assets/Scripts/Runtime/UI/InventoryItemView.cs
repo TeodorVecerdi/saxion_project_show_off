@@ -1,10 +1,7 @@
-﻿using System;
-using Runtime.Data;
-using Runtime.Event;
+﻿using Runtime.Data;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
     public class InventoryItemView : MonoBehaviour {
@@ -17,7 +14,7 @@ namespace Runtime {
         }
 
         public void UpdateItemCount(float mass) {
-            countText.text = $"{mass} MU";
+            countText.text = $"{mass:F2} <b>MU</b>";
         }
     }
 }
