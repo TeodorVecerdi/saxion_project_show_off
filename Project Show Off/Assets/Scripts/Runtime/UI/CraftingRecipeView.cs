@@ -23,7 +23,6 @@ namespace Runtime {
         [SerializeField] private Image overlayImage;
 
         private bool canCraft;
-        private CrafterView owner;
         private CraftingRecipe recipe;
         private Inventory materialInventory;
         private IDisposable inventoryUpdateUnsubscribeToken;
@@ -37,20 +36,21 @@ namespace Runtime {
             inventoryUpdateUnsubscribeToken?.Dispose();
         }
 
-        public void Build(CrafterView owner, CraftingRecipe recipe, Inventory materialInventory) {
-            this.owner = owner;
+        public void Build( CraftingRecipe recipe, Inventory materialInventory) {
             this.recipe = recipe;
             this.materialInventory = materialInventory;
+            
+            // TODO!: Use object pooling
             foreach (var recipeIngredient in recipe.Ingredients) {
                 var recipeBuilder = Instantiate(itemPrefab, ingredientsContainer);
-                recipeBuilder.Build(this, recipeIngredient, materialInventory);
+                recipeBuilder.Build(recipeIngredient, materialInventory);
             }
 
             UpdateCraftableState();
 
-            resultSprite.sprite = recipe.Result.Item.ItemSprite;
-            resultName.text = recipe.Result.Item.ItemName;
-            resultCount.text = $"x{recipe.Result.Count}";
+            resultSprite.sprite = recipe.Result.TrashCategory.CategorySprite;
+            resultName.text = recipe.Result.TrashCategory.CategoryName;
+            resultCount.text = $"{recipe.Result.Mass} <b>MU</b>";
         }
 
         private void OnCraftButtonClicked() {
@@ -80,7 +80,7 @@ namespace Runtime {
         private void UpdateCraftableState() {
             canCraft = true;
             foreach (var itemStack in recipe.Ingredients) {
-                if (materialInventory.GetItemCount(itemStack.Item) >= itemStack.Count) continue;
+                if (materialInventory.GetTrashCategoryMass(itemStack.TrashCategory) >= itemStack.Mass) continue;
                 
                 canCraft = false;
                 break;
