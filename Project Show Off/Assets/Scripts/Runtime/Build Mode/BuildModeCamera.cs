@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Cinemachine;
 using NaughtyAttributes;
 using Runtime.Event;
@@ -32,6 +32,7 @@ namespace Runtime {
         [HorizontalLine(color: EColor.Red, order = 1), Header("Zoom")]
         [SerializeField] private float normalZoomSpeed = 1.0f;
         [SerializeField] private float boostZoomSpeed = 3.0f;
+        [SerializeField] private float scrollZoomSensitivity = 5.0f;
         [ShowIf(nameof(unlinkTimeVariables)), OnValueChanged("OnTimeSettingsChanged"), SerializeField]
         private float zoomTime = 5.0f;
         [SerializeField] private float minZoom = 40;
