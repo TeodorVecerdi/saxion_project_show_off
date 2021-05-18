@@ -11,7 +11,7 @@ namespace Runtime {
         public float Mass => mass;
 
         private void Start() {
-            mass = Rand.Range(item.MinimumMass, item.MaximumMass).RoundedTo(0.1f).Clamped(item.MinimumMass, item.MaximumMass);
+            mass = Rand.Range(item.MinimumMass, item.MaximumMass).RoundedTo(0.05f).Clamped(item.MinimumMass, item.MaximumMass);
         }
     }
 }
