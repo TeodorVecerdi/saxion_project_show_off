@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Cinemachine;
 using NaughtyAttributes;
 using Runtime.Event;
@@ -141,10 +141,12 @@ namespace Runtime {
             var zoomDelta = InputManager.RawZoom;
             if (!Mathf.Approximately(zoomDelta, 0.0f))
                 zoomDelta = Mathf.Sign(zoomDelta);
+            zoomDelta *= scrollZoomSensitivity;
+            zoomDelta += InputManager.KeyboardZoom;
 
             newPosition += movementDelta.x * movementSpeed * transform.right + movementDelta.y * movementSpeed * transform.forward;
             newRotation *= Quaternion.Euler(rotationDelta * rotationSpeed * Vector3.up);
-            newZoom += zoomDelta * new Vector3(0, -zoomSpeed, zoomSpeed);
+            newZoom += Time.deltaTime * zoomDelta * new Vector3(0, -zoomSpeed, zoomSpeed);
             newZoom.y = newZoom.y.Clamped(minZoom, maxZoom);
             newZoom.z = newZoom.z.Clamped(-maxZoom, -minZoom);
 

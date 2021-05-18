@@ -5133,6 +5133,7 @@ MonoBehaviour:
   rotationTime: 5
   normalZoomSpeed: 11.93
   boostZoomSpeed: 14
+  scrollZoomSensitivity: 5
   zoomTime: 5
   minZoom: 50
   maxZoom: 170
