@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using Runtime;
 using Runtime.Data;
 using Runtime.Event;
@@ -18,7 +19,7 @@ public class NewInventoryView : MonoBehaviour, IEventSubscriber {
     private IDisposable inventoryUpdateEventUnsubscriber;
 
     private void Awake() {
-        var inventoryScreenSize = ((RectTransform) transform).sizeDelta.x;
+        var inventoryScreenSize = ((RectTransform) transform).sizeDelta.y;
         screenUnitsPerMassUnit = inventoryScreenSize / playerInventory.MaximumCarryMass;
         items = new Dictionary<TrashCategory, Image>();
         inventoryUpdateEventUnsubscriber = EventQueue.Subscribe(this, EventType.InventoryUpdate);
@@ -43,10 +44,10 @@ public class NewInventoryView : MonoBehaviour, IEventSubscriber {
 
     private void UpdateFillAmount(ItemStack itemStack) {
         var screenSize = itemStack.Mass * screenUnitsPerMassUnit;
-        
         var sizeDelta = items[itemStack.TrashCategory].rectTransform.sizeDelta;
-        sizeDelta.x = screenSize;
-        items[itemStack.TrashCategory].rectTransform.sizeDelta = sizeDelta;
+        sizeDelta.y = screenSize;
+        items[itemStack.TrashCategory].rectTransform.DOKill(true);
+        items[itemStack.TrashCategory].rectTransform.DOSizeDelta(sizeDelta, 0.25f);
     }
 
     /// <summary>
