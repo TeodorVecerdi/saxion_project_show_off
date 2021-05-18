@@ -679,6 +679,14 @@ namespace Runtime
                     ""interactions"": """"
                 },
                 {
+                    ""name"": ""KeyboardZoom"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""7148b0c0-e66c-463c-8306-2742c47ea8e9"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
                     ""name"": ""Zoom"",
                     ""type"": ""PassThrough"",
                     ""id"": ""42265744-9fd9-4a8c-a2ea-f375d5218d61"",
@@ -815,39 +823,6 @@ namespace Runtime
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""1D Axis"",
-                    ""id"": ""0814b994-d61c-40e5-b507-3780df38a510"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Zoom"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""0b0d5a0c-2466-48dc-b46e-4ffd694dbfbb"",
-                    ""path"": ""<Keyboard>/f"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Zoom"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""b0cfef58-ad67-4749-bc56-286d710be789"",
-                    ""path"": ""<Keyboard>/r"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Zoom"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
                     ""name"": """",
                     ""id"": ""ccec3a6f-0786-48e7-9556-e7f194e927b9"",
                     ""path"": ""<Keyboard>/shift"",
@@ -888,6 +863,39 @@ namespace Runtime
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Rotation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""0814b994-d61c-40e5-b507-3780df38a510"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""KeyboardZoom"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""0b0d5a0c-2466-48dc-b46e-4ffd694dbfbb"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""KeyboardZoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""b0cfef58-ad67-4749-bc56-286d710be789"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""KeyboardZoom"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 }
@@ -974,6 +982,7 @@ namespace Runtime
             // Build Mode
             m_BuildMode = asset.FindActionMap("Build Mode", throwIfNotFound: true);
             m_BuildMode_KeyboardPan = m_BuildMode.FindAction("KeyboardPan", throwIfNotFound: true);
+            m_BuildMode_KeyboardZoom = m_BuildMode.FindAction("KeyboardZoom", throwIfNotFound: true);
             m_BuildMode_Zoom = m_BuildMode.FindAction("Zoom", throwIfNotFound: true);
             m_BuildMode_Rotation = m_BuildMode.FindAction("Rotation", throwIfNotFound: true);
             m_BuildMode_Boost = m_BuildMode.FindAction("Boost", throwIfNotFound: true);
@@ -1208,6 +1217,7 @@ namespace Runtime
         private readonly InputActionMap m_BuildMode;
         private IBuildModeActions m_BuildModeActionsCallbackInterface;
         private readonly InputAction m_BuildMode_KeyboardPan;
+        private readonly InputAction m_BuildMode_KeyboardZoom;
         private readonly InputAction m_BuildMode_Zoom;
         private readonly InputAction m_BuildMode_Rotation;
         private readonly InputAction m_BuildMode_Boost;
@@ -1216,6 +1226,7 @@ namespace Runtime
             private @DefaultInputActions m_Wrapper;
             public BuildModeActions(@DefaultInputActions wrapper) { m_Wrapper = wrapper; }
             public InputAction @KeyboardPan => m_Wrapper.m_BuildMode_KeyboardPan;
+            public InputAction @KeyboardZoom => m_Wrapper.m_BuildMode_KeyboardZoom;
             public InputAction @Zoom => m_Wrapper.m_BuildMode_Zoom;
             public InputAction @Rotation => m_Wrapper.m_BuildMode_Rotation;
             public InputAction @Boost => m_Wrapper.m_BuildMode_Boost;
@@ -1231,6 +1242,9 @@ namespace Runtime
                     @KeyboardPan.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnKeyboardPan;
                     @KeyboardPan.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnKeyboardPan;
                     @KeyboardPan.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnKeyboardPan;
+                    @KeyboardZoom.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnKeyboardZoom;
+                    @KeyboardZoom.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnKeyboardZoom;
+                    @KeyboardZoom.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnKeyboardZoom;
                     @Zoom.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnZoom;
                     @Zoom.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnZoom;
                     @Zoom.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnZoom;
@@ -1247,6 +1261,9 @@ namespace Runtime
                     @KeyboardPan.started += instance.OnKeyboardPan;
                     @KeyboardPan.performed += instance.OnKeyboardPan;
                     @KeyboardPan.canceled += instance.OnKeyboardPan;
+                    @KeyboardZoom.started += instance.OnKeyboardZoom;
+                    @KeyboardZoom.performed += instance.OnKeyboardZoom;
+                    @KeyboardZoom.canceled += instance.OnKeyboardZoom;
                     @Zoom.started += instance.OnZoom;
                     @Zoom.performed += instance.OnZoom;
                     @Zoom.canceled += instance.OnZoom;
@@ -1336,6 +1353,7 @@ namespace Runtime
         public interface IBuildModeActions
         {
             void OnKeyboardPan(InputAction.CallbackContext context);
+            void OnKeyboardZoom(InputAction.CallbackContext context);
             void OnZoom(InputAction.CallbackContext context);
             void OnRotation(InputAction.CallbackContext context);
             void OnBoost(InputAction.CallbackContext context);
