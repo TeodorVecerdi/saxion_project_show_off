@@ -6,7 +6,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace Editor.Editors {
+namespace Editor {
     // [CustomEditor(typeof(CraftingRecipe))]
     public class CraftingRecipeEditor : UnityEditor.Editor {
         private CraftingRecipe recipe;
