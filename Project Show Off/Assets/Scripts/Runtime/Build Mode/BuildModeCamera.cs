@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
+    [RequireComponent(typeof(CameraBoundaries))]
     public class BuildModeCamera : MonoBehaviour, IEventSubscriber {
         // ReSharper disable InconsistentNaming
         [HorizontalLine(color: EColor.Green, order = 1), Header("General")]
@@ -31,6 +32,7 @@ namespace Runtime {
         [HorizontalLine(color: EColor.Red, order = 1), Header("Zoom")]
         [SerializeField] private float normalZoomSpeed = 1.0f;
         [SerializeField] private float boostZoomSpeed = 3.0f;
+        [SerializeField] private float scrollZoomSensitivity = 5.0f;
         [ShowIf(nameof(unlinkTimeVariables)), OnValueChanged("OnTimeSettingsChanged"), SerializeField]
         private float zoomTime = 5.0f;
         [SerializeField] private float minZoom = 40;
@@ -55,13 +57,15 @@ namespace Runtime {
         private Quaternion newRotation;
         
         private Transform cameraTransform;
+        private CameraBoundaries cameraBoundaries;
         private Plane dragPlane;
         private Mouse mouse;
-        private bool isEnabled = false;
+        private bool isEnabled;
         private IDisposable gameModeToggleEventUnsubscriber;
 
         private void Awake() {
             cameraTransform = virtualCamera.transform;
+            cameraBoundaries = GetComponent<CameraBoundaries>();
             dragPlane = new Plane(Vector3.up, Vector3.zero);
             mouse = Mouse.current;
             gameModeToggleEventUnsubscriber = EventQueue.Subscribe(this, EventType.GameModeToggle);
@@ -137,12 +141,18 @@ namespace Runtime {
             var zoomDelta = InputManager.RawZoom;
             if (!Mathf.Approximately(zoomDelta, 0.0f))
                 zoomDelta = Mathf.Sign(zoomDelta);
+            zoomDelta *= scrollZoomSensitivity;
+            zoomDelta += InputManager.KeyboardZoom;
 
             newPosition += movementDelta.x * movementSpeed * transform.right + movementDelta.y * movementSpeed * transform.forward;
             newRotation *= Quaternion.Euler(rotationDelta * rotationSpeed * Vector3.up);
-            newZoom += zoomDelta * new Vector3(0, -zoomSpeed, zoomSpeed);
+            newZoom += Time.deltaTime * zoomDelta * new Vector3(0, -zoomSpeed, zoomSpeed);
             newZoom.y = newZoom.y.Clamped(minZoom, maxZoom);
             newZoom.z = newZoom.z.Clamped(-maxZoom, -minZoom);
+
+            // Limit to boundaries
+            newPosition.x = newPosition.x.Clamped(cameraBoundaries.MinimumPosition.x, cameraBoundaries.MaximumPosition.x);
+            newPosition.z = newPosition.z.Clamped(cameraBoundaries.MinimumPosition.z, cameraBoundaries.MaximumPosition.z);
 
             transform.position = Vector3.Lerp(transform.position, newPosition, Time.deltaTime * actualMovementTime);
             transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, Time.deltaTime * actualRotationTime);

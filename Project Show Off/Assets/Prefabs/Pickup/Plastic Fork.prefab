@@ -12,6 +12,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 8fdfaef01d5aba742a20a812e99253be, type: 2}
     - target: {fileID: 6782581133842966873, guid: 1570f7654d1782e47bc0380284842b02, type: 3}
+      propertyPath: item
+      value: 
+      objectReference: {fileID: 11400000, guid: b672ca510d5b5d641b8edaa7dcf0b4a4, type: 2}
+    - target: {fileID: 6782581133842966873, guid: 1570f7654d1782e47bc0380284842b02, type: 3}
       propertyPath: itemStack.item
       value: 
       objectReference: {fileID: 11400000, guid: 4bce4b42e3e7157439edede8569afc9e, type: 2}
@@ -21,7 +25,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6782581133842966878, guid: 1570f7654d1782e47bc0380284842b02, type: 3}
       propertyPath: m_Name
-      value: Plastic
+      value: PlasticFork
       objectReference: {fileID: 0}
     - target: {fileID: 6782581133842966879, guid: 1570f7654d1782e47bc0380284842b02, type: 3}
       propertyPath: m_RootOrder

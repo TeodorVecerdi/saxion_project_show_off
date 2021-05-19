@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Plastic-Metal
   m_EditorClassIdentifier: 
   ingredients:
-    items:
-    - item: {fileID: 11400000, guid: 4bce4b42e3e7157439edede8569afc9e, type: 2}
-      count: 1
+    contents:
+    - trashCategory: {fileID: 11400000, guid: 4bce4b42e3e7157439edede8569afc9e, type: 2}
+      mass: 0.25
   result:
-    item: {fileID: 11400000, guid: 2484c42e7f6c4d949b8bb98b18aedf0b, type: 2}
-    count: 1
+    trashCategory: {fileID: 11400000, guid: 2484c42e7f6c4d949b8bb98b18aedf0b, type: 2}
+    mass: 0.25
