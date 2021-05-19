@@ -69,7 +69,7 @@ namespace Runtime {
             }
         }
 
-        private void LoadUI(Inventory materialInventory) {
+        private void LoadUI(MaterialInventory materialInventory) {
             if (currentCrafter == null) {
                 Debug.LogError("Attempting to load crafter UI without a crafter or player inventory");
                 CloseView();

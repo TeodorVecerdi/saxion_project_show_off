@@ -24,7 +24,7 @@ namespace Runtime {
 
         private bool canCraft;
         private CraftingRecipe recipe;
-        private Inventory materialInventory;
+        private MaterialInventory materialInventory;
         private IDisposable inventoryUpdateUnsubscribeToken;
         
         private void Start() {
@@ -36,7 +36,7 @@ namespace Runtime {
             inventoryUpdateUnsubscribeToken?.Dispose();
         }
 
-        public void Build( CraftingRecipe recipe, Inventory materialInventory) {
+        public void Build( CraftingRecipe recipe, MaterialInventory materialInventory) {
             this.recipe = recipe;
             this.materialInventory = materialInventory;
             

@@ -8,12 +8,12 @@ using EventType = Runtime.Event.EventType;
 namespace Runtime {
     public class PlayerInventory : MonoBehaviour, IEventSubscriber {
         [SerializeField] private float maximumCarryMass = 50.0f;
-        [SerializeField] private Inventory materialInventory;
-        [SerializeField] private Inventory placeableInventory;
+        [SerializeField] private MaterialInventory materialInventory;
+        [SerializeField] private MaterialInventory placeableInventory;
 
         public float MaximumCarryMass => maximumCarryMass;
-        public Inventory MaterialInventory => materialInventory;
-        public Inventory PlaceableInventory => placeableInventory;
+        public MaterialInventory MaterialInventory => materialInventory;
+        public MaterialInventory PlaceableInventory => placeableInventory;
 
         private readonly List<IDisposable> eventUnsubscribeTokens = new List<IDisposable>();
 

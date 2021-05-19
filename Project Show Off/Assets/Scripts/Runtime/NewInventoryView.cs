@@ -65,7 +65,7 @@ public class NewInventoryView : MonoBehaviour, IEventSubscriber {
         }
     }
 
-    private void OnInventoryUpdate(Inventory inventory) {
+    private void OnInventoryUpdate(MaterialInventory inventory) {
         foreach (var itemStack in inventory) {
             if (!items.ContainsKey(itemStack.TrashCategory)) CreateInventoryImage(itemStack);
             UpdateFillAmount(itemStack);

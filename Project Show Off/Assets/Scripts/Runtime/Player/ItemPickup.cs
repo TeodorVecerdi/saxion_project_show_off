@@ -28,7 +28,6 @@ namespace Runtime {
             InputManager.PlayerActions.PickUp.performed -= PickupPerformed;
         }
 
-
         private void Update() {
             if (transform.hasChanged) {
                 transform.hasChanged = false;

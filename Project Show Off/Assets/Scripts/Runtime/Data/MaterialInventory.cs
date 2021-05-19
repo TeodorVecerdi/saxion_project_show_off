@@ -6,13 +6,13 @@ using UnityEngine;
 
 namespace Runtime.Data {
     [Serializable]
-    public class Inventory : IEnumerable {
+    public class MaterialInventory : IEnumerable {
         [SerializeField] private List<ItemStack> contents;
         [SerializeField] private float totalMass;
 
         public float TotalMass => totalMass;
         
-        public Inventory() {
+        public MaterialInventory() {
             contents = new List<ItemStack>();
         }
 
@@ -31,7 +31,7 @@ namespace Runtime.Data {
 
         public void Add(ItemStack itemStack) => Add(itemStack.TrashCategory, itemStack.Mass);
 
-        public void Add(Inventory inventory) {
+        public void Add(MaterialInventory inventory) {
             foreach (var itemStack in inventory) {
                 Add(itemStack);
             }
@@ -53,7 +53,7 @@ namespace Runtime.Data {
 
         public void Remove(ItemStack itemStack) => Remove(itemStack.TrashCategory, itemStack.Mass);
 
-        public void Remove(Inventory inventory) {
+        public void Remove(MaterialInventory inventory) {
             foreach (var itemStack in inventory) {
                 Remove(itemStack);
             }
@@ -68,7 +68,7 @@ namespace Runtime.Data {
             return contents.FirstOrDefault(stack => stack.TrashCategory == trashCategory);
         }
 
-        public bool Contains(Inventory other) {
+        public bool Contains(MaterialInventory other) {
             foreach (var itemStack in other) {
                 var selfStack = GetItemStack(itemStack.TrashCategory);
                 if (selfStack == null || selfStack.Mass < itemStack.Mass) 

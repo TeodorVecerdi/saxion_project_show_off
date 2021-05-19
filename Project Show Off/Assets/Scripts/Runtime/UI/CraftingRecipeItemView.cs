@@ -25,7 +25,7 @@ namespace Runtime {
             inventoryUpdateUnsubscribeToken?.Dispose();
         }
 
-        public void Build(ItemStack itemStack, Inventory materialInventory) {
+        public void Build(ItemStack itemStack, MaterialInventory materialInventory) {
             this.itemStack = itemStack;
             icon.sprite = itemStack.TrashCategory.CategorySprite;
             nameText.text = itemStack.TrashCategory.CategoryName;
