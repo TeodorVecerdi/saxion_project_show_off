@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1481.7754, g: 1835.8867, b: 2430.4492, a: 1}
+  m_IndirectSpecularColor: {r: 1481.7451, g: 1835.5391, b: 2429.8105, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5108,10 +5108,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f0519c731d548aa805dc7cb37e8100c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  depositUiFadeDuration: 0.25
+  depositKey: 101
+  depositUICanvasGroup: {fileID: 1174968907}
   inventory:
     contents: []
     totalMass: 0
-  depositKey: 101
 --- !u!135 &869963679
 SphereCollider:
   m_ObjectHideFlags: 0
