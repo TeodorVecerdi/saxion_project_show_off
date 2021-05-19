@@ -70,14 +70,6 @@ public class NewInventoryView : MonoBehaviour, IEventSubscriber {
             if (!items.ContainsKey(itemStack.TrashCategory)) CreateInventoryImage(itemStack);
             UpdateFillAmount(itemStack);
         }
-        
-        // Remove empty items
-        foreach (var trashCategory in items.Keys.ToList()) {
-            if (inventory.GetTrashCategoryMass(trashCategory) > 0) continue;
-                
-            Destroy(items[trashCategory].gameObject);
-            items.Remove(trashCategory);
-        }
     }
     
     

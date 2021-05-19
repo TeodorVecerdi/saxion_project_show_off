@@ -1,26 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Runtime.Data;
 using Runtime.Event;
 using UnityEngine;
 using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
-    public class InventoryView : MonoBehaviour, IEventSubscriber {
+    public class DepositInventoryView : MonoBehaviour, IEventSubscriber {
         [Header("References"), SerializeField] private RectTransform itemViewsContainer;
-        [SerializeField] private InventoryItemView itemViewPrefab;
+        [SerializeField] private DepositItemView itemViewPrefab;
         
-        private Dictionary<ItemStack, InventoryItemView> items;
-        private IDisposable inventoryUpdateUnsubscribeToken;
+        private Dictionary<ItemStack, DepositItemView> items;
+        private IDisposable depositInventoryUpdateUnsubscribeToken;
         
         private void Start() {
-            inventoryUpdateUnsubscribeToken = EventQueue.Subscribe(this, EventType.InventoryUpdate);
-            items = new Dictionary<ItemStack, InventoryItemView>(ItemStack.Comparer);
+            depositInventoryUpdateUnsubscribeToken = EventQueue.Subscribe(this, EventType.DepositInventoryUpdate);
+            items = new Dictionary<ItemStack, DepositItemView>(ItemStack.Comparer);
         }
         
         private void OnDestroy() {
-            inventoryUpdateUnsubscribeToken?.Dispose();
+            depositInventoryUpdateUnsubscribeToken?.Dispose();
         }
         
         /// <summary>
@@ -30,7 +29,7 @@ namespace Runtime {
         /// <returns><c>true</c> if event propagation should be stopped, <c>false</c> otherwise.</returns>
         public bool OnEvent(EventData eventData) {
             switch (eventData) {
-                case MaterialInventoryUpdateEvent inventoryUpdateEvent:
+                case DepositInventoryUpdateEvent inventoryUpdateEvent:
                     OnInventoryUpdateEvent(inventoryUpdateEvent);
                     return false;
                 default:
@@ -38,7 +37,7 @@ namespace Runtime {
             }
         }
         
-        private void OnInventoryUpdateEvent(InventoryUpdateEvent inventoryUpdateEvent) {
+        private void OnInventoryUpdateEvent(DepositInventoryUpdateEvent inventoryUpdateEvent) {
             // Update count
             foreach (var itemStack in inventoryUpdateEvent.Inventory) {
                 if (!items.ContainsKey(itemStack)) {
@@ -48,14 +47,6 @@ namespace Runtime {
                 } else {
                     items[itemStack].UpdateItemCount(itemStack.Mass);
                 }
-            }
-            
-            // Remove empty items
-            foreach (var itemStack in items.Keys.ToList()) {
-                if (inventoryUpdateEvent.Inventory.GetTrashCategoryMass(itemStack.TrashCategory) > 0) continue;
-                
-                Destroy(items[itemStack].gameObject);
-                items.Remove(itemStack);
             }
         }
     }

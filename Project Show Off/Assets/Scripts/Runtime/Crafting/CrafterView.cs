@@ -1,5 +1,4 @@
 ﻿using System;
-using NaughtyAttributes;
 using Runtime.Data;
 using Runtime.Event;
 using UnityEngine;
@@ -22,7 +21,7 @@ namespace Runtime {
         public bool IsMenuOpen => isMenuOpen;
 
         private void Awake() {
-            inventoryResponseEventUnsubscriber = EventQueue.Subscribe(this, EventType.InventoryResponse);
+            inventoryResponseEventUnsubscriber = EventQueue.Subscribe(this, EventType.DepositInventoryResponse);
         }
 
         private void OnEnable() {
@@ -48,7 +47,7 @@ namespace Runtime {
             EventQueue.QueueEvent(new ChangeMouseLockEvent(this, false));
             mainUI.SetActive(true);
 
-            EventQueue.QueueEvent(new EmptyEvent(this, EventType.InventoryRequest));
+            EventQueue.QueueEvent(new EmptyEvent(this, EventType.DepositInventoryRequest));
             isWaitingForInventory = true;
         }
 
@@ -94,10 +93,10 @@ namespace Runtime {
         /// <returns><c>true</c> if event propagation should be stopped, <c>false</c> otherwise.</returns>
         public bool OnEvent(EventData eventData) {
             switch (eventData) {
-                case InventoryResponseEvent responseEvent: {
+                case DepositInventoryResponseEvent responseEvent: {
                     if (!isWaitingForInventory) return false;
                     isWaitingForInventory = false;
-                    LoadUI(responseEvent.MaterialInventory);
+                    LoadUI(responseEvent.Inventory);
                     return false;
                 }
                 default: return false;

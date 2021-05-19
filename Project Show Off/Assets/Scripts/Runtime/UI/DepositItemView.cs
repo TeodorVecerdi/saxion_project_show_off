@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace Runtime {
-    public class InventoryItemView : MonoBehaviour {
+    public class DepositItemView : MonoBehaviour {
         [Header("References"), SerializeField] private Image icon;
         [SerializeField] private TextMeshProUGUI countText;
 
@@ -14,7 +14,7 @@ namespace Runtime {
         }
 
         public void UpdateItemCount(float mass) {
-            countText.text = $"{mass:F2} <b>MU</b>";
+            countText.text = $"{mass:F1} <b>MU</b>";
         }
     }
 }

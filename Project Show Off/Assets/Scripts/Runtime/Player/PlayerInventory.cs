@@ -19,8 +19,8 @@ namespace Runtime {
 
         private void Awake() {
             eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.ItemPickupRequest));
-            eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.InventoryRequest));
             eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.CraftRequest));
+            eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.DepositMaterialsRequest));
         }
 
         private void OnDestroy() {
@@ -43,10 +43,6 @@ namespace Runtime {
                     EventQueue.QueueEvent(new MaterialInventoryUpdateEvent(this, materialInventory));
                     return true;
                 }
-                case EmptyEvent {Type: EventType.InventoryRequest}: {
-                    EventQueue.QueueEvent(new InventoryResponseEvent(this, materialInventory, placeableInventory));
-                    return true;
-                }
                 case CraftRequestEvent craftRequestEvent: {
                     if (!materialInventory.Contains(craftRequestEvent.Recipe.Ingredients)) return true;
                     
@@ -58,6 +54,13 @@ namespace Runtime {
                     // placeableInventory.Add(craftRequestEvent.Recipe.Result);
                     // EventQueue.QueueEvent(new PlaceableInventoryUpdateEvent(this, placeableInventory));
                     return true;
+                }
+                case DepositMaterialsRequestEvent depositMaterialsRequestEvent: {
+                    depositMaterialsRequestEvent.DepositInventory.Add(materialInventory);
+                    materialInventory.Clear();
+                    EventQueue.QueueEvent(new MaterialInventoryUpdateEvent(this, materialInventory));
+                    EventQueue.QueueEvent(new DepositInventoryUpdateEvent(this, depositMaterialsRequestEvent.DepositInventory));
+                    return false;
                 }
                 default: return false;
             }

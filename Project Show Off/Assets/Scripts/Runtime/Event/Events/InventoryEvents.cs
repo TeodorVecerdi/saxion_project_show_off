@@ -1,4 +1,5 @@
 ﻿using Runtime.Data;
+using UnityEngine.UIElements;
 
 namespace Runtime.Event {
     public abstract class InventoryUpdateEvent : EventData {
@@ -17,16 +18,23 @@ namespace Runtime.Event {
     public sealed class PlaceableInventoryUpdateEvent : InventoryUpdateEvent {
         public PlaceableInventoryUpdateEvent(object sender, MaterialInventory inventory) : base(sender, inventory) { }
     }
+    
+    public sealed class DepositInventoryUpdateEvent : EventData {
+        public override EventType Type => EventType.DepositInventoryUpdate;
+        public MaterialInventory Inventory { get; }
 
-    public sealed class InventoryResponseEvent : EventData {
-        public override EventType Type => EventType.InventoryResponse;
+        public DepositInventoryUpdateEvent(object sender, MaterialInventory inventory) : base(sender) {
+            Inventory = inventory;
+        }
+    }
 
-        public MaterialInventory MaterialInventory { get; }
-        public MaterialInventory PlaceableInventory { get; }
+    public sealed class DepositInventoryResponseEvent : EventData {
+        public override EventType Type => EventType.DepositInventoryResponse;
+
+        public MaterialInventory Inventory { get; }
         
-        public InventoryResponseEvent(object sender, MaterialInventory materialInventory, MaterialInventory placeableInventory) : base(sender) {
-            MaterialInventory = materialInventory;
-            PlaceableInventory = placeableInventory;
+        public DepositInventoryResponseEvent(object sender, MaterialInventory materialInventory) : base(sender) {
+            Inventory = materialInventory;
         }
     }
 }

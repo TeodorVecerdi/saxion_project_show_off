@@ -67,6 +67,14 @@ namespace Runtime
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""DepositInventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""c3762a16-1653-4ed9-9638-79bcb29a7a9f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -265,6 +273,17 @@ namespace Runtime
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""54d2d764-34e8-4f02-8cb4-7d7444924508"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DepositInventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -967,6 +986,7 @@ namespace Runtime
             m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
             m_Player_PickUp = m_Player.FindAction("PickUp", throwIfNotFound: true);
             m_Player_OpenMenu = m_Player.FindAction("OpenMenu", throwIfNotFound: true);
+            m_Player_DepositInventory = m_Player.FindAction("DepositInventory", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1044,6 +1064,7 @@ namespace Runtime
         private readonly InputAction m_Player_Jump;
         private readonly InputAction m_Player_PickUp;
         private readonly InputAction m_Player_OpenMenu;
+        private readonly InputAction m_Player_DepositInventory;
         public struct PlayerActions
         {
             private @DefaultInputActions m_Wrapper;
@@ -1054,6 +1075,7 @@ namespace Runtime
             public InputAction @Jump => m_Wrapper.m_Player_Jump;
             public InputAction @PickUp => m_Wrapper.m_Player_PickUp;
             public InputAction @OpenMenu => m_Wrapper.m_Player_OpenMenu;
+            public InputAction @DepositInventory => m_Wrapper.m_Player_DepositInventory;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -1081,6 +1103,9 @@ namespace Runtime
                     @OpenMenu.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOpenMenu;
                     @OpenMenu.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOpenMenu;
                     @OpenMenu.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOpenMenu;
+                    @DepositInventory.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDepositInventory;
+                    @DepositInventory.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDepositInventory;
+                    @DepositInventory.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDepositInventory;
                 }
                 m_Wrapper.m_PlayerActionsCallbackInterface = instance;
                 if (instance != null)
@@ -1103,6 +1128,9 @@ namespace Runtime
                     @OpenMenu.started += instance.OnOpenMenu;
                     @OpenMenu.performed += instance.OnOpenMenu;
                     @OpenMenu.canceled += instance.OnOpenMenu;
+                    @DepositInventory.started += instance.OnDepositInventory;
+                    @DepositInventory.performed += instance.OnDepositInventory;
+                    @DepositInventory.canceled += instance.OnDepositInventory;
                 }
             }
         }
@@ -1336,6 +1364,7 @@ namespace Runtime
             void OnJump(InputAction.CallbackContext context);
             void OnPickUp(InputAction.CallbackContext context);
             void OnOpenMenu(InputAction.CallbackContext context);
+            void OnDepositInventory(InputAction.CallbackContext context);
         }
         public interface IUIActions
         {

@@ -47,7 +47,7 @@ namespace Runtime.Data {
             itemStack.Mass -= mass;
             totalMass -= mass;
             if (itemStack.Mass <= 0) {
-                contents.Remove(itemStack);
+                itemStack.Mass = 0.0f;
             }
         }
 
@@ -76,6 +76,12 @@ namespace Runtime.Data {
             }
 
             return true;
+        }
+
+        public void Clear() {
+            foreach (var itemStack in contents) {
+                itemStack.Mass = 0.0f;
+            }
         }
 
         public IEnumerator<ItemStack> GetEnumerator() {
