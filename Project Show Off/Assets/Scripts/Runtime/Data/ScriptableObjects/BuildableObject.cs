@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 namespace Runtime.Data {
-    [CreateAssetMenu(fileName = "NewBuildableObject", menuName = "Data/BuildableObjects", order = 0)]
+    [CreateAssetMenu(fileName = "NewBuildableObject", menuName = "Data/Buildable Object", order = 0)]
     public class BuildableObject : ScriptableObject {
         [SerializeField] private Sprite objectSprite;
         [SerializeField] private BuildableObjectPreview prefab;
