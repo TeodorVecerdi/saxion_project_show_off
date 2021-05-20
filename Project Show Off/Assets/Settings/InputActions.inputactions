@@ -713,6 +713,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "SelectObject",
+                    "type": "Button",
+                    "id": "9ee21abe-ff7b-467e-b104-09640ca9da57",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -902,6 +910,17 @@
                     "action": "KeyboardZoom",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "4ee26a66-775f-4be9-9071-e17f7206a944",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "SelectObject",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },

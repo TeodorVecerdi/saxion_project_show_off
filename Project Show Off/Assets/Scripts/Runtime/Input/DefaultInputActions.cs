@@ -728,6 +728,14 @@ namespace Runtime
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""SelectObject"",
+                    ""type"": ""Button"",
+                    ""id"": ""9ee21abe-ff7b-467e-b104-09640ca9da57"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -917,6 +925,17 @@ namespace Runtime
                     ""action"": ""KeyboardZoom"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4ee26a66-775f-4be9-9071-e17f7206a944"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": ""Tap"",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""SelectObject"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -1006,6 +1025,7 @@ namespace Runtime
             m_BuildMode_Zoom = m_BuildMode.FindAction("Zoom", throwIfNotFound: true);
             m_BuildMode_Rotation = m_BuildMode.FindAction("Rotation", throwIfNotFound: true);
             m_BuildMode_Boost = m_BuildMode.FindAction("Boost", throwIfNotFound: true);
+            m_BuildMode_SelectObject = m_BuildMode.FindAction("SelectObject", throwIfNotFound: true);
             // General
             m_General = asset.FindActionMap("General", throwIfNotFound: true);
             m_General_ToggleGameMode = m_General.FindAction("ToggleGameMode", throwIfNotFound: true);
@@ -1249,6 +1269,7 @@ namespace Runtime
         private readonly InputAction m_BuildMode_Zoom;
         private readonly InputAction m_BuildMode_Rotation;
         private readonly InputAction m_BuildMode_Boost;
+        private readonly InputAction m_BuildMode_SelectObject;
         public struct BuildModeActions
         {
             private @DefaultInputActions m_Wrapper;
@@ -1258,6 +1279,7 @@ namespace Runtime
             public InputAction @Zoom => m_Wrapper.m_BuildMode_Zoom;
             public InputAction @Rotation => m_Wrapper.m_BuildMode_Rotation;
             public InputAction @Boost => m_Wrapper.m_BuildMode_Boost;
+            public InputAction @SelectObject => m_Wrapper.m_BuildMode_SelectObject;
             public InputActionMap Get() { return m_Wrapper.m_BuildMode; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -1282,6 +1304,9 @@ namespace Runtime
                     @Boost.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnBoost;
                     @Boost.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnBoost;
                     @Boost.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnBoost;
+                    @SelectObject.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnSelectObject;
+                    @SelectObject.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnSelectObject;
+                    @SelectObject.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnSelectObject;
                 }
                 m_Wrapper.m_BuildModeActionsCallbackInterface = instance;
                 if (instance != null)
@@ -1301,6 +1326,9 @@ namespace Runtime
                     @Boost.started += instance.OnBoost;
                     @Boost.performed += instance.OnBoost;
                     @Boost.canceled += instance.OnBoost;
+                    @SelectObject.started += instance.OnSelectObject;
+                    @SelectObject.performed += instance.OnSelectObject;
+                    @SelectObject.canceled += instance.OnSelectObject;
                 }
             }
         }
@@ -1386,6 +1414,7 @@ namespace Runtime
             void OnZoom(InputAction.CallbackContext context);
             void OnRotation(InputAction.CallbackContext context);
             void OnBoost(InputAction.CallbackContext context);
+            void OnSelectObject(InputAction.CallbackContext context);
         }
         public interface IGeneralActions
         {
