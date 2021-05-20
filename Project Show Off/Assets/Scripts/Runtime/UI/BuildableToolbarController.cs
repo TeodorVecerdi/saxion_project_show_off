@@ -50,7 +50,6 @@ namespace Runtime {
 
         private void SetViewVisible(bool visible) {
             if(isVisible == visible) return;
-            Debug.Log($"Setting view visible {visible}");
             isVisible = visible;
             rectTransform.DOKill();
             rectTransform.DOAnchorPosX(isVisible ? 0.0f : -width, transitionDuration);
