@@ -6,6 +6,7 @@ using UnityEngine;
 
 namespace Runtime.Event {
     public class EventQueue : MonoSingleton<EventQueue> {
+        private const bool debug = false;
         private readonly Dictionary<EventType, List<IEventSubscriber>> subscribers = new Dictionary<EventType, List<IEventSubscriber>>();
         private readonly Queue<EventData> eventQueue = new Queue<EventData>();
         
@@ -25,8 +26,13 @@ namespace Runtime.Event {
         /// Queues an event for raising during the next update loop.
         /// </summary>
         /// <param name="eventData">Event data that will be raised</param>
-        public static void QueueEvent(EventData eventData) => Instance.eventQueue.Enqueue(eventData);
-        
+        public static void QueueEvent(EventData eventData) {
+            if (debug) {
+                Debug.Log($"Queued event {eventData} from {eventData.Sender}");
+            }
+            Instance.eventQueue.Enqueue(eventData);
+        }
+
         /// <summary>
         /// Raises an event immediately
         /// </summary>
@@ -78,6 +84,9 @@ namespace Runtime.Event {
             }
             
             foreach (var subscriber in subscribers[eventData.Type]) {
+                if (debug) {
+                    Debug.Log($"Sent event {eventData} from {eventData.Sender} to {subscriber}");
+                }
                 if (subscriber.OnEvent(eventData)) {
                     // stop propagation if event was consumed
                     break;
