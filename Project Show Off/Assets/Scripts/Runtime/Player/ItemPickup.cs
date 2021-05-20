@@ -9,7 +9,9 @@ namespace Runtime {
     public class ItemPickup : MonoBehaviour, IEventSubscriber {
         [SerializeField] private TextMeshProUGUI text;
         [SerializeField] private Transform cameraTransform;
+        
         private Pickup pickupUnderMouse;
+        private bool shouldRaycast;
         private IDisposable itemPickupSuccessEventUnsubscriber;
 
         private void Awake() {
@@ -29,8 +31,16 @@ namespace Runtime {
         }
 
         private void Update() {
+            if (shouldRaycast) {
+                shouldRaycast = false;
+                DoPickupRaycast();
+                return;
+            }
             if (transform.hasChanged) {
                 transform.hasChanged = false;
+                DoPickupRaycast();
+            } else if (cameraTransform.hasChanged) {
+                cameraTransform.hasChanged = false;
                 DoPickupRaycast();
             }
         }
@@ -60,7 +70,8 @@ namespace Runtime {
             switch (eventData) {
                 case ItemPickupEvent {Type: EventType.ItemPickupSuccess} itemPickupSuccessEvent: {
                     Destroy(itemPickupSuccessEvent.Pickup.gameObject);
-                    DoPickupRaycast();
+                    pickupUnderMouse = null;
+                    shouldRaycast = true;
                     return true;
                 }
                 default: return false;

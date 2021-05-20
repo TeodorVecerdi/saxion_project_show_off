@@ -82,6 +82,8 @@ namespace Runtime.Data {
             foreach (var itemStack in contents) {
                 itemStack.Mass = 0.0f;
             }
+
+            totalMass = 0.0f;
         }
 
         public IEnumerator<ItemStack> GetEnumerator() {

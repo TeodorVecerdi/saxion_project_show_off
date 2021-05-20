@@ -21,6 +21,10 @@ namespace Runtime {
             gameModeToggleEventUnsubscriber = EventQueue.Subscribe(this, EventType.GameModeChange);
         }
 
+        private void Start() {
+            InputManager.BuildModeActions.Disable();
+        }
+
         private void OnDestroy() {
             gameModeToggleEventUnsubscriber.Dispose();
         }
