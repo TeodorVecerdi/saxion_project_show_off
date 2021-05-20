@@ -11,5 +11,8 @@
         DepositInventoryRequest,
         DepositInventoryResponse,
         DepositInventoryUpdate,
+        BeginBuild,
+        CancelBuild,
+        PerformBuild,
     }
 }
