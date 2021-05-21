@@ -26,8 +26,12 @@ public class InventoryView : MonoBehaviour, IEventSubscriber {
     }
 
     private void Start() {
+        foreach (var trashColorPair in trashColors) {
+            CreateInventoryImage(new ItemStack(trashColorPair.Category, 0.0f));
+        }
+
         foreach (var itemStack in playerInventory.MaterialInventory) {
-            CreateInventoryImage(itemStack);
+            UpdateFillAmount(itemStack);
         }
     }
 
@@ -39,7 +43,12 @@ public class InventoryView : MonoBehaviour, IEventSubscriber {
         var go = new GameObject(itemStack.TrashCategory.CategoryName, typeof(Image));
         go.transform.SetParent(inventoryItemContainer);
         var imageComp = items[itemStack.TrashCategory] = go.GetComponent<Image>();
+        
         imageComp.color = trashColors.FirstOrDefault(pair => pair.Category == itemStack.TrashCategory)?.Color ?? Color.magenta;
+        
+        var sizeDelta = imageComp.rectTransform.sizeDelta;
+        sizeDelta.y = 0.0f;
+        imageComp.rectTransform.sizeDelta = sizeDelta;
     }
 
     private void UpdateFillAmount(ItemStack itemStack) {
