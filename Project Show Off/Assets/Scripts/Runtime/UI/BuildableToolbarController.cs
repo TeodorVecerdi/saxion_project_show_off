@@ -44,6 +44,10 @@ namespace Runtime {
 
         private void Start() {
             entries = new List<BuildableEntry>();
+            
+            rectTransform.DOKill();
+            rectTransform.DOAnchorPosX(isVisible ? 0.0f : -width, transitionDuration);
+            
             foreach (var buildableObject in buildableObjects) {
                 var buildableEntry = Instantiate(buildableEntryPrefab, buildableEntryContainer);
                 entries.Add(buildableEntry);
@@ -79,7 +83,7 @@ namespace Runtime {
                     return false;
                 }
                 case EmptyEvent {Type: EventType.CancelBuild}:
-                case PerformBuildEvent performBuildEvent: {
+                case PerformBuildEvent _: {
                     SetViewVisible(true);
                     return false;
                 }
