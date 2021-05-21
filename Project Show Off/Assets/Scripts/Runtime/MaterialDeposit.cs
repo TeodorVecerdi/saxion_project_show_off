@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using DG.Tweening;
 using Runtime.Data;
 using Runtime.Event;
@@ -17,16 +18,21 @@ namespace Runtime {
         [SerializeField] private CanvasGroup depositUICanvasGroup;
         [SerializeField] private MaterialInventory inventory;
 
-        private IDisposable depositInventoryRequestEventUnsubscriber;
+        private List<IDisposable> eventUnsubscribers;
         private bool canDeposit;
 
         private void Awake() {
-            depositInventoryRequestEventUnsubscriber = EventQueue.Subscribe(this, EventType.DepositInventoryRequest);
+            eventUnsubscribers = new List<IDisposable>();
+            eventUnsubscribers.Add(EventQueue.Subscribe(this, EventType.DepositInventoryRequest));
+            eventUnsubscribers.Add(EventQueue.Subscribe(this, EventType.PerformBuild));
             depositUICanvasGroup.alpha = 0.0f;
         }
 
         private void OnDestroy() {
-            depositInventoryRequestEventUnsubscriber.Dispose();
+            foreach (var eventUnsubscriber in eventUnsubscribers) {
+                eventUnsubscriber.Dispose();
+            }
+            eventUnsubscribers.Clear();
         }
 
         private void OnEnable() {
@@ -65,6 +71,11 @@ namespace Runtime {
             switch (eventData) {
                 case EmptyEvent {Type: EventType.DepositInventoryRequest}: {
                     EventQueue.QueueEvent(new DepositInventoryResponseEvent(this, inventory));
+                    return false;
+                }
+                case PerformBuildEvent performBuildEvent: {
+                    inventory.Remove(performBuildEvent.BuildableObject.ConstructionRequirements);
+                    EventQueue.QueueEvent(new DepositInventoryUpdateEvent(this, inventory));
                     return false;
                 }
                 default: return false;

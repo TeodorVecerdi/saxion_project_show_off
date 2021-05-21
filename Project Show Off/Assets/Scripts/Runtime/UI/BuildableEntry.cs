@@ -4,7 +4,6 @@ using DG.Tweening;
 using Runtime.Data;
 using Runtime.Event;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 using EventType = Runtime.Event.EventType;
 
@@ -19,8 +18,10 @@ namespace Runtime {
         
         private Button button;
         private Image borderImage;
-        private BuildableObjectPreview prefab;
+        private BuildableObject buildableObject;
         private List<IDisposable> eventUnsubscribers;
+
+        public MaterialInventory Requirements => buildableObject.ConstructionRequirements;
 
         private void Awake() {
             button = GetComponent<Button>();
@@ -41,13 +42,13 @@ namespace Runtime {
         }
 
         public void BuildUI(BuildableObject buildableObject) {
+            this.buildableObject = buildableObject;
             buildableImage.sprite = buildableObject.ObjectSprite;
-            prefab = buildableObject.Prefab;
         }
 
         private void OnBuildClicked() {
             SetSelection(true);
-            EventQueue.QueueEvent(new BeginBuildEvent(this, prefab));
+            EventQueue.QueueEvent(new BeginBuildEvent(this, buildableObject));
         }
 
         private void SetSelection(bool selected) {
@@ -63,11 +64,11 @@ namespace Runtime {
         public bool OnEvent(EventData eventData) {
             switch (eventData) {
                 case BeginBuildEvent beginBuildEvent: {
-                    if (beginBuildEvent.Sender is BuildableEntry entry && entry == this || beginBuildEvent.Prefab == prefab) return false;
+                    if (beginBuildEvent.Sender is BuildableEntry entry && entry == this || beginBuildEvent.BuildableObject == buildableObject) return false;
                     SetSelection(false);
                     return false;
                 }
-                case EmptyEvent {Type: EventType.PerformBuild}:
+                case PerformBuildEvent performBuildEvent:
                 case EmptyEvent {Type: EventType.CancelBuild}: {
                     SetSelection(false);
                     return false;

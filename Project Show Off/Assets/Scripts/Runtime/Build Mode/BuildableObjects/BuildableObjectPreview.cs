@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Runtime.Data;
 using Runtime.Event;
 using UnityEngine;
 using EventType = Runtime.Event.EventType;
@@ -12,6 +13,7 @@ namespace Runtime {
         [Header("References")]
         [SerializeField] private GameObject objectContainer;
 
+        private MaterialInventory requirements;
         private IDisposable performBuildEventUnsubscriber;
         private List<Collider> colliders;
 
@@ -26,9 +28,14 @@ namespace Runtime {
                 collider.enabled = false;
             }
         }
+        
 
         private void OnDestroy() {
             performBuildEventUnsubscriber.Dispose();
+        }
+
+        public void Initialize(BuildableObject buildableObject) {
+            requirements = buildableObject.ConstructionRequirements;
         }
 
         /// <summary>
@@ -38,7 +45,7 @@ namespace Runtime {
         /// <returns><c>true</c> if event propagation should be stopped, <c>false</c> otherwise.</returns>
         public bool OnEvent(EventData eventData) {
             switch (eventData) {
-                case EmptyEvent {Type: EventType.PerformBuild}: {
+                case PerformBuildEvent performBuildEvent: {
                     foreach (var collider in colliders) {
                         collider.enabled = true;
                     }

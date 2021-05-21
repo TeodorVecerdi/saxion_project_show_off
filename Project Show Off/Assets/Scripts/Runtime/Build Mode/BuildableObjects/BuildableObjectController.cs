@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Runtime.Data;
 using Runtime.Event;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -14,7 +15,7 @@ namespace Runtime {
         [SerializeField] private Transform buildModeCenter;
         [SerializeField] private Camera buildModeCamera;
         
-        private BuildableObjectPreview currentPrefab;
+        private BuildableObject currentBuildable;
         private BuildableObjectPreview currentObject;
         private Transform currentTransform;
         private Quaternion newRotation;
@@ -52,20 +53,19 @@ namespace Runtime {
                 Destroy(currentObject.gameObject);
                 currentTransform = null;
                 currentObject = null;
-                currentPrefab = null;
+                currentBuildable = null;
                 isBuilding = false;
                 oldIsBuilding = false;
                 return;
             }
 
             if (InputManager.PerformBuildTriggered) {
-                // todo yeet and check for valid spot or check earlier while moving????
+                EventQueue.QueueEvent(new PerformBuildEvent(this, currentBuildable));
                 currentTransform = null;
                 currentObject = null;
-                currentPrefab = null;
+                currentBuildable = null;
                 isBuilding = false;
                 oldIsBuilding = false;
-                EventQueue.QueueEvent(new EmptyEvent(this, EventType.PerformBuild));
                 return;
             }
             
@@ -91,9 +91,9 @@ namespace Runtime {
         public bool OnEvent(EventData eventData) {
             switch (eventData) {
                 case BeginBuildEvent beginBuildEvent: {
-                    if (currentPrefab == beginBuildEvent.Prefab) return false;
-                    currentPrefab = beginBuildEvent.Prefab;
-                    currentObject = Instantiate(currentPrefab, buildModeCenter.position, buildModeCenter.rotation * y180deg);
+                    if (currentBuildable == beginBuildEvent.BuildableObject) return false;
+                    currentBuildable = beginBuildEvent.BuildableObject;
+                    currentObject = Instantiate(currentBuildable.Prefab, buildModeCenter.position, buildModeCenter.rotation * y180deg);
                     currentTransform = currentObject.transform;
                     newRotation = currentTransform.rotation;
                     isBuilding = true;

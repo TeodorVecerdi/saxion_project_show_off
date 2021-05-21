@@ -13,15 +13,16 @@ namespace Runtime {
         [Header("References")]
         [SerializeField] private Transform buildableEntryContainer;
         [SerializeField] private BuildableEntry buildableEntryPrefab;
-        
+
         private List<BuildableObject> buildableObjects;
+        private List<BuildableEntry> entries;
         private List<IDisposable> eventUnsubscribers;
         private RectTransform rectTransform;
         private float width;
         private bool isVisible;
-        
+
         private void Awake() {
-            rectTransform = (RectTransform) transform; 
+            rectTransform = (RectTransform) transform;
             width = rectTransform.sizeDelta.x;
             buildableObjects = new List<BuildableObject>(Resources.LoadAll<BuildableObject>("Buildable Objects"));
 
@@ -30,27 +31,39 @@ namespace Runtime {
             eventUnsubscribers.Add(EventQueue.Subscribe(this, EventType.CancelBuild));
             eventUnsubscribers.Add(EventQueue.Subscribe(this, EventType.PerformBuild));
             eventUnsubscribers.Add(EventQueue.Subscribe(this, EventType.GameModeToggle));
+            eventUnsubscribers.Add(EventQueue.Subscribe(this, EventType.DepositInventoryResponse));
         }
 
         private void OnDestroy() {
             foreach (var eventUnsubscriber in eventUnsubscribers) {
                 eventUnsubscriber.Dispose();
             }
+
             eventUnsubscribers.Clear();
         }
 
         private void Start() {
+            entries = new List<BuildableEntry>();
             foreach (var buildableObject in buildableObjects) {
                 var buildableEntry = Instantiate(buildableEntryPrefab, buildableEntryContainer);
+                entries.Add(buildableEntry);
                 buildableEntry.BuildUI(buildableObject);
             }
         }
 
         private void SetViewVisible(bool visible) {
-            if(isVisible == visible) return;
+            if (isVisible == visible) return;
             isVisible = visible;
             rectTransform.DOKill();
             rectTransform.DOAnchorPosX(isVisible ? 0.0f : -width, transitionDuration);
+            
+            if (!isVisible) return;
+            
+            foreach (var buildableEntry in entries) {
+                buildableEntry.gameObject.SetActive(false);
+            }
+
+            EventQueue.QueueEvent(new EmptyEvent(this, EventType.DepositInventoryRequest));
         }
 
         /// <summary>
@@ -60,14 +73,22 @@ namespace Runtime {
         /// <returns><c>true</c> if event propagation should be stopped, <c>false</c> otherwise.</returns>
         public bool OnEvent(EventData eventData) {
             switch (eventData) {
-                case BeginBuildEvent _: 
-                case EmptyEvent {Type:EventType.GameModeToggle}: {
+                case BeginBuildEvent _:
+                case EmptyEvent {Type: EventType.GameModeToggle}: {
                     SetViewVisible(!isVisible);
                     return false;
                 }
                 case EmptyEvent {Type: EventType.CancelBuild}:
-                case EmptyEvent {Type: EventType.PerformBuild}: {
+                case PerformBuildEvent performBuildEvent: {
                     SetViewVisible(true);
+                    return false;
+                }
+                case DepositInventoryResponseEvent inventoryResponseEvent: {
+                    var inventory = inventoryResponseEvent.Inventory;
+                    foreach (var buildableEntry in entries) {
+                        if(!inventory.Contains(buildableEntry.Requirements)) continue;
+                        buildableEntry.gameObject.SetActive(true);
+                    }
                     return false;
                 }
                 default: return false;

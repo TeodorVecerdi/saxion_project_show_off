@@ -5821,7 +5821,6 @@ MonoBehaviour:
   depositUICanvasGroup: {fileID: 1174968907}
   inventory:
     contents: []
-    totalMass: 0
 --- !u!135 &869963679
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -6502,7 +6501,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 73c176f402d2c2f4d929aa5da7585d17, type: 2}
+  - {fileID: 3332067844585720699, guid: 1afb92d10ccf8d440ab494fb20332849, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -10225,10 +10224,8 @@ MonoBehaviour:
   maximumCarryMass: 50
   materialInventory:
     contents: []
-    totalMass: 0
   placeableInventory:
     contents: []
-    totalMass: 0
 --- !u!4 &738646681827304401
 Transform:
   m_ObjectHideFlags: 0
