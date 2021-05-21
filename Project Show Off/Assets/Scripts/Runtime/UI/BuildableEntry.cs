@@ -19,7 +19,7 @@ namespace Runtime {
         private Button button;
         private Image borderImage;
         private BuildableObject buildableObject;
-        private List<IDisposable> eventUnsubscribers;
+        private List<IDisposable> eventUnsubscribeTokens;
 
         public MaterialInventory Requirements => buildableObject.ConstructionRequirements;
 
@@ -28,17 +28,17 @@ namespace Runtime {
             borderImage = GetComponent<Image>();
             button.onClick.AddListener(OnBuildClicked);
             
-            eventUnsubscribers = new List<IDisposable>();
-            eventUnsubscribers.Add(EventQueue.Subscribe(this, EventType.BeginBuild));
-            eventUnsubscribers.Add(EventQueue.Subscribe(this, EventType.CancelBuild));
-            eventUnsubscribers.Add(EventQueue.Subscribe(this, EventType.PerformBuild));
+            eventUnsubscribeTokens = new List<IDisposable>();
+            eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.BeginBuild));
+            eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.CancelBuild));
+            eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.PerformBuild));
         }
 
         private void OnDestroy() {
-            foreach (var eventUnsubscriber in eventUnsubscribers) {
-                eventUnsubscriber.Dispose();
+            foreach (var eventUnsubscribeToken in eventUnsubscribeTokens) {
+                eventUnsubscribeToken.Dispose();
             }
-            eventUnsubscribers.Clear();
+            eventUnsubscribeTokens.Clear();
         }
 
         public void BuildUI(BuildableObject buildableObject) {

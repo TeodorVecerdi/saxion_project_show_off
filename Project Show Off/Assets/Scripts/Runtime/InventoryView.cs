@@ -16,13 +16,13 @@ public class InventoryView : MonoBehaviour, IEventSubscriber {
     
     private float screenUnitsPerMassUnit;
     private Dictionary<TrashCategory, Image> items;
-    private IDisposable inventoryUpdateEventUnsubscriber;
+    private IDisposable inventoryUpdateEventUnsubscribeToken;
 
     private void Awake() {
         var inventoryScreenSize = ((RectTransform) transform).sizeDelta.y;
         screenUnitsPerMassUnit = inventoryScreenSize / playerInventory.MaximumCarryMass;
         items = new Dictionary<TrashCategory, Image>();
-        inventoryUpdateEventUnsubscriber = EventQueue.Subscribe(this, EventType.InventoryUpdate);
+        inventoryUpdateEventUnsubscribeToken = EventQueue.Subscribe(this, EventType.InventoryUpdate);
     }
 
     private void Start() {
@@ -32,7 +32,7 @@ public class InventoryView : MonoBehaviour, IEventSubscriber {
     }
 
     private void OnDestroy() {
-        inventoryUpdateEventUnsubscriber.Dispose();
+        inventoryUpdateEventUnsubscribeToken.Dispose();
     }
     
     private void CreateInventoryImage(ItemStack itemStack) {

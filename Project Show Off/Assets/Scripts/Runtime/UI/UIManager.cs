@@ -9,11 +9,11 @@ namespace Runtime {
         [SerializeField] private List<GameObject> gameModeObjects;
         [SerializeField] private List<GameObject> buildModeObjects;
         
-        private IDisposable gameModeToggleEventUnsubscriber;
+        private IDisposable gameModeToggleEventUnsubscribeToken;
         private bool isBuildModeActive;
 
         private void Awake() {
-            gameModeToggleEventUnsubscriber = EventQueue.Subscribe(this, EventType.GameModeToggle);
+            gameModeToggleEventUnsubscribeToken = EventQueue.Subscribe(this, EventType.GameModeToggle);
         }
 
         private void Start() {
@@ -21,7 +21,7 @@ namespace Runtime {
         }
 
         private void OnDestroy() {
-            gameModeToggleEventUnsubscriber.Dispose();
+            gameModeToggleEventUnsubscribeToken.Dispose();
         }
 
         private void EnableBuildModeUI() {

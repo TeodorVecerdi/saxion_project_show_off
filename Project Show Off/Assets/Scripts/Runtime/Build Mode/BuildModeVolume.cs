@@ -7,18 +7,18 @@ using EventType = Runtime.Event.EventType;
 namespace Runtime {
     public class BuildModeVolume : MonoBehaviour, IEventSubscriber {
         private Volume volume;
-        private IDisposable gameModeToggleEventUnsubscriber;
+        private IDisposable gameModeToggleEventUnsubscribeToken;
         private bool isBuildMode;
 
         private void Awake() {
-            gameModeToggleEventUnsubscriber = EventQueue.Subscribe(this, EventType.GameModeToggle);
+            gameModeToggleEventUnsubscribeToken = EventQueue.Subscribe(this, EventType.GameModeToggle);
             volume = GetComponent<Volume>();
             volume.weight = 0.0f;
             isBuildMode = false;
         }
 
         private void OnDestroy() {
-            gameModeToggleEventUnsubscriber.Dispose();
+            gameModeToggleEventUnsubscribeToken.Dispose();
         }
 
         /// <summary>

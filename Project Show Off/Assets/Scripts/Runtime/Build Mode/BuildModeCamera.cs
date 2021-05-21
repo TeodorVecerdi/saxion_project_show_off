@@ -61,14 +61,14 @@ namespace Runtime {
         private Plane dragPlane;
         private Mouse mouse;
         private bool isEnabled;
-        private IDisposable gameModeToggleEventUnsubscriber;
+        private IDisposable gameModeToggleEventUnsubscribeToken;
 
         private void Awake() {
             cameraTransform = virtualCamera.transform;
             cameraBoundaries = GetComponent<CameraBoundaries>();
             dragPlane = new Plane(Vector3.up, Vector3.zero);
             mouse = Mouse.current;
-            gameModeToggleEventUnsubscriber = EventQueue.Subscribe(this, EventType.GameModeToggle);
+            gameModeToggleEventUnsubscribeToken = EventQueue.Subscribe(this, EventType.GameModeToggle);
             
             DisableBuildMode();
         }
@@ -82,7 +82,7 @@ namespace Runtime {
         }
 
         private void OnDestroy() {
-            gameModeToggleEventUnsubscriber.Dispose();
+            gameModeToggleEventUnsubscribeToken.Dispose();
         }
 
         private void Update() {

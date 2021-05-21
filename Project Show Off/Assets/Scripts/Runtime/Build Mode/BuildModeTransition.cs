@@ -13,12 +13,12 @@ namespace Runtime {
         [Header("References")]
         [SerializeField] private Image fadeImage;
 
-        private IDisposable gameModeToggleEventUnsubscriber;
+        private IDisposable gameModeToggleEventUnsubscribeToken;
         private bool waitingToSendEvent;
         private bool isBuildMode;
 
         private void Awake() {
-            gameModeToggleEventUnsubscriber = EventQueue.Subscribe(this, EventType.GameModeChange);
+            gameModeToggleEventUnsubscribeToken = EventQueue.Subscribe(this, EventType.GameModeChange);
         }
 
         private void Start() {
@@ -26,7 +26,7 @@ namespace Runtime {
         }
 
         private void OnDestroy() {
-            gameModeToggleEventUnsubscriber.Dispose();
+            gameModeToggleEventUnsubscribeToken.Dispose();
         }
 
         private void StartFade() {

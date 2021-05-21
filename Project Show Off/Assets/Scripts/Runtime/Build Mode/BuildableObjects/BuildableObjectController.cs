@@ -23,20 +23,20 @@ namespace Runtime {
         private bool isBuilding;
         private bool oldIsBuilding;
 
-        private List<IDisposable> eventUnsubscribers;
+        private List<IDisposable> eventUnsubscribeTokens;
 
         private void Awake() {
-            eventUnsubscribers = new List<IDisposable>();
-            eventUnsubscribers.Add(EventQueue.Subscribe(this, EventType.BeginBuild));
-            eventUnsubscribers.Add(EventQueue.Subscribe(this, EventType.CancelBuild));
+            eventUnsubscribeTokens = new List<IDisposable>();
+            eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.BeginBuild));
+            eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.CancelBuild));
             y180deg = Quaternion.Euler(180.0f * Vector3.up);
         }
 
         private void OnDestroy() {
-            foreach (var eventUnsubscriber in eventUnsubscribers) {
-                eventUnsubscriber.Dispose();
+            foreach (var eventUnsubscribeToken in eventUnsubscribeTokens) {
+                eventUnsubscribeToken.Dispose();
             }
-            eventUnsubscribers.Clear();
+            eventUnsubscribeTokens.Clear();
         }
 
         private void Update() {

@@ -18,21 +18,21 @@ namespace Runtime {
         [SerializeField] private CanvasGroup depositUICanvasGroup;
         [SerializeField] private MaterialInventory inventory;
 
-        private List<IDisposable> eventUnsubscribers;
+        private List<IDisposable> eventUnsubscribeTokens;
         private bool canDeposit;
 
         private void Awake() {
-            eventUnsubscribers = new List<IDisposable>();
-            eventUnsubscribers.Add(EventQueue.Subscribe(this, EventType.DepositInventoryRequest));
-            eventUnsubscribers.Add(EventQueue.Subscribe(this, EventType.PerformBuild));
+            eventUnsubscribeTokens = new List<IDisposable>();
+            eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.DepositInventoryRequest));
+            eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.PerformBuild));
             depositUICanvasGroup.alpha = 0.0f;
         }
 
         private void OnDestroy() {
-            foreach (var eventUnsubscriber in eventUnsubscribers) {
-                eventUnsubscriber.Dispose();
+            foreach (var eventUnsubscribeToken in eventUnsubscribeTokens) {
+                eventUnsubscribeToken.Dispose();
             }
-            eventUnsubscribers.Clear();
+            eventUnsubscribeTokens.Clear();
         }
 
         private void OnEnable() {

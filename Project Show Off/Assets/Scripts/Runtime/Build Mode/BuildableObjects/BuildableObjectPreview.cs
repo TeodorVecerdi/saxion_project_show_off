@@ -14,11 +14,11 @@ namespace Runtime {
         [SerializeField] private GameObject objectContainer;
 
         private MaterialInventory requirements;
-        private IDisposable performBuildEventUnsubscriber;
+        private IDisposable performBuildEventUnsubscribeToken;
         private List<Collider> colliders;
 
         private void Awake() {
-            performBuildEventUnsubscriber = EventQueue.Subscribe(this, EventType.PerformBuild);
+            performBuildEventUnsubscribeToken = EventQueue.Subscribe(this, EventType.PerformBuild);
         }
 
         private void Start() {
@@ -31,7 +31,7 @@ namespace Runtime {
         
 
         private void OnDestroy() {
-            performBuildEventUnsubscriber.Dispose();
+            performBuildEventUnsubscribeToken.Dispose();
         }
 
         public void Initialize(BuildableObject buildableObject) {

@@ -16,7 +16,7 @@ namespace Runtime {
 
         private List<BuildableObject> buildableObjects;
         private List<BuildableEntry> entries;
-        private List<IDisposable> eventUnsubscribers;
+        private List<IDisposable> eventUnsubscribeTokens;
         private RectTransform rectTransform;
         private float width;
         private bool isVisible;
@@ -26,20 +26,20 @@ namespace Runtime {
             width = rectTransform.sizeDelta.x;
             buildableObjects = new List<BuildableObject>(Resources.LoadAll<BuildableObject>("Buildable Objects"));
 
-            eventUnsubscribers = new List<IDisposable>();
-            eventUnsubscribers.Add(EventQueue.Subscribe(this, EventType.BeginBuild));
-            eventUnsubscribers.Add(EventQueue.Subscribe(this, EventType.CancelBuild));
-            eventUnsubscribers.Add(EventQueue.Subscribe(this, EventType.PerformBuild));
-            eventUnsubscribers.Add(EventQueue.Subscribe(this, EventType.GameModeToggle));
-            eventUnsubscribers.Add(EventQueue.Subscribe(this, EventType.DepositInventoryResponse));
+            eventUnsubscribeTokens = new List<IDisposable>();
+            eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.BeginBuild));
+            eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.CancelBuild));
+            eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.PerformBuild));
+            eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.GameModeToggle));
+            eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.DepositInventoryResponse));
         }
 
         private void OnDestroy() {
-            foreach (var eventUnsubscriber in eventUnsubscribers) {
-                eventUnsubscriber.Dispose();
+            foreach (var eventUnsubscribeToken in eventUnsubscribeTokens) {
+                eventUnsubscribeToken.Dispose();
             }
 
-            eventUnsubscribers.Clear();
+            eventUnsubscribeTokens.Clear();
         }
 
         private void Start() {

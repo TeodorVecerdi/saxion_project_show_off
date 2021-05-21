@@ -17,21 +17,21 @@ namespace Runtime {
         private float pickupTimer;
         private bool shouldRaycast;
         private bool isPickingUp;
-        private List<IDisposable> eventUnsubscribers;
+        private List<IDisposable> eventUnsubscribeTokens;
 
         private void Awake() {
-            eventUnsubscribers = new List<IDisposable>();
-            eventUnsubscribers.Add(EventQueue.Subscribe(this, EventType.TrashPickupSuccess));
-            eventUnsubscribers.Add(EventQueue.Subscribe(this, EventType.TrashPickupSpaceResponse));
+            eventUnsubscribeTokens = new List<IDisposable>();
+            eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.TrashPickupSuccess));
+            eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.TrashPickupSpaceResponse));
             
             pickupIndicatorImage.fillAmount = 0.0f;
         }
 
         private void OnDestroy() {
-            foreach (var eventUnsubscriber in eventUnsubscribers) {
-                eventUnsubscriber.Dispose();
+            foreach (var eventUnsubscribeToken in eventUnsubscribeTokens) {
+                eventUnsubscribeToken.Dispose();
             }
-            eventUnsubscribers.Clear();
+            eventUnsubscribeTokens.Clear();
         }
 
         private void OnEnable() {
