@@ -714,17 +714,33 @@ namespace Runtime
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Rotation"",
+                    ""name"": ""Boost"",
+                    ""type"": ""Button"",
+                    ""id"": ""3f84e2cf-e1da-4f6e-b130-afea4d229552"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""ObjectRotation"",
                     ""type"": ""PassThrough"",
-                    ""id"": ""fe6afbbd-b025-4f54-9b9f-12b6c07c968b"",
+                    ""id"": ""37442eb1-453e-4e3f-9a65-4e84107401af"",
                     ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Boost"",
+                    ""name"": ""CancelBuild"",
                     ""type"": ""Button"",
-                    ""id"": ""3f84e2cf-e1da-4f6e-b130-afea4d229552"",
+                    ""id"": ""00c3b6c7-ffde-4438-9c13-cfa97c01a0c8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""PerformBuild"",
+                    ""type"": ""Button"",
+                    ""id"": ""06a23f2f-62d4-4041-ba07-bac3c0b5cd85"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -854,39 +870,6 @@ namespace Runtime
                 },
                 {
                     ""name"": ""1D Axis"",
-                    ""id"": ""728c0f90-7cfc-4c92-bd97-0f1f1f12d8ad"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Rotation"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""Negative"",
-                    ""id"": ""c5cd5062-412d-42b3-ac37-19fb77ada257"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Rotation"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""Positive"",
-                    ""id"": ""2fb4f509-ee46-40dd-8a63-55a6447f551e"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Rotation"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""1D Axis"",
                     ""id"": ""0814b994-d61c-40e5-b507-3780df38a510"",
                     ""path"": ""1DAxis"",
                     ""interactions"": """",
@@ -917,6 +900,61 @@ namespace Runtime
                     ""action"": ""KeyboardZoom"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""f41e0be6-00a4-448d-a6d7-51f35391691e"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ObjectRotation"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Negative"",
+                    ""id"": ""99dacd16-087e-4d84-99d9-6a79f637535c"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ObjectRotation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Positive"",
+                    ""id"": ""9201cc60-3b57-4bcf-b1b6-3f1137fe5127"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ObjectRotation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""74ced0fc-16f0-42be-b806-112d5ba4ec58"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": ""Tap(duration=0.15)"",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""CancelBuild"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""af25f2fe-bfc7-434c-bf84-4c70be3d1bec"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": ""Tap(duration=0.15)"",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""PerformBuild"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -1004,8 +1042,10 @@ namespace Runtime
             m_BuildMode_KeyboardPan = m_BuildMode.FindAction("KeyboardPan", throwIfNotFound: true);
             m_BuildMode_KeyboardZoom = m_BuildMode.FindAction("KeyboardZoom", throwIfNotFound: true);
             m_BuildMode_Zoom = m_BuildMode.FindAction("Zoom", throwIfNotFound: true);
-            m_BuildMode_Rotation = m_BuildMode.FindAction("Rotation", throwIfNotFound: true);
             m_BuildMode_Boost = m_BuildMode.FindAction("Boost", throwIfNotFound: true);
+            m_BuildMode_ObjectRotation = m_BuildMode.FindAction("ObjectRotation", throwIfNotFound: true);
+            m_BuildMode_CancelBuild = m_BuildMode.FindAction("CancelBuild", throwIfNotFound: true);
+            m_BuildMode_PerformBuild = m_BuildMode.FindAction("PerformBuild", throwIfNotFound: true);
             // General
             m_General = asset.FindActionMap("General", throwIfNotFound: true);
             m_General_ToggleGameMode = m_General.FindAction("ToggleGameMode", throwIfNotFound: true);
@@ -1247,8 +1287,10 @@ namespace Runtime
         private readonly InputAction m_BuildMode_KeyboardPan;
         private readonly InputAction m_BuildMode_KeyboardZoom;
         private readonly InputAction m_BuildMode_Zoom;
-        private readonly InputAction m_BuildMode_Rotation;
         private readonly InputAction m_BuildMode_Boost;
+        private readonly InputAction m_BuildMode_ObjectRotation;
+        private readonly InputAction m_BuildMode_CancelBuild;
+        private readonly InputAction m_BuildMode_PerformBuild;
         public struct BuildModeActions
         {
             private @DefaultInputActions m_Wrapper;
@@ -1256,8 +1298,10 @@ namespace Runtime
             public InputAction @KeyboardPan => m_Wrapper.m_BuildMode_KeyboardPan;
             public InputAction @KeyboardZoom => m_Wrapper.m_BuildMode_KeyboardZoom;
             public InputAction @Zoom => m_Wrapper.m_BuildMode_Zoom;
-            public InputAction @Rotation => m_Wrapper.m_BuildMode_Rotation;
             public InputAction @Boost => m_Wrapper.m_BuildMode_Boost;
+            public InputAction @ObjectRotation => m_Wrapper.m_BuildMode_ObjectRotation;
+            public InputAction @CancelBuild => m_Wrapper.m_BuildMode_CancelBuild;
+            public InputAction @PerformBuild => m_Wrapper.m_BuildMode_PerformBuild;
             public InputActionMap Get() { return m_Wrapper.m_BuildMode; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -1276,12 +1320,18 @@ namespace Runtime
                     @Zoom.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnZoom;
                     @Zoom.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnZoom;
                     @Zoom.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnZoom;
-                    @Rotation.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnRotation;
-                    @Rotation.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnRotation;
-                    @Rotation.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnRotation;
                     @Boost.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnBoost;
                     @Boost.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnBoost;
                     @Boost.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnBoost;
+                    @ObjectRotation.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnObjectRotation;
+                    @ObjectRotation.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnObjectRotation;
+                    @ObjectRotation.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnObjectRotation;
+                    @CancelBuild.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnCancelBuild;
+                    @CancelBuild.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnCancelBuild;
+                    @CancelBuild.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnCancelBuild;
+                    @PerformBuild.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnPerformBuild;
+                    @PerformBuild.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnPerformBuild;
+                    @PerformBuild.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnPerformBuild;
                 }
                 m_Wrapper.m_BuildModeActionsCallbackInterface = instance;
                 if (instance != null)
@@ -1295,12 +1345,18 @@ namespace Runtime
                     @Zoom.started += instance.OnZoom;
                     @Zoom.performed += instance.OnZoom;
                     @Zoom.canceled += instance.OnZoom;
-                    @Rotation.started += instance.OnRotation;
-                    @Rotation.performed += instance.OnRotation;
-                    @Rotation.canceled += instance.OnRotation;
                     @Boost.started += instance.OnBoost;
                     @Boost.performed += instance.OnBoost;
                     @Boost.canceled += instance.OnBoost;
+                    @ObjectRotation.started += instance.OnObjectRotation;
+                    @ObjectRotation.performed += instance.OnObjectRotation;
+                    @ObjectRotation.canceled += instance.OnObjectRotation;
+                    @CancelBuild.started += instance.OnCancelBuild;
+                    @CancelBuild.performed += instance.OnCancelBuild;
+                    @CancelBuild.canceled += instance.OnCancelBuild;
+                    @PerformBuild.started += instance.OnPerformBuild;
+                    @PerformBuild.performed += instance.OnPerformBuild;
+                    @PerformBuild.canceled += instance.OnPerformBuild;
                 }
             }
         }
@@ -1384,8 +1440,10 @@ namespace Runtime
             void OnKeyboardPan(InputAction.CallbackContext context);
             void OnKeyboardZoom(InputAction.CallbackContext context);
             void OnZoom(InputAction.CallbackContext context);
-            void OnRotation(InputAction.CallbackContext context);
             void OnBoost(InputAction.CallbackContext context);
+            void OnObjectRotation(InputAction.CallbackContext context);
+            void OnCancelBuild(InputAction.CallbackContext context);
+            void OnPerformBuild(InputAction.CallbackContext context);
         }
         public interface IGeneralActions
         {

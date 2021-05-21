@@ -699,17 +699,33 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Rotation",
+                    "name": "Boost",
+                    "type": "Button",
+                    "id": "3f84e2cf-e1da-4f6e-b130-afea4d229552",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "ObjectRotation",
                     "type": "PassThrough",
-                    "id": "fe6afbbd-b025-4f54-9b9f-12b6c07c968b",
+                    "id": "37442eb1-453e-4e3f-9a65-4e84107401af",
                     "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": ""
                 },
                 {
-                    "name": "Boost",
+                    "name": "CancelBuild",
                     "type": "Button",
-                    "id": "3f84e2cf-e1da-4f6e-b130-afea4d229552",
+                    "id": "00c3b6c7-ffde-4438-9c13-cfa97c01a0c8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "PerformBuild",
+                    "type": "Button",
+                    "id": "06a23f2f-62d4-4041-ba07-bac3c0b5cd85",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -839,39 +855,6 @@
                 },
                 {
                     "name": "1D Axis",
-                    "id": "728c0f90-7cfc-4c92-bd97-0f1f1f12d8ad",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Rotation",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "Negative",
-                    "id": "c5cd5062-412d-42b3-ac37-19fb77ada257",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Rotation",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "Positive",
-                    "id": "2fb4f509-ee46-40dd-8a63-55a6447f551e",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Rotation",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "1D Axis",
                     "id": "0814b994-d61c-40e5-b507-3780df38a510",
                     "path": "1DAxis",
                     "interactions": "",
@@ -902,6 +885,61 @@
                     "action": "KeyboardZoom",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "f41e0be6-00a4-448d-a6d7-51f35391691e",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ObjectRotation",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "Negative",
+                    "id": "99dacd16-087e-4d84-99d9-6a79f637535c",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ObjectRotation",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Positive",
+                    "id": "9201cc60-3b57-4bcf-b1b6-3f1137fe5127",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ObjectRotation",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "74ced0fc-16f0-42be-b806-112d5ba4ec58",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "Tap(duration=0.15)",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "CancelBuild",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "af25f2fe-bfc7-434c-bf84-4c70be3d1bec",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Tap(duration=0.15)",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "PerformBuild",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },

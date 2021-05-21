@@ -8,8 +8,8 @@ namespace Runtime.Data {
     [Serializable]
     public class MaterialInventory : IEnumerable {
         [SerializeField] private List<ItemStack> contents;
-        [SerializeField] private float totalMass;
 
+        private float totalMass;
         public float TotalMass => totalMass;
         
         public MaterialInventory() {

@@ -1,5 +1,4 @@
 ﻿using Runtime.Data;
-using UnityEngine.UIElements;
 
 namespace Runtime.Event {
     public abstract class InventoryUpdateEvent : EventData {

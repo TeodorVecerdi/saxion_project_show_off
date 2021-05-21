@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using Runtime.Event;
 using UnityCommons;
 using UnityEngine;
+using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
     public class PickupSpawnerTest : MonoBehaviour{
@@ -25,6 +27,7 @@ namespace Runtime {
             var spawnX = Rand.Range(From.x, To.x);
             var spawnZ = Rand.Range(From.z, To.z);
             Instantiate(pickup, new Vector3(spawnX, 10, spawnZ), Quaternion.Euler(Rand.Float * 360, Rand.Float * 360, Rand.Float * 360));
+            EventQueue.QueueEvent(new TrashPickupEvent(this, EventType.TrashSpawn, pickup));
         }
 
         private void OnDrawGizmosSelected() {
