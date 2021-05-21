@@ -11,11 +11,11 @@ namespace Runtime {
         [SerializeField] private float mouseSensitivity = 400.0f;
 
         private Vector3 startingRotation;
-        private IDisposable changeMouseLockEventUnsubscriber;
+        private IDisposable changeMouseLockEventUnsubscribeToken;
 
         protected override void Awake() {
             startingRotation = transform.localEulerAngles;
-            changeMouseLockEventUnsubscriber = EventQueue.Subscribe(this, EventType.ChangeMouseLock);
+            changeMouseLockEventUnsubscribeToken = EventQueue.Subscribe(this, EventType.ChangeMouseLock);
             base.Awake();
         }
 
@@ -24,7 +24,7 @@ namespace Runtime {
         }
 
         protected override void OnDestroy() {
-            changeMouseLockEventUnsubscriber.Dispose();
+            changeMouseLockEventUnsubscribeToken.Dispose();
             base.OnDestroy();
         }
 

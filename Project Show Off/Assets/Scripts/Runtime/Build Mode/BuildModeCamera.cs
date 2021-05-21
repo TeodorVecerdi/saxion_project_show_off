@@ -61,14 +61,14 @@ namespace Runtime {
         private Plane dragPlane;
         private Mouse mouse;
         private bool isEnabled;
-        private IDisposable gameModeToggleEventUnsubscriber;
+        private IDisposable gameModeToggleEventUnsubscribeToken;
 
         private void Awake() {
             cameraTransform = virtualCamera.transform;
             cameraBoundaries = GetComponent<CameraBoundaries>();
             dragPlane = new Plane(Vector3.up, Vector3.zero);
             mouse = Mouse.current;
-            gameModeToggleEventUnsubscriber = EventQueue.Subscribe(this, EventType.GameModeToggle);
+            gameModeToggleEventUnsubscribeToken = EventQueue.Subscribe(this, EventType.GameModeToggle);
             
             DisableBuildMode();
         }
@@ -82,7 +82,7 @@ namespace Runtime {
         }
 
         private void OnDestroy() {
-            gameModeToggleEventUnsubscriber.Dispose();
+            gameModeToggleEventUnsubscribeToken.Dispose();
         }
 
         private void Update() {
@@ -137,7 +137,6 @@ namespace Runtime {
 
         private void HandleInput() {
             var movementDelta = InputManager.CameraKeyboardPan * Time.deltaTime;
-            var rotationDelta = InputManager.Rotation * Time.deltaTime;
             var zoomDelta = InputManager.RawZoom;
             if (!Mathf.Approximately(zoomDelta, 0.0f))
                 zoomDelta = Mathf.Sign(zoomDelta);
@@ -145,7 +144,6 @@ namespace Runtime {
             zoomDelta += InputManager.KeyboardZoom;
 
             newPosition += movementDelta.x * movementSpeed * transform.right + movementDelta.y * movementSpeed * transform.forward;
-            newRotation *= Quaternion.Euler(rotationDelta * rotationSpeed * Vector3.up);
             newZoom += Time.deltaTime * zoomDelta * new Vector3(0, -zoomSpeed, zoomSpeed);
             newZoom.y = newZoom.y.Clamped(minZoom, maxZoom);
             newZoom.z = newZoom.z.Clamped(-maxZoom, -minZoom);

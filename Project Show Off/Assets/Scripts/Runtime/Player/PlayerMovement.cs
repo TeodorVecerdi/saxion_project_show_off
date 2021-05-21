@@ -23,7 +23,9 @@ namespace Runtime {
             if (grounded && velocity.y < 0.0f) velocity.y = 0.0f;
 
             var delta = speed * Time.deltaTime * InputManager.PlayerMovement;
-            var movement = cameraTransform.right * delta.x + cameraTransform.forward * delta.y;
+            var right = cameraTransform.right;
+            var forward = Vector3.Cross(right, Vector3.up);
+            var movement = right * delta.x + forward * delta.y;
             movement.y = 0.0f;
             controller.Move(movement);
 
