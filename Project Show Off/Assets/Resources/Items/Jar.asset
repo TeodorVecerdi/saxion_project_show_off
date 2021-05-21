@@ -16,3 +16,4 @@ MonoBehaviour:
   trashCategory: {fileID: 11400000, guid: 30d4a134f1adb6b479af094e1fdf25f7, type: 2}
   minimumMass: 0.5
   maximumMass: 1.1
+  pickupDuration: 0.4
