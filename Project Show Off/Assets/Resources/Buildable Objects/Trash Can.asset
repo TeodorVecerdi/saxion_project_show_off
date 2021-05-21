@@ -14,3 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectSprite: {fileID: 21300000, guid: 2c3ab1a8d183d884aad20f81f2ddc5dd, type: 3}
   prefab: {fileID: 2989257595510482479, guid: d4bb156347d99de43b43fce2f6f36616, type: 3}
+  constructionRequirements:
+    contents:
+    - trashCategory: {fileID: 11400000, guid: 2484c42e7f6c4d949b8bb98b18aedf0b, type: 2}
+      mass: 2.5
