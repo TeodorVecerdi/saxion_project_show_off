@@ -9,7 +9,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using EventType = Runtime.Event.EventType;
 
-public class NewInventoryView : MonoBehaviour, IEventSubscriber {
+public class InventoryView : MonoBehaviour, IEventSubscriber {
     [SerializeField] private PlayerInventory playerInventory;
     [SerializeField] private RectTransform inventoryItemContainer;
     [SerializeField] private List<TrashColorPair> trashColors;
