@@ -21,8 +21,8 @@ namespace Runtime {
 
         private void Awake() {
             eventUnsubscribers = new List<IDisposable>();
-            eventUnsubscribers.Add(EventQueue.Subscribe(this, EventType.ItemPickupSuccess));
-            eventUnsubscribers.Add(EventQueue.Subscribe(this, EventType.ItemPickupSpaceResponse));
+            eventUnsubscribers.Add(EventQueue.Subscribe(this, EventType.TrashPickupSuccess));
+            eventUnsubscribers.Add(EventQueue.Subscribe(this, EventType.TrashPickupSpaceResponse));
             
             pickupIndicatorImage.fillAmount = 0.0f;
         }
@@ -50,7 +50,7 @@ namespace Runtime {
                 var fillAmount = pickupTimer / pickupUnderMouse.Item.PickupDuration;
                 pickupIndicatorImage.fillAmount = fillAmount;
                 if (fillAmount >= 1.0f) {
-                    EventQueue.QueueEvent(new ItemPickupEvent(this, EventType.ItemPickupRequest, pickupUnderMouse));
+                    EventQueue.QueueEvent(new TrashPickupEvent(this, EventType.TrashPickupRequest, pickupUnderMouse));
                     StopPickup();
                 }
             }
@@ -92,7 +92,7 @@ namespace Runtime {
 
         private void PickupStarted(InputAction.CallbackContext context) {
             if (pickupUnderMouse == null) return;
-            EventQueue.QueueEvent(new ItemPickupSpaceRequest(this, pickupUnderMouse.Mass));
+            EventQueue.QueueEvent(new TrashPickupSpaceRequest(this, pickupUnderMouse.Mass));
         }
 
         private void StartPickup() {
@@ -113,13 +113,13 @@ namespace Runtime {
         /// <returns><c>true</c> if event propagation should be stopped, <c>false</c> otherwise.</returns>
         public bool OnEvent(EventData eventData) {
             switch (eventData) {
-                case ItemPickupEvent {Type: EventType.ItemPickupSuccess} itemPickupSuccessEvent: {
+                case TrashPickupEvent {Type: EventType.TrashPickupSuccess} itemPickupSuccessEvent: {
                     Destroy(itemPickupSuccessEvent.Pickup.gameObject);
                     pickupUnderMouse = null;
                     shouldRaycast = true;
                     return true;
                 }
-                case ItemPickupSpaceResponse itemPickupSpaceResponse: {
+                case TrashPickupSpaceResponse itemPickupSpaceResponse: {
                     if(itemPickupSpaceResponse.CanPickUp)
                         StartPickup();
                     return true;

@@ -18,9 +18,9 @@ namespace Runtime {
         private readonly List<IDisposable> eventUnsubscribeTokens = new List<IDisposable>();
 
         private void Awake() {
-            eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.ItemPickupRequest));
+            eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.TrashPickupRequest));
             eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.DepositMaterialsRequest));
-            eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.ItemPickupSpaceRequest));
+            eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.TrashPickupSpaceRequest));
         }
 
         private void OnDestroy() {
@@ -35,11 +35,11 @@ namespace Runtime {
         /// <returns><c>true</c> if event propagation should be stopped, <c>false</c> otherwise.</returns>
         public bool OnEvent(EventData eventData) {
             switch (eventData) {
-                case ItemPickupEvent {Type: EventType.ItemPickupRequest} itemPickupEvent: {
+                case TrashPickupEvent {Type: EventType.TrashPickupRequest} itemPickupEvent: {
                     var mass = itemPickupEvent.Pickup.Mass;
                     if(materialInventory.TotalMass + mass > MaximumCarryMass) return true;
                     materialInventory.Add(itemPickupEvent.Pickup.Item.TrashCategory, itemPickupEvent.Pickup.Mass);
-                    EventQueue.QueueEvent(new ItemPickupEvent(this, EventType.ItemPickupSuccess, itemPickupEvent.Pickup));
+                    EventQueue.QueueEvent(new TrashPickupEvent(this, EventType.TrashPickupSuccess, itemPickupEvent.Pickup));
                     EventQueue.QueueEvent(new MaterialInventoryUpdateEvent(this, materialInventory));
                     return true;
                 }
@@ -50,8 +50,8 @@ namespace Runtime {
                     EventQueue.QueueEvent(new DepositInventoryUpdateEvent(this, depositMaterialsRequestEvent.DepositInventory));
                     return false;
                 }
-                case ItemPickupSpaceRequest itemPickupSpaceRequest: {
-                    EventQueue.QueueEvent(new ItemPickupSpaceResponse(this, materialInventory.TotalMass + itemPickupSpaceRequest.Mass <= MaximumCarryMass));
+                case TrashPickupSpaceRequest itemPickupSpaceRequest: {
+                    EventQueue.QueueEvent(new TrashPickupSpaceResponse(this, materialInventory.TotalMass + itemPickupSpaceRequest.Mass <= MaximumCarryMass));
                     return true;
                 }
                 default: return false;
