@@ -7806,7 +7806,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63d744a51a1d4280882ff30bc9878415, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maximumCarryMass: 10
+  maximumCarryMass: 50
   materialInventory:
     contents: []
   placeableInventory:
