@@ -21,6 +21,7 @@ namespace Runtime {
             eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.ItemPickupRequest));
             eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.CraftRequest));
             eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.DepositMaterialsRequest));
+            eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.ItemPickupSpaceRequest));
         }
 
         private void OnDestroy() {
@@ -61,6 +62,10 @@ namespace Runtime {
                     EventQueue.QueueEvent(new MaterialInventoryUpdateEvent(this, materialInventory));
                     EventQueue.QueueEvent(new DepositInventoryUpdateEvent(this, depositMaterialsRequestEvent.DepositInventory));
                     return false;
+                }
+                case ItemPickupSpaceRequest itemPickupSpaceRequest: {
+                    EventQueue.QueueEvent(new ItemPickupSpaceResponse(this, materialInventory.TotalMass + itemPickupSpaceRequest.Mass <= MaximumCarryMass));
+                    return true;
                 }
                 default: return false;
             }
