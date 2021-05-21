@@ -23,6 +23,7 @@ namespace Runtime {
         private void Awake() {
             rectTransform = (RectTransform) transform; 
             width = rectTransform.sizeDelta.x;
+            buildableObjects = new List<BuildableObject>(Resources.LoadAll<BuildableObject>("Buildable Objects"));
 
             eventUnsubscribers = new List<IDisposable>();
             eventUnsubscribers.Add(EventQueue.Subscribe(this, EventType.BeginBuild));
@@ -39,9 +40,6 @@ namespace Runtime {
         }
 
         private void Start() {
-            
-            buildableObjects = new List<BuildableObject>(Resources.LoadAll<BuildableObject>("Buildable Objects"));
-            Debug.Log($"Creating {buildableObjects.Count} entries");
             foreach (var buildableObject in buildableObjects) {
                 var buildableEntry = Instantiate(buildableEntryPrefab, buildableEntryContainer);
                 buildableEntry.BuildUI(buildableObject);
