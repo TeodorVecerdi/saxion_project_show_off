@@ -19,7 +19,6 @@ namespace Runtime {
 
         private void Awake() {
             eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.ItemPickupRequest));
-            eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.CraftRequest));
             eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.DepositMaterialsRequest));
             eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.ItemPickupSpaceRequest));
         }
@@ -42,18 +41,6 @@ namespace Runtime {
                     materialInventory.Add(itemPickupEvent.Pickup.Item.TrashCategory, itemPickupEvent.Pickup.Mass);
                     EventQueue.QueueEvent(new ItemPickupEvent(this, EventType.ItemPickupSuccess, itemPickupEvent.Pickup));
                     EventQueue.QueueEvent(new MaterialInventoryUpdateEvent(this, materialInventory));
-                    return true;
-                }
-                case CraftRequestEvent craftRequestEvent: {
-                    if (!materialInventory.Contains(craftRequestEvent.Recipe.Ingredients)) return true;
-                    
-                    materialInventory.Remove(craftRequestEvent.Recipe.Ingredients);
-                    materialInventory.Add(craftRequestEvent.Recipe.Result);
-                    EventQueue.QueueEvent(new MaterialInventoryUpdateEvent(this, materialInventory));
-                    
-                    // TODO!: Change to placeable inventory once system is in place 
-                    // placeableInventory.Add(craftRequestEvent.Recipe.Result);
-                    // EventQueue.QueueEvent(new PlaceableInventoryUpdateEvent(this, placeableInventory));
                     return true;
                 }
                 case DepositMaterialsRequestEvent depositMaterialsRequestEvent: {
