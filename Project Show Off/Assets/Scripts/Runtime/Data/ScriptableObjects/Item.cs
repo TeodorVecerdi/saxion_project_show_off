@@ -8,11 +8,13 @@ namespace Runtime.Data {
         [SerializeField] private float minimumMass;
         [SerializeField] private float maximumMass;
         [SerializeField, Tooltip("In seconds")] private float pickupDuration = 1.0f;
+        [SerializeField] private float pollutionAmount = 1.0f;
 
         public string ItemName => itemName;
         public TrashCategory TrashCategory => trashCategory;
         public float MinimumMass => minimumMass;
         public float MaximumMass => maximumMass;
         public float PickupDuration => pickupDuration;
+        public float PollutionAmount => pollutionAmount;
     }
 }
