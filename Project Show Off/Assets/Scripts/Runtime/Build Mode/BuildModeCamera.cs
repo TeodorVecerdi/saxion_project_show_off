@@ -68,7 +68,7 @@ namespace Runtime {
             cameraBoundaries = GetComponent<CameraBoundaries>();
             dragPlane = new Plane(Vector3.up, Vector3.zero);
             mouse = Mouse.current;
-            gameModeToggleEventUnsubscribeToken = EventQueue.Subscribe(this, EventType.GameModeToggle);
+            gameModeToggleEventUnsubscribeToken = this.Subscribe(EventType.GameModeToggle);
             
             DisableBuildMode();
         }

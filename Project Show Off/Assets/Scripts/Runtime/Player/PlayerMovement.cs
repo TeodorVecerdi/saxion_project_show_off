@@ -1,7 +1,6 @@
 using System;
 using Runtime.Event;
 using UnityEngine;
-using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
     public class PlayerMovement : MonoBehaviour {

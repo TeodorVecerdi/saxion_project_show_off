@@ -22,9 +22,10 @@ namespace Runtime {
         private bool canDeposit;
 
         private void Awake() {
-            eventUnsubscribeTokens = new List<IDisposable>();
-            eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.DepositInventoryRequest));
-            eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.PerformBuild));
+            eventUnsubscribeTokens = new List<IDisposable> {
+                this.Subscribe(EventType.DepositInventoryRequest), 
+                this.Subscribe(EventType.PerformBuild)
+            };
             depositUICanvasGroup.alpha = 0.0f;
         }
 

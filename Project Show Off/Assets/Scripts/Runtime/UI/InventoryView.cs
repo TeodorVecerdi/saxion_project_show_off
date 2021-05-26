@@ -22,7 +22,7 @@ public class InventoryView : MonoBehaviour, IEventSubscriber {
         var inventoryScreenSize = ((RectTransform) transform).sizeDelta.y;
         screenUnitsPerMassUnit = inventoryScreenSize / playerInventory.MaximumCarryMass;
         items = new Dictionary<TrashCategory, Image>();
-        inventoryUpdateEventUnsubscribeToken = EventQueue.Subscribe(this, EventType.InventoryUpdate);
+        inventoryUpdateEventUnsubscribeToken = this.Subscribe(EventType.InventoryUpdate);
     }
 
     private void Start() {

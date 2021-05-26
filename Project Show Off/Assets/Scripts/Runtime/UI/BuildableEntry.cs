@@ -27,11 +27,12 @@ namespace Runtime {
             button = GetComponent<Button>();
             borderImage = GetComponent<Image>();
             button.onClick.AddListener(OnBuildClicked);
-            
-            eventUnsubscribeTokens = new List<IDisposable>();
-            eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.BeginBuild));
-            eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.CancelBuild));
-            eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.PerformBuild));
+
+            eventUnsubscribeTokens = new List<IDisposable> {
+                this.Subscribe(EventType.BeginBuild), 
+                this.Subscribe(EventType.CancelBuild), 
+                this.Subscribe(EventType.PerformBuild)
+            };
         }
 
         private void OnDestroy() {

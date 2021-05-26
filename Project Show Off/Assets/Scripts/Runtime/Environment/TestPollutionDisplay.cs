@@ -10,7 +10,7 @@ namespace Runtime {
         private IDisposable pollutionUpdateEventUnsubscribeToken;
         
         private void Awake() {
-            pollutionUpdateEventUnsubscribeToken = EventQueue.Subscribe(this, EventType.PollutionUpdate);
+            pollutionUpdateEventUnsubscribeToken = this.Subscribe(EventType.PollutionUpdate);
         }
 
         private void OnDestroy() {

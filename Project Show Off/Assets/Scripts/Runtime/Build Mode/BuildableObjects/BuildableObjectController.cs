@@ -26,9 +26,10 @@ namespace Runtime {
         private List<IDisposable> eventUnsubscribeTokens;
 
         private void Awake() {
-            eventUnsubscribeTokens = new List<IDisposable>();
-            eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.BeginBuild));
-            eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.CancelBuild));
+            eventUnsubscribeTokens = new List<IDisposable> {
+                this.Subscribe(EventType.BeginBuild), 
+                this.Subscribe(EventType.CancelBuild)
+            };
             y180deg = Quaternion.Euler(180.0f * Vector3.up);
         }
 

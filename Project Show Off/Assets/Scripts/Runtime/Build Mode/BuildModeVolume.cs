@@ -11,7 +11,7 @@ namespace Runtime {
         private bool isBuildMode;
 
         private void Awake() {
-            gameModeToggleEventUnsubscribeToken = EventQueue.Subscribe(this, EventType.GameModeToggle);
+            gameModeToggleEventUnsubscribeToken = this.Subscribe(EventType.GameModeToggle);
             volume = GetComponent<Volume>();
             volume.weight = 0.0f;
             isBuildMode = false;
