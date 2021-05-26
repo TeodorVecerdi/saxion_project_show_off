@@ -16,6 +16,7 @@ namespace Runtime {
         private bool unlinkTimeVariables;
         [SerializeField, Required] private CinemachineVirtualCamera virtualCamera;
         [SerializeField, Required] private Camera actualCamera;
+        [SerializeField, Required] private BuildModeVolume buildModeVolume;
 
         [HorizontalLine(color: EColor.Blue, order = 1), Header("Movement")]
         [SerializeField] private float normalMovementSpeed = 1.0f;
@@ -154,12 +155,18 @@ namespace Runtime {
 
             transform.position = Vector3.Lerp(transform.position, newPosition, Time.deltaTime * actualMovementTime);
             transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, Time.deltaTime * actualRotationTime);
-            cameraTransform.localPosition = Vector3.Lerp(cameraTransform.localPosition, newZoom, Time.deltaTime * actualZoomTime);
+            
+            //!! reason: repeated property access of built in component is inefficient
+            var cameraLocalPosition = cameraTransform.localPosition;
+            cameraLocalPosition = Vector3.Lerp(cameraLocalPosition, newZoom, Time.deltaTime * actualZoomTime);
+            buildModeVolume.UpdateShadowDistance(cameraLocalPosition.y);
+            cameraTransform.localPosition = cameraLocalPosition;
         }
 
         private void EnableBuildMode() {
             isEnabled = true;
-            var baseTransform = transform; // reason: repeated property access of built in component is inefficient 
+            //!! reason: repeated property access of built in component is inefficient
+            var baseTransform = transform;  
             newPosition = baseTransform.position;
             newRotation = baseTransform.rotation;
             newZoom = cameraTransform.localPosition;

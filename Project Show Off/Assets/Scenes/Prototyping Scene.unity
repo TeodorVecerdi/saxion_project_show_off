@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 7209.6953, g: 10814.328, b: 17393.062, a: 1}
+  m_IndirectSpecularColor: {r: 7213.004, g: 10817.172, b: 17393.062, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4634,6 +4634,7 @@ MonoBehaviour:
   unlinkTimeVariables: 0
   virtualCamera: {fileID: 663367962}
   actualCamera: {fileID: 738646681827304406}
+  buildModeVolume: {fileID: 2037264830}
   normalMovementSpeed: 25
   boostMovementSpeed: 50
   movementTime: 8
@@ -4645,7 +4646,7 @@ MonoBehaviour:
   scrollZoomSensitivity: 5
   zoomTime: 5
   minZoom: 45
-  maxZoom: 170
+  maxZoom: 1700
 --- !u!114 &882174911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7111,6 +7112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e8096b75f8441c49638862b36ac670b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shadowDistanceMultiplier: 12.5
 --- !u!1 &2121497766
 GameObject:
   m_ObjectHideFlags: 0

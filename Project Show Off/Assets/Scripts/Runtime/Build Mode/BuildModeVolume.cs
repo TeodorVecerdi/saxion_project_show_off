@@ -2,23 +2,45 @@
 using Runtime.Event;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.Rendering.HighDefinition;
 using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
     public class BuildModeVolume : MonoBehaviour, IEventSubscriber {
         private Volume volume;
+        private HDShadowSettings shadowSettings;
         private IDisposable gameModeToggleEventUnsubscribeToken;
         private bool isBuildMode;
+
+        [SerializeField] private float shadowDistanceMultiplier = 20;
+#if UNITY_EDITOR
+        //debug:
+        private float originalShadowDistance;
+#endif
+        private const float sqrt2 = 1.4142135623731f;
 
         private void Awake() {
             gameModeToggleEventUnsubscribeToken = this.Subscribe(EventType.GameModeToggle);
             volume = GetComponent<Volume>();
             volume.weight = 0.0f;
+            volume.profile.TryGet(out shadowSettings);
+            originalShadowDistance = shadowSettings.maxShadowDistance.value;
             isBuildMode = false;
         }
 
         private void OnDestroy() {
             gameModeToggleEventUnsubscribeToken.Dispose();
+#if UNITY_EDITOR
+            //debug: Reset shadow distance when exiting scene
+            shadowSettings.maxShadowDistance.value = originalShadowDistance;
+#endif
+        }
+
+        public void UpdateShadowDistance(float zoom) {
+            // 45 deg angle 
+            var distanceToCenter = zoom * sqrt2;
+            var shadowDistance = distanceToCenter * shadowDistanceMultiplier;
+            shadowSettings.maxShadowDistance.value = shadowDistance;
         }
 
         /// <summary>
