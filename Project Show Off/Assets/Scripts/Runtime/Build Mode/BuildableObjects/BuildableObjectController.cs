@@ -4,6 +4,7 @@ using Runtime.Data;
 using Runtime.Event;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Networking;
 using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
@@ -14,6 +15,7 @@ namespace Runtime {
         [Header("References")]
         [SerializeField] private Transform buildModeCenter;
         [SerializeField] private Camera buildModeCamera;
+        [SerializeField] private BuildArea buildArea;
         
         private BuildableObject currentBuildable;
         private BuildableObjectPreview currentObject;
@@ -22,6 +24,7 @@ namespace Runtime {
         private Quaternion y180deg;
         private bool isBuilding;
         private bool oldIsBuilding;
+        private bool isValidSpot;
 
         private List<IDisposable> eventUnsubscribeTokens;
 
@@ -57,16 +60,18 @@ namespace Runtime {
                 currentBuildable = null;
                 isBuilding = false;
                 oldIsBuilding = false;
+                isValidSpot = false;
                 return;
             }
 
-            if (InputManager.PerformBuildTriggered) {
+            if (InputManager.PerformBuildTriggered && isValidSpot) {
                 EventQueue.QueueEvent(new PerformBuildEvent(this, currentBuildable));
                 currentTransform = null;
                 currentObject = null;
                 currentBuildable = null;
                 isBuilding = false;
                 oldIsBuilding = false;
+                isValidSpot = false;
                 return;
             }
             
@@ -75,7 +80,18 @@ namespace Runtime {
             var mousePosition = Mouse.current.position.ReadValue();
             var ray = buildModeCamera.ScreenPointToRay(mousePosition);
             if (Physics.Raycast(ray, out var hit, 10000.0f, LayerMask.GetMask("Ground"))) {
-                currentTransform.position = hit.point;
+                if ((currentTransform.position - hit.point).sqrMagnitude > 0.01f) {
+                    currentTransform.position = hit.point;
+                    isValidSpot = false;
+                    foreach (var quad in buildArea.Quads) {
+                        var points = quad.Points;
+                        if (Utilities.IsMouseInQuad(mousePosition, buildModeCamera.WorldToScreenPoint(points[0]), buildModeCamera.WorldToScreenPoint(points[1]),
+                                                    buildModeCamera.WorldToScreenPoint(points[2]), buildModeCamera.WorldToScreenPoint(points[3]))) {
+                            isValidSpot = true;
+                            break;
+                        }
+                    }
+                }
                 // todo check for valid spot
             }
 
@@ -98,6 +114,7 @@ namespace Runtime {
                     currentTransform = currentObject.transform;
                     newRotation = currentTransform.rotation;
                     isBuilding = true;
+                    isValidSpot = false;
                     return false;
                 }
                 default: return false;

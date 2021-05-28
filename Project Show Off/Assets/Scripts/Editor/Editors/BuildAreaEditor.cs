@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Runtime;
 using Runtime.Data;
 using UnityEditor;
 using UnityEngine;
@@ -91,7 +92,12 @@ namespace Editor {
                     var mousePosition = currentEvent.mousePosition;
                     hoveredQuad = -1;
                     for (var index = buildArea.Quads.Count - 1; index >= 0; index--) {
-                        if (MouseInQuad(mousePosition, buildArea.Quads[index])) {
+                        var quadPoints = buildArea.Quads[index].Points;
+
+                        if (Utilities.IsMouseInQuad(mousePosition,
+                            HandleUtility.WorldToGUIPoint(quadPoints[0]), HandleUtility.WorldToGUIPoint(quadPoints[1]),
+                            HandleUtility.WorldToGUIPoint(quadPoints[2]), HandleUtility.WorldToGUIPoint(quadPoints[3]))
+                        ) {
                             hoveredQuad = index;
                             break;
                         }
@@ -139,46 +145,6 @@ namespace Editor {
                     break;
                 }
             }
-        }
-
-        private bool PointTriangle(Vector2 a, Vector2 b, Vector2 c, Vector2 p) {
-            var areaMain = Mathf.Abs((b.x - a.x) * (c.y - a.y) - (c.x - a.x) * (b.y - a.y));
-            var area1 = Mathf.Abs((a.x - p.x) * (b.y - p.y) - (b.x - p.x) * (a.y - p.y));
-            var area2 = Mathf.Abs((b.x - p.x) * (c.y - p.y) - (c.x - p.x) * (b.y - p.y));
-            var area3 = Mathf.Abs((c.x - p.x) * (a.y - p.y) - (a.x - p.x) * (c.y - p.y));
-            return Math.Abs(area1 + area2 + area3 - areaMain) < 0.2f; // I have no idea why such a big tolerance is required but I'm not going to question it
-        }
-
-        private bool MouseInQuad(Vector2 mouseScreenPosition, BuildArea.Quad quad) {
-            // translate quad to screen view
-            var screenPoints = new[] {
-                HandleUtility.WorldToGUIPoint(quad.Points[0]),
-                HandleUtility.WorldToGUIPoint(quad.Points[1]),
-                HandleUtility.WorldToGUIPoint(quad.Points[2]),
-                HandleUtility.WorldToGUIPoint(quad.Points[3])
-            };
-
-            return PointTriangle(screenPoints[0], screenPoints[1], screenPoints[2], mouseScreenPosition) ||
-                   PointTriangle(screenPoints[0], screenPoints[2], screenPoints[3], mouseScreenPosition);
-
-            /*// shift origin
-            var b = screenPoints[1] -= screenPoints[0];
-            var c = screenPoints[2] -= screenPoints[0];
-            var d = screenPoints[3] -= screenPoints[0];
-            mouseScreenPosition -= screenPoints[0];
-
-            // first triangle test
-            var vx1 = c.y * mouseScreenPosition.x - c.x * mouseScreenPosition.y;
-            var vy1 = -b.y * mouseScreenPosition.x + b.x * mouseScreenPosition.y;
-            var D1 = b.x * c.y - c.x * b.y;
-            var inTriangle1 = vx1 + vy1 < D1 && vx1 > 0 && vy1 > 0;
-            if (inTriangle1) return true;
-
-            // second triangle test
-            var vx2 = d.y * mouseScreenPosition.x - d.x * mouseScreenPosition.y;
-            var vy2 = -c.y * mouseScreenPosition.x + c.x * mouseScreenPosition.y;
-            var D2 = c.x * d.y - d.x * c.y;
-            return vx2 + vy2 < D2 && vx2 > 0 && vy2 > 0;*/
         }
     }
 }
