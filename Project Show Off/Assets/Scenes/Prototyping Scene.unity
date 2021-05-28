@@ -4145,7 +4145,15 @@ MonoBehaviour:
   depositKey: 101
   depositUICanvasGroup: {fileID: 1174968907}
   inventory:
-    contents: []
+    contents:
+    - trashCategory: {fileID: 11400000, guid: 30d4a134f1adb6b479af094e1fdf25f7, type: 2}
+      mass: 1000000
+    - trashCategory: {fileID: 11400000, guid: 2484c42e7f6c4d949b8bb98b18aedf0b, type: 2}
+      mass: 1000000
+    - trashCategory: {fileID: 11400000, guid: fec93a18793254344b0eb7b9c697fd84, type: 2}
+      mass: 1000000
+    - trashCategory: {fileID: 11400000, guid: 4bce4b42e3e7157439edede8569afc9e, type: 2}
+      mass: 1000000
 --- !u!135 &869963679
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -6003,7 +6011,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29126
+  m_Name: pb_Mesh36946
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7377,7 +7385,6 @@ MonoBehaviour:
   buildableRotationTime: 8
   buildModeCenter: {fileID: 882174909}
   buildModeCamera: {fileID: 738646681827304406}
-  buildArea: {fileID: 11400000, guid: 6ac7deca58c47144cab44f001c95e09b, type: 2}
 --- !u!114 &2121497773
 MonoBehaviour:
   m_ObjectHideFlags: 0

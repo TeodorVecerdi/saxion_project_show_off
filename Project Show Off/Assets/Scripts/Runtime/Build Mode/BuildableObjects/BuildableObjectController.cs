@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Runtime.Data;
 using Runtime.Event;
 using UnityEngine;
@@ -15,7 +16,6 @@ namespace Runtime {
         [Header("References")]
         [SerializeField] private Transform buildModeCenter;
         [SerializeField] private Camera buildModeCamera;
-        [SerializeField] private BuildArea buildArea;
         
         private BuildableObject currentBuildable;
         private BuildableObjectPreview currentObject;
@@ -83,7 +83,8 @@ namespace Runtime {
                 if ((currentTransform.position - hit.point).sqrMagnitude > 0.01f) {
                     currentTransform.position = hit.point;
                     isValidSpot = false;
-                    foreach (var quad in buildArea.Quads) {
+                    //Todo: Optimize using raycast and physical meshes?
+                    foreach (var quad in currentBuildable.BuildAreas.SelectMany(area => area.Quads)) {
                         var points = quad.Points;
                         if (Utilities.IsMouseInQuad(mousePosition, buildModeCamera.WorldToScreenPoint(points[0]), buildModeCamera.WorldToScreenPoint(points[1]),
                                                     buildModeCamera.WorldToScreenPoint(points[2]), buildModeCamera.WorldToScreenPoint(points[3]))) {
@@ -92,7 +93,6 @@ namespace Runtime {
                         }
                     }
                 }
-                // todo check for valid spot
             }
 
             var rotationDelta = InputManager.ObjectRotation;
