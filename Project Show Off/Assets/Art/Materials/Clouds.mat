@@ -51,20 +51,20 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - AmbientInfluence: 2.17
+    - AmbientInfluence: 2.63
     - CloudHeight: 3.2
     - CloudPosition: 23.3
-    - CloudThickness: 2.01
-    - Contrast: 0.38
-    - DetailNoiseContrast: 0.26
-    - DetailNoiseStrength: 0.91
-    - DetailNoiseTiling: 0.01
-    - Mask_Strength: 0.22
-    - NoiseAScale: 0.22
+    - CloudThickness: 4.52
+    - Contrast: 0
+    - DetailNoiseContrast: 0.22
+    - DetailNoiseStrength: 0.62
+    - DetailNoiseTiling: 0.02
+    - Mask_Strength: 0.35
+    - NoiseAScale: 0.3
     - NoiseBScale: 0.26
-    - Power: 3.04
-    - SunSpreadContrast: 2.06
-    - SunSpreadPower: 18.99
+    - Power: 3.36
+    - SunSpreadContrast: 6.8
+    - SunSpreadPower: 9.96
     - UseGradientNoise: 0
     - _AddPrecomputedVelocity: 0
     - _AlphaCutoffEnable: 0
@@ -79,7 +79,7 @@ Material:
     - _DoubleSidedEnable: 0
     - _DoubleSidedNormalMode: 2
     - _DstBlend: 10
-    - _EnableBlendModePreserveSpecularLighting: 1
+    - _EnableBlendModePreserveSpecularLighting: 0
     - _EnableFogOnTransparent: 1
     - _OpaqueCullMode: 2
     - _RayTracing: 0
@@ -114,8 +114,8 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 0
     m_Colors:
-    - CloudSpeed: {r: 0.05, g: 0.12, b: 0.1, a: 0.12}
-    - Hardness: {r: 0.1, g: 1.1, b: -0.59, a: -1.87}
+    - CloudSpeed: {r: 0.02, g: 0.06, b: 7, a: 0.01}
+    - Hardness: {r: 0.1, g: 1.09, b: -0.58, a: -1.78}
     - MainLightColor: {r: 1, g: 1, b: 1, a: 1}
     - MainLightDirection: {r: 0.43222207, g: -0.7900663, b: 0.43471766, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
