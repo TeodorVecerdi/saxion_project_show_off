@@ -1,6 +1,4 @@
-﻿using Runtime.Data;
-
-namespace Runtime.Event {
+﻿namespace Runtime.Event {
     public sealed class TrashPickupEvent : EventData {
         public override EventType Type { get; }
 

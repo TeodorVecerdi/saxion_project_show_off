@@ -14,7 +14,7 @@ namespace Runtime {
         private IDisposable depositInventoryUpdateUnsubscribeToken;
         
         private void Start() {
-            depositInventoryUpdateUnsubscribeToken = EventQueue.Subscribe(this, EventType.DepositInventoryUpdate);
+            depositInventoryUpdateUnsubscribeToken = this.Subscribe(EventType.DepositInventoryUpdate);
             items = new Dictionary<ItemStack, DepositItemView>(ItemStack.Comparer);
         }
         

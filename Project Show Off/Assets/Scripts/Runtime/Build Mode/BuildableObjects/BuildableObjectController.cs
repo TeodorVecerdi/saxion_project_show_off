@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Runtime.Data;
 using Runtime.Event;
 using UnityEngine;
@@ -22,13 +23,15 @@ namespace Runtime {
         private Quaternion y180deg;
         private bool isBuilding;
         private bool oldIsBuilding;
+        private bool isValidSpot;
 
         private List<IDisposable> eventUnsubscribeTokens;
 
         private void Awake() {
-            eventUnsubscribeTokens = new List<IDisposable>();
-            eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.BeginBuild));
-            eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.CancelBuild));
+            eventUnsubscribeTokens = new List<IDisposable> {
+                this.Subscribe(EventType.BeginBuild), 
+                this.Subscribe(EventType.CancelBuild)
+            };
             y180deg = Quaternion.Euler(180.0f * Vector3.up);
         }
 
@@ -56,16 +59,18 @@ namespace Runtime {
                 currentBuildable = null;
                 isBuilding = false;
                 oldIsBuilding = false;
+                isValidSpot = false;
                 return;
             }
 
-            if (InputManager.PerformBuildTriggered) {
+            if (InputManager.PerformBuildTriggered && isValidSpot) {
                 EventQueue.QueueEvent(new PerformBuildEvent(this, currentBuildable));
                 currentTransform = null;
                 currentObject = null;
                 currentBuildable = null;
                 isBuilding = false;
                 oldIsBuilding = false;
+                isValidSpot = false;
                 return;
             }
             
@@ -73,9 +78,11 @@ namespace Runtime {
             
             var mousePosition = Mouse.current.position.ReadValue();
             var ray = buildModeCamera.ScreenPointToRay(mousePosition);
-            if (Physics.Raycast(ray, out var hit, 10000.0f, LayerMask.GetMask("Ground"))) {
-                currentTransform.position = hit.point;
-                // todo check for valid spot
+            if (Physics.Raycast(ray, out var hit, 100_000.0f, LayerMask.GetMask("Ground"))) {
+                if ((currentTransform.position - hit.point).sqrMagnitude > 0.01f) {
+                    currentTransform.position = hit.point;
+                    isValidSpot = Physics.Raycast(ray, 100_000.0f, LayerMask.GetMask("Build Area"));
+                }
             }
 
             var rotationDelta = InputManager.ObjectRotation;
@@ -97,6 +104,7 @@ namespace Runtime {
                     currentTransform = currentObject.transform;
                     newRotation = currentTransform.rotation;
                     isBuilding = true;
+                    isValidSpot = false;
                     return false;
                 }
                 default: return false;

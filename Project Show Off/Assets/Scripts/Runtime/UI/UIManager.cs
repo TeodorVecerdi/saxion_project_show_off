@@ -13,7 +13,7 @@ namespace Runtime {
         private bool isBuildModeActive;
 
         private void Awake() {
-            gameModeToggleEventUnsubscribeToken = EventQueue.Subscribe(this, EventType.GameModeToggle);
+            gameModeToggleEventUnsubscribeToken = this.Subscribe(EventType.GameModeToggle);
         }
 
         private void Start() {

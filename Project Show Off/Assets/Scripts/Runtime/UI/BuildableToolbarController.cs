@@ -26,12 +26,13 @@ namespace Runtime {
             width = rectTransform.sizeDelta.x;
             buildableObjects = new List<BuildableObject>(Resources.LoadAll<BuildableObject>("Buildable Objects"));
 
-            eventUnsubscribeTokens = new List<IDisposable>();
-            eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.BeginBuild));
-            eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.CancelBuild));
-            eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.PerformBuild));
-            eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.GameModeToggle));
-            eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.DepositInventoryResponse));
+            eventUnsubscribeTokens = new List<IDisposable> {
+                this.Subscribe(EventType.BeginBuild),
+                this.Subscribe(EventType.CancelBuild),
+                this.Subscribe(EventType.PerformBuild),
+                this.Subscribe(EventType.GameModeToggle),
+                this.Subscribe(EventType.DepositInventoryResponse)
+            };
         }
 
         private void OnDestroy() {

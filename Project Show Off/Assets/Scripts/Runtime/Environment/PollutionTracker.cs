@@ -11,9 +11,10 @@ namespace Runtime {
         private List<IDisposable> eventUnsubscribeTokens;
 
         private void Awake() {
-            eventUnsubscribeTokens = new List<IDisposable>();
-            eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.TrashPickupSuccess));
-            eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.TrashSpawn));
+            eventUnsubscribeTokens = new List<IDisposable> {
+                this.Subscribe(EventType.TrashPickupSuccess), 
+                this.Subscribe(EventType.TrashSpawn)
+            };
         }
 
         private void OnDestroy() {

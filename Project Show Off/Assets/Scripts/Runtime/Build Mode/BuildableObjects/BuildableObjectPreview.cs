@@ -18,7 +18,7 @@ namespace Runtime {
         private List<Collider> colliders;
 
         private void Awake() {
-            performBuildEventUnsubscribeToken = EventQueue.Subscribe(this, EventType.PerformBuild);
+            performBuildEventUnsubscribeToken = this.Subscribe(EventType.PerformBuild);
         }
 
         private void Start() {

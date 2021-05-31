@@ -15,12 +15,14 @@ namespace Runtime {
         public MaterialInventory MaterialInventory => materialInventory;
         public MaterialInventory PlaceableInventory => placeableInventory;
 
-        private readonly List<IDisposable> eventUnsubscribeTokens = new List<IDisposable>();
+        private List<IDisposable> eventUnsubscribeTokens;
 
         private void Awake() {
-            eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.TrashPickupRequest));
-            eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.DepositMaterialsRequest));
-            eventUnsubscribeTokens.Add(EventQueue.Subscribe(this, EventType.TrashPickupSpaceRequest));
+            eventUnsubscribeTokens = new List<IDisposable> {
+                this.Subscribe(EventType.TrashPickupRequest), 
+                this.Subscribe(EventType.DepositMaterialsRequest), 
+                this.Subscribe(EventType.TrashPickupSpaceRequest)
+            };
         }
 
         private void OnDestroy() {
@@ -37,7 +39,7 @@ namespace Runtime {
             switch (eventData) {
                 case TrashPickupEvent {Type: EventType.TrashPickupRequest} itemPickupEvent: {
                     var mass = itemPickupEvent.Pickup.Mass;
-                    if(materialInventory.TotalMass + mass > MaximumCarryMass) return true;
+                    if (materialInventory.TotalMass + mass > MaximumCarryMass) return true;
                     materialInventory.Add(itemPickupEvent.Pickup.Item.TrashCategory, itemPickupEvent.Pickup.Mass);
                     EventQueue.QueueEvent(new TrashPickupEvent(this, EventType.TrashPickupSuccess, itemPickupEvent.Pickup));
                     EventQueue.QueueEvent(new MaterialInventoryUpdateEvent(this, materialInventory));
