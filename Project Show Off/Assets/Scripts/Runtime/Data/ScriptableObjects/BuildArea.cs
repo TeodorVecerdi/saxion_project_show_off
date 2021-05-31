@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using NaughtyAttributes;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
 using UnityEngine;
 
 namespace Runtime.Data {
@@ -13,12 +10,17 @@ namespace Runtime.Data {
         [SerializeField, ReadOnly] private Mesh bakedMesh;
 
         public List<Quad> Quads => quads;
-        public Mesh BakedMesh => bakedMesh;
+        public Mesh BakedMesh {
+            get => bakedMesh;
+#if UNITY_EDITOR //!! Editor only setter
+            set => bakedMesh = value;
+#endif
+        }
 
         [field: SerializeField, HideInInspector] public bool IsBakeDirty {
             get;
-#if UNITY_EDITOR
-            set; //!! Editor only setter
+#if UNITY_EDITOR //!! Editor only setter
+            set;
 #endif
         } = true;
 
@@ -35,18 +37,6 @@ namespace Runtime.Data {
                 new Quad(Vector3.zero)
             };
         }
-
-#if UNITY_EDITOR
-        public void SetBakedMesh(Mesh mesh) {
-            if (bakedMesh != null) {
-                bakedMesh.Clear();
-                DestroyImmediate(bakedMesh, true);
-            }
-
-            bakedMesh = mesh;
-            AssetDatabase.AddObjectToAsset(bakedMesh, this);
-        }
-#endif
 
         [Serializable]
         public struct Quad {

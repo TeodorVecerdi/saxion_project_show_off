@@ -203,46 +203,15 @@ namespace Editor {
         private void BakeQuads() {
             Undo.RecordObject(buildArea, "Baked build area mesh");
             
-            // Basic setup
+            // Setup for first time baking
             if (buildArea.BakedMesh == null) {
-                buildArea.SetBakedMesh(new Mesh{name = "Build Area Mesh"});
+                buildArea.BakedMesh = new Mesh {name = "Build Area Mesh"};
+                AssetDatabase.AddObjectToAsset(buildArea.BakedMesh, buildArea);
             }
-            var mesh = buildArea.BakedMesh;
-            mesh.Clear();
-            
-            // Calculate vertices & triangles
-            var vertices = new List<Vector3>();
-            var triangles = new List<int>();
-            for (var quadIndex = 0; quadIndex < buildArea.Quads.Count; quadIndex++) {
-                var (quadVerts, quadTris) = GetMeshForQuad(buildArea.Quads[quadIndex], quadIndex);
-                vertices.AddRange(quadVerts);
-                triangles.AddRange(quadTris);
-            }
-            mesh.SetVertices(vertices);
-            mesh.SetTriangles(triangles, 0);
-            mesh.Optimize();
-            mesh.RecalculateNormals();
-        }
 
-        private (List<Vector3> vertices, List<int> triangles) GetMeshForQuad(BuildArea.Quad quad, int quadIndex) {
-            var triangleOffset = quadIndex * 8;
-            return (new List<Vector3> {
-                quad.Points[0] + bakedMeshTolerance * 0.5f * Vector3.up,
-                quad.Points[1] + bakedMeshTolerance * 0.5f * Vector3.up,
-                quad.Points[2] + bakedMeshTolerance * 0.5f * Vector3.up,
-                quad.Points[3] + bakedMeshTolerance * 0.5f * Vector3.up,
-                quad.Points[0] - bakedMeshTolerance * 0.5f * Vector3.up,
-                quad.Points[1] - bakedMeshTolerance * 0.5f * Vector3.up,
-                quad.Points[2] - bakedMeshTolerance * 0.5f * Vector3.up,
-                quad.Points[3] - bakedMeshTolerance * 0.5f * Vector3.up
-            }, new List<int> {
-                1 + triangleOffset, 0 + triangleOffset, 2 + triangleOffset, 2 + triangleOffset, 0 + triangleOffset, 3 + triangleOffset,
-                4 + triangleOffset, 5 + triangleOffset, 6 + triangleOffset, 4 + triangleOffset, 6 + triangleOffset, 7 + triangleOffset,
-                5 + triangleOffset, 4 + triangleOffset, 1 + triangleOffset, 4 + triangleOffset, 0 + triangleOffset, 1 + triangleOffset,
-                7 + triangleOffset, 6 + triangleOffset, 3 + triangleOffset, 6 + triangleOffset, 2 + triangleOffset, 3 + triangleOffset, 
-                4 + triangleOffset, 7 + triangleOffset, 0 + triangleOffset, 7 + triangleOffset, 3 + triangleOffset, 0 + triangleOffset, 
-                6 + triangleOffset, 5 + triangleOffset, 2 + triangleOffset, 5 + triangleOffset, 1 + triangleOffset, 2 + triangleOffset
-            });
+            BuildAreaBaker.Bake(buildArea.Quads, bakedMeshTolerance, buildArea.BakedMesh);
+            EditorUtility.SetDirty(buildArea);
+            AssetDatabase.SaveAssets();
         }
     }
 }
