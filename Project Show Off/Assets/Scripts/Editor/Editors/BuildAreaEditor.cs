@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Editor.Utils;
 using Runtime;
 using Runtime.Data;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.Rendering;
 
 namespace Editor {
@@ -22,6 +20,7 @@ namespace Editor {
 
         private void OnDisable() {
             SceneView.duringSceneGui -= DrawSceneGUI;
+            AssetDatabase.SaveAssets();
         }
 
         private void DrawSceneGUI(SceneView sceneView) {
@@ -46,11 +45,12 @@ namespace Editor {
                     var newCenter = Handles.DoPositionHandle(center, Quaternion.identity);
                     if (EditorGUI.EndChangeCheck()) {
                         var difference = newCenter - center;
-                        Undo.RecordObject(buildArea, "Move quad");
-                        quad.Points[0] += difference;
-                        quad.Points[1] += difference;
-                        quad.Points[2] += difference;
-                        quad.Points[3] += difference;
+                        EditorUtilities.RecordChange(buildArea, "Move quad", () => {
+                            quad.Points[0] += difference;
+                            quad.Points[1] += difference;
+                            quad.Points[2] += difference;
+                            quad.Points[3] += difference;
+                        });
                     }
                 } else {
                     EditorGUI.BeginChangeCheck();
@@ -59,11 +59,12 @@ namespace Editor {
                     var newVert2 = Handles.DoPositionHandle(quad.Points[2], Quaternion.identity);
                     var newVert3 = Handles.DoPositionHandle(quad.Points[3], Quaternion.identity);
                     if (EditorGUI.EndChangeCheck()) {
-                        Undo.RecordObject(buildArea, "Move quad vertex");
-                        quad.Points[0] = newVert0;
-                        quad.Points[1] = newVert1;
-                        quad.Points[2] = newVert2;
-                        quad.Points[3] = newVert3;
+                        EditorUtilities.RecordChange(buildArea, "Move quad vertex", () => {
+                            quad.Points[0] = newVert0;
+                            quad.Points[1] = newVert1;
+                            quad.Points[2] = newVert2;
+                            quad.Points[3] = newVert3;    
+                        });
                     }
                 }
             }
@@ -117,8 +118,9 @@ namespace Editor {
                     // create new quad at mouse position
                     var mousePosition = currentEvent.mousePosition;
                     if (Physics.Raycast(HandleUtility.GUIPointToWorldRay(mousePosition), out var hitInfo)) {
-                        Undo.RecordObject(buildArea, "Added quad");
-                        buildArea.AddQuad(hitInfo.point);
+                        EditorUtilities.RecordChange(buildArea, "Added quad", () => {
+                            buildArea.AddQuad(hitInfo.point);
+                        });
                     }
 
                     break;
@@ -127,8 +129,9 @@ namespace Editor {
                     if (selectedQuad == -1) break;
                     switch (keyUpEvent) {
                         case {keyCode: KeyCode.Backspace}: {
-                            Undo.RecordObject(buildArea, "Removed quad");
-                            buildArea.RemoveQuad(selectedQuad);
+                            EditorUtilities.RecordChange(buildArea, "Removed quad", () => {
+                                buildArea.RemoveQuad(selectedQuad);
+                            });
                             selectedQuad = -1;
                             break;
                         }
