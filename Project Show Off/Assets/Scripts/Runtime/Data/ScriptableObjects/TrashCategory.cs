@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Runtime.Data {
     [CreateAssetMenu(fileName = "NewTrashCategory", menuName = "Data/Trash Category")]

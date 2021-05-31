@@ -5,7 +5,6 @@ using Runtime.Data;
 using Runtime.Event;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Networking;
 using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
