@@ -1,4 +1,5 @@
-﻿using Editor.Utils;
+﻿using System.Collections.Generic;
+using Editor.Utils;
 using Runtime;
 using Runtime.Data;
 using UnityEditor;
@@ -8,19 +9,64 @@ using UnityEngine.Rendering;
 namespace Editor {
     [CustomEditor(typeof(BuildArea))]
     public class BuildAreaEditor : UnityEditor.Editor {
+        private static Material sPreviewMaterial;
+        
         [SerializeField] private BuildArea buildArea;
         [SerializeField] private int hoveredQuad = -1;
         [SerializeField] private int selectedQuad = -1;
         [SerializeField] private bool moveWholeQuad;
+        [SerializeField] private float bakedMeshTolerance = 0.1f;
+        
+        [SerializeField] private bool isMeshPreviewActive;
+        [SerializeField] private GameObject previewGameObject;
 
         private void OnEnable() {
             buildArea = target as BuildArea;
             SceneView.duringSceneGui += DrawSceneGUI;
+            if (sPreviewMaterial == null) 
+                sPreviewMaterial = Resources.Load<Material>("_Materials/BuildAreaPreview");
         }
 
         private void OnDisable() {
             SceneView.duringSceneGui -= DrawSceneGUI;
             AssetDatabase.SaveAssets();
+
+            if (previewGameObject != null) {
+                DestroyImmediate(previewGameObject);
+                previewGameObject = null;
+            }
+        }
+
+        public override void OnInspectorGUI() {
+            base.OnInspectorGUI();
+            bakedMeshTolerance = EditorGUILayout.FloatField("Mesh thickness", bakedMeshTolerance);
+
+            if (buildArea.IsBakeDirty) {
+                EditorGUILayout.HelpBox("Build area has changed since last bake. Please bake again if you want to keep the changes", MessageType.Error);
+            }
+            if (GUILayout.Button("Bake")) {
+                BakeQuads();
+                buildArea.IsBakeDirty = false;
+            }
+
+            GUI.enabled = buildArea.BakedMesh != null;
+            EditorGUI.BeginChangeCheck();
+            var newIsMeshPreviewActive = EditorGUILayout.Toggle("Preview Baked Mesh", isMeshPreviewActive);
+            if (EditorGUI.EndChangeCheck()) {
+                if (!newIsMeshPreviewActive && isMeshPreviewActive) {
+                    DestroyImmediate(previewGameObject);
+                    previewGameObject = null;
+                } else if (newIsMeshPreviewActive && !isMeshPreviewActive) {
+                    previewGameObject = new GameObject("PREVIEW BUILD AREA MESH");
+                    var meshFilter = previewGameObject.AddComponent<MeshFilter>();
+                    var meshRenderer = previewGameObject.AddComponent<MeshRenderer>();
+                    meshFilter.sharedMesh = buildArea.BakedMesh;
+                    meshRenderer.sharedMaterial = sPreviewMaterial;
+                }
+
+                isMeshPreviewActive = newIsMeshPreviewActive;
+            }
+            GUI.enabled = true;
         }
 
         private void DrawSceneGUI(SceneView sceneView) {
@@ -46,6 +92,7 @@ namespace Editor {
                     if (EditorGUI.EndChangeCheck()) {
                         var difference = newCenter - center;
                         EditorUtilities.RecordChange(buildArea, "Move quad", () => {
+                            buildArea.IsBakeDirty = true;
                             quad.Points[0] += difference;
                             quad.Points[1] += difference;
                             quad.Points[2] += difference;
@@ -60,6 +107,7 @@ namespace Editor {
                     var newVert3 = Handles.DoPositionHandle(quad.Points[3], Quaternion.identity);
                     if (EditorGUI.EndChangeCheck()) {
                         EditorUtilities.RecordChange(buildArea, "Move quad vertex", () => {
+                            buildArea.IsBakeDirty = true;
                             quad.Points[0] = newVert0;
                             quad.Points[1] = newVert1;
                             quad.Points[2] = newVert2;
@@ -119,6 +167,7 @@ namespace Editor {
                     var mousePosition = currentEvent.mousePosition;
                     if (Physics.Raycast(HandleUtility.GUIPointToWorldRay(mousePosition), out var hitInfo)) {
                         EditorUtilities.RecordChange(buildArea, "Added quad", () => {
+                            buildArea.IsBakeDirty = true;
                             buildArea.AddQuad(hitInfo.point);
                         });
                     }
@@ -130,6 +179,7 @@ namespace Editor {
                     switch (keyUpEvent) {
                         case {keyCode: KeyCode.Backspace}: {
                             EditorUtilities.RecordChange(buildArea, "Removed quad", () => {
+                                buildArea.IsBakeDirty = true;
                                 buildArea.RemoveQuad(selectedQuad);
                             });
                             selectedQuad = -1;
@@ -148,6 +198,51 @@ namespace Editor {
                     break;
                 }
             }
+        }
+
+        private void BakeQuads() {
+            Undo.RecordObject(buildArea, "Baked build area mesh");
+            
+            // Basic setup
+            if (buildArea.BakedMesh == null) {
+                buildArea.SetBakedMesh(new Mesh{name = "Build Area Mesh"});
+            }
+            var mesh = buildArea.BakedMesh;
+            mesh.Clear();
+            
+            // Calculate vertices & triangles
+            var vertices = new List<Vector3>();
+            var triangles = new List<int>();
+            for (var quadIndex = 0; quadIndex < buildArea.Quads.Count; quadIndex++) {
+                var (quadVerts, quadTris) = GetMeshForQuad(buildArea.Quads[quadIndex], quadIndex);
+                vertices.AddRange(quadVerts);
+                triangles.AddRange(quadTris);
+            }
+            mesh.SetVertices(vertices);
+            mesh.SetTriangles(triangles, 0);
+            mesh.Optimize();
+            mesh.RecalculateNormals();
+        }
+
+        private (List<Vector3> vertices, List<int> triangles) GetMeshForQuad(BuildArea.Quad quad, int quadIndex) {
+            var triangleOffset = quadIndex * 8;
+            return (new List<Vector3> {
+                quad.Points[0] + bakedMeshTolerance * 0.5f * Vector3.up,
+                quad.Points[1] + bakedMeshTolerance * 0.5f * Vector3.up,
+                quad.Points[2] + bakedMeshTolerance * 0.5f * Vector3.up,
+                quad.Points[3] + bakedMeshTolerance * 0.5f * Vector3.up,
+                quad.Points[0] - bakedMeshTolerance * 0.5f * Vector3.up,
+                quad.Points[1] - bakedMeshTolerance * 0.5f * Vector3.up,
+                quad.Points[2] - bakedMeshTolerance * 0.5f * Vector3.up,
+                quad.Points[3] - bakedMeshTolerance * 0.5f * Vector3.up
+            }, new List<int> {
+                1 + triangleOffset, 0 + triangleOffset, 2 + triangleOffset, 2 + triangleOffset, 0 + triangleOffset, 3 + triangleOffset,
+                4 + triangleOffset, 5 + triangleOffset, 6 + triangleOffset, 4 + triangleOffset, 6 + triangleOffset, 7 + triangleOffset,
+                5 + triangleOffset, 4 + triangleOffset, 1 + triangleOffset, 4 + triangleOffset, 0 + triangleOffset, 1 + triangleOffset,
+                7 + triangleOffset, 6 + triangleOffset, 3 + triangleOffset, 6 + triangleOffset, 2 + triangleOffset, 3 + triangleOffset, 
+                4 + triangleOffset, 7 + triangleOffset, 0 + triangleOffset, 7 + triangleOffset, 3 + triangleOffset, 0 + triangleOffset, 
+                6 + triangleOffset, 5 + triangleOffset, 2 + triangleOffset, 5 + triangleOffset, 1 + triangleOffset, 2 + triangleOffset
+            });
         }
     }
 }
