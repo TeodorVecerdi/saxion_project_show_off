@@ -62,7 +62,7 @@ namespace Runtime {
         }
 
         private MeshCollider MakePooledObject() {
-            return new GameObject($"Collider[{inactiveColliders.Count + activeColliders.Count}]") {layer = LayerMask.GetMask("Build Area"), transform = { parent = transform }}.AddComponent<MeshCollider>();
+            return new GameObject($"Collider[{inactiveColliders.Count + activeColliders.Count}]") {layer = LayerMask.NameToLayer("Build Area"), transform = { parent = transform }}.AddComponent<MeshCollider>();
         }
 
         /// <summary>

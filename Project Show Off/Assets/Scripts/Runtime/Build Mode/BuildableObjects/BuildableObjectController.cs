@@ -78,19 +78,10 @@ namespace Runtime {
             
             var mousePosition = Mouse.current.position.ReadValue();
             var ray = buildModeCamera.ScreenPointToRay(mousePosition);
-            if (Physics.Raycast(ray, out var hit, 10000.0f, LayerMask.GetMask("Ground"))) {
+            if (Physics.Raycast(ray, out var hit, 100_000.0f, LayerMask.GetMask("Ground"))) {
                 if ((currentTransform.position - hit.point).sqrMagnitude > 0.01f) {
                     currentTransform.position = hit.point;
-                    isValidSpot = false;
-                    //Todo: Optimize using raycast and physical meshes?
-                    foreach (var quad in currentBuildable.BuildAreas.SelectMany(area => area.Quads)) {
-                        var points = quad.Points;
-                        if (Utilities.IsMouseInQuad(mousePosition, buildModeCamera.WorldToScreenPoint(points[0]), buildModeCamera.WorldToScreenPoint(points[1]),
-                                                    buildModeCamera.WorldToScreenPoint(points[2]), buildModeCamera.WorldToScreenPoint(points[3]))) {
-                            isValidSpot = true;
-                            break;
-                        }
-                    }
+                    isValidSpot = Physics.Raycast(ray, 100_000.0f, LayerMask.GetMask("Build Area"));
                 }
             }
 
