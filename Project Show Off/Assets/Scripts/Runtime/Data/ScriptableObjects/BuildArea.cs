@@ -8,6 +8,7 @@ namespace Runtime.Data {
     public class BuildArea : ScriptableObject {
         [SerializeField] private List<Quad> quads;
         [SerializeField, ReadOnly] private Mesh bakedMesh;
+        [SerializeField, HideInInspector] private bool isBakeDirty = true;
 
         public List<Quad> Quads => quads;
         public Mesh BakedMesh {
@@ -17,12 +18,12 @@ namespace Runtime.Data {
 #endif
         }
 
-        [field: SerializeField, HideInInspector] public bool IsBakeDirty {
-            get;
+        public bool IsBakeDirty {
+            get => isBakeDirty;
 #if UNITY_EDITOR //!! Editor only setter
-            set;
+            set => isBakeDirty = value;
 #endif
-        } = true;
+        }
 
         public void AddQuad(Vector3 origin) {
             quads.Add(new Quad(origin + Vector3.up * 0.01f));
@@ -34,7 +35,7 @@ namespace Runtime.Data {
 
         private void Reset() {
             quads = new List<Quad> {
-                new Quad(Vector3.zero)
+                new Quad(Vector3.up * 0.01f)
             };
         }
 

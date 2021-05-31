@@ -46,7 +46,6 @@ namespace Editor {
             }
             if (GUILayout.Button("Bake")) {
                 BakeQuads();
-                buildArea.IsBakeDirty = false;
             }
 
             GUI.enabled = buildArea.BakedMesh != null;
@@ -210,6 +209,8 @@ namespace Editor {
             }
 
             BuildAreaBaker.Bake(buildArea.Quads, bakedMeshTolerance, buildArea.BakedMesh);
+            buildArea.IsBakeDirty = false;
+
             EditorUtility.SetDirty(buildArea);
             AssetDatabase.SaveAssets();
         }
