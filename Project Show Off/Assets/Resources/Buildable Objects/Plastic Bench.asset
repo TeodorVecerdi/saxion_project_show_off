@@ -20,3 +20,5 @@ MonoBehaviour:
       mass: 8
     - trashCategory: {fileID: 11400000, guid: 2484c42e7f6c4d949b8bb98b18aedf0b, type: 2}
       mass: 1.5
+  buildAreas:
+  - {fileID: 11400000, guid: 6ac7deca58c47144cab44f001c95e09b, type: 2}
