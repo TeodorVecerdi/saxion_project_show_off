@@ -79,7 +79,7 @@ namespace Runtime.Event {
         /// <param name="eventData">Event data that is raised</param>
         private void EmitEvent(EventData eventData) {
             if (!subscribers.ContainsKey(eventData.Type) || subscribers[eventData.Type].Count == 0) {
-                Debug.LogWarning($"An event of type {eventData.Type} was raised but there is no subscriber for that event type");
+                // Debug.LogWarning($"An event of type {eventData.Type} was raised but there is no subscriber for that event type");
                 return;
             }
             
