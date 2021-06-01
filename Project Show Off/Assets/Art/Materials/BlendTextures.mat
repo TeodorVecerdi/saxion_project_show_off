@@ -39,7 +39,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Albedo_1:
-        m_Texture: {fileID: 2800000, guid: 958eec7a228d72741a23c738566a8d5c, type: 3}
+        m_Texture: {fileID: 2800000, guid: 24958f41185a2054c80a3c8602f8a8a0, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Albedo_2:
@@ -51,7 +51,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Mask_Map_1:
-        m_Texture: {fileID: 2800000, guid: dc2a004d16af5fd448c6e532dc48e939, type: 3}
+        m_Texture: {fileID: 2800000, guid: de724a01bb849e7459a1e4a764e27647, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Mask_Map_2:
@@ -63,7 +63,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Normal_1:
-        m_Texture: {fileID: 2800000, guid: b9a2f09768aecf3489c2660ed0dbf05b, type: 3}
+        m_Texture: {fileID: 2800000, guid: 89ece45795f76a345bababe6ead08805, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Normal_2:
@@ -169,7 +169,7 @@ Material:
     m_Ints: []
     m_Floats:
     - Blend_2: 1
-    - Normal_Strength_1: 1.13
+    - Normal_Strength_1: -0.21
     - Normal_Strength_2: 0.64
     - Normal_Strength_3: 1
     - _AORemapMax: 1
@@ -187,7 +187,7 @@ Material:
     - _AlphaToMask: 0
     - _AlphaToMaskInspectorValue: 0
     - _Anisotropy: 0
-    - _Blend: 0.731
+    - _Blend: 0
     - _BlendMode: 0
     - _CoatMask: 0
     - _CullMode: 2
