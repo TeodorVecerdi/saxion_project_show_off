@@ -12,8 +12,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: pasted__lambert5
-    second: {fileID: 2100000, guid: a61ae783e7d88524b9319da8c37f5e86, type: 2}
+      name: pasted__lambert6
+    second: {fileID: 2100000, guid: 1c1779184a2a30a45aee2eed3d7fcd32, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
