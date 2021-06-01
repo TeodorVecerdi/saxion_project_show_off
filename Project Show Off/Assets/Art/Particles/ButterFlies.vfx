@@ -8365,7 +8365,7 @@ MonoBehaviour:
   m_InputSlots:
   - {fileID: 8926484042661614909}
   m_OutputSlots: []
-  m_Disabled: 1
+  m_Disabled: 0
   attribute: pivot
   Composition: 0
   Source: 0
