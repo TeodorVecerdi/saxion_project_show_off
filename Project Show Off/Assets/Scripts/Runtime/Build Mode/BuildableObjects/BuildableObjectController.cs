@@ -30,7 +30,7 @@ namespace Runtime {
         private void Awake() {
             eventUnsubscribeTokens = new List<IDisposable> {
                 this.Subscribe(EventType.BeginBuild), 
-                this.Subscribe(EventType.CancelBuild)
+                this.Subscribe(EventType.GameModeChange)
             };
             y180deg = Quaternion.Euler(180.0f * Vector3.up);
         }
@@ -54,23 +54,13 @@ namespace Runtime {
                 EventQueue.QueueEvent(new EmptyEvent(this, EventType.CancelBuild));
                 
                 Destroy(currentObject.gameObject);
-                currentTransform = null;
-                currentObject = null;
-                currentBuildable = null;
-                isBuilding = false;
-                oldIsBuilding = false;
-                isValidSpot = false;
+                ObjectCleanup();
                 return;
             }
 
             if (InputManager.PerformBuildTriggered && isValidSpot) {
                 EventQueue.QueueEvent(new PerformBuildEvent(this, currentBuildable));
-                currentTransform = null;
-                currentObject = null;
-                currentBuildable = null;
-                isBuilding = false;
-                oldIsBuilding = false;
-                isValidSpot = false;
+                ObjectCleanup();
                 return;
             }
             
@@ -90,6 +80,15 @@ namespace Runtime {
             currentTransform.rotation = Quaternion.Slerp(currentTransform.rotation, newRotation, buildableRotationTime * Time.deltaTime);
         }
 
+        private void ObjectCleanup() {
+            currentTransform = null;
+            currentObject = null;
+            currentBuildable = null;
+            isBuilding = false;
+            oldIsBuilding = false;
+            isValidSpot = false;
+        }
+
         /// <summary>
         /// <para>Receives an event from the Event Queue</para>
         /// </summary>
@@ -105,6 +104,16 @@ namespace Runtime {
                     newRotation = currentTransform.rotation;
                     isBuilding = true;
                     isValidSpot = false;
+                    return false;
+                }
+                case EmptyEvent {Type: EventType.GameModeChange}: {
+                    if (currentObject != null) {
+                        EventQueue.QueueEvent(new EmptyEvent(this, EventType.CancelBuild));
+                
+                        Destroy(currentObject.gameObject);
+                        ObjectCleanup();
+                    }
+
                     return false;
                 }
                 default: return false;
