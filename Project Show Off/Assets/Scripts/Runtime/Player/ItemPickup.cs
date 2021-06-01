@@ -9,11 +9,14 @@ using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
     public class ItemPickup : MonoBehaviour, IEventSubscriber {
-        /*debug:*/[SerializeField] private TextMeshProUGUI text;
+        /*debug:*/
+        [SerializeField] private TextMeshProUGUI text;
         [SerializeField] private Transform cameraTransform;
         [SerializeField] private Image pickupIndicatorImage;
-        
+        [SerializeField] private Transform vacuumEndTransform;
+
         private Pickup pickupUnderMouse;
+        private Vector3 initialPickupLocation;
         private float pickupTimer;
         private bool shouldRaycast;
         private bool isPickingUp;
@@ -21,7 +24,7 @@ namespace Runtime {
 
         private void Awake() {
             eventUnsubscribeTokens = new List<IDisposable> {
-                this.Subscribe(EventType.TrashPickupSuccess), 
+                this.Subscribe(EventType.TrashPickupSuccess),
                 this.Subscribe(EventType.TrashPickupSpaceResponse)
             };
 
@@ -32,6 +35,7 @@ namespace Runtime {
             foreach (var eventUnsubscribeToken in eventUnsubscribeTokens) {
                 eventUnsubscribeToken.Dispose();
             }
+
             eventUnsubscribeTokens.Clear();
         }
 
@@ -49,23 +53,29 @@ namespace Runtime {
             if (isPickingUp) {
                 pickupTimer += Time.deltaTime;
                 var fillAmount = pickupTimer / pickupUnderMouse.Item.PickupDuration;
+                var pickupPosition = Vector3.Lerp(initialPickupLocation, vacuumEndTransform.position, fillAmount);
+                
+                pickupUnderMouse.transform.position = pickupPosition;
                 pickupIndicatorImage.fillAmount = fillAmount;
+                
                 if (fillAmount >= 1.0f) {
                     EventQueue.QueueEvent(new TrashPickupEvent(this, EventType.TrashPickupRequest, pickupUnderMouse));
                     StopPickup();
                 }
-            }
-            if (shouldRaycast) {
-                shouldRaycast = false;
-                DoPickupRaycast();
-                return;
-            }
-            if (transform.hasChanged) {
-                transform.hasChanged = false;
-                DoPickupRaycast();
-            } else if (cameraTransform.hasChanged) {
-                cameraTransform.hasChanged = false;
-                DoPickupRaycast();
+            } else {
+                if (shouldRaycast) {
+                    shouldRaycast = false;
+                    DoPickupRaycast();
+                    return;
+                }
+
+                if (transform.hasChanged) {
+                    transform.hasChanged = false;
+                    DoPickupRaycast();
+                } else if (cameraTransform.hasChanged) {
+                    cameraTransform.hasChanged = false;
+                    DoPickupRaycast();
+                }
             }
         }
 
@@ -73,22 +83,25 @@ namespace Runtime {
             var ray = new Ray(cameraTransform.position, cameraTransform.forward);
             if (Physics.Raycast(ray, out var hitInfo, 10, LayerMask.GetMask("Pickup"))) {
                 var pickup = hitInfo.transform.GetComponent<Pickup>();
-                if(pickup != pickupUnderMouse && isPickingUp) 
+                if (pickup != pickupUnderMouse && isPickingUp)
                     StopPickup();
-                
+
                 pickupUnderMouse = pickup;
                 text.text = $"{pickupUnderMouse.Item.ItemName} ({pickupUnderMouse.Item.TrashCategory.CategoryName})";
             } else {
-                if(pickupUnderMouse != null && isPickingUp) 
+                if (pickupUnderMouse != null && isPickingUp)
                     StopPickup();
-                
+
                 pickupUnderMouse = null;
                 text.text = "None";
             }
         }
 
         private void PickupCanceled(InputAction.CallbackContext context) {
+            if(pickupUnderMouse == null) return;
+            
             StopPickup();
+            pickupUnderMouse.StopPickup();
         }
 
         private void PickupStarted(InputAction.CallbackContext context) {
@@ -100,6 +113,8 @@ namespace Runtime {
             isPickingUp = true;
             pickupIndicatorImage.fillAmount = 0.0f;
             pickupTimer = 0.0f;
+            initialPickupLocation = pickupUnderMouse.transform.position;
+            pickupUnderMouse.StartPickup();
         }
 
         private void StopPickup() {
@@ -121,8 +136,7 @@ namespace Runtime {
                     return true;
                 }
                 case TrashPickupSpaceResponse itemPickupSpaceResponse: {
-                    if(itemPickupSpaceResponse.CanPickUp)
-                        StartPickup();
+                    if (itemPickupSpaceResponse.CanPickUp) StartPickup();
                     return true;
                 }
                 default: return false;
@@ -130,4 +144,3 @@ namespace Runtime {
         }
     }
 }
-
