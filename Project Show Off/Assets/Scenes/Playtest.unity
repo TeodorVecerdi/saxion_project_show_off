@@ -7230,8 +7230,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildableRotationSpeed: 90
   buildableRotationTime: 8
+  buildIndicatorValidColor: {r: 1, g: 1, b: 1, a: 1}
+  buildIndicatorInvalidColor: {r: 0.972549, g: 0.47199094, b: 0.41568628, a: 1}
   buildModeCenter: {fileID: 882174909}
   buildModeCamera: {fileID: 738646681827304406}
+  buildLocationIndicator: {fileID: 2100000, guid: f34664637a339eb498322241b0fa1be3, type: 2}
 --- !u!114 &2121497773
 MonoBehaviour:
   m_ObjectHideFlags: 0

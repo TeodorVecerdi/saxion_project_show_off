@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using Runtime.Data;
 using Runtime.Event;
 using UnityEngine;
@@ -12,9 +13,13 @@ namespace Runtime {
         [Header("Settings")]
         [SerializeField] private float buildableRotationSpeed = 45.0f;
         [SerializeField] private float buildableRotationTime = 5.0f;
+        [Space]
+        [SerializeField] private Color buildIndicatorValidColor;
+        [SerializeField] private Color buildIndicatorInvalidColor;
         [Header("References")]
         [SerializeField] private Transform buildModeCenter;
         [SerializeField] private Camera buildModeCamera;
+        [SerializeField] private Material buildLocationIndicator;
         
         private BuildableObject currentBuildable;
         private BuildableObjectPreview currentObject;
@@ -24,6 +29,15 @@ namespace Runtime {
         private bool isBuilding;
         private bool oldIsBuilding;
         private bool isValidSpot;
+       
+        private bool IsValidSpot {
+            get => isValidSpot;
+            set {
+                if(value == isValidSpot) return;
+                buildLocationIndicator.DOColor(value ? buildIndicatorValidColor : buildIndicatorInvalidColor, 0.125f);
+                isValidSpot = value;
+            }
+        }
 
         private List<IDisposable> eventUnsubscribeTokens;
 
@@ -58,7 +72,7 @@ namespace Runtime {
                 return;
             }
 
-            if (InputManager.PerformBuildTriggered && isValidSpot) {
+            if (InputManager.PerformBuildTriggered && IsValidSpot) {
                 EventQueue.QueueEvent(new PerformBuildEvent(this, currentBuildable));
                 ObjectCleanup();
                 return;
@@ -69,10 +83,10 @@ namespace Runtime {
             var mousePosition = Mouse.current.position.ReadValue();
             var ray = buildModeCamera.ScreenPointToRay(mousePosition);
             if (Physics.Raycast(ray, out var hit, 100_000.0f, LayerMask.GetMask("Ground"))) {
-                if ((currentTransform.position - hit.point).sqrMagnitude > 0.01f) {
-                    currentTransform.position = hit.point;
-                    isValidSpot = Physics.Raycast(ray, 100_000.0f, LayerMask.GetMask("Build Area"));
+                if ((currentTransform.position - hit.point).sqrMagnitude > 0.001f) {
+                    IsValidSpot = Physics.Raycast(ray, 100_000.0f, LayerMask.GetMask("Build Area"));
                 }
+                currentTransform.position = hit.point;
             }
 
             var rotationDelta = InputManager.ObjectRotation;
@@ -86,7 +100,7 @@ namespace Runtime {
             currentBuildable = null;
             isBuilding = false;
             oldIsBuilding = false;
-            isValidSpot = false;
+            IsValidSpot = false;
         }
 
         /// <summary>
@@ -103,7 +117,7 @@ namespace Runtime {
                     currentTransform = currentObject.transform;
                     newRotation = currentTransform.rotation;
                     isBuilding = true;
-                    isValidSpot = false;
+                    IsValidSpot = false;
                     return false;
                 }
                 case EmptyEvent {Type: EventType.GameModeChange}: {
