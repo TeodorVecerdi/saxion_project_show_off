@@ -19,7 +19,7 @@ namespace Runtime {
         [SerializeField] private MaterialInventory inventory;
 
         private List<IDisposable> eventUnsubscribeTokens;
-        private bool canDeposit;
+        private bool canRecycle;
 
         private void Awake() {
             eventUnsubscribeTokens = new List<IDisposable> {
@@ -38,29 +38,36 @@ namespace Runtime {
 
         private void OnEnable() {
             InputManager.PlayerActions.DepositInventory.performed += OnDepositPerformed;
+            InputManager.GeneralActions.ToggleGameMode.performed += OnToggleGameModePerformed;
         }
-        
+
         private void OnDisable() {
             InputManager.PlayerActions.DepositInventory.performed -= OnDepositPerformed;
+            InputManager.GeneralActions.ToggleGameMode.performed -= OnToggleGameModePerformed;
         }
 
         private void OnTriggerEnter(Collider other) {
             if (!other.CompareTag("Player")) return;
-            canDeposit = true;
+            canRecycle = true;
             depositUICanvasGroup.DOFade(1.0f, depositUiFadeDuration).From(0.0f);
             UIHintController.Instance.Add(string.Format(kDepositHintFormat, depositKey));
         }
 
         private void OnTriggerExit(Collider other) {
             if (!other.CompareTag("Player")) return;
-            canDeposit = false;
+            canRecycle = false;
             depositUICanvasGroup.DOFade(0.0f, depositUiFadeDuration).From(1.0f);
             UIHintController.Instance.Remove(string.Format(kDepositHintFormat, depositKey));
         }
 
         private void OnDepositPerformed(InputAction.CallbackContext obj) {
-            if(!canDeposit) return;
+            if(!canRecycle) return;
             EventQueue.QueueEvent(new DepositMaterialsRequestEvent(this, inventory));
+        }
+        
+        private void OnToggleGameModePerformed(InputAction.CallbackContext obj) {
+            if(!canRecycle) return;
+            EventQueue.QueueEvent(new EmptyEvent(this, EventType.GameModeChange));
         }
 
         /// <summary>
