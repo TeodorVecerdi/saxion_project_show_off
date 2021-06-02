@@ -41,12 +41,12 @@ namespace Runtime {
         private void SpawnInitialTrash() {
             var totalPollution = 0.0f;
             for (var i = 0; i < initialTrashCount; i++) {
-                totalPollution += SpawnTrash();
+                totalPollution += SpawnTrash(false);
             }
             EventQueue.QueueEvent(new PollutionChangeEvent(this, totalPollution));
         }
 
-        private float SpawnTrash() {
+        private float SpawnTrash(bool sendEvent = true) {
             const int maxTries = 10;
             var choice = Rand.ListItem(trashPickups);
             
@@ -61,7 +61,8 @@ namespace Runtime {
                     trash.Load(choice);
                     trash.transform.localScale = Vector3.zero;
                     trash.transform.DOScale(Vector3.one, trashScaleUpDuration);
-                    EventQueue.QueueEvent(new TrashPickupEvent(this, EventType.TrashSpawn, trash));
+                    if(sendEvent)
+                        EventQueue.QueueEvent(new TrashPickupEvent(this, EventType.TrashSpawn, trash));
                     return choice.PollutionAmount;
                 }
             }

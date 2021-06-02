@@ -4155,23 +4155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f51f817f50d42db9542bbe1d2df1112, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundList:
-  - Key: click
-    HasVariations: 0
-    Sound: {fileID: 8300000, guid: 0d0282974e9bd93479d7df0c5694a223, type: 3}
-    Variations: []
-  - Key: build
-    HasVariations: 1
-    Sound: {fileID: 0}
-    Variations:
-    - {fileID: 8300000, guid: 8e34d34c412c92c43956d88a8a13e161, type: 3}
-    - {fileID: 8300000, guid: bb1705f8348bea24c93615a75b98febd, type: 3}
-  - Key: vacuum
-    HasVariations: 1
-    Sound: {fileID: 0}
-    Variations:
-    - {fileID: 8300000, guid: 68c74bb96f0c3c1439e3eeb59f15a048, type: 3}
-    - {fileID: 8300000, guid: abc79fc251e9e844eb3d727736a9bc5d, type: 3}
+  soundSettings: {fileID: 11400000, guid: 1471740d16e47344fb06b3e097b7614c, type: 2}
 --- !u!4 &848430518
 Transform:
   m_ObjectHideFlags: 0
@@ -4184,7 +4168,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &852378947
 GameObject:
@@ -4931,8 +4915,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c123a60b51b4ad7b0ff2a0b95a59b27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minimumPosition: {x: 40.662815, y: 0, z: 48.631496}
-  maximumPosition: {x: -37.374027, y: 0, z: -38.042007}
+  minimumPosition: {x: 179.88832, y: 0, z: 203.9789}
+  maximumPosition: {x: 149.79047, y: 0, z: 157.059}
 --- !u!1 &927672769
 GameObject:
   m_ObjectHideFlags: 0
@@ -6460,6 +6444,55 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1667021839
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1667021841}
+  - component: {fileID: 1667021840}
+  m_Layer: 0
+  m_Name: TRASH
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1667021840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1667021839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff8d6375338e455d9cbc8706202a6442, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  from: {x: 150.5, y: 3.02, z: 157.6}
+  to: {x: 179.6, y: 3, z: 203.7}
+  worldMaxHeight: 7.14
+  spawnInterval: 4
+  trashScaleUpDuration: 0.1
+  initialTrashCount: 50
+--- !u!4 &1667021841
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1667021839}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 21
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1686002729
 GameObject:
   m_ObjectHideFlags: 0
@@ -6756,7 +6789,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 22
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1822909273
 GameObject:
@@ -7571,7 +7604,6 @@ GameObject:
   - component: {fileID: 2121497771}
   - component: {fileID: 2121497773}
   - component: {fileID: 2121497767}
-  - component: {fileID: 2121497769}
   - component: {fileID: 2121497772}
   - component: {fileID: 2121497774}
   m_Layer: 0
@@ -7610,24 +7642,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2121497769
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2121497766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff8d6375338e455d9cbc8706202a6442, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  from: {x: 150.5, y: 3.02, z: 157.6}
-  to: {x: 179.6, y: 3, z: 203.7}
-  worldMaxHeight: 7.14
-  spawnInterval: 4
-  trashScaleUpDuration: 0.1
-  initialTrashCount: 50
 --- !u!114 &2121497770
 MonoBehaviour:
   m_ObjectHideFlags: 0
