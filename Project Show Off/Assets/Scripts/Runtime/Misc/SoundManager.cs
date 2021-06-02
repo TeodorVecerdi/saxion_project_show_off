@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using NaughtyAttributes;
+using Runtime.Data;
 using UnityCommons;
 using UnityEngine;
 
 namespace Runtime {
     public class SoundManager : MonoSingleton<SoundManager> {
-        [SerializeField] private List<AudioKeyValuePair> soundList;
+        [SerializeField] private SoundSettings soundSettings;
+        
         private float sfxVolume = 1f;
-        private Dictionary<string, AudioSource> soundDictionary;
+        private Dictionary<string, (AudioSource audioSource, SoundSettings.AudioKeyValuePair sound)> soundDictionary;
 
-        private Dictionary<string, AudioSource> Sounds {
+        private Dictionary<string, (AudioSource audioSource, SoundSettings.AudioKeyValuePair settings)> Sounds {
             get {
                 if (soundDictionary == null)
                     LoadSoundDictionary();
@@ -21,56 +24,52 @@ namespace Runtime {
             get => Instance.sfxVolume;
             set {
                 Instance.sfxVolume = value;
-                foreach (var sound in Instance.Sounds) sound.Value.volume = Instance.sfxVolume;
+                foreach (var sound in Instance.Sounds) sound.Value.audioSource.volume = Instance.sfxVolume;
 
                 PlayerPrefs.SetFloat("SfxVolume", Instance.sfxVolume);
                 PlayerPrefs.Save();
             }
         }
 
-        private void LoadSoundDictionary() {
-            soundDictionary = new Dictionary<string, AudioSource>();
-            foreach (var sound in soundList) {
-                var audioSource = gameObject.AddComponent<AudioSource>();
-                audioSource.clip = sound.Sound;
-                audioSource.loop = sound.Loop;
-                soundDictionary[sound.Key] = audioSource;
-            }
-        }
-
         protected override void OnAwake() {
+            LoadSoundDictionary();
             SfxVolume = PlayerPrefs.GetFloat("SfxVolume", 0.75f);
         }
 
+        private void LoadSoundDictionary() {
+            soundDictionary = new Dictionary<string, (AudioSource audioSource, SoundSettings.AudioKeyValuePair settings)>();
+            foreach (var sound in soundSettings.Sounds) {
+                var audioSource = gameObject.AddComponent<AudioSource>();
+                if (!sound.HasVariations)
+                    audioSource.clip = sound.Sound;
+                soundDictionary[sound.Key] = (audioSource, sound);
+            }
+        }
+
         public static void PlaySound(string soundKey, bool stopIfPlaying = false, bool skipIfAlreadyPlaying = false) {
-            if (Instance.Sounds[soundKey] == null) return;
+            if (!Instance.Sounds.ContainsKey(soundKey)) return;
+
+            var (audioSource, settings) = Instance.Sounds[soundKey];
 
             if (stopIfPlaying)
-                Instance.Sounds[soundKey].Stop();
+                audioSource.Stop();
 
-            if (skipIfAlreadyPlaying && Instance.Sounds[soundKey].isPlaying)
+            if (skipIfAlreadyPlaying && audioSource.isPlaying)
                 return;
 
-            if (Instance.Sounds[soundKey].loop)
-                Instance.Sounds[soundKey].Play();
-            else
-                Instance.Sounds[soundKey].PlayOneShot(Instance.Sounds[soundKey].clip);
+            if (settings.HasVariations)
+                audioSource.clip = Rand.ListItem(settings.Variations);
+
+            audioSource.PlayOneShot(audioSource.clip);
         }
 
         public static void StopSound(string soundKey) {
-            if (Instance.Sounds[soundKey] == null) return;
-            Instance.Sounds[soundKey].Stop();
+            if (!Instance.Sounds.ContainsKey(soundKey)) return;
+            Instance.Sounds[soundKey].audioSource.Stop();
         }
 
         public static bool IsPlaying(string soundKey) {
-            return Instance.Sounds[soundKey] != null && Instance.Sounds[soundKey].isPlaying;
-        }
-
-        [Serializable]
-        private class AudioKeyValuePair {
-            [SerializeField] internal string Key;
-            [SerializeField] internal AudioClip Sound;
-            [SerializeField] internal bool Loop;
+            return Instance.Sounds.ContainsKey(soundKey) && Instance.Sounds[soundKey].audioSource.isPlaying;
         }
     }
 }
