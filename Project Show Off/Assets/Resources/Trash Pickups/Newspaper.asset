@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e09f3c7958cd4570bd300599d1422992, type: 3}
-  m_Name: Jar
+  m_Name: Newspaper
   m_EditorClassIdentifier: 
-  itemName: Jar
-  trashCategory: {fileID: 11400000, guid: 30d4a134f1adb6b479af094e1fdf25f7, type: 2}
-  minimumMass: 0.5
-  maximumMass: 1.1
+  itemName: Newspaper
+  trashCategory: {fileID: 11400000, guid: fec93a18793254344b0eb7b9c697fd84, type: 2}
+  minimumMass: 0.4
+  maximumMass: 0.6
   pickupDuration: 0.4
+  pollutionAmount: 1
+  prefab: {fileID: 2346935513933802946, guid: 31553f39e4c57c64d8c5091419e38a3c, type: 3}

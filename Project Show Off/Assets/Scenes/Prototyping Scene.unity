@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1467.529, g: 1819.5583, b: 2405.8, a: 1}
+  m_IndirectSpecularColor: {r: 1481.7754, g: 1835.8867, b: 2430.4492, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7515,7 +7515,7 @@ GameObject:
   - component: {fileID: 2121497772}
   - component: {fileID: 2121497774}
   m_Layer: 0
-  m_Name: '> Utility Scripts'
+  m_Name: Scripts
   m_TagString: Untagged
   m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -7559,23 +7559,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 2121497766}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4b618bdd66e487d86eb5a5fc76512ee, type: 3}
+  m_Script: {fileID: 11500000, guid: ff8d6375338e455d9cbc8706202a6442, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  From: {x: 152.8, y: 3.02, z: 159.5}
-  To: {x: 178, y: 3, z: 201.7}
-  SpawnTime: 3
-  Pickups:
-  - {fileID: 2346935513933802946, guid: d06699974a2287d459a61c93411dc159, type: 3}
-  - {fileID: 2346935513933802946, guid: cffc879df520ed24892ebbceff5d55d0, type: 3}
-  - {fileID: 2346935513933802946, guid: 1fd0fb375ae35be4db353c0a6cdfa1d8, type: 3}
-  - {fileID: 2346935513933802946, guid: 68664aed65053d344b7ad1d55755203e, type: 3}
-  - {fileID: 2346935513933802946, guid: 83bf5c4666ab69d48883e10134b30bf3, type: 3}
-  - {fileID: 2346935513933802946, guid: 2c9a3d4a70431044992fce2c06935e92, type: 3}
-  - {fileID: 2346935513933802946, guid: 27c199666ff081e43b6d1b335df1d51d, type: 3}
-  - {fileID: 2346935513933802946, guid: 297df8f864149ee459fcaa0c877fb5f3, type: 3}
-  - {fileID: 2346935513933802946, guid: 433df02414664914fb6a6c79c68296f4, type: 3}
-  - {fileID: 2346935513933802946, guid: 31553f39e4c57c64d8c5091419e38a3c, type: 3}
+  from: {x: 150.5, y: 3.02, z: 157.6}
+  to: {x: 179.6, y: 3, z: 203.7}
+  worldMaxHeight: 7.14
+  spawnInterval: 4
+  pickupScaleUpDuration: 0.1
+  initialTrashCount: 50
 --- !u!114 &2121497770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7952,20 +7944,29 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
+      inSlope: 0.09267481
+      outSlope: 0.09267481
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.12827604
+    - serializedVersion: 3
+      time: 0.59966755
+      value: 0.20216031
+      inSlope: 0.56297266
+      outSlope: 0.8062787
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0.123766
+      outWeight: 0.09277821
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
+      inSlope: 0.4267893
+      outSlope: 0.4267893
+      tangentMode: 0
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.27357882
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -8356,7 +8357,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9118541827359811511}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0

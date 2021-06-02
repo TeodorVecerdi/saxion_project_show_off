@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e09f3c7958cd4570bd300599d1422992, type: 3}
-  m_Name: Napkin
+  m_Name: Wine Bottle
   m_EditorClassIdentifier: 
-  itemName: Napkin
-  trashCategory: {fileID: 11400000, guid: fec93a18793254344b0eb7b9c697fd84, type: 2}
-  minimumMass: 0.2
-  maximumMass: 0.4
+  itemName: Wine Bottle
+  trashCategory: {fileID: 11400000, guid: 30d4a134f1adb6b479af094e1fdf25f7, type: 2}
+  minimumMass: 0.8
+  maximumMass: 1.25
   pickupDuration: 0.4
+  pollutionAmount: 1
+  prefab: {fileID: 2346935513933802946, guid: 433df02414664914fb6a6c79c68296f4, type: 3}

@@ -13,7 +13,8 @@ namespace Runtime {
         private void Awake() {
             eventUnsubscribeTokens = new List<IDisposable> {
                 this.Subscribe(EventType.TrashPickupSuccess), 
-                this.Subscribe(EventType.TrashSpawn)
+                this.Subscribe(EventType.TrashSpawn),
+                this.Subscribe(EventType.PollutionChange)
             };
         }
 
@@ -36,12 +37,17 @@ namespace Runtime {
         public bool OnEvent(EventData eventData) {
             switch (eventData) {
                 case TrashPickupEvent {Type: EventType.TrashSpawn} trashSpawnEvent: {
-                    pollution += trashSpawnEvent.Pickup.Item.PollutionAmount;
+                    pollution += trashSpawnEvent.Pickup.TrashPickup.PollutionAmount;
                     UpdatePollution();
                     return false;
                 }
                 case TrashPickupEvent {Type: EventType.TrashPickupSuccess} trashPickupSuccessEvent: {
-                    pollution -= trashPickupSuccessEvent.Pickup.Item.PollutionAmount;
+                    pollution -= trashPickupSuccessEvent.Pickup.TrashPickup.PollutionAmount;
+                    UpdatePollution();
+                    return false;
+                }
+                case PollutionChangeEvent pollutionChangeEvent: {
+                    pollution += pollutionChangeEvent.Delta;
                     UpdatePollution();
                     return false;
                 }

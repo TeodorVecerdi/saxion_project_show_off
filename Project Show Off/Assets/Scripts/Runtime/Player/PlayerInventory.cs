@@ -38,7 +38,7 @@ namespace Runtime {
                 case TrashPickupEvent {Type: EventType.TrashPickupRequest} itemPickupEvent: {
                     var mass = itemPickupEvent.Pickup.Mass;
                     if (materialInventory.TotalMass + mass > MaximumCarryMass) return true;
-                    materialInventory.Add(itemPickupEvent.Pickup.Item.TrashCategory, itemPickupEvent.Pickup.Mass);
+                    materialInventory.Add(itemPickupEvent.Pickup.TrashPickup.TrashCategory, itemPickupEvent.Pickup.Mass);
                     EventQueue.QueueEvent(new TrashPickupEvent(this, EventType.TrashPickupSuccess, itemPickupEvent.Pickup));
                     EventQueue.QueueEvent(new MaterialInventoryUpdateEvent(this, materialInventory));
                     return true;

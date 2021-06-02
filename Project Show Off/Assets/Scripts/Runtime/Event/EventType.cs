@@ -21,5 +21,6 @@
         TrashPickupSpaceResponse,
         
         PollutionUpdate,
+        PollutionChange,
     }
 }

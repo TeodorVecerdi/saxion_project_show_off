@@ -7,4 +7,14 @@
             Pollution = pollution;
         }
     }
+    
+    public sealed class PollutionChangeEvent : EventData {
+        public override EventType Type => EventType.PollutionChange;
+        public float Delta { get; }
+        
+        public PollutionChangeEvent(object sender, float delta) : base(sender) {
+            Delta = delta;
+        }
+    }
+
 }
