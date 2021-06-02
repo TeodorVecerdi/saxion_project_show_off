@@ -9,6 +9,7 @@ namespace Runtime {
     public class MouseLook : CinemachineExtension, IEventSubscriber {
         [SerializeField] private float clampAngle = 80.0f;
         [SerializeField] private float mouseSensitivity = 400.0f;
+        [SerializeField] private Transform lookForwardTransform;
 
         private Vector3 startingRotation;
         private IDisposable changeMouseLockEventUnsubscribeToken;
@@ -31,10 +32,12 @@ namespace Runtime {
         protected override void PostPipelineStageCallback(CinemachineVirtualCameraBase vcam, CinemachineCore.Stage stage, ref CameraState state, float deltaTime) {
             if(!vcam.Follow || stage != CinemachineCore.Stage.Aim || !Application.isPlaying) return;
             var input = InputManager.MouseDelta * deltaTime * mouseSensitivity * 0.06666667f;
+            
             startingRotation.x += input.x;
             startingRotation.y += input.y;
             startingRotation.y = startingRotation.y.Clamped(-clampAngle, clampAngle);
-            state.RawOrientation = Quaternion.Euler(-startingRotation.y, startingRotation.x, 0.0f);
+            
+            lookForwardTransform.rotation = state.RawOrientation = Quaternion.Euler(-startingRotation.y, startingRotation.x, 0.0f);
         }
         
         private void SetMouseLock(bool locked) {

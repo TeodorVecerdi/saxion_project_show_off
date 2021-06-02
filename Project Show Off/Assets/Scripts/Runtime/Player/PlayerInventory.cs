@@ -9,11 +9,9 @@ namespace Runtime {
     public class PlayerInventory : MonoBehaviour, IEventSubscriber {
         [SerializeField] private float maximumCarryMass = 50.0f;
         [SerializeField] private MaterialInventory materialInventory;
-        [SerializeField] private MaterialInventory placeableInventory;
 
         public float MaximumCarryMass => maximumCarryMass;
         public MaterialInventory MaterialInventory => materialInventory;
-        public MaterialInventory PlaceableInventory => placeableInventory;
 
         private List<IDisposable> eventUnsubscribeTokens;
 
