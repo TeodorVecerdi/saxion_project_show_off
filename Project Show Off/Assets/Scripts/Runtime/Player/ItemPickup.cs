@@ -127,6 +127,7 @@ namespace Runtime {
             pickupTimer = 0.0f;
             initialPickupLocation = pickupUnderMouse.transform.position;
             pickupUnderMouse.StartPickup();
+            SoundManager.PlaySound("Vacuum");
         }
 
         private void StopPickup() {

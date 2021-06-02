@@ -66,7 +66,7 @@ namespace Runtime {
 
             if (InputManager.CancelBuildTriggered) {
                 EventQueue.QueueEvent(new EmptyEvent(this, EventType.CancelBuild));
-                
+                SoundManager.PlaySound("Click");
                 Destroy(currentObject.gameObject);
                 ObjectCleanup();
                 return;
@@ -74,6 +74,7 @@ namespace Runtime {
 
             if (InputManager.PerformBuildTriggered && IsValidSpot) {
                 EventQueue.QueueEvent(new PerformBuildEvent(this, currentBuildable));
+                SoundManager.PlaySound("Build");
                 ObjectCleanup();
                 return;
             }
