@@ -105,6 +105,19 @@ LODGroup:
     renderers:
     - renderer: {fileID: 4529733883862787309}
   m_Enabled: 1
+--- !u!65 &5320457878450948275
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5365270017682976918}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.24, z: 1}
+  m_Center: {x: 0, y: 0.62, z: 0}
 --- !u!1 &7250205035333878875
 GameObject:
   m_ObjectHideFlags: 0
