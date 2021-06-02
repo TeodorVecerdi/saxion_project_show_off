@@ -6,48 +6,49 @@ using Runtime.Event;
 using UnityCommons;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Serialization;
 using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
-    public class PickupSpawner : MonoBehaviour {
+    public class TrashSpawner : MonoBehaviour {
         [Header("Location")]
         [SerializeField] private Vector3 from;
         [SerializeField] private Vector3 to;
         [SerializeField] private float worldMaxHeight;
         [Header("Settings")]
         [SerializeField] private float spawnInterval = 4f;
-        [SerializeField] private float pickupScaleUpDuration = 0.1f;
+        [SerializeField] private float trashScaleUpDuration = 0.1f;
         [SerializeField, MinValue(0)] private int initialTrashCount = 20;
 
-        private List<TrashPickup> allPickups;
+        private List<TrashPickup> trashPickups;
         private float spawnTimer;
         private void Awake() {
-            allPickups = new List<TrashPickup>(Resources.LoadAll<TrashPickup>("Trash Pickups"));
+            trashPickups = new List<TrashPickup>(Resources.LoadAll<TrashPickup>("Trash Pickups"));
         }
 
         private void Start() {
-            SpawnInitialPickups();
+            SpawnInitialTrash();
         }
 
         private void Update() {
             spawnTimer += Time.deltaTime;
             if (spawnTimer >= spawnInterval) {
                 spawnTimer -= spawnInterval;
-                SpawnPickup();
+                SpawnTrash();
             }
         }
 
-        private void SpawnInitialPickups() {
+        private void SpawnInitialTrash() {
             var totalPollution = 0.0f;
             for (var i = 0; i < initialTrashCount; i++) {
-                totalPollution += SpawnPickup();
+                totalPollution += SpawnTrash();
             }
             EventQueue.QueueEvent(new PollutionChangeEvent(this, totalPollution));
         }
 
-        private float SpawnPickup() {
+        private float SpawnTrash() {
             const int maxTries = 10;
-            var choice = Rand.ListItem(allPickups);
+            var choice = Rand.ListItem(trashPickups);
             
             for (var i = 0; i < maxTries; i++) {
                 var spawnX = Rand.Range(from.x, to.x);
@@ -56,11 +57,11 @@ namespace Runtime {
                 if (Physics.Raycast(ray, out var hit, worldMaxHeight + 1000f, LayerMask.GetMask("Ground"))) {
                     var spawnY = hit.point.y;
 
-                    var pickup = Instantiate(choice.Prefab, new Vector3(spawnX, spawnY, spawnZ), Quaternion.Euler(0, Rand.Float * 360.0f, 0), transform);
-                    pickup.Load(choice);
-                    pickup.transform.localScale = Vector3.zero;
-                    pickup.transform.DOScale(Vector3.one, pickupScaleUpDuration);
-                    EventQueue.QueueEvent(new TrashPickupEvent(this, EventType.TrashSpawn, pickup));
+                    var trash = Instantiate(choice.Prefab, new Vector3(spawnX, spawnY, spawnZ), Quaternion.Euler(0, Rand.Float * 360.0f, 0), transform);
+                    trash.Load(choice);
+                    trash.transform.localScale = Vector3.zero;
+                    trash.transform.DOScale(Vector3.one, trashScaleUpDuration);
+                    EventQueue.QueueEvent(new TrashPickupEvent(this, EventType.TrashSpawn, trash));
                     return choice.PollutionAmount;
                 }
             }
