@@ -58,7 +58,7 @@ namespace Runtime {
         private void Update() {
             if (isPickingUp) {
                 pickupTimer += Time.deltaTime;
-                var fillAmount = pickupTimer / pickupUnderMouse.Item.PickupDuration;
+                var fillAmount = pickupTimer / pickupUnderMouse.TrashPickup.PickupDuration;
                 var pickupPosition = Vector3.Lerp(initialPickupLocation, vacuumEndTransform.position, movementCurve.Evaluate(fillAmount));
                 var pickupScale = 1.0f-Mathf.Lerp(0.0f, 1.0f, scaleCurve.Evaluate(fillAmount));
                 
@@ -98,7 +98,7 @@ namespace Runtime {
                     StopPickup();
 
                 pickupUnderMouse = pickup;
-                text.text = $"{pickupUnderMouse.Item.ItemName} ({pickupUnderMouse.Item.TrashCategory.CategoryName})";
+                text.text = $"{pickupUnderMouse.TrashPickup.ItemName} ({pickupUnderMouse.TrashPickup.TrashCategory.CategoryName})";
             } else {
                 if (pickupUnderMouse != null && isPickingUp)
                     StopPickup();
