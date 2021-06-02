@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e09f3c7958cd4570bd300599d1422992, type: 3}
-  m_Name: Plastic Bottle
+  m_Name: Soda Can
   m_EditorClassIdentifier: 
-  itemName: Plastic Bottle
-  trashCategory: {fileID: 11400000, guid: 4bce4b42e3e7157439edede8569afc9e, type: 2}
-  minimumMass: 0.2
-  maximumMass: 0.5
+  itemName: Soda Can
+  trashCategory: {fileID: 11400000, guid: 2484c42e7f6c4d949b8bb98b18aedf0b, type: 2}
+  minimumMass: 0.5
+  maximumMass: 0.75
   pickupDuration: 0.4
+  pollutionAmount: 1
+  prefab: {fileID: 2346935513933802946, guid: d06699974a2287d459a61c93411dc159, type: 3}

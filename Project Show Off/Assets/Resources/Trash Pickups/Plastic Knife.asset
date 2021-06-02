@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e09f3c7958cd4570bd300599d1422992, type: 3}
-  m_Name: Box
+  m_Name: Plastic Knife
   m_EditorClassIdentifier: 
-  itemName: Box
-  trashCategory: {fileID: 11400000, guid: fec93a18793254344b0eb7b9c697fd84, type: 2}
-  minimumMass: 0.5
-  maximumMass: 3
+  itemName: Plastic Knife
+  trashCategory: {fileID: 11400000, guid: 4bce4b42e3e7157439edede8569afc9e, type: 2}
+  minimumMass: 0.1
+  maximumMass: 0.2
   pickupDuration: 0.4
+  pollutionAmount: 1
+  prefab: {fileID: 2346935513933802946, guid: 297df8f864149ee459fcaa0c877fb5f3, type: 3}

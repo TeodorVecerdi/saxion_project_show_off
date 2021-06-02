@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e09f3c7958cd4570bd300599d1422992, type: 3}
-  m_Name: Food Container
+  m_Name: Jar
   m_EditorClassIdentifier: 
-  itemName: Food Container
-  trashCategory: {fileID: 11400000, guid: 4bce4b42e3e7157439edede8569afc9e, type: 2}
-  minimumMass: 0.4
-  maximumMass: 0.7
+  itemName: Jar
+  trashCategory: {fileID: 11400000, guid: 30d4a134f1adb6b479af094e1fdf25f7, type: 2}
+  minimumMass: 0.5
+  maximumMass: 1.1
   pickupDuration: 0.4
+  pollutionAmount: 1
+  prefab: {fileID: 2346935513933802946, guid: 68664aed65053d344b7ad1d55755203e, type: 3}
