@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using DG.Tweening;
+using NaughtyAttributes;
 using Runtime.Event;
 using TMPro;
 using UnityEngine;
@@ -9,11 +11,15 @@ using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
     public class ItemPickup : MonoBehaviour, IEventSubscriber {
-        /*debug:*/
-        [SerializeField] private TextMeshProUGUI text;
+        [SerializeField] /*debug:*/ private TextMeshProUGUI text;
         [SerializeField] private Transform cameraTransform;
         [SerializeField] private Image pickupIndicatorImage;
         [SerializeField] private Transform vacuumEndTransform;
+        [Space]
+        [SerializeField] private AnimationCurve movementCurve;
+        [SerializeField] private AnimationCurve scaleCurve;
+        [Tooltip("The time it takes for the object scale to return to normal after cancelling a pickup")]
+        [SerializeField] private float unscaleTransitionDuration = 0.1f;
 
         private Pickup pickupUnderMouse;
         private Vector3 initialPickupLocation;
@@ -53,9 +59,14 @@ namespace Runtime {
             if (isPickingUp) {
                 pickupTimer += Time.deltaTime;
                 var fillAmount = pickupTimer / pickupUnderMouse.Item.PickupDuration;
-                var pickupPosition = Vector3.Lerp(initialPickupLocation, vacuumEndTransform.position, fillAmount);
+                var pickupPosition = Vector3.Lerp(initialPickupLocation, vacuumEndTransform.position, movementCurve.Evaluate(fillAmount));
+                var pickupScale = 1.0f-Mathf.Lerp(0.0f, 1.0f, scaleCurve.Evaluate(fillAmount));
                 
-                pickupUnderMouse.transform.position = pickupPosition;
+                //!! Reason: repeated property access of built in component is inefficient
+                var pickupTransform = pickupUnderMouse.transform; 
+                pickupTransform.position = pickupPosition;
+                pickupTransform.localScale = Vector3.one * pickupScale;
+                
                 pickupIndicatorImage.fillAmount = fillAmount;
                 
                 if (fillAmount >= 1.0f) {
@@ -101,6 +112,7 @@ namespace Runtime {
             if(pickupUnderMouse == null) return;
             
             StopPickup();
+            pickupUnderMouse.transform.DOScale(Vector3.one, unscaleTransitionDuration);
             pickupUnderMouse.StopPickup();
         }
 
