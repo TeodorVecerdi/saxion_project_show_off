@@ -33,6 +33,7 @@ namespace Runtime {
 
         protected override void OnAwake() {
             LoadSoundDictionary();
+            DontDestroyOnLoad(gameObject);
             SfxVolume = PlayerPrefs.GetFloat("SfxVolume", 0.75f);
         }
 
@@ -59,6 +60,10 @@ namespace Runtime {
 
             if (settings.HasVariations)
                 audioSource.clip = Rand.ListItem(settings.Variations);
+
+            if (settings.HasPitchVariation) {
+                audioSource.pitch = 1 + Rand.Range(settings.PitchVariationMinMax.x, settings.PitchVariationMinMax.y);
+            }
 
             audioSource.PlayOneShot(audioSource.clip);
         }

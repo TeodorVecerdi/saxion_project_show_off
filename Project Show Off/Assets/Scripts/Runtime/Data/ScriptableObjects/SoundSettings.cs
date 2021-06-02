@@ -16,6 +16,8 @@ namespace Runtime.Data {
             public bool HasVariations;
             public AudioClip Sound;
             public List<AudioClip> Variations;
+            public bool HasPitchVariation;
+            public Vector2 PitchVariationMinMax;
         }
     }
 }
