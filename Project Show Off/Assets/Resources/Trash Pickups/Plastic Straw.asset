@@ -16,6 +16,6 @@ MonoBehaviour:
   trashCategory: {fileID: 11400000, guid: 4bce4b42e3e7157439edede8569afc9e, type: 2}
   minimumMass: 0.3
   maximumMass: 0.7
-  pickupDuration: 0.4
+  pickupDuration: 0.3
   pollutionAmount: 1
   prefab: {fileID: 2346935513933802946, guid: 27c199666ff081e43b6d1b335df1d51d, type: 3}

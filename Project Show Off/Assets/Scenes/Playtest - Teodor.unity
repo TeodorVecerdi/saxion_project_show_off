@@ -2356,6 +2356,10 @@ PrefabInstance:
       value: Round Hedge.10
       objectReference: {fileID: 0}
     - target: {fileID: 6269568581412760583, guid: 8a1777c3e4e7c014f9b5a664f72fa394, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6269568581412760583, guid: 8a1777c3e4e7c014f9b5a664f72fa394, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -12610,8 +12614,8 @@ MonoBehaviour:
   boostZoomSpeed: 250
   scrollZoomSensitivity: 5
   zoomTime: 5
-  minZoom: 45
-  maxZoom: 1700
+  minZoom: 30
+  maxZoom: 150
 --- !u!114 &882174911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12624,8 +12628,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c123a60b51b4ad7b0ff2a0b95a59b27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minimumPosition: {x: 283.3144, y: 0, z: 264.16473}
-  maximumPosition: {x: 83.002525, y: 0, z: 66.183624}
+  minimumPosition: {x: 269.6016, y: 0, z: 247.16353}
+  maximumPosition: {x: 96.48498, y: 0, z: 80.82831}
 --- !u!1001 &890929072
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22969,10 +22973,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff8d6375338e455d9cbc8706202a6442, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  from: {x: 169.9, y: 3.02, z: 82.7}
-  to: {x: 268.9, y: 3, z: 176.6}
-  worldMaxHeight: 7.14
-  spawnInterval: 4
+  from: {x: 184, y: 3.02, z: 124.7}
+  to: {x: 252.29, y: 3, z: 166.3}
+  worldMaxHeight: 11.4
+  spawnInterval: 10
   trashScaleUpDuration: 0.1
   initialTrashCount: 50
 --- !u!4 &1667021841
@@ -23363,6 +23367,10 @@ PrefabInstance:
     - target: {fileID: 6269568581412760583, guid: 8a1777c3e4e7c014f9b5a664f72fa394, type: 3}
       propertyPath: m_Name
       value: Round Hedge.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6269568581412760583, guid: 8a1777c3e4e7c014f9b5a664f72fa394, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6269568581412760583, guid: 8a1777c3e4e7c014f9b5a664f72fa394, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -30245,7 +30253,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &9192739437221699864
 GameObject:
   m_ObjectHideFlags: 0
@@ -30262,7 +30270,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &9192739437500069723
 GameObject:
   m_ObjectHideFlags: 0
@@ -30279,4 +30287,4 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
