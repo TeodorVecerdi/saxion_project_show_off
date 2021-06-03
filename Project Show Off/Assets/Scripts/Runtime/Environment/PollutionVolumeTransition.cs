@@ -10,7 +10,6 @@ namespace Runtime {
     public class PollutionVolumeTransition : MonoBehaviour, IEventSubscriber {
         [SerializeField] private Volume dirtyVolume;
         [SerializeField] private AnimationCurve pollutionCurve;
-        [SerializeField] private float pollutionMultiplier = 0.01f;
 
         private List<IDisposable> eventUnsubscribeTokens;
 
@@ -28,8 +27,7 @@ namespace Runtime {
         }
 
         private void UpdatePollution(float pollution) {
-            var pollutionWeight = pollution * pollutionMultiplier;
-            dirtyVolume.weight = pollutionCurve.Evaluate(pollutionWeight.Clamped01());
+            dirtyVolume.weight = pollutionCurve.Evaluate(pollution.Clamped01());
         }
 
         /// <summary>
@@ -40,7 +38,7 @@ namespace Runtime {
         public bool OnEvent(EventData eventData) {
             switch (eventData) {
                 case PollutionUpdateEvent pollutionUpdateEvent: {
-                    UpdatePollution(pollutionUpdateEvent.Pollution);
+                    UpdatePollution(pollutionUpdateEvent.PollutionRatio);
                     return false;
                 }
                 default: return false;

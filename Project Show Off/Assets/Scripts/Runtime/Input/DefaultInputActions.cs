@@ -246,7 +246,7 @@ namespace Runtime
                 {
                     ""name"": """",
                     ""id"": ""2b288fc7-f75f-4f67-9127-0467872f6c96"",
-                    ""path"": ""<Keyboard>/f"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",

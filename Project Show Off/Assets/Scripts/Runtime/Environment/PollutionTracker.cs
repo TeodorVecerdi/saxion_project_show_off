@@ -1,19 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using NaughtyAttributes;
 using Runtime.Event;
 using UnityEngine;
 using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
     public class PollutionTracker : MonoBehaviour, IEventSubscriber {
-
-        private float pollution;
+        [InfoBox("The amount with which raw pollution gets divided. Basically controls how much pollution is necessary to reach 'max' pollution.\nA value of 100 means 100 pollution = 100% polluted")]
+        [SerializeField] private float pollutionMultiplier = 100;
+        
+        private float rawPollution;
         private List<IDisposable> eventUnsubscribeTokens;
+
+        public float PollutionRatio => rawPollution / pollutionMultiplier;
 
         private void Awake() {
             eventUnsubscribeTokens = new List<IDisposable> {
                 this.Subscribe(EventType.TrashPickupSuccess), 
-                this.Subscribe(EventType.TrashSpawn)
+                this.Subscribe(EventType.TrashSpawn),
+                this.Subscribe(EventType.PollutionChange)
             };
         }
 
@@ -25,7 +31,7 @@ namespace Runtime {
         }
 
         private void UpdatePollution() {
-            EventQueue.QueueEvent(new PollutionUpdateEvent(this, pollution));
+            EventQueue.QueueEvent(new PollutionUpdateEvent(this, rawPollution, PollutionRatio));
         }
 
         /// <summary>
@@ -36,12 +42,17 @@ namespace Runtime {
         public bool OnEvent(EventData eventData) {
             switch (eventData) {
                 case TrashPickupEvent {Type: EventType.TrashSpawn} trashSpawnEvent: {
-                    pollution += trashSpawnEvent.Pickup.Item.PollutionAmount;
+                    rawPollution += trashSpawnEvent.Pickup.TrashPickup.PollutionAmount;
                     UpdatePollution();
                     return false;
                 }
                 case TrashPickupEvent {Type: EventType.TrashPickupSuccess} trashPickupSuccessEvent: {
-                    pollution -= trashPickupSuccessEvent.Pickup.Item.PollutionAmount;
+                    rawPollution -= trashPickupSuccessEvent.Pickup.TrashPickup.PollutionAmount;
+                    UpdatePollution();
+                    return false;
+                }
+                case PollutionChangeEvent pollutionChangeEvent: {
+                    rawPollution += pollutionChangeEvent.Delta;
                     UpdatePollution();
                     return false;
                 }

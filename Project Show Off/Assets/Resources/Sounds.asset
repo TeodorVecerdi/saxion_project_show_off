@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4bb42275e9c43b989fc472facb434c0, type: 3}
+  m_Name: Sounds
+  m_EditorClassIdentifier: 
+  sounds:
+  - Key: Click
+    HasVariations: 0
+    Sound: {fileID: 8300000, guid: 0d0282974e9bd93479d7df0c5694a223, type: 3}
+    Variations: []
+    HasPitchVariation: 0
+    PitchVariationMinMax: {x: 0, y: 0}
+  - Key: Build
+    HasVariations: 0
+    Sound: {fileID: 8300000, guid: ade9a0bb429115848a674d9b8bc7dde0, type: 3}
+    Variations:
+    - {fileID: 8300000, guid: 8e34d34c412c92c43956d88a8a13e161, type: 3}
+    - {fileID: 8300000, guid: bb1705f8348bea24c93615a75b98febd, type: 3}
+    HasPitchVariation: 1
+    PitchVariationMinMax: {x: -0.3, y: 0.3}
+  - Key: Vacuum
+    HasVariations: 1
+    Sound: {fileID: 8300000, guid: 68c74bb96f0c3c1439e3eeb59f15a048, type: 3}
+    Variations:
+    - {fileID: 8300000, guid: 68c74bb96f0c3c1439e3eeb59f15a048, type: 3}
+    - {fileID: 8300000, guid: abc79fc251e9e844eb3d727736a9bc5d, type: 3}
+    HasPitchVariation: 1
+    PitchVariationMinMax: {x: -0.1, y: 0.5}

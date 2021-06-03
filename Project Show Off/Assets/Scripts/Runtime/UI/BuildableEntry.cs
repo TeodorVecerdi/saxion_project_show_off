@@ -49,6 +49,7 @@ namespace Runtime {
 
         private void OnBuildClicked() {
             SetSelection(true);
+            SoundManager.PlaySound("Click");
             EventQueue.QueueEvent(new BeginBuildEvent(this, buildableObject));
         }
 

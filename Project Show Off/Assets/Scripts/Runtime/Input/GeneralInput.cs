@@ -1,23 +1,36 @@
-﻿using Runtime.Event;
+﻿using System;
+using Runtime.Event;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
-    public class GeneralInput : MonoBehaviour {
+    public class GeneralInput : MonoBehaviour, IEventSubscriber {
         private bool isBuildModeActive;
-        private void OnEnable() {
-            InputManager.GeneralActions.ToggleGameMode.performed += ToggleGameMode;
+
+        private IDisposable gameModeChangeEventUnsubscribeToken;
+
+        private void Awake() {
+            gameModeChangeEventUnsubscribeToken = this.Subscribe(EventType.GameModeChange);
         }
 
-        private void OnDisable() {
-            InputManager.GeneralActions.ToggleGameMode.performed -= ToggleGameMode;
+        private void OnDestroy() {
+            gameModeChangeEventUnsubscribeToken.Dispose();
         }
 
-        private void ToggleGameMode(InputAction.CallbackContext callbackContext) {
-            isBuildModeActive = !isBuildModeActive;
-            EventQueue.QueueEvent(new ChangeMouseLockEvent(this, !isBuildModeActive));
-            EventQueue.QueueEvent(new EmptyEvent(this, EventType.GameModeChange));
+        /// <summary>
+        /// <para>Receives an event from the Event Queue</para>
+        /// </summary>
+        /// <param name="eventData">Event data raised</param>
+        /// <returns><c>true</c> if event propagation should be stopped, <c>false</c> otherwise.</returns>
+        public bool OnEvent(EventData eventData) {
+            switch (eventData) {
+                case EmptyEvent {Type: EventType.GameModeChange}: {
+                    isBuildModeActive = !isBuildModeActive;
+                    EventQueue.QueueEvent(new ChangeMouseLockEvent(this, !isBuildModeActive));
+                    return false;
+                }
+                default: return false;
+            }
         }
     }
 }
