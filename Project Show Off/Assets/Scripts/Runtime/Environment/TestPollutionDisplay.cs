@@ -1,6 +1,7 @@
 ﻿using System;
 using Runtime.Event;
 using TMPro;
+using UnityCommons;
 using UnityEngine;
 using EventType = Runtime.Event.EventType;
 
@@ -25,7 +26,7 @@ namespace Runtime {
         public bool OnEvent(EventData eventData) {
             switch (eventData) {
                 case PollutionUpdateEvent pollutionUpdateEvent: {
-                    pollutionText.text = $"Pollution: {pollutionUpdateEvent.Pollution:F1}";
+                    pollutionText.text = $"Pollution: {pollutionUpdateEvent.RawPollution:F1} ({pollutionUpdateEvent.PollutionRatio.Clamped01()*100.0f :F1}%)";
                     return false;
                 }
                 default: return false;

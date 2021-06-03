@@ -1,10 +1,12 @@
 ﻿namespace Runtime.Event {
     public sealed class PollutionUpdateEvent : EventData {
         public override EventType Type => EventType.PollutionUpdate;
-        public float Pollution { get; }
+        public float RawPollution { get; }
+        public float PollutionRatio { get; }
         
-        public PollutionUpdateEvent(object sender, float pollution) : base(sender) {
-            Pollution = pollution;
+        public PollutionUpdateEvent(object sender, float rawPollution, float pollutionRatio) : base(sender) {
+            RawPollution = rawPollution;
+            PollutionRatio = pollutionRatio;
         }
     }
     
