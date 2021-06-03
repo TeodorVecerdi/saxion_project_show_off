@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Soda Can
   trashCategory: {fileID: 11400000, guid: 2484c42e7f6c4d949b8bb98b18aedf0b, type: 2}
-  minimumMass: 0.5
-  maximumMass: 0.75
+  minimumMass: 0.7
+  maximumMass: 1
   pickupDuration: 0.4
   pollutionAmount: 1
   prefab: {fileID: 2346935513933802946, guid: d06699974a2287d459a61c93411dc159, type: 3}

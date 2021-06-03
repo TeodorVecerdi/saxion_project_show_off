@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e09f3c7958cd4570bd300599d1422992, type: 3}
-  m_Name: Newspaper
+  m_Name: Metal
   m_EditorClassIdentifier: 
-  itemName: Newspaper
-  trashCategory: {fileID: 11400000, guid: fec93a18793254344b0eb7b9c697fd84, type: 2}
-  minimumMass: 0.4
-  maximumMass: 0.6
+  itemName: Metal
+  trashCategory: {fileID: 11400000, guid: 2484c42e7f6c4d949b8bb98b18aedf0b, type: 2}
+  minimumMass: 2
+  maximumMass: 4
   pickupDuration: 0.4
   pollutionAmount: 1
-  prefab: {fileID: 2346935513933802946, guid: 31553f39e4c57c64d8c5091419e38a3c, type: 3}
+  prefab: {fileID: 2346935513933802946, guid: 433df02414664914fb6a6c79c68296f4, type: 3}
