@@ -24,7 +24,9 @@ namespace Runtime {
             volume = GetComponent<Volume>();
             volume.weight = 0.0f;
             volume.profile.TryGet(out shadowSettings);
+#if UNITY_EDITOR
             originalShadowDistance = shadowSettings.maxShadowDistance.value;
+#endif
             isBuildMode = false;
         }
 

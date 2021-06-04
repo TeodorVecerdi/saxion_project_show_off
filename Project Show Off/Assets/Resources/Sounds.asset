@@ -20,13 +20,13 @@ MonoBehaviour:
     HasPitchVariation: 0
     PitchVariationMinMax: {x: 0, y: 0}
   - Key: Build
-    HasVariations: 1
-    Sound: {fileID: 0}
+    HasVariations: 0
+    Sound: {fileID: 8300000, guid: ade9a0bb429115848a674d9b8bc7dde0, type: 3}
     Variations:
     - {fileID: 8300000, guid: 8e34d34c412c92c43956d88a8a13e161, type: 3}
     - {fileID: 8300000, guid: bb1705f8348bea24c93615a75b98febd, type: 3}
-    HasPitchVariation: 0
-    PitchVariationMinMax: {x: 0, y: 0}
+    HasPitchVariation: 1
+    PitchVariationMinMax: {x: -0.3, y: 0.3}
   - Key: Vacuum
     HasVariations: 1
     Sound: {fileID: 8300000, guid: 68c74bb96f0c3c1439e3eeb59f15a048, type: 3}

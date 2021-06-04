@@ -9,7 +9,7 @@ using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
     public class MaterialDeposit : MonoBehaviour, IEventSubscriber {
-        private const string kDepositHintFormat = "Press {0} to deposit inventory";
+        private const string kDepositHintFormat = "Press {0} to deposit & recycle inventory";
 
         [Header("Settings")]
         [SerializeField] private float depositUiFadeDuration = 0.25f;

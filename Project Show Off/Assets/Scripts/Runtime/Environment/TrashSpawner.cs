@@ -22,6 +22,7 @@ namespace Runtime {
 
         private List<TrashPickup> trashPickups;
         private float spawnTimer;
+
         private void Awake() {
             trashPickups = new List<TrashPickup>(Resources.LoadAll<TrashPickup>("Trash Pickups"));
         }
@@ -43,13 +44,14 @@ namespace Runtime {
             for (var i = 0; i < initialTrashCount; i++) {
                 totalPollution += SpawnTrash(false);
             }
+
             EventQueue.QueueEvent(new PollutionChangeEvent(this, totalPollution));
         }
 
         private float SpawnTrash(bool sendEvent = true) {
             const int maxTries = 10;
             var choice = Rand.ListItem(trashPickups);
-            
+
             for (var i = 0; i < maxTries; i++) {
                 var spawnX = Rand.Range(from.x, to.x);
                 var spawnZ = Rand.Range(from.z, to.z);
@@ -61,7 +63,7 @@ namespace Runtime {
                     trash.Load(choice);
                     trash.transform.localScale = Vector3.zero;
                     trash.transform.DOScale(Vector3.one, trashScaleUpDuration);
-                    if(sendEvent)
+                    if (sendEvent)
                         EventQueue.QueueEvent(new TrashPickupEvent(this, EventType.TrashSpawn, trash));
                     return choice.PollutionAmount;
                 }
@@ -71,11 +73,12 @@ namespace Runtime {
         }
 
         private void OnDrawGizmosSelected() {
+#if UNITY_EDITOR
             Gizmos.color = Color.red;
             Gizmos.DrawSphere(from, HandleUtility.GetHandleSize(from) * 0.2f);
             Gizmos.color = Color.blue;
             Gizmos.DrawSphere(to, HandleUtility.GetHandleSize(to) * 0.2f);
-            
+
             var diff = to - from;
             var avg = 0.5f * (from + to);
             var halfHeight = worldMaxHeight * 0.5f;
@@ -83,6 +86,7 @@ namespace Runtime {
             var size = new Vector3(Mathf.Abs(diff.x), worldMaxHeight, Mathf.Abs(diff.z));
             Gizmos.color = new Color(0.0f, 1.0f, 0.0f, 0.2f);
             Gizmos.DrawCube(center, size);
+#endif
         }
     }
 }
