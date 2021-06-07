@@ -29197,7 +29197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63d744a51a1d4280882ff30bc9878415, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maximumCarryMass: 50
+  maximumCarryMass: 20
   materialInventory:
     contents: []
 --- !u!4 &738646681827304401
