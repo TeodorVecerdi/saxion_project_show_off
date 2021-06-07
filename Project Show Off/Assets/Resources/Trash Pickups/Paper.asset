@@ -18,4 +18,4 @@ MonoBehaviour:
   maximumMass: 0.6
   pickupDuration: 0.5
   pollutionAmount: 0.8
-  prefab: {fileID: 2346935513933802946, guid: 31553f39e4c57c64d8c5091419e38a3c, type: 3}
+  prefab: {fileID: 2346935513933802946, guid: 2f12cb83abce7854d921053b8abbb3ef, type: 3}
