@@ -3,14 +3,14 @@ using UnityEngine;
 
 namespace Runtime.Tutorial {
     public class ZoomTutorial : TutorialSlide {
+        public override string TutorialKey => "build_mode_zoom";
+        
         [HorizontalLine(color: EColor.Orange, order = -10000), Header("Movement Tutorial", order = -20000)]
         [SerializeField] private float zoomRequired = 250.0f;
 
         private float totalZoomed;
         private float currentZoomed;
-       
-        public override string TutorialKey => "build_mode_zoom";
-        
+
         protected override void Process() {
             var zoomDelta = InputManager.RawZoom;
             if (!Mathf.Approximately(zoomDelta, 0.0f))
