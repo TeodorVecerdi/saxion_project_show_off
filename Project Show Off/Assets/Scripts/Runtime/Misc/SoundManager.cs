@@ -33,7 +33,7 @@ namespace Runtime {
 
         protected override void OnAwake() {
             LoadSoundDictionary();
-            DontDestroyOnLoad(gameObject);
+            // DontDestroyOnLoad(gameObject);
             SfxVolume = PlayerPrefs.GetFloat("SfxVolume", 0.75f);
         }
 
