@@ -1,4 +1,5 @@
 ﻿using System;
+using DG.Tweening;
 using NaughtyAttributes;
 using TMPro;
 using UnityCommons;
@@ -27,7 +28,7 @@ namespace Runtime.Tutorial {
         [Space]
         [SerializeField] private TutorialSlide nextTutorial;
         
-#if  UNITY_EDITOR //debug: !! Naughty Attributes
+#if  UNITY_EDITOR //debug: begin !! Naughty Attributes
         // ReSharper disable InconsistentNaming UnusedMember.Local
         //debug: !! used by NaughtyAttributes to draw the inspector
         private bool debug_tutorialLine1Null => tutorialLine1 == null;
@@ -44,15 +45,57 @@ namespace Runtime.Tutorial {
         protected void OnTutorialIconUpdated() {
             if (tutorialIcon != null) tutorialIcon.sprite = tutorialSprite;
         }
-#endif
-        
+#endif //debug: end !! Naughty Attributes
+
+        private const float tutorialTransitionDuration = 0.5f;
+        private RectTransform rectTransform;
+        private float transitionFromX;
+        private float transitionToX;
+        private bool isFinished;
+
         protected float FillAmount;
-        protected abstract string TutorialKey { get; }
+        public abstract string TutorialKey { get; }
         protected abstract void Process();
 
+        protected void FinishTutorial() {
+            Debug.Log($"Finished tutorial {TutorialKey}");
+            isFinished = true;
+            Hide(1.0f).OnComplete(() => {
+                gameObject.SetActive(false);
+                if (nextTutorial != null) {
+                    nextTutorial.gameObject.SetActive(true);
+                    nextTutorial.Show(1.0f);
+                    PlayerPrefs.SetString("current_tutorial", nextTutorial.TutorialKey);
+                } else {
+                    PlayerPrefs.SetString("current_tutorial", "none");
+                }
+            });
+        }
+
+        private void Awake() {
+            rectTransform = (RectTransform) transform;
+            transitionFromX = -8.0f;
+            transitionToX = rectTransform.sizeDelta.x + 8.0f;
+        }
+
         private void Update() {
+            if (isFinished) return;
+            
             Process();
             tutorialProgressBar.fillAmount = FillAmount.Clamped01();
+        }
+
+        public void LoadTransitionSettings(float transitionFrom, float transitionTo) {
+            transitionFromX = transitionFrom;
+            transitionToX = transitionTo;
+        }
+
+        public Tweener Hide(float delay) {
+            return rectTransform.DOAnchorPosX(transitionToX, tutorialTransitionDuration).From(new Vector2(transitionFromX, -8.0f)).SetDelay(delay);
+        }
+
+        public Tweener Show(float delay) {
+            return rectTransform.DOAnchorPosX(transitionFromX, tutorialTransitionDuration).From(new Vector2(transitionToX, -8.0f)).SetDelay(delay);
         }
     }
 }

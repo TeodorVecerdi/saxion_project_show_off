@@ -1,13 +1,17 @@
 ﻿using System;
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Runtime.Tutorial {
     public class MovementTutorial : TutorialSlide {
-        [Space]
+        [HorizontalLine(color: EColor.Indigo, order = -10000), Header("Movement Tutorial", order = -20000)]
         [SerializeField] private float movementTimeRequired = 3.0f;
+
+        private float totalTimeMoved;
+        private bool isMoving;
         
-        protected override string TutorialKey => "movement";
+        public override string TutorialKey => "movement";
 
         private void OnEnable() {
             InputManager.PlayerActions.Move.started += OnPlayerMoveStarted;
@@ -20,15 +24,20 @@ namespace Runtime.Tutorial {
         }
 
         protected override void Process() {
-            Debug.Log("Process tutorial");
+            if (!isMoving) return;
+            
+            totalTimeMoved += Time.deltaTime;
+            FillAmount = totalTimeMoved / movementTimeRequired;
+            if (totalTimeMoved >= movementTimeRequired)
+                FinishTutorial();
         }
 
         private void OnPlayerMoveStarted(InputAction.CallbackContext obj) {
-            Debug.Log("Movement started");
+            isMoving = true;
         }
 
         private void OnPlayerMoveCanceled(InputAction.CallbackContext obj) {
-            Debug.Log("Movement canceled");
+            isMoving = false;
         }
     }
 }
