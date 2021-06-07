@@ -7,11 +7,13 @@ namespace Runtime {
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static void InitializeBeforeSceneLoad() {
+            Debug.Log("Before Scene Load");
             actions = new DefaultInputActions();
         }
         
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         private static void InitializeAfterSceneLoad() {
+            Debug.Log("After Scene Load");
             Enable();
         }
 

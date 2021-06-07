@@ -15,7 +15,7 @@ namespace Runtime {
         private IDisposable changeMouseLockEventUnsubscribeToken;
 
         protected override void Awake() {
-            startingRotation = transform.localEulerAngles;
+            startingRotation = lookForwardTransform.eulerAngles;
             changeMouseLockEventUnsubscribeToken = this.Subscribe(EventType.ChangeMouseLock);
             base.Awake();
         }
