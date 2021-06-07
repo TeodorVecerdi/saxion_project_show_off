@@ -709,6 +709,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!225 &282152157 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 8665863472196901642, guid: fd7068f616163634d9a4d3785013cadb, type: 3}
+  m_PrefabInstance: {fileID: 282152153}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &342294686
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1218,7 +1223,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   depositUiFadeDuration: 0.25
   depositKey: 101
-  depositUICanvasGroup: {fileID: 0}
+  depositUICanvasGroup: {fileID: 282152157}
   inventory:
     contents:
     - trashCategory: {fileID: 11400000, guid: 30d4a134f1adb6b479af094e1fdf25f7, type: 2}
@@ -2614,7 +2619,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28184
+  m_Name: pb_Mesh43520
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
