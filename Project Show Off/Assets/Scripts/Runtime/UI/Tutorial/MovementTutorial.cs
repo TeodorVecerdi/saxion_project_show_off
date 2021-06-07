@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 namespace Runtime.Tutorial {
     public class MovementTutorial : TutorialSlide {
-        [HorizontalLine(color: EColor.Indigo, order = -10000), Header("Movement Tutorial", order = -20000)]
+        [HorizontalLine(color: EColor.Orange, order = -10000), Header("Movement Tutorial", order = -20000)]
         [SerializeField] private float movementTimeRequired = 3.0f;
 
         private float totalTimeMoved;

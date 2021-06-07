@@ -27,6 +27,9 @@ namespace Runtime.Tutorial {
         private Sprite tutorialSprite;
         [Space]
         [SerializeField] private TutorialSlide nextTutorial;
+        [SerializeField] protected bool overrideTransitionSettings;
+        [SerializeField, ShowIf("overrideTransitionSettings")] private float transitionDelay;
+        [SerializeField, ShowIf("overrideTransitionSettings")] private float transitionDuration;
         
 #if  UNITY_EDITOR //debug: begin !! Naughty Attributes
         // ReSharper disable InconsistentNaming UnusedMember.Local
@@ -47,7 +50,7 @@ namespace Runtime.Tutorial {
         }
 #endif //debug: end !! Naughty Attributes
 
-        private const float tutorialTransitionDuration = 0.5f;
+        private const float baseTransitionDuration = 0.5f;
         private RectTransform rectTransform;
         private float transitionFromX;
         private float transitionToX;
@@ -56,6 +59,8 @@ namespace Runtime.Tutorial {
         protected float FillAmount;
         public abstract string TutorialKey { get; }
         protected abstract void Process();
+        
+        protected virtual void OnAwake() {}
 
         protected void FinishTutorial() {
             Debug.Log($"Finished tutorial {TutorialKey}");
@@ -76,6 +81,8 @@ namespace Runtime.Tutorial {
             rectTransform = (RectTransform) transform;
             transitionFromX = -8.0f;
             transitionToX = rectTransform.sizeDelta.x + 8.0f;
+            
+            OnAwake();
         }
 
         private void Update() {
@@ -91,11 +98,15 @@ namespace Runtime.Tutorial {
         }
 
         public Tweener Hide(float delay) {
-            return rectTransform.DOAnchorPosX(transitionToX, tutorialTransitionDuration).From(new Vector2(transitionFromX, -8.0f)).SetDelay(delay);
+            var realDuration = overrideTransitionSettings ? transitionDuration : baseTransitionDuration;
+            var realDelay = overrideTransitionSettings ? transitionDelay : delay;
+            return rectTransform.DOAnchorPosX(transitionToX, realDuration).From(new Vector2(transitionFromX, -8.0f)).SetDelay(realDelay);
         }
 
         public Tweener Show(float delay) {
-            return rectTransform.DOAnchorPosX(transitionFromX, tutorialTransitionDuration).From(new Vector2(transitionToX, -8.0f)).SetDelay(delay);
+            var realDuration = overrideTransitionSettings ? transitionDuration : baseTransitionDuration;
+            var realDelay = overrideTransitionSettings ? transitionDelay : delay;
+            return rectTransform.DOAnchorPosX(transitionFromX, realDuration).From(new Vector2(transitionToX, -8.0f)).SetDelay(realDelay);
         }
     }
 }
