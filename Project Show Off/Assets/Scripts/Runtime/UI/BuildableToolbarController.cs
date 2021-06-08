@@ -52,7 +52,7 @@ namespace Runtime {
             foreach (var buildableObject in buildableObjects) {
                 var buildableEntry = Instantiate(buildableEntryPrefab, buildableEntryContainer);
                 entries.Add(buildableEntry);
-                buildableEntry.BuildUI(buildableObject);
+                buildableEntry.LoadUI(buildableObject);
             }
         }
 

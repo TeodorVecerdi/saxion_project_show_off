@@ -86,6 +86,14 @@ namespace Runtime.Data {
             totalMass = 0.0f;
         }
 
+        public ItemStack First(Func<ItemStack, bool> predicate) {
+            return contents.First(predicate);
+        }
+        
+        public ItemStack FirstOrDefault(Func<ItemStack, bool> predicate) {
+            return contents.FirstOrDefault(predicate);
+        }
+
         public IEnumerator<ItemStack> GetEnumerator() {
             return contents.GetEnumerator();
         }

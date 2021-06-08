@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57635ac4f96b4d2d9cb732e4878bbe7b, type: 3}
   m_Name: Plastic Bench
   m_EditorClassIdentifier: 
+  objectName: Plastic Bench
+  objectDescription: Some kind of description for the plastic bench. Should say something
+    about attracting more visitors when built.
   objectSprite: {fileID: 21300000, guid: 8bf70e12719241d498b6c890c70c70ea, type: 3}
   prefab: {fileID: 6393172599133227736, guid: 49b734ea413d9b742a241b15d20991e9, type: 3}
   constructionRequirements:
@@ -21,4 +24,4 @@ MonoBehaviour:
     - trashCategory: {fileID: 11400000, guid: 2484c42e7f6c4d949b8bb98b18aedf0b, type: 2}
       mass: 1.5
   buildAreas:
-  - {fileID: 11400000, guid: 42df31a03327af547a81c5e325b99271, type: 2}
+  - {fileID: 0}

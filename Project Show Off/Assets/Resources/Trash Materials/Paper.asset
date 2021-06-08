@@ -16,3 +16,4 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 6f945ca2bf3b1b84d87bb4f7e632818b, type: 3}
   verticalPattern: {fileID: 21300000, guid: cbed835de6f6fe6439a1bd7b0805e5b2, type: 3}
   patternColor: {r: 0.20392159, g: 0.6, b: 0.854902, a: 1}
+  type: 2

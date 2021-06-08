@@ -16,6 +16,7 @@ namespace Runtime {
         [Header("References")]
         [SerializeField] private Image buildableImage;
         [SerializeField] private Image disabledImage;
+        [SerializeField] private BuildableEntryTooltip tooltip;
         
         private Button button;
         private Image borderImage;
@@ -44,9 +45,11 @@ namespace Runtime {
             eventUnsubscribeTokens.Clear();
         }
 
-        public void BuildUI(BuildableObject buildableObject) {
+        public void LoadUI(BuildableObject buildableObject) {
             this.buildableObject = buildableObject;
             buildableImage.sprite = buildableObject.ObjectSprite;
+            
+            tooltip.LoadUI(buildableObject);
         }
 
         public void SetEnabled(bool isEnabled) {
@@ -54,6 +57,14 @@ namespace Runtime {
             var color = disabledImage.color;
             color.a = isEnabled ? 0.0f : 0.8f;
             disabledImage.color = color;
+        }
+
+        public void OnPointerEnter() {
+            tooltip.Show(true);
+        }
+
+        private void OnPointerExit() {
+            tooltip.Show(false);
         }
 
         private void OnBuildClicked() {
