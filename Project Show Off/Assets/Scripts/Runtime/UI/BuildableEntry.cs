@@ -21,6 +21,7 @@ namespace Runtime {
         private Image borderImage;
         private BuildableObject buildableObject;
         private List<IDisposable> eventUnsubscribeTokens;
+        private bool isEnabled;
 
         public MaterialInventory Requirements => buildableObject.ConstructionRequirements;
 
@@ -49,12 +50,14 @@ namespace Runtime {
         }
 
         public void SetEnabled(bool isEnabled) {
+            this.isEnabled = isEnabled;
             var color = disabledImage.color;
             color.a = isEnabled ? 0.0f : 0.8f;
             disabledImage.color = color;
         }
 
         private void OnBuildClicked() {
+            if(!isEnabled) return;
             SetSelection(true);
             SoundManager.PlaySound("Click");
             EventQueue.QueueEvent(new BeginBuildEvent(this, buildableObject));
