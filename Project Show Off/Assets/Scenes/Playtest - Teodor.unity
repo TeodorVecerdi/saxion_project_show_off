@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1484.0566, g: 1838.8809, b: 2433.832, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -21125,13 +21125,17 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3069956907330275185, guid: fd7068f616163634d9a4d3785013cadb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4688333471668551534, guid: fd7068f616163634d9a4d3785013cadb, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5063437604072105913, guid: fd7068f616163634d9a4d3785013cadb, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5465225532023622541, guid: fd7068f616163634d9a4d3785013cadb, type: 3}
       propertyPath: m_IsActive
@@ -21149,9 +21153,17 @@ PrefabInstance:
       propertyPath: movementTimeRequired
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7195574131469948735, guid: fd7068f616163634d9a4d3785013cadb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8096923195402918672, guid: fd7068f616163634d9a4d3785013cadb, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8117139756829424499, guid: fd7068f616163634d9a4d3785013cadb, type: 3}
+      propertyPath: m_FillAmount
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8665863472196901638, guid: fd7068f616163634d9a4d3785013cadb, type: 3}
       propertyPath: m_SizeDelta.x
@@ -21195,6 +21207,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8665863474012914693, guid: fd7068f616163634d9a4d3785013cadb, type: 3}
       propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8832653590468868657, guid: fd7068f616163634d9a4d3785013cadb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8854378260617340176, guid: fd7068f616163634d9a4d3785013cadb, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9043990097963017518, guid: fd7068f616163634d9a4d3785013cadb, type: 3}
