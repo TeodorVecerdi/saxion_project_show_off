@@ -136,7 +136,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 8, y: 8}
-  m_SizeDelta: {x: 48, y: 384}
+  m_SizeDelta: {x: 64, y: 512}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &8422123430567726204
 MonoBehaviour:
@@ -152,15 +152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInventory: {fileID: 0}
   inventoryItemContainer: {fileID: 8422123431455962366}
-  trashColors:
-  - Category: {fileID: 11400000, guid: 30d4a134f1adb6b479af094e1fdf25f7, type: 2}
-    Color: {r: 0.42865422, g: 0.7647059, b: 0.33725494, a: 1}
-  - Category: {fileID: 11400000, guid: 2484c42e7f6c4d949b8bb98b18aedf0b, type: 2}
-    Color: {r: 0.9811321, g: 0.1342115, b: 0.1342115, a: 1}
-  - Category: {fileID: 11400000, guid: fec93a18793254344b0eb7b9c697fd84, type: 2}
-    Color: {r: 0.8679245, g: 0.8679245, b: 0.8679245, a: 1}
-  - Category: {fileID: 11400000, guid: 4bce4b42e3e7157439edede8569afc9e, type: 2}
-    Color: {r: 0.44313723, g: 0.7489753, b: 0.9647059, a: 1}
+  materialViewPrefab: {fileID: 4839723428472778184, guid: 01ed2934b696fe64cb82e6d20151a17c, type: 3}
 --- !u!1 &8422123431289286471
 GameObject:
   m_ObjectHideFlags: 0
@@ -333,7 +325,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: a3ba8b5dfc243514881955613928e1e4, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -342,7 +334,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 0.85
+  m_PixelsPerUnitMultiplier: 16
 --- !u!114 &8422123431455962881
 MonoBehaviour:
   m_ObjectHideFlags: 0
