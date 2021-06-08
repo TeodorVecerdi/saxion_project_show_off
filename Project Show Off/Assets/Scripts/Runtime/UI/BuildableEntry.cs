@@ -63,7 +63,7 @@ namespace Runtime {
             tooltip.Show(true);
         }
 
-        private void OnPointerExit() {
+        public void OnPointerExit() {
             tooltip.Show(false);
         }
 
