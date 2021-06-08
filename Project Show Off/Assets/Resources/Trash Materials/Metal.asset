@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: Metal
   m_EditorClassIdentifier: 
   categoryName: Metal
-  categorySprite: {fileID: -5383897463847916688, guid: 6f5a68e1ce0ea514b829f1d76c5d590d, type: 3}
-  badness: 0
+  categorySprite: {fileID: 21300000, guid: e97a4582809fe6345b76097472c0b450, type: 3}

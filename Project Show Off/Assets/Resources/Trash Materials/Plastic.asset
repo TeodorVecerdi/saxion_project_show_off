@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: Plastic
   m_EditorClassIdentifier: 
   categoryName: Plastic
-  categorySprite: {fileID: 4846883041880463676, guid: 6f5a68e1ce0ea514b829f1d76c5d590d, type: 3}
-  badness: 0
+  categorySprite: {fileID: 21300000, guid: 54f13aa63dbd94946a6dc64e58ad2305, type: 3}

@@ -65,7 +65,7 @@ namespace Runtime {
             if (!isVisible) return;
             
             foreach (var buildableEntry in entries) {
-                buildableEntry.gameObject.SetActive(false);
+                buildableEntry.SetEnabled(false);
             }
 
             EventQueue.QueueEvent(new EmptyEvent(this, EventType.DepositInventoryRequest));
@@ -92,7 +92,7 @@ namespace Runtime {
                     var inventory = inventoryResponseEvent.Inventory;
                     foreach (var buildableEntry in entries) {
                         if(!inventory.Contains(buildableEntry.Requirements)) continue;
-                        buildableEntry.gameObject.SetActive(true);
+                        buildableEntry.SetEnabled(true);
                     }
                     return false;
                 }

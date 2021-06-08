@@ -15,6 +15,7 @@ namespace Runtime {
         [SerializeField] private float selectedColorTransitionDuration = 0.125f;
         [Header("References")]
         [SerializeField] private Image buildableImage;
+        [SerializeField] private Image disabledImage;
         
         private Button button;
         private Image borderImage;
@@ -45,6 +46,12 @@ namespace Runtime {
         public void BuildUI(BuildableObject buildableObject) {
             this.buildableObject = buildableObject;
             buildableImage.sprite = buildableObject.ObjectSprite;
+        }
+
+        public void SetEnabled(bool isEnabled) {
+            var color = disabledImage.color;
+            color.a = isEnabled ? 0.0f : 0.8f;
+            disabledImage.color = color;
         }
 
         private void OnBuildClicked() {

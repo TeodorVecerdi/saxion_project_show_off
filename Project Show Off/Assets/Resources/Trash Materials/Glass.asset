@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: Glass
   m_EditorClassIdentifier: 
   categoryName: Glass
-  categorySprite: {fileID: 3889507850481819456, guid: 6f5a68e1ce0ea514b829f1d76c5d590d, type: 3}
-  badness: 0
+  categorySprite: {fileID: 21300000, guid: 4b5f7228283e1c14f95bed789ecdc982, type: 3}
