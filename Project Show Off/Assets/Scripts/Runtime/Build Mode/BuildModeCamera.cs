@@ -70,7 +70,7 @@ namespace Runtime {
             dragPlane = new Plane(Vector3.up, Vector3.zero);
             mouse = Mouse.current;
             gameModeToggleEventUnsubscribeToken = this.Subscribe(EventType.GameModeToggle);
-            actualCamera = Camera.main;
+            actualCamera = ResourcesProvider.MainCamera;
             
             DisableBuildMode();
         }

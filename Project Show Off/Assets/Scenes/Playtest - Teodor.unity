@@ -16640,7 +16640,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh209920
+  m_Name: pb_Mesh29050
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -21074,6 +21074,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Miscellaneous
       objectReference: {fileID: 0}
+    - target: {fileID: 6447761907418670376, guid: 3fa3ab45af8d2064283c538d4ce7d78d, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 738646681827304406}
     - target: {fileID: 8410512925163984017, guid: 3fa3ab45af8d2064283c538d4ce7d78d, type: 3}
       propertyPath: buildModeCamera
       value: 
@@ -21278,7 +21282,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8573404978122709729, guid: baf922d5f1c59a044b2fb5f87876d9fb, type: 3}
       propertyPath: m_Name
-      value: Main Camera
+      value: Game Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 8573404978122709729, guid: baf922d5f1c59a044b2fb5f87876d9fb, type: 3}
+      propertyPath: m_TagString
+      value: MainCamera
       objectReference: {fileID: 0}
     - target: {fileID: 8573404978122709730, guid: baf922d5f1c59a044b2fb5f87876d9fb, type: 3}
       propertyPath: field of view

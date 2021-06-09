@@ -8,6 +8,7 @@ namespace Runtime {
         private static readonly int speedPropertyID = Animator.StringToHash("Speed");
         
         [SerializeField] private Image fadeImage;
+        [SerializeField] private GameObject eventSystemGameObject;
         [SerializeField] private AnimationClip clip;
         
         private Animator animator;
@@ -22,6 +23,7 @@ namespace Runtime {
             // prevents buttons from being clicked
             fadeImage.raycastTarget = true;
 
+            Destroy(eventSystemGameObject);
             StartCoroutine(SwitchSceneAfter(clip.length));
         }
 

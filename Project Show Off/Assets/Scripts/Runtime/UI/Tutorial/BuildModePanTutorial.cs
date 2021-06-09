@@ -16,7 +16,7 @@ namespace Runtime.Tutorial {
         private Plane dragPlane;
 
         protected override void OnAwake() {
-            camera = Camera.main;
+            camera = ResourcesProvider.MainCamera;
             dragPlane = new Plane(Vector3.up, Vector3.zero);
         }
 

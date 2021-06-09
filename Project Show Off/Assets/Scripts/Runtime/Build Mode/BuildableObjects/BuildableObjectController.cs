@@ -45,7 +45,7 @@ namespace Runtime {
                 this.Subscribe(EventType.BeginBuild), 
                 this.Subscribe(EventType.GameModeChange)
             };
-            buildModeCamera = Camera.main;
+            buildModeCamera = ResourcesProvider.MainCamera;
             y180deg = Quaternion.Euler(180.0f * Vector3.up);
         }
 
