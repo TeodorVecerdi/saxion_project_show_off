@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Runtime.Data {
     [CreateAssetMenu(fileName = "NewSoundSettings", menuName = "Data/Sound Settings", order = 0)]

@@ -15,7 +15,6 @@ namespace Runtime {
         [SerializeField, OnValueChanged("OnTimeSettingsChanged")]
         private bool unlinkTimeVariables;
         [SerializeField, Required] private CinemachineVirtualCamera virtualCamera;
-        [SerializeField, Required] private Camera actualCamera;
         [SerializeField, Required] private BuildModeVolume buildModeVolume;
 
         [HorizontalLine(color: EColor.Blue, order = 1), Header("Movement")]
@@ -59,6 +58,7 @@ namespace Runtime {
         
         private Transform cameraTransform;
         private CameraBoundaries cameraBoundaries;
+        private Camera actualCamera;
         private Plane dragPlane;
         private Mouse mouse;
         private bool isEnabled;
@@ -70,6 +70,7 @@ namespace Runtime {
             dragPlane = new Plane(Vector3.up, Vector3.zero);
             mouse = Mouse.current;
             gameModeToggleEventUnsubscribeToken = this.Subscribe(EventType.GameModeToggle);
+            actualCamera = Camera.main;
             
             DisableBuildMode();
         }
