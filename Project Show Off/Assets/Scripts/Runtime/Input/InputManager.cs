@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using UnityCommons;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Runtime {
-    internal static class InputManager {
+    internal class InputManager : MonoSingleton<InputManager> {
         private static DefaultInputActions actions;
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]

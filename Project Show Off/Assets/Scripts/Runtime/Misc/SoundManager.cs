@@ -12,13 +12,7 @@ namespace Runtime {
         private float sfxVolume = 1f;
         private Dictionary<string, (AudioSource audioSource, SoundSettings.AudioKeyValuePair sound)> soundDictionary;
 
-        private Dictionary<string, (AudioSource audioSource, SoundSettings.AudioKeyValuePair settings)> Sounds {
-            get {
-                if (soundDictionary == null)
-                    LoadSoundDictionary();
-                return soundDictionary;
-            }
-        }
+        private Dictionary<string, (AudioSource audioSource, SoundSettings.AudioKeyValuePair settings)> Sounds => soundDictionary;
 
         public static float SfxVolume {
             get => Instance.sfxVolume;
@@ -33,7 +27,6 @@ namespace Runtime {
 
         protected override void OnAwake() {
             LoadSoundDictionary();
-            // DontDestroyOnLoad(gameObject);
             SfxVolume = PlayerPrefs.GetFloat("SfxVolume", 0.75f);
         }
 
