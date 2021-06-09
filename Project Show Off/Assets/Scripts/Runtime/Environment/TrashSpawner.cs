@@ -1,12 +1,9 @@
-﻿using System.Collections.Generic;
-using DG.Tweening;
+﻿using DG.Tweening;
 using NaughtyAttributes;
-using Runtime.Data;
 using Runtime.Event;
 using UnityCommons;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.Serialization;
 using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
@@ -20,12 +17,7 @@ namespace Runtime {
         [SerializeField] private float trashScaleUpDuration = 0.1f;
         [SerializeField, MinValue(0)] private int initialTrashCount = 20;
 
-        private List<TrashPickup> trashPickups;
         private float spawnTimer;
-
-        private void Awake() {
-            trashPickups = new List<TrashPickup>(Resources.LoadAll<TrashPickup>("Trash Pickups"));
-        }
 
         private void Start() {
             SpawnInitialTrash();
@@ -50,7 +42,7 @@ namespace Runtime {
 
         private float SpawnTrash(bool sendEvent = true) {
             const int maxTries = 10;
-            var choice = Rand.ListItem(trashPickups);
+            var choice = Rand.ListItemReadOnly(ResourcesProvider.TrashPickups);
 
             for (var i = 0; i < maxTries; i++) {
                 var spawnX = Rand.Range(from.x, to.x);

@@ -1,11 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using DG.Tweening;
 using Runtime.Data;
 using Runtime.Event;
 using UnityEngine;
-using UnityEngine.UI;
 using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
@@ -15,24 +12,21 @@ namespace Runtime {
         [SerializeField] private InventoryMaterialView materialViewPrefab;
     
         private float screenUnitsPerMassUnit;
-        private List<TrashCategory> trashCategories;
-        private Dictionary<TrashCategory, InventoryMaterialView> itemDictionary;
+        private Dictionary<TrashMaterial, InventoryMaterialView> itemDictionary;
         private List<InventoryMaterialView> items;
         private IDisposable inventoryUpdateEventUnsubscribeToken;
 
         private void Awake() {
-            trashCategories = new List<TrashCategory>(Resources.LoadAll<TrashCategory>("Trash Materials"));
-            
             var inventoryScreenSize = ((RectTransform) transform).sizeDelta.y;
             screenUnitsPerMassUnit = inventoryScreenSize / playerInventory.MaximumCarryMass;
             items = new List<InventoryMaterialView>();
-            itemDictionary = new Dictionary<TrashCategory, InventoryMaterialView>();
+            itemDictionary = new Dictionary<TrashMaterial, InventoryMaterialView>();
             inventoryUpdateEventUnsubscribeToken = this.Subscribe(EventType.InventoryUpdate);
         }
 
         private void Start() {
-            foreach (var trashCategory in trashCategories) {
-                CreateInventoryImage(trashCategory);
+            foreach (var trashMaterial in ResourcesProvider.TrashMaterials) {
+                CreateInventoryImage(trashMaterial);
             }
 
             foreach (var itemStack in playerInventory.MaterialInventory) {
@@ -44,7 +38,7 @@ namespace Runtime {
             inventoryUpdateEventUnsubscribeToken.Dispose();
         }
     
-        private void CreateInventoryImage(TrashCategory trashCategory) {
+        private void CreateInventoryImage(TrashMaterial trashCategory) {
             var materialView = Instantiate(materialViewPrefab, inventoryItemContainer);
             materialView.gameObject.name = $"MaterialView_{items.Count}";
             materialView.LoadUI(trashCategory);

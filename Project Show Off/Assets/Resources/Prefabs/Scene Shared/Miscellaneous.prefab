@@ -180,6 +180,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8410512925163984021}
   - component: {fileID: 8410512925163984023}
+  - component: {fileID: 6447761907418670376}
   - component: {fileID: 8410512925163984022}
   - component: {fileID: 3881557259139277500}
   - component: {fileID: 8410512925163984016}
@@ -219,6 +220,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db27cc594f814a849d7cd5b2998dc357, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6447761907418670376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8410512925163984027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ebbe993359843768f933b53f944b370, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trashMaterialsFolder: Trash Materials
+  trashPickupsFolder: Trash Pickups
+  buildableObjectsFolder: Buildable Objects
 --- !u!114 &8410512925163984022
 MonoBehaviour:
   m_ObjectHideFlags: 0
