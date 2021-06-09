@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Runtime.Data {
     [CreateAssetMenu(fileName = "NewSoundSettings", menuName = "Data/Sound Settings", order = 0)]
     public class SoundSettings : ScriptableObject {
-        [FormerlySerializedAs("soundList")] [SerializeField] private List<AudioKeyValuePair> sounds;
+        [SerializeField] private List<AudioKeyValuePair> sounds;
 
         public List<AudioKeyValuePair> Sounds => sounds;
 

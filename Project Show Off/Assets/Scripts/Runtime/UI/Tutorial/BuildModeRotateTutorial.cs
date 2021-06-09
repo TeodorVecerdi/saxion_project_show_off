@@ -14,6 +14,8 @@ namespace Runtime.Tutorial {
         private Vector3 dragCurrentPosition;
 
         protected override void Process() {
+            if(!GeneralInput.IsBuildModeActive) return;
+            
             var mouse = Mouse.current;
             var mousePosition = (Vector3) mouse.position.ReadValue();
 

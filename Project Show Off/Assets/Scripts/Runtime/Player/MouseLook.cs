@@ -15,7 +15,8 @@ namespace Runtime {
         private IDisposable changeMouseLockEventUnsubscribeToken;
 
         protected override void Awake() {
-            startingRotation = lookForwardTransform.eulerAngles;
+            var startingEulerAngles = lookForwardTransform.eulerAngles;
+            startingRotation = new Vector3(startingEulerAngles.y, startingEulerAngles.x, 0);
             changeMouseLockEventUnsubscribeToken = this.Subscribe(EventType.ChangeMouseLock);
             base.Awake();
         }
@@ -32,7 +33,6 @@ namespace Runtime {
         protected override void PostPipelineStageCallback(CinemachineVirtualCameraBase vcam, CinemachineCore.Stage stage, ref CameraState state, float deltaTime) {
             if(!vcam.Follow || stage != CinemachineCore.Stage.Aim || !Application.isPlaying) return;
             var input = InputManager.MouseDelta * deltaTime * mouseSensitivity * 0.06666667f;
-            
             startingRotation.x += input.x;
             startingRotation.y += input.y;
             startingRotation.y = startingRotation.y.Clamped(-clampAngle, clampAngle);

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Plastic Bottle
   m_EditorClassIdentifier: 
   itemName: Plastic Bottle
-  trashCategory: {fileID: 11400000, guid: 4bce4b42e3e7157439edede8569afc9e, type: 2}
+  trashMaterial: {fileID: 11400000, guid: 4bce4b42e3e7157439edede8569afc9e, type: 2}
   minimumMass: 1
   maximumMass: 2
   pickupDuration: 0.4

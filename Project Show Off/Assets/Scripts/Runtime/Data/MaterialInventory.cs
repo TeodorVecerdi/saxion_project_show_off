@@ -16,12 +16,12 @@ namespace Runtime.Data {
             contents = new List<ItemStack>();
         }
 
-        public void Add(TrashCategory trashCategory, float mass) {
+        public void Add(TrashMaterial trashMaterial, float mass) {
             if(mass <= 0) return;
-            var itemStack = GetItemStack(trashCategory);
+            var itemStack = GetItemStack(trashMaterial);
             
             if (itemStack == null) {
-                itemStack = new ItemStack(trashCategory, 0);
+                itemStack = new ItemStack(trashMaterial, 0);
                 contents.Add(itemStack);
             }
 
@@ -29,7 +29,7 @@ namespace Runtime.Data {
             itemStack.Mass += mass;
         }
 
-        public void Add(ItemStack itemStack) => Add(itemStack.TrashCategory, itemStack.Mass);
+        public void Add(ItemStack itemStack) => Add(itemStack.TrashMaterial, itemStack.Mass);
 
         public void Add(MaterialInventory inventory) {
             foreach (var itemStack in inventory) {
@@ -37,10 +37,10 @@ namespace Runtime.Data {
             }
         }
 
-        public void Remove(TrashCategory trashCategory, float mass) {
+        public void Remove(TrashMaterial trashMaterial, float mass) {
             if(mass <= 0) return;
             
-            var itemStack = GetItemStack(trashCategory);
+            var itemStack = GetItemStack(trashMaterial);
             var inventoryMass = itemStack == null ? 0.0f : itemStack.Mass;
             if (itemStack == null || inventoryMass < mass) throw new Exception("Attempting to remove more items than inventory contains");
 
@@ -51,7 +51,7 @@ namespace Runtime.Data {
             }
         }
 
-        public void Remove(ItemStack itemStack) => Remove(itemStack.TrashCategory, itemStack.Mass);
+        public void Remove(ItemStack itemStack) => Remove(itemStack.TrashMaterial, itemStack.Mass);
 
         public void Remove(MaterialInventory inventory) {
             foreach (var itemStack in inventory) {
@@ -59,18 +59,18 @@ namespace Runtime.Data {
             }
         }
 
-        public float GetTrashCategoryMass(TrashCategory trashCategory) {
-            var itemStack = GetItemStack(trashCategory);
+        public float GetTrashMaterialMass(TrashMaterial trashMaterial) {
+            var itemStack = GetItemStack(trashMaterial);
             return itemStack == null ? 0 : itemStack.Mass;
         }
 
-        private ItemStack GetItemStack(TrashCategory trashCategory) {
-            return contents.FirstOrDefault(stack => stack.TrashCategory == trashCategory);
+        private ItemStack GetItemStack(TrashMaterial trashMaterial) {
+            return contents.FirstOrDefault(stack => stack.TrashMaterial == trashMaterial);
         }
 
         public bool Contains(MaterialInventory other) {
             foreach (var itemStack in other) {
-                var selfStack = GetItemStack(itemStack.TrashCategory);
+                var selfStack = GetItemStack(itemStack.TrashMaterial);
                 if (selfStack == null || selfStack.Mass < itemStack.Mass) 
                     return false;
             }

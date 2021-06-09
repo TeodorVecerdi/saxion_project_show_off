@@ -7,7 +7,7 @@ using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
     public class PollutionTracker : MonoBehaviour, IEventSubscriber {
-        [InfoBox("The amount with which raw pollution gets divided. Basically controls how much pollution is necessary to reach 'max' pollution.\nA value of 100 means 100 pollution = 100% polluted")]
+        [InfoBox("The amount by which to divide raw pollution. \nBasically controls how much pollution is necessary to reach 'max' pollution.\nA value of 100 means 100 pollution = 100% polluted")]
         [SerializeField] private float pollutionMultiplier = 100;
         
         private float rawPollution;

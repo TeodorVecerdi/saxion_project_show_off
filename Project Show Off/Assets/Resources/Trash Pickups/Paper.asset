@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Paper
   m_EditorClassIdentifier: 
   itemName: Paper
-  trashCategory: {fileID: 11400000, guid: fec93a18793254344b0eb7b9c697fd84, type: 2}
+  trashMaterial: {fileID: 11400000, guid: fec93a18793254344b0eb7b9c697fd84, type: 2}
   minimumMass: 0.4
   maximumMass: 0.6
   pickupDuration: 0.5

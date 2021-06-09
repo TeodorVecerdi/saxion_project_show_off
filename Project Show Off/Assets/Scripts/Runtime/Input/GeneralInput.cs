@@ -5,9 +5,11 @@ using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
     public class GeneralInput : MonoBehaviour, IEventSubscriber {
-        private bool isBuildModeActive;
+        private static bool isBuildModeActive;
 
         private IDisposable gameModeChangeEventUnsubscribeToken;
+
+        public static bool IsBuildModeActive => isBuildModeActive;
 
         private void Awake() {
             gameModeChangeEventUnsubscribeToken = this.Subscribe(EventType.GameModeChange);

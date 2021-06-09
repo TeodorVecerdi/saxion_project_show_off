@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using DG.Tweening;
-using NaughtyAttributes;
 using Runtime.Event;
 using TMPro;
 using UnityEngine;
@@ -98,7 +97,7 @@ namespace Runtime {
                     StopPickup();
 
                 pickupUnderMouse = pickup;
-                text.text = $"{pickupUnderMouse.TrashPickup.ItemName} ({pickupUnderMouse.TrashPickup.TrashCategory.CategoryName})";
+                text.text = $"{pickupUnderMouse.TrashPickup.ItemName} ({pickupUnderMouse.TrashPickup.TrashMaterial.MaterialName})";
             } else {
                 if (pickupUnderMouse != null && isPickingUp)
                     StopPickup();

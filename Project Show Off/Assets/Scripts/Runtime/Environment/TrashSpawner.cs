@@ -1,12 +1,9 @@
-﻿using System.Collections.Generic;
-using DG.Tweening;
+﻿using DG.Tweening;
 using NaughtyAttributes;
-using Runtime.Data;
 using Runtime.Event;
 using UnityCommons;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.Serialization;
 using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
@@ -19,13 +16,9 @@ namespace Runtime {
         [SerializeField] private float spawnInterval = 4f;
         [SerializeField] private float trashScaleUpDuration = 0.1f;
         [SerializeField, MinValue(0)] private int initialTrashCount = 20;
+        [SerializeField] private float yOffset = 0.25f;
 
-        private List<TrashPickup> trashPickups;
         private float spawnTimer;
-
-        private void Awake() {
-            trashPickups = new List<TrashPickup>(Resources.LoadAll<TrashPickup>("Trash Pickups"));
-        }
 
         private void Start() {
             SpawnInitialTrash();
@@ -50,14 +43,14 @@ namespace Runtime {
 
         private float SpawnTrash(bool sendEvent = true) {
             const int maxTries = 10;
-            var choice = Rand.ListItem(trashPickups);
+            var choice = Rand.ReadOnlyListItem(ResourcesProvider.TrashPickups);
 
             for (var i = 0; i < maxTries; i++) {
                 var spawnX = Rand.Range(from.x, to.x);
                 var spawnZ = Rand.Range(from.z, to.z);
                 var ray = new Ray(new Vector3(spawnX, worldMaxHeight + 25.0f, spawnZ), Vector3.down);
                 if (Physics.Raycast(ray, out var hit, worldMaxHeight + 1000f, LayerMask.GetMask("Ground"))) {
-                    var spawnY = hit.point.y;
+                    var spawnY = hit.point.y + yOffset;
 
                     var trash = Instantiate(choice.Prefab, new Vector3(spawnX, spawnY, spawnZ), Quaternion.Euler(0, Rand.Float * 360.0f, 0), transform);
                     trash.Load(choice);

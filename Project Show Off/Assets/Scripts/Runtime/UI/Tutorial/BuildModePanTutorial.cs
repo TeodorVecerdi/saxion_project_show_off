@@ -8,19 +8,21 @@ namespace Runtime.Tutorial {
         
         [HorizontalLine(color: EColor.Orange, order = -10000), Header("Build Mode Pan/Move Tutorial", order = -20000)]
         [SerializeField] private float movementRequired = 100.0f;
-        [Space]
-        [SerializeField] private Camera camera;
 
+        private new Camera camera;
         private float totalMoved;
         private Vector3 dragStartPosition;
         private Vector3 dragCurrentPosition;
         private Plane dragPlane;
 
         protected override void OnAwake() {
+            camera = ResourcesProvider.MainCamera;
             dragPlane = new Plane(Vector3.up, Vector3.zero);
         }
 
         protected override void Process() {
+            if(!GeneralInput.IsBuildModeActive) return;
+            
             var mouse = Mouse.current;
             var mousePosition = (Vector3) mouse.position.ReadValue();
 
