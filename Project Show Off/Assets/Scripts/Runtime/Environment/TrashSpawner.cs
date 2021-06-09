@@ -42,7 +42,7 @@ namespace Runtime {
 
         private float SpawnTrash(bool sendEvent = true) {
             const int maxTries = 10;
-            var choice = Rand.ListItemReadOnly(ResourcesProvider.TrashPickups);
+            var choice = Rand.ReadOnlyListItem(ResourcesProvider.TrashPickups);
 
             for (var i = 0; i < maxTries; i++) {
                 var spawnX = Rand.Range(from.x, to.x);
