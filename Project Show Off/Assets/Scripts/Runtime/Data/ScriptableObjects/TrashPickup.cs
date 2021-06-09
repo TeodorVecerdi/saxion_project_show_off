@@ -4,7 +4,7 @@ namespace Runtime.Data {
     [CreateAssetMenu(fileName = "NewItem", menuName = "Data/Trash Pickup", order = 0)]
     public class TrashPickup : ScriptableObject {
         [SerializeField] private string itemName;
-        [SerializeField] private TrashCategory trashCategory;
+        [SerializeField] private TrashMaterial trashCategory;
         [SerializeField] private float minimumMass;
         [SerializeField] private float maximumMass;
         [SerializeField, Tooltip("In seconds")] private float pickupDuration = 1.0f;
@@ -12,7 +12,7 @@ namespace Runtime.Data {
         [SerializeField] private Pickup prefab;
 
         public string ItemName => itemName;
-        public TrashCategory TrashCategory => trashCategory;
+        public TrashMaterial TrashCategory => trashCategory;
         public float MinimumMass => minimumMass;
         public float MaximumMass => maximumMass;
         public float PickupDuration => pickupDuration;

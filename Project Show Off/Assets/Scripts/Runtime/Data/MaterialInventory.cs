@@ -16,7 +16,7 @@ namespace Runtime.Data {
             contents = new List<ItemStack>();
         }
 
-        public void Add(TrashCategory trashCategory, float mass) {
+        public void Add(TrashMaterial trashCategory, float mass) {
             if(mass <= 0) return;
             var itemStack = GetItemStack(trashCategory);
             
@@ -37,7 +37,7 @@ namespace Runtime.Data {
             }
         }
 
-        public void Remove(TrashCategory trashCategory, float mass) {
+        public void Remove(TrashMaterial trashCategory, float mass) {
             if(mass <= 0) return;
             
             var itemStack = GetItemStack(trashCategory);
@@ -59,12 +59,12 @@ namespace Runtime.Data {
             }
         }
 
-        public float GetTrashCategoryMass(TrashCategory trashCategory) {
+        public float GetTrashCategoryMass(TrashMaterial trashCategory) {
             var itemStack = GetItemStack(trashCategory);
             return itemStack == null ? 0 : itemStack.Mass;
         }
 
-        private ItemStack GetItemStack(TrashCategory trashCategory) {
+        private ItemStack GetItemStack(TrashMaterial trashCategory) {
             return contents.FirstOrDefault(stack => stack.TrashCategory == trashCategory);
         }
 

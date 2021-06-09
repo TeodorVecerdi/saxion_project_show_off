@@ -30,19 +30,19 @@ namespace Runtime {
             objectNameText.text = buildableObject.Name;
             objectDescriptionText.text = buildableObject.Description;
 
-            var glassRequirements = buildableObject.ConstructionRequirements.FirstOrDefault(stack => stack.TrashCategory.Type == TrashCategory.Types.Glass);
+            var glassRequirements = buildableObject.ConstructionRequirements.FirstOrDefault(stack => stack.TrashCategory.Type == TrashMaterial.Types.Glass);
             glassCount.text = glassRequirements == null ? "0" : glassRequirements.Mass.ToString(CultureInfo.InvariantCulture);
             if (glassRequirements == null) glassCanvasGroup.alpha = 0.5f;
             
-            var metalRequirements = buildableObject.ConstructionRequirements.FirstOrDefault(stack => stack.TrashCategory.Type == TrashCategory.Types.Metal);
+            var metalRequirements = buildableObject.ConstructionRequirements.FirstOrDefault(stack => stack.TrashCategory.Type == TrashMaterial.Types.Metal);
             metalCount.text = metalRequirements == null ? "0" : metalRequirements.Mass.ToString(CultureInfo.InvariantCulture);
             if (metalRequirements == null) metalCanvasGroup.alpha = 0.5f;
             
-            var paperRequirements = buildableObject.ConstructionRequirements.FirstOrDefault(stack => stack.TrashCategory.Type == TrashCategory.Types.Paper);
+            var paperRequirements = buildableObject.ConstructionRequirements.FirstOrDefault(stack => stack.TrashCategory.Type == TrashMaterial.Types.Paper);
             paperCount.text = paperRequirements == null ? "0" : paperRequirements.Mass.ToString(CultureInfo.InvariantCulture);
             if (paperRequirements == null) paperCanvasGroup.alpha = 0.5f;
             
-            var plasticRequirements = buildableObject.ConstructionRequirements.FirstOrDefault(stack => stack.TrashCategory.Type == TrashCategory.Types.Plastic);
+            var plasticRequirements = buildableObject.ConstructionRequirements.FirstOrDefault(stack => stack.TrashCategory.Type == TrashMaterial.Types.Plastic);
             plasticCount.text = plasticRequirements == null ? "0" : plasticRequirements.Mass.ToString(CultureInfo.InvariantCulture);
             if (plasticRequirements == null) plasticCanvasGroup.alpha = 0.5f;
 

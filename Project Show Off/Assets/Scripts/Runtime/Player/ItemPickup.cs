@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using DG.Tweening;
-using NaughtyAttributes;
 using Runtime.Event;
 using TMPro;
 using UnityEngine;

@@ -1,9 +1,8 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Runtime.Data {
-    [CreateAssetMenu(fileName = "NewTrashCategory", menuName = "Data/Trash Category")]
-    public class TrashCategory : ScriptableObject {
+    [CreateAssetMenu(fileName = "NewTrashMaterial", menuName = "Data/Trash Material")]
+    public class TrashMaterial : ScriptableObject {
         [SerializeField] private string categoryName;
         [SerializeField] private Sprite icon;
         [SerializeField] private Sprite verticalPattern;

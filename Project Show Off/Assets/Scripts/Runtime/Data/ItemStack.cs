@@ -5,17 +5,17 @@ using UnityEngine;
 namespace Runtime.Data {
     [Serializable]
     public class ItemStack : IEquatable<ItemStack> {
-        [SerializeField] private TrashCategory trashCategory;
+        [SerializeField] private TrashMaterial trashCategory;
         [SerializeField] private float mass;
         
-        public TrashCategory TrashCategory => trashCategory;
+        public TrashMaterial TrashCategory => trashCategory;
         
         public float Mass {
             get => mass;
             set => mass = value;
         }
 
-        public ItemStack(TrashCategory trashCategory, float mass) {
+        public ItemStack(TrashMaterial trashCategory, float mass) {
             this.trashCategory = trashCategory;
             this.mass = mass;
         }
