@@ -8,6 +8,9 @@ TextureImporter:
   - first:
       213: 6864086708673216346
     second: Triangle
+  - first:
+      213: -471119314482427843
+    second: Triangle Rounded Top
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -100,12 +103,12 @@ TextureImporter:
       name: Rounded Triangle
       rect:
         serializedVersion: 2
-        x: 4
+        x: 11
         y: 35
         width: 477
         height: 419
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -121,12 +124,12 @@ TextureImporter:
       name: Triangle
       rect:
         serializedVersion: 2
-        x: 501
+        x: 526
         y: 35
         width: 512
         height: 443
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -134,6 +137,27 @@ TextureImporter:
       bones: []
       spriteID: a5f72f97e72224f50800000000000000
       internalID: 6864086708673216346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Triangle Rounded Top
+      rect:
+        serializedVersion: 2
+        x: 1059
+        y: 35
+        width: 512
+        height: 419
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d380375ca7f3679f0800000000000000
+      internalID: -471119314482427843
       vertices: []
       indices: 
       edges: []
