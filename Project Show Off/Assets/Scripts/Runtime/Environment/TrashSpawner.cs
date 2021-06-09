@@ -16,6 +16,7 @@ namespace Runtime {
         [SerializeField] private float spawnInterval = 4f;
         [SerializeField] private float trashScaleUpDuration = 0.1f;
         [SerializeField, MinValue(0)] private int initialTrashCount = 20;
+        [SerializeField] private float yOffset = 0.25f;
 
         private float spawnTimer;
 
@@ -49,7 +50,7 @@ namespace Runtime {
                 var spawnZ = Rand.Range(from.z, to.z);
                 var ray = new Ray(new Vector3(spawnX, worldMaxHeight + 25.0f, spawnZ), Vector3.down);
                 if (Physics.Raycast(ray, out var hit, worldMaxHeight + 1000f, LayerMask.GetMask("Ground"))) {
-                    var spawnY = hit.point.y;
+                    var spawnY = hit.point.y + yOffset;
 
                     var trash = Instantiate(choice.Prefab, new Vector3(spawnX, spawnY, spawnZ), Quaternion.Euler(0, Rand.Float * 360.0f, 0), transform);
                     trash.Load(choice);
