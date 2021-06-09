@@ -21292,6 +21292,30 @@ PrefabInstance:
       propertyPath: near clip plane
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 8573404978122709731, guid: baf922d5f1c59a044b2fb5f87876d9fb, type: 3}
+      propertyPath: TAAQuality
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8573404978122709731, guid: baf922d5f1c59a044b2fb5f87876d9fb, type: 3}
+      propertyPath: SMAAQuality
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8573404978122709731, guid: baf922d5f1c59a044b2fb5f87876d9fb, type: 3}
+      propertyPath: antialiasing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8573404978122709731, guid: baf922d5f1c59a044b2fb5f87876d9fb, type: 3}
+      propertyPath: taaAntiFlicker
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8573404978122709731, guid: baf922d5f1c59a044b2fb5f87876d9fb, type: 3}
+      propertyPath: taaSharpenStrength
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8573404978122709731, guid: baf922d5f1c59a044b2fb5f87876d9fb, type: 3}
+      propertyPath: taaMotionVectorRejection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8573404978122709733, guid: baf922d5f1c59a044b2fb5f87876d9fb, type: 3}
       propertyPath: m_RootOrder
       value: 1

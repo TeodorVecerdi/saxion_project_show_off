@@ -444,6 +444,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1565523223787411116}
     m_Modifications:
+    - target: {fileID: 5749393550392241190, guid: 6c1b629c0bd664e44b68c50ae56c1279, type: 3}
+      propertyPath: allTutorials.Array.size
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6292469753081509378, guid: 6c1b629c0bd664e44b68c50ae56c1279, type: 3}
       propertyPath: m_Pivot.x
       value: 0
