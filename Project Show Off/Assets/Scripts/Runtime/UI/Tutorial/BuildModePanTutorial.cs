@@ -9,7 +9,7 @@ namespace Runtime.Tutorial {
         [HorizontalLine(color: EColor.Orange, order = -10000), Header("Build Mode Pan/Move Tutorial", order = -20000)]
         [SerializeField] private float movementRequired = 100.0f;
         [Space]
-        [SerializeField] private Camera camera;
+        [SerializeField] private new Camera camera;
 
         private float totalMoved;
         private Vector3 dragStartPosition;
