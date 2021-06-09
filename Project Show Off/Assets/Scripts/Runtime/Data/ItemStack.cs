@@ -1,22 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Runtime.Data {
     [Serializable]
     public class ItemStack : IEquatable<ItemStack> {
-        [SerializeField] private TrashMaterial trashCategory;
+        [SerializeField] private TrashMaterial trashMaterial;
         [SerializeField] private float mass;
         
-        public TrashMaterial TrashCategory => trashCategory;
+        public TrashMaterial TrashMaterial => trashMaterial;
         
         public float Mass {
             get => mass;
             set => mass = value;
         }
 
-        public ItemStack(TrashMaterial trashCategory, float mass) {
-            this.trashCategory = trashCategory;
+        public ItemStack(TrashMaterial trashMaterial, float mass) {
+            this.trashMaterial = trashMaterial;
             this.mass = mass;
         }
 
@@ -32,7 +33,7 @@ namespace Runtime.Data {
         }
 
         public override int GetHashCode() {
-            return trashCategory.GetHashCode();
+            return trashMaterial.GetHashCode();
         }
 
         public static bool operator ==(ItemStack left, ItemStack right) {
@@ -51,11 +52,11 @@ namespace Runtime.Data {
                 if (ReferenceEquals(x, null)) return false;
                 if (ReferenceEquals(y, null)) return false;
                 if (x.GetType() != y.GetType()) return false;
-                return Equals(x.trashCategory, y.trashCategory);
+                return Equals(x.trashMaterial, y.trashMaterial);
             }
 
             public int GetHashCode(ItemStack obj) {
-                return obj.trashCategory.GetHashCode();
+                return obj.trashMaterial.GetHashCode();
             }
         }
     }

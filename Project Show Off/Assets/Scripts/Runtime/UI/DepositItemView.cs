@@ -9,7 +9,7 @@ namespace Runtime {
         [SerializeField] private TextMeshProUGUI countText;
 
         public void Build(ItemStack itemStack) {
-            icon.sprite = itemStack.TrashCategory.Icon;
+            icon.sprite = itemStack.TrashMaterial.Icon;
             UpdateItemCount(itemStack.Mass);
         }
 

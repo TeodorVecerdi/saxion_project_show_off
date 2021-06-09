@@ -97,7 +97,7 @@ namespace Runtime {
                     StopPickup();
 
                 pickupUnderMouse = pickup;
-                text.text = $"{pickupUnderMouse.TrashPickup.ItemName} ({pickupUnderMouse.TrashPickup.TrashCategory.CategoryName})";
+                text.text = $"{pickupUnderMouse.TrashPickup.ItemName} ({pickupUnderMouse.TrashPickup.TrashMaterial.MaterialName})";
             } else {
                 if (pickupUnderMouse != null && isPickingUp)
                     StopPickup();

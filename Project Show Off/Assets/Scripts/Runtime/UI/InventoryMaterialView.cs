@@ -8,8 +8,8 @@ namespace Runtime {
         [SerializeField] private Image patternImage;
         [SerializeField] private Image transitionImage;
         
-        public void LoadUI(TrashMaterial trashCategory) {
-            patternImage.sprite = trashCategory.VerticalPattern;
+        public void LoadUI(TrashMaterial trashMaterial) {
+            patternImage.sprite = trashMaterial.VerticalPattern;
             patternImage.type = Image.Type.Tiled;
             patternImage.pixelsPerUnitMultiplier = 1.56f; // magic value woo
 
@@ -20,8 +20,8 @@ namespace Runtime {
             patternImage.rectTransform.sizeDelta = sizeDelta;
         }
 
-        public void LoadTransition(TrashMaterial otherTrashCategory) {
-            transitionImage.color = otherTrashCategory.PatternColor;
+        public void LoadTransition(TrashMaterial otherTrashMaterial) {
+            transitionImage.color = otherTrashMaterial.PatternColor;
         }
 
         public void UpdateSize(float screenSize) {
