@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Main Menu.unity
+    guid: c8d181972f0088141a66ad3540422939
+  - enabled: 1
     path: Assets/Scenes/Playtest - Teodor.unity
     guid: 7f5cb295d7a51874da5a550d4f3f91ae
   m_configObjects: {}
