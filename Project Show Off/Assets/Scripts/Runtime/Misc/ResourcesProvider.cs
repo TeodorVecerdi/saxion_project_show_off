@@ -11,7 +11,8 @@ namespace Runtime {
         [SerializeField] private string trashPickupsFolder;
         [SerializeField] private string buildableObjectsFolder;
         [SerializeField] private string cameraName = "Game Camera";
-        
+        [SerializeField] private SoundSettings soundSettings;
+
         private ReadOnlyCollection<TrashMaterial> trashMaterials;
         private ReadOnlyCollection<TrashPickup> trashPickups;
         private ReadOnlyCollection<BuildableObject> buildableObjects;
@@ -28,5 +29,6 @@ namespace Runtime {
         public static IReadOnlyList<TrashPickup> TrashPickups => Instance.trashPickups;
         public static IReadOnlyList<BuildableObject> BuildableObjects => Instance.buildableObjects;
         public static Camera MainCamera => Instance.mainCamera;
+        public static SoundSettings SoundSettings => Instance.soundSettings;
     }
 }
