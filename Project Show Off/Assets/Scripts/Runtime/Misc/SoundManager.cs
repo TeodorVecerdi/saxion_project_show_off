@@ -45,7 +45,7 @@ namespace Runtime {
         }
 
         private void OnDestroy() {
-            settingsChangedEventUnsubscribeToken.Dispose();
+            settingsChangedEventUnsubscribeToken?.Dispose();
         }
 
         private void LoadSoundDictionary() {

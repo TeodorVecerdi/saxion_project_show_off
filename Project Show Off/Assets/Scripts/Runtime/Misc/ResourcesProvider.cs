@@ -5,6 +5,7 @@ using System.Linq;
 using Runtime.Data;
 using UnityCommons;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Runtime {
     public class ResourcesProvider : MonoSingleton<ResourcesProvider> {
@@ -23,12 +24,17 @@ namespace Runtime {
             trashMaterials = Resources.LoadAll<TrashMaterial>(trashMaterialsFolder).ToList().AsReadOnly();
             trashPickups = Resources.LoadAll<TrashPickup>(trashPickupsFolder).ToList().AsReadOnly();
             buildableObjects = Resources.LoadAll<BuildableObject>(buildableObjectsFolder).ToList().AsReadOnly();
+            SceneManager.activeSceneChanged += OnSceneChanged;
         }
 
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
-        private static void AfterSceneLoad() {
-            Debug.Log("AfterSceneLoad - GetCamera");
-            Instance.mainCamera = GameObject.Find(Instance.cameraName)?.GetComponent<Camera>();
+        private void OnDestroy() {
+            SceneManager.activeSceneChanged -= OnSceneChanged;
+        }
+
+        private void OnSceneChanged(Scene arg0, Scene arg1) {
+            var newCamera = GameObject.Find(Instance.cameraName)?.GetComponent<Camera>();
+            if(newCamera != null)
+                Instance.mainCamera = newCamera;
         }
 
         public static IReadOnlyList<TrashMaterial> TrashMaterials => Instance.trashMaterials;

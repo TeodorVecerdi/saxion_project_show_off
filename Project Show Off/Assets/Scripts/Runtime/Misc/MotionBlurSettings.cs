@@ -30,11 +30,11 @@ namespace Runtime {
         }
 
         private void OnDestroy() {
-            settingsChangedEventUnsubscribeToken.Dispose();
+            settingsChangedEventUnsubscribeToken?.Dispose();
         }
 
         private void UpdateMotionBlur(bool enableMotionBlur) {
-            motionBlurComponent.active = enableMotionBlur;
+            motionBlurComponent.intensity.value = enableMotionBlur ? 1.0f : 0.0f;
         }
 
         /// <summary>

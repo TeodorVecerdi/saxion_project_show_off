@@ -58,7 +58,6 @@ namespace Runtime {
         
         private Transform cameraTransform;
         private CameraBoundaries cameraBoundaries;
-        private Camera actualCamera;
         private Plane dragPlane;
         private Mouse mouse;
         private bool isEnabled;
@@ -70,7 +69,6 @@ namespace Runtime {
             dragPlane = new Plane(Vector3.up, Vector3.zero);
             mouse = Mouse.current;
             gameModeToggleEventUnsubscribeToken = this.Subscribe(EventType.GameModeToggle);
-            actualCamera = ResourcesProvider.MainCamera;
             
             DisableBuildMode();
         }
@@ -88,7 +86,7 @@ namespace Runtime {
         }
 
         private void Update() {
-            if (!isEnabled) return;
+            if (!isEnabled || !InputManager.BuildModeActions.enabled) return;
 
             if (InputManager.IsBoosting) {
                 movementSpeed = boostMovementSpeed;
@@ -110,14 +108,14 @@ namespace Runtime {
 
             // Pan / Move
             if (mouse.leftButton.wasPressedThisFrame) {
-                var ray = actualCamera.ScreenPointToRay(mousePosition);
+                var ray = ResourcesProvider.MainCamera.ScreenPointToRay(mousePosition);
                 if (dragPlane.Raycast(ray, out var distance)) {
                     dragStartPosition = ray.GetPoint(distance);
                 }
             }
 
             if (mouse.leftButton.isPressed) {
-                var ray = actualCamera.ScreenPointToRay(mousePosition);
+                var ray = ResourcesProvider.MainCamera.ScreenPointToRay(mousePosition);
                 if (dragPlane.Raycast(ray, out var distance)) {
                     dragCurrentPosition = ray.GetPoint(distance);
                     newPosition = transform.position + dragStartPosition - dragCurrentPosition;

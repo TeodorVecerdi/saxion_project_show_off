@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using NaughtyAttributes;
 using Runtime.Event;
@@ -14,6 +15,7 @@ namespace Runtime.Tutorial {
         
         private Dictionary<string, TutorialSlide> tutorialDictionary;
         private TutorialSlide activeTutorialSlide;
+        private IDisposable resetTutorialsEventUnsubscribeToken;
 
         [Button]
         public void ResetTutorials() {
@@ -21,6 +23,8 @@ namespace Runtime.Tutorial {
         }
 
         private void Awake() {
+            resetTutorialsEventUnsubscribeToken = this.Subscribe(EventType.ResetTutorial);
+            
             tutorialDictionary = new Dictionary<string, TutorialSlide>();
             foreach (var tutorialSlide in allTutorials) {
                 tutorialDictionary.Add(tutorialSlide.TutorialKey, tutorialSlide);
@@ -48,6 +52,10 @@ namespace Runtime.Tutorial {
             activeTutorialSlide.Show(2.0f);
         }
 
+        private void OnDestroy() {
+            resetTutorialsEventUnsubscribeToken.Dispose();
+        }
+
         /// <summary>
         /// <para>Receives an event from the Event Queue</para>
         /// </summary>
@@ -56,8 +64,9 @@ namespace Runtime.Tutorial {
         public bool OnEvent(EventData eventData) {
             switch (eventData) {
                 case EmptyEvent {Type: EventType.ResetTutorial}: {
-                    activeTutorialSlide.Hide(0.0f).OnComplete(() => {
-                        activeTutorialSlide.gameObject.SetActive(false);
+                    var activeTutorial = allTutorials.First(slide => slide.gameObject.activeSelf);
+                    activeTutorial.Hide(0.0f).OnComplete(() => {
+                        activeTutorial.gameObject.SetActive(false);
                         
                         activeTutorialSlide = allTutorials[0];
                         activeTutorialSlide.GetComponent<RectTransform>().anchoredPosition = new Vector2(transitionToX, -8.0f);
