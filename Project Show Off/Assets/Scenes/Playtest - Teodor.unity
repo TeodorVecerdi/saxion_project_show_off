@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1484.0566, g: 1838.8809, b: 2433.832, a: 1}
+  m_IndirectSpecularColor: {r: 1484.1904, g: 1839.0898, b: 2433.9258, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -21078,6 +21078,10 @@ PrefabInstance:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 738646681827304406}
+    - target: {fileID: 6447761907418670376, guid: 3fa3ab45af8d2064283c538d4ce7d78d, type: 3}
+      propertyPath: soundSettings
+      value: 
+      objectReference: {fileID: 11400000, guid: 1471740d16e47344fb06b3e097b7614c, type: 2}
     - target: {fileID: 8410512925163984017, guid: 3fa3ab45af8d2064283c538d4ce7d78d, type: 3}
       propertyPath: buildModeCamera
       value: 

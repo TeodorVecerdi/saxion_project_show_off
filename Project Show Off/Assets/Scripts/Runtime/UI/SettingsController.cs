@@ -5,6 +5,7 @@ using Runtime.Event;
 using UnityCommons;
 using UnityEngine;
 using UnityEngine.UI;
+using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
     [RequireComponent(typeof(CanvasGroup))]
@@ -55,7 +56,7 @@ namespace Runtime {
             PlayerPrefs.SetFloat("Settings_SfxVolume", sfxVolume);
             PlayerPrefs.SetFloat("Settings_MusicVolume", musicVolume);
             PlayerPrefs.SetFloat("Settings_MouseSensitivity", mouseSensitivity);
-            
+
             QualitySettings.SetQualityLevel(qualityLevel, true);
 
             // Send event so settings can be applied 
@@ -102,7 +103,8 @@ namespace Runtime {
         }
 
         public void OnResetTutorialsClicked() {
-            //TODO: yeet out event / save PlayerPrefs
+            PlayerPrefs.DeleteKey("current_tutorial");
+            EventQueue.QueueEvent(new EmptyEvent(this, EventType.ResetTutorial));
         }
     }
 }

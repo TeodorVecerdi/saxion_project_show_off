@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using NaughtyAttributes;
+using Runtime.Event;
 using UnityEngine;
+using EventType = Runtime.Event.EventType;
 
 namespace Runtime.Tutorial {
-    public class TutorialController : MonoBehaviour {
+    public class TutorialController : MonoBehaviour, IEventSubscriber {
         [SerializeField] private List<TutorialSlide> allTutorials;
         [SerializeField] private float transitionFromX;
         [SerializeField] private float transitionToX;
@@ -43,6 +46,29 @@ namespace Runtime.Tutorial {
             activeTutorialSlide.GetComponent<RectTransform>().anchoredPosition = new Vector2(transitionToX, -8.0f);
             activeTutorialSlide.gameObject.SetActive(true);
             activeTutorialSlide.Show(2.0f);
+        }
+
+        /// <summary>
+        /// <para>Receives an event from the Event Queue</para>
+        /// </summary>
+        /// <param name="eventData">Event data raised</param>
+        /// <returns><c>true</c> if event propagation should be stopped, <c>false</c> otherwise.</returns>
+        public bool OnEvent(EventData eventData) {
+            switch (eventData) {
+                case EmptyEvent {Type: EventType.ResetTutorial}: {
+                    activeTutorialSlide.Hide(0.0f).OnComplete(() => {
+                        activeTutorialSlide.gameObject.SetActive(false);
+                        
+                        activeTutorialSlide = allTutorials[0];
+                        activeTutorialSlide.GetComponent<RectTransform>().anchoredPosition = new Vector2(transitionToX, -8.0f);
+                        activeTutorialSlide.gameObject.SetActive(true);
+                        activeTutorialSlide.Show(2.0f);
+                    });
+                    
+                    return true;
+                }
+                default: return false;
+            }
         }
     }
 }
