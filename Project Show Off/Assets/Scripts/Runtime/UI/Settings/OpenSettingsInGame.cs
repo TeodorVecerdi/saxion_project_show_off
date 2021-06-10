@@ -27,7 +27,7 @@ namespace Runtime {
             settingsController.SetEnabled(isSettingsMenuOpen);
 
             if (isSettingsMenuOpen) settingsController.gameObject.SetActive(true);
-            settingsCanvasGroup.DOFade(isSettingsMenuOpen ? 1.0f : 0.0f, 0.25f).OnComplete(() => {
+            settingsCanvasGroup.DOFade(isSettingsMenuOpen ? 1.0f : 0.0f, 0.25f).SetUpdate(true).OnComplete(() => {
                 if (!isSettingsMenuOpen) settingsCanvasGroup.gameObject.SetActive(false);
             });
 

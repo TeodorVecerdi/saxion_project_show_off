@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Runtime.Data;
@@ -22,9 +23,14 @@ namespace Runtime {
             trashMaterials = Resources.LoadAll<TrashMaterial>(trashMaterialsFolder).ToList().AsReadOnly();
             trashPickups = Resources.LoadAll<TrashPickup>(trashPickupsFolder).ToList().AsReadOnly();
             buildableObjects = Resources.LoadAll<BuildableObject>(buildableObjectsFolder).ToList().AsReadOnly();
-            mainCamera = GameObject.Find(cameraName).GetComponent<Camera>();
         }
-        
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+        private static void AfterSceneLoad() {
+            Debug.Log("AfterSceneLoad - GetCamera");
+            Instance.mainCamera = GameObject.Find(Instance.cameraName)?.GetComponent<Camera>();
+        }
+
         public static IReadOnlyList<TrashMaterial> TrashMaterials => Instance.trashMaterials;
         public static IReadOnlyList<TrashPickup> TrashPickups => Instance.trashPickups;
         public static IReadOnlyList<BuildableObject> BuildableObjects => Instance.buildableObjects;
