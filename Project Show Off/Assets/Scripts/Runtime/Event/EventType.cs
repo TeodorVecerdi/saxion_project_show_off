@@ -22,5 +22,7 @@
         
         PollutionUpdate,
         PollutionChange,
+        
+        SettingsChanged
     }
 }
