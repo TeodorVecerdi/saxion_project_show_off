@@ -491,6 +491,12 @@ MonoBehaviour:
   sfxVolumeSlider: {fileID: 4066329378568295592}
   musicVolumeSlider: {fileID: 4066329378939350155}
   mouseSensitivitySlider: {fileID: 4066329379932400072}
+  onEnable:
+    m_PersistentCalls:
+      m_Calls: []
+  onDisable:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!225 &4066329378551483056
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -2712,7 +2718,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4066329379095936982}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4066329378551483070}
+        m_TargetAssemblyTypeName: Runtime.SettingsController, Game.Runtime
+        m_MethodName: OnResetTutorialsClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4066329379179005804
 GameObject:
   m_ObjectHideFlags: 0

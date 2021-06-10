@@ -36,7 +36,7 @@ namespace Runtime {
 
         private void OnCloseSettingsMenu(InputAction.CallbackContext obj) {
             if(!isSettingsMenuOpen) return;
-            OnSettingsClicked(false);
+            ShowSettings(false);
         }
 
         public void OnPlayClicked() {
@@ -47,16 +47,22 @@ namespace Runtime {
             
             animation.Play();
             StartCoroutine(SwitchSceneAfter(animation.clip.length));
+            SoundManager.PlaySound("Click");
         }
 
         public void OnSettingsClicked(bool showSettings) {
+            ShowSettings(showSettings);
+            SoundManager.PlaySound("Click");
+        }
+
+        private void ShowSettings(bool showSettings) {
             isSettingsMenuOpen = showSettings;
             settingsController.SetEnabled(showSettings);
-            if(!showSettings) buttonContainer.gameObject.SetActive(true);
+            if (!showSettings) buttonContainer.gameObject.SetActive(true);
             else settingsContainer.gameObject.SetActive(true);
 
             buttonContainer.DOFade(showSettings ? 0.0f : 1.0f, 0.25f).OnComplete(() => {
-                if(showSettings) buttonContainer.gameObject.SetActive(false);
+                if (showSettings) buttonContainer.gameObject.SetActive(false);
             });
             settingsContainer.DOFade(showSettings ? 1.0f : 0.0f, 0.25f).OnComplete(() => {
                 if (!showSettings) settingsContainer.gameObject.SetActive(false);

@@ -95,6 +95,7 @@ namespace Runtime {
             PlayerPrefs.SetInt("Settings_MotionBlur", enableMotionBlur ? 1 : 0);
             PlayerPrefs.Save();
             EventQueue.QueueEvent(new SettingsChangedEvent(this, enableMotionBlur, sfxVolume, musicVolume, mouseSensitivity));
+            SoundManager.PlaySound("Click");
         }
 
         private void OnSFXVolumeChanged(float volume) {
@@ -121,6 +122,7 @@ namespace Runtime {
         public void OnResetTutorialsClicked() {
             PlayerPrefs.DeleteKey("current_tutorial");
             EventQueue.QueueEvent(new EmptyEvent(this, EventType.ResetTutorial));
+            SoundManager.PlaySound("Click");
         }
     }
 }
