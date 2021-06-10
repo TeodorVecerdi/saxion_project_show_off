@@ -965,6 +965,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "ToggleSettings",
+                    "type": "Button",
+                    "id": "1a2c2d12-dc5d-4d33-aa2e-643f5f844685",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -976,6 +984,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "ToggleGameMode",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "59f1e8eb-8898-42c0-8bf7-3116ba0ab46e",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "ToggleSettings",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
