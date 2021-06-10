@@ -2,19 +2,24 @@ using System;
 using DG.Tweening;
 using NaughtyAttributes;
 using Runtime.Event;
+using TMPro;
 using UnityCommons;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
     [RequireComponent(typeof(CanvasGroup))]
     public class SettingsController : MonoBehaviour {
-        [SerializeField] private Dropdown qualityLevelDropdown;
+        [SerializeField] private TMP_Dropdown qualityLevelDropdown;
         [SerializeField] private Toggle motionBlurToggle;
         [SerializeField] private Slider sfxVolumeSlider;
         [SerializeField] private Slider musicVolumeSlider;
         [SerializeField] private Slider mouseSensitivitySlider;
+
+        [SerializeField] private UnityEvent onEnable;
+        [SerializeField] private UnityEvent onDisable;
 
         private CanvasGroup canvasGroup;
 
@@ -56,6 +61,7 @@ namespace Runtime {
             PlayerPrefs.SetFloat("Settings_SfxVolume", sfxVolume);
             PlayerPrefs.SetFloat("Settings_MusicVolume", musicVolume);
             PlayerPrefs.SetFloat("Settings_MouseSensitivity", mouseSensitivity);
+            PlayerPrefs.Save();
 
             QualitySettings.SetQualityLevel(qualityLevel, true);
 
@@ -71,35 +77,45 @@ namespace Runtime {
             mouseSensitivitySlider.onValueChanged.RemoveListener(OnMouseSensitivityChanged);
         }
 
+        public void SetEnabled(bool isEnabled) {
+            if (isEnabled) onEnable?.Invoke();
+            else onDisable?.Invoke();
+        }
+
         private void OnQualityLevelChanged(int qualityIndex) {
             qualityLevel = qualityIndex;
             QualitySettings.SetQualityLevel(qualityLevel, false);
             PlayerPrefs.SetInt("Settings_QualityLevel", qualityLevel);
-            EventQueue.RaiseEventImmediately(new SettingsChangedEvent(this, enableMotionBlur, sfxVolume, musicVolume, mouseSensitivity));
+            PlayerPrefs.Save();
+            EventQueue.QueueEvent(new SettingsChangedEvent(this, enableMotionBlur, sfxVolume, musicVolume, mouseSensitivity));
         }
 
         private void OnMotionBlurChanged(bool motionBlur) {
             enableMotionBlur = motionBlur;
             PlayerPrefs.SetInt("Settings_MotionBlur", enableMotionBlur ? 1 : 0);
-            EventQueue.RaiseEventImmediately(new SettingsChangedEvent(this, enableMotionBlur, sfxVolume, musicVolume, mouseSensitivity));
+            PlayerPrefs.Save();
+            EventQueue.QueueEvent(new SettingsChangedEvent(this, enableMotionBlur, sfxVolume, musicVolume, mouseSensitivity));
         }
 
         private void OnSFXVolumeChanged(float volume) {
             sfxVolume = volume;
             PlayerPrefs.SetFloat("Settings_SFXVolume", sfxVolume);
-            EventQueue.RaiseEventImmediately(new SettingsChangedEvent(this, enableMotionBlur, sfxVolume, musicVolume, mouseSensitivity));
+            PlayerPrefs.Save();
+            EventQueue.QueueEvent(new SettingsChangedEvent(this, enableMotionBlur, sfxVolume, musicVolume, mouseSensitivity));
         }
 
         private void OnMusicVolumeChanged(float volume) {
             musicVolume = volume;
             PlayerPrefs.SetFloat("Settings_MusicVolume", musicVolume);
-            EventQueue.RaiseEventImmediately(new SettingsChangedEvent(this, enableMotionBlur, sfxVolume, musicVolume, mouseSensitivity));
+            PlayerPrefs.Save();
+            EventQueue.QueueEvent(new SettingsChangedEvent(this, enableMotionBlur, sfxVolume, musicVolume, mouseSensitivity));
         }
 
         private void OnMouseSensitivityChanged(float sensitivity) {
             mouseSensitivity = sensitivity;
             PlayerPrefs.SetFloat("Settings_MouseSensitivity", mouseSensitivity);
-            EventQueue.RaiseEventImmediately(new SettingsChangedEvent(this, enableMotionBlur, sfxVolume, musicVolume, mouseSensitivity));
+            PlayerPrefs.Save();
+            EventQueue.QueueEvent(new SettingsChangedEvent(this, enableMotionBlur, sfxVolume, musicVolume, mouseSensitivity));
         }
 
         public void OnResetTutorialsClicked() {

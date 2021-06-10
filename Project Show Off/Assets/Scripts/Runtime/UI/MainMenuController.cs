@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -15,10 +17,26 @@ namespace Runtime {
         [SerializeField] private Image fadeImage;
         [SerializeField] private GameObject eventSystemGameObject;
 
+        private SettingsController settingsController;
         private Animation animation;
+        private bool isSettingsMenuOpen;
 
         private void Awake() {
             animation = GetComponent<Animation>();
+            settingsController = settingsContainer.GetComponent<SettingsController>();
+        }
+
+        private void OnEnable() {
+            InputManager.UIActions.Cancel.performed += OnCloseSettingsMenu;
+        }
+
+        private void OnDisable() {
+            InputManager.UIActions.Cancel.performed -= OnCloseSettingsMenu;
+        }
+
+        private void OnCloseSettingsMenu(InputAction.CallbackContext obj) {
+            if(!isSettingsMenuOpen) return;
+            OnSettingsClicked(false);
         }
 
         public void OnPlayClicked() {
@@ -32,9 +50,11 @@ namespace Runtime {
         }
 
         public void OnSettingsClicked(bool showSettings) {
+            isSettingsMenuOpen = showSettings;
+            settingsController.SetEnabled(showSettings);
             if(!showSettings) buttonContainer.gameObject.SetActive(true);
             else settingsContainer.gameObject.SetActive(true);
-            
+
             buttonContainer.DOFade(showSettings ? 0.0f : 1.0f, 0.25f).OnComplete(() => {
                 if(showSettings) buttonContainer.gameObject.SetActive(false);
             });
