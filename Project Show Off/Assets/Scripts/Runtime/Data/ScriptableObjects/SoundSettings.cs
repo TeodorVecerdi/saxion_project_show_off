@@ -12,6 +12,7 @@ namespace Runtime.Data {
         [Serializable]
         public class AudioKeyValuePair {
             public string Key;
+            public bool IsMusic;
             public bool HasVariations;
             public AudioClip Sound;
             public List<AudioClip> Variations;

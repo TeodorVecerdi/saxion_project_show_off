@@ -22,5 +22,8 @@
         
         PollutionUpdate,
         PollutionChange,
+        
+        SettingsChanged,
+        ResetTutorial
     }
 }

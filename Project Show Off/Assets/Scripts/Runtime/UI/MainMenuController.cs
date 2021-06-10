@@ -1,34 +1,72 @@
+using System;
 using System.Collections;
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Runtime {
+    [RequireComponent(typeof(Animation))]
     public class MainMenuController : MonoBehaviour {
-        private static readonly int speedPropertyID = Animator.StringToHash("Speed");
+        [Header("References")]
+        [SerializeField] private CanvasGroup settingsContainer;
+        [SerializeField] private CanvasGroup buttonContainer;
         
+        [Header("Scene Transition References")]
         [SerializeField] private Image fadeImage;
         [SerializeField] private GameObject eventSystemGameObject;
-        [SerializeField] private AnimationClip clip;
-        
-        private Animator animator;
+
+        private SettingsController settingsController;
+        private Animation animation;
+        private bool isSettingsMenuOpen;
 
         private void Awake() {
-            animator = GetComponent<Animator>();
+            animation = GetComponent<Animation>();
+            settingsController = settingsContainer.GetComponent<SettingsController>();
+        }
+
+        private void OnEnable() {
+            InputManager.UIActions.Cancel.performed += OnCloseSettingsMenu;
+        }
+
+        private void OnDisable() {
+            InputManager.UIActions.Cancel.performed -= OnCloseSettingsMenu;
+        }
+
+        private void OnCloseSettingsMenu(InputAction.CallbackContext obj) {
+            if(!isSettingsMenuOpen) return;
+            ShowSettings(false);
         }
 
         public void OnPlayClicked() {
-            animator.SetFloat(speedPropertyID, 1.0f);
-
             // prevents buttons from being clicked
             fadeImage.raycastTarget = true;
 
             Destroy(eventSystemGameObject);
-            StartCoroutine(SwitchSceneAfter(clip.length));
+            
+            animation.Play();
+            StartCoroutine(SwitchSceneAfter(animation.clip.length));
+            SoundManager.PlaySound("Click");
         }
 
-        public void OnSettingsClicked() {
-            Debug.Log("Settings clicked");
+        public void OnSettingsClicked(bool showSettings) {
+            ShowSettings(showSettings);
+            SoundManager.PlaySound("Click");
+        }
+
+        private void ShowSettings(bool showSettings) {
+            isSettingsMenuOpen = showSettings;
+            settingsController.SetEnabled(showSettings);
+            if (!showSettings) buttonContainer.gameObject.SetActive(true);
+            else settingsContainer.gameObject.SetActive(true);
+
+            buttonContainer.DOFade(showSettings ? 0.0f : 1.0f, 0.25f).OnComplete(() => {
+                if (showSettings) buttonContainer.gameObject.SetActive(false);
+            });
+            settingsContainer.DOFade(showSettings ? 1.0f : 0.0f, 0.25f).OnComplete(() => {
+                if (!showSettings) settingsContainer.gameObject.SetActive(false);
+            });
         }
 
         public void OnExitClicked() {

@@ -1,47 +1,67 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Runtime.Data;
+using Runtime.Event;
 using UnityCommons;
 using UnityEngine;
+using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
-    public class SoundManager : MonoSingleton<SoundManager> {
-        [SerializeField] private SoundSettings soundSettings;
+    public class SoundManager : MonoSingleton<SoundManager>, IEventSubscriber {
         
         private float sfxVolume = 1f;
-        private Dictionary<string, (AudioSource audioSource, SoundSettings.AudioKeyValuePair sound)> soundDictionary;
-
-        private Dictionary<string, (AudioSource audioSource, SoundSettings.AudioKeyValuePair settings)> Sounds => soundDictionary;
+        private float musicVolume = 1f;
+        private Dictionary<string, (AudioSource audioSource, SoundSettings.AudioKeyValuePair settings)> sounds;
+        private IDisposable settingsChangedEventUnsubscribeToken;
 
         public static float SfxVolume {
             get => Instance.sfxVolume;
             set {
                 Instance.sfxVolume = value;
-                foreach (var sound in Instance.Sounds) sound.Value.audioSource.volume = Instance.sfxVolume;
-
-                PlayerPrefs.SetFloat("SfxVolume", Instance.sfxVolume);
-                PlayerPrefs.Save();
+                foreach (var sound in Instance.sounds) {
+                    if(sound.Value.settings.IsMusic) continue; 
+                    sound.Value.audioSource.volume = Instance.sfxVolume;
+                }
+            }
+        }
+        
+        public static float MusicVolume {
+            get => Instance.musicVolume;
+            set {
+                Instance.musicVolume = value;
+                foreach (var sound in Instance.sounds) {
+                    if(!sound.Value.settings.IsMusic) continue; 
+                    sound.Value.audioSource.volume = Instance.sfxVolume;
+                }
             }
         }
 
         protected override void OnAwake() {
             LoadSoundDictionary();
-            SfxVolume = PlayerPrefs.GetFloat("SfxVolume", 0.75f);
+            settingsChangedEventUnsubscribeToken = this.Subscribe(EventType.SettingsChanged);
+            
+            SfxVolume = PlayerPrefs.GetFloat("Settings_SfxVolume", 1.0f);
+            MusicVolume = PlayerPrefs.GetFloat("Settings_MusicVolume", 1.0f);
+        }
+
+        private void OnDestroy() {
+            settingsChangedEventUnsubscribeToken?.Dispose();
         }
 
         private void LoadSoundDictionary() {
-            soundDictionary = new Dictionary<string, (AudioSource audioSource, SoundSettings.AudioKeyValuePair settings)>();
-            foreach (var sound in soundSettings.Sounds) {
+            sounds = new Dictionary<string, (AudioSource audioSource, SoundSettings.AudioKeyValuePair settings)>();
+            foreach (var sound in ResourcesProvider.SoundSettings.Sounds) {
                 var audioSource = gameObject.AddComponent<AudioSource>();
                 if (!sound.HasVariations)
                     audioSource.clip = sound.Sound;
-                soundDictionary[sound.Key] = (audioSource, sound);
+                sounds[sound.Key] = (audioSource, sound);
             }
         }
 
         public static void PlaySound(string soundKey, bool stopIfPlaying = false, bool skipIfAlreadyPlaying = false) {
-            if (!Instance.Sounds.ContainsKey(soundKey)) return;
+            if (!Instance.sounds.ContainsKey(soundKey)) return;
 
-            var (audioSource, settings) = Instance.Sounds[soundKey];
+            var (audioSource, settings) = Instance.sounds[soundKey];
 
             if (stopIfPlaying)
                 audioSource.Stop();
@@ -60,12 +80,28 @@ namespace Runtime {
         }
 
         public static void StopSound(string soundKey) {
-            if (!Instance.Sounds.ContainsKey(soundKey)) return;
-            Instance.Sounds[soundKey].audioSource.Stop();
+            if (!Instance.sounds.ContainsKey(soundKey)) return;
+            Instance.sounds[soundKey].audioSource.Stop();
         }
 
         public static bool IsPlaying(string soundKey) {
-            return Instance.Sounds.ContainsKey(soundKey) && Instance.Sounds[soundKey].audioSource.isPlaying;
+            return Instance.sounds.ContainsKey(soundKey) && Instance.sounds[soundKey].audioSource.isPlaying;
+        }
+
+        /// <summary>
+        /// <para>Receives an event from the Event Queue</para>
+        /// </summary>
+        /// <param name="eventData">Event data raised</param>
+        /// <returns><c>true</c> if event propagation should be stopped, <c>false</c> otherwise.</returns>
+        public bool OnEvent(EventData eventData) {
+            switch (eventData) {
+                case SettingsChangedEvent settingsChangedEvent: {
+                    SfxVolume = settingsChangedEvent.SfxVolume;
+                    MusicVolume = settingsChangedEvent.MusicVolume;
+                    return false;
+                }
+                default: return false;
+            }
         }
     }
 }

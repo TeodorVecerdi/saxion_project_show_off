@@ -198,7 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clampAngle: 80
-  mouseSensitivity: 400
+  minMaxMouseSensitivity: {x: 100, y: 700}
   lookForwardTransform: {fileID: 879175130479569128}
 --- !u!114 &1614876351368593877
 MonoBehaviour:
@@ -489,13 +489,13 @@ MonoBehaviour:
   maximumCarryMass: 20
   materialInventory:
     contents:
-    - trashCategory: {fileID: 11400000, guid: 30d4a134f1adb6b479af094e1fdf25f7, type: 2}
+    - trashMaterial: {fileID: 11400000, guid: 30d4a134f1adb6b479af094e1fdf25f7, type: 2}
       mass: 0
-    - trashCategory: {fileID: 11400000, guid: 2484c42e7f6c4d949b8bb98b18aedf0b, type: 2}
+    - trashMaterial: {fileID: 11400000, guid: 2484c42e7f6c4d949b8bb98b18aedf0b, type: 2}
       mass: 0
-    - trashCategory: {fileID: 11400000, guid: fec93a18793254344b0eb7b9c697fd84, type: 2}
+    - trashMaterial: {fileID: 11400000, guid: fec93a18793254344b0eb7b9c697fd84, type: 2}
       mass: 0
-    - trashCategory: {fileID: 11400000, guid: 4bce4b42e3e7157439edede8569afc9e, type: 2}
+    - trashMaterial: {fileID: 11400000, guid: 4bce4b42e3e7157439edede8569afc9e, type: 2}
       mass: 0
 --- !u!114 &2029155590080418560
 MonoBehaviour:
