@@ -6867,13 +6867,13 @@ MonoBehaviour:
   depositUICanvasGroup: {fileID: 1174968907}
   inventory:
     contents:
-    - trashMaterial: {fileID: 0}
+    - trashMaterial: {fileID: 11400000, guid: 30d4a134f1adb6b479af094e1fdf25f7, type: 2}
       mass: 0
-    - trashMaterial: {fileID: 0}
+    - trashMaterial: {fileID: 11400000, guid: 2484c42e7f6c4d949b8bb98b18aedf0b, type: 2}
       mass: 0
-    - trashMaterial: {fileID: 0}
+    - trashMaterial: {fileID: 11400000, guid: fec93a18793254344b0eb7b9c697fd84, type: 2}
       mass: 0
-    - trashMaterial: {fileID: 0}
+    - trashMaterial: {fileID: 11400000, guid: 4bce4b42e3e7157439edede8569afc9e, type: 2}
       mass: 0
 --- !u!135 &869963679
 SphereCollider:
@@ -16435,7 +16435,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh33610
+  m_Name: pb_Mesh29580
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -19762,6 +19762,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 34408235243006838, guid: c5228e484dec7a046b074a08b600d833, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 34408235243006838, guid: c5228e484dec7a046b074a08b600d833, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 0}
@@ -20632,6 +20636,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
+    - target: {fileID: 6046915000412124252, guid: fd7068f616163634d9a4d3785013cadb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6057479685238194725, guid: fd7068f616163634d9a4d3785013cadb, type: 3}
       propertyPath: camera
       value: 
@@ -20731,7 +20739,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8573404978122709729, guid: baf922d5f1c59a044b2fb5f87876d9fb, type: 3}
       propertyPath: m_Name
-      value: Main Camera
+      value: Game Camera
       objectReference: {fileID: 0}
     - target: {fileID: 8573404978122709730, guid: baf922d5f1c59a044b2fb5f87876d9fb, type: 3}
       propertyPath: field of view

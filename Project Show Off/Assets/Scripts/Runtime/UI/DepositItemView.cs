@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 namespace Runtime {
     public class DepositItemView : MonoBehaviour {
-        [Header("References"), SerializeField] private Image icon;
+        [Header("References")]
+        [SerializeField] private Image icon;
         [SerializeField] private TextMeshProUGUI countText;
 
         public void Build(ItemStack itemStack) {
@@ -14,7 +15,7 @@ namespace Runtime {
         }
 
         public void UpdateItemCount(float mass) {
-            countText.text = $"{mass:F1} <b>MU</b>";
+            countText.text = $"{mass:F1}";
         }
     }
 }

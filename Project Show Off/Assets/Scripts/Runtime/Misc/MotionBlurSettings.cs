@@ -15,11 +15,11 @@ namespace Runtime {
         
         private void Awake() {
             if (globalSettingsVolume.profile.TryGet<MotionBlur>(out var motionBlur)) {
+                settingsChangedEventUnsubscribeToken = this.Subscribe(EventType.SettingsChanged);
                 motionBlurComponent = motionBlur;
                 return;
             }
 
-            settingsChangedEventUnsubscribeToken = this.Subscribe(EventType.SettingsChanged);
             
             // self-destroy if couldn't get motion blur component
             Destroy(gameObject);
