@@ -10,9 +10,6 @@ using EventType = Runtime.Event.EventType;
 namespace Runtime {
     public class TrashBin : MonoBehaviour, IEventSubscriber {
         [SerializeField] public float CollectionRadius = 3.0f;
-        [SerializeField] private MaterialInventory inventory;
-
-        private bool canCollect;
         private List<IDisposable> eventUnsubscribeTokens;
 
         private void Awake() {
@@ -28,14 +25,6 @@ namespace Runtime {
             eventUnsubscribeTokens.Clear();
         }
 
-        private void OnTriggerEnter(Collider other) {
-            canCollect = true;
-        }
-
-        private void OnTriggerExit(Collider other) {
-            canCollect = false;
-        }
-
         /// <summary>
         /// <para>Receives an event from the Event Queue</para>
         /// </summary>
@@ -48,8 +37,6 @@ namespace Runtime {
                     var squareDistance = (spawnPosition - transform.position).sqrMagnitude;
                     
                     if (squareDistance <= CollectionRadius * CollectionRadius) {
-                        inventory.Add(trashEvent.Pickup.TrashPickup.TrashMaterial, trashEvent.Pickup.Mass);
-                        
                         EventQueue.QueueEvent(new TrashPickupBinEvent(this, trashEvent.Pickup.TrashPickup, trashEvent.Pickup.Mass));
                         trashEvent.Pickup.DOKill();
                         Destroy(trashEvent.Pickup.gameObject);

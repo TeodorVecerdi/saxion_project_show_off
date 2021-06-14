@@ -24,7 +24,8 @@ namespace Runtime {
         private void Awake() {
             eventUnsubscribeTokens = new List<IDisposable> {
                 this.Subscribe(EventType.DepositInventoryRequest), 
-                this.Subscribe(EventType.PerformBuild)
+                this.Subscribe(EventType.PerformBuild),
+                this.Subscribe(EventType.TrashPickupBin)
             };
             depositUICanvasGroup.alpha = 0.0f;
         }
@@ -83,6 +84,11 @@ namespace Runtime {
                 }
                 case PerformBuildEvent performBuildEvent: {
                     inventory.Remove(performBuildEvent.BuildableObject.ConstructionRequirements);
+                    EventQueue.QueueEvent(new DepositInventoryUpdateEvent(this, inventory));
+                    return false;
+                }
+                case TrashPickupBinEvent trashPickupBinEvent: {
+                    inventory.Add(trashPickupBinEvent.TrashPickup.TrashMaterial, trashPickupBinEvent.Mass);
                     EventQueue.QueueEvent(new DepositInventoryUpdateEvent(this, inventory));
                     return false;
                 }
