@@ -24,6 +24,7 @@ namespace Runtime {
             trashMaterials = Resources.LoadAll<TrashMaterial>(trashMaterialsFolder).ToList().AsReadOnly();
             trashPickups = Resources.LoadAll<TrashPickup>(trashPickupsFolder).ToList().AsReadOnly();
             buildableObjects = Resources.LoadAll<BuildableObject>(buildableObjectsFolder).ToList().AsReadOnly();
+            LoadCamera();
             SceneManager.activeSceneChanged += OnSceneChanged;
         }
 
@@ -32,9 +33,13 @@ namespace Runtime {
         }
 
         private void OnSceneChanged(Scene arg0, Scene arg1) {
+            LoadCamera();
+        }
+
+        private void LoadCamera() {
             var newCamera = GameObject.Find(Instance.cameraName)?.GetComponent<Camera>();
-            if(newCamera != null)
-                Instance.mainCamera = newCamera;
+            if (newCamera != null)
+                mainCamera = newCamera;
         }
 
         public static IReadOnlyList<TrashMaterial> TrashMaterials => Instance.trashMaterials;
