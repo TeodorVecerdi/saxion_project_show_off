@@ -14,5 +14,22 @@ namespace Runtime {
             var area3 = Mathf.Abs((c.x - p.x) * (a.y - p.y) - (a.x - p.x) * (c.y - p.y));
             return Mathf.Abs(area1 + area2 + area3 - areaMain) < 0.2f; // I have no idea why such a big tolerance is required but I'm not going to question it
         }
+        
+        public static int PackColor(Color32 color) {
+            var colorInt = 0;
+            colorInt |= (color.r & 255) << 24;
+            colorInt |= (color.g & 255) << 16;
+            colorInt |= (color.b & 255) << 8;
+            colorInt |= (color.a & 255);
+            return colorInt;
+        }
+
+        public static Color32 UnpackColor(int colorInt) {
+            var r = (byte) ((colorInt >> 24) & 255);
+            var g = (byte) ((colorInt >> 16) & 255);
+            var b = (byte) ((colorInt >> 8) & 255);
+            var a = (byte) (colorInt & 255);
+            return new Color32(r, g, b, a);
+        }
     }
 }

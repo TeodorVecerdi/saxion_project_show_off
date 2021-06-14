@@ -41,13 +41,18 @@ namespace Runtime {
         /// <returns><c>true</c> if event propagation should be stopped, <c>false</c> otherwise.</returns>
         public bool OnEvent(EventData eventData) {
             switch (eventData) {
-                case TrashPickupEvent {Type: EventType.TrashSpawn} trashSpawnEvent: {
+                case TrashEvent {Type: EventType.TrashSpawn} trashSpawnEvent: {
                     rawPollution += trashSpawnEvent.Pickup.TrashPickup.PollutionAmount;
                     UpdatePollution();
                     return false;
                 }
-                case TrashPickupEvent {Type: EventType.TrashPickupSuccess} trashPickupSuccessEvent: {
+                case TrashEvent {Type: EventType.TrashPickupSuccess} trashPickupSuccessEvent: {
                     rawPollution -= trashPickupSuccessEvent.Pickup.TrashPickup.PollutionAmount;
+                    UpdatePollution();
+                    return false;
+                }
+                case TrashPickupBinEvent trashPickupBinEvent: {
+                    rawPollution -= trashPickupBinEvent.TrashPickup.PollutionAmount;
                     UpdatePollution();
                     return false;
                 }

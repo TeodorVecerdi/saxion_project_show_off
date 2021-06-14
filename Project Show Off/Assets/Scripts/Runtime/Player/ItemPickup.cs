@@ -69,7 +69,7 @@ namespace Runtime {
                 pickupIndicatorImage.fillAmount = fillAmount;
                 
                 if (fillAmount >= 1.0f) {
-                    EventQueue.QueueEvent(new TrashPickupEvent(this, EventType.TrashPickupRequest, pickupUnderMouse));
+                    EventQueue.QueueEvent(new TrashEvent(this, EventType.TrashPickupRequest, pickupUnderMouse));
                     StopPickup();
                 }
             } else {
@@ -141,7 +141,7 @@ namespace Runtime {
         /// <returns><c>true</c> if event propagation should be stopped, <c>false</c> otherwise.</returns>
         public bool OnEvent(EventData eventData) {
             switch (eventData) {
-                case TrashPickupEvent {Type: EventType.TrashPickupSuccess} itemPickupSuccessEvent: {
+                case TrashEvent {Type: EventType.TrashPickupSuccess} itemPickupSuccessEvent: {
                     Destroy(itemPickupSuccessEvent.Pickup.gameObject);
                     pickupUnderMouse = null;
                     shouldRaycast = true;

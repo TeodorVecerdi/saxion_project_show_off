@@ -57,7 +57,7 @@ namespace Runtime {
                     trash.transform.localScale = Vector3.zero;
                     trash.transform.DOScale(Vector3.one, trashScaleUpDuration);
                     if (sendEvent)
-                        EventQueue.QueueEvent(new TrashPickupEvent(this, EventType.TrashSpawn, trash));
+                        EventQueue.QueueEvent(new TrashEvent(this, EventType.TrashSpawn, trash));
                     return choice.PollutionAmount;
                 }
             }

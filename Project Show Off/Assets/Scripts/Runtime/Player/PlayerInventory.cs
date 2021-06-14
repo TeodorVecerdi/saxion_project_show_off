@@ -35,11 +35,11 @@ namespace Runtime {
         /// <returns><c>true</c> if event propagation should be stopped, <c>false</c> otherwise.</returns>
         public bool OnEvent(EventData eventData) {
             switch (eventData) {
-                case TrashPickupEvent {Type: EventType.TrashPickupRequest} itemPickupEvent: {
+                case TrashEvent {Type: EventType.TrashPickupRequest} itemPickupEvent: {
                     var mass = itemPickupEvent.Pickup.Mass;
                     if (materialInventory.TotalMass + mass > MaximumCarryMass) return true;
                     materialInventory.Add(itemPickupEvent.Pickup.TrashPickup.TrashMaterial, itemPickupEvent.Pickup.Mass);
-                    EventQueue.QueueEvent(new TrashPickupEvent(this, EventType.TrashPickupSuccess, itemPickupEvent.Pickup));
+                    EventQueue.QueueEvent(new TrashEvent(this, EventType.TrashPickupSuccess, itemPickupEvent.Pickup));
                     EventQueue.QueueEvent(new MaterialInventoryUpdateEvent(this, materialInventory));
                     return true;
                 }

@@ -19,6 +19,7 @@
         TrashPickupRequest,
         TrashPickupSpaceRequest,
         TrashPickupSpaceResponse,
+        TrashPickupBin,
         
         PollutionUpdate,
         PollutionChange,
