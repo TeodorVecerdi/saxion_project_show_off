@@ -10,7 +10,6 @@ namespace Runtime {
         [SerializeField] private List<GameObject> buildModeObjects;
         
         private IDisposable gameModeToggleEventUnsubscribeToken;
-        private bool isBuildModeActive;
 
         private void Awake() {
             gameModeToggleEventUnsubscribeToken = this.Subscribe(EventType.GameModeToggle);
@@ -35,8 +34,7 @@ namespace Runtime {
         }
 
         private void OnGameModeToggle() {
-            isBuildModeActive = !isBuildModeActive;
-            if (isBuildModeActive) EnableBuildModeUI();
+            if (GeneralInput.IsBuildModeActive) EnableBuildModeUI();
             else DisableBuildModeUI();
         }
 

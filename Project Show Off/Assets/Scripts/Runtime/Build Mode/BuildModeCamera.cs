@@ -60,7 +60,6 @@ namespace Runtime {
         private CameraBoundaries cameraBoundaries;
         private Plane dragPlane;
         private Mouse mouse;
-        private bool isEnabled;
         private IDisposable gameModeToggleEventUnsubscribeToken;
 
         private void Awake() {
@@ -86,7 +85,7 @@ namespace Runtime {
         }
 
         private void Update() {
-            if (!isEnabled || !InputManager.BuildModeActions.enabled) return;
+            if (!GeneralInput.IsBuildModeActive || !InputManager.BuildModeActions.enabled) return;
 
             if (InputManager.IsBoosting) {
                 movementSpeed = boostMovementSpeed;
@@ -163,7 +162,6 @@ namespace Runtime {
         }
 
         private void EnableBuildMode() {
-            isEnabled = true;
             //!! reason: repeated property access of built in component is inefficient
             var baseTransform = transform;  
             newPosition = baseTransform.position;
@@ -175,7 +173,6 @@ namespace Runtime {
         }
 
         private void DisableBuildMode() {
-            isEnabled = false;
             virtualCamera.Priority = 0;
         }
 
@@ -191,7 +188,7 @@ namespace Runtime {
         }
 
         private void ToggleCameraMode() {
-            if (isEnabled) DisableBuildMode();
+            if (GeneralInput.IsBuildModeActive) DisableBuildMode();
             else EnableBuildMode();
         }
         

@@ -13,6 +13,7 @@ namespace Runtime {
 
         private void Awake() {
             gameModeChangeEventUnsubscribeToken = this.Subscribe(EventType.GameModeChange);
+            isBuildModeActive = false;
         }
 
         private void OnDestroy() {
