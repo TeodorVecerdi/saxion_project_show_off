@@ -188,8 +188,8 @@ namespace Runtime {
         }
 
         private void ToggleCameraMode() {
-            if (GeneralInput.IsBuildModeActive) DisableBuildMode();
-            else EnableBuildMode();
+            if (GeneralInput.IsBuildModeActive) EnableBuildMode();
+            else DisableBuildMode();
         }
         
         private void OnDeviceChanged(InputDevice device, InputDeviceChange change) {
