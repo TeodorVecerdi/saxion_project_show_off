@@ -58,6 +58,7 @@ namespace Runtime.Tutorial {
         protected float FillAmount;
         public abstract string TutorialKey { get; }
         protected abstract void Process();
+        protected abstract void OnReset();
         
         protected virtual void OnAwake() {}
 
@@ -106,6 +107,12 @@ namespace Runtime.Tutorial {
             var realDuration = overrideTransitionSettings ? transitionDuration : baseTransitionDuration;
             var realDelay = overrideTransitionSettings ? transitionDelay : delay;
             return rectTransform.DOAnchorPosX(transitionFromX, realDuration).From(new Vector2(transitionToX, -8.0f)).SetDelay(realDelay);
+        }
+
+        public void ResetTutorial() {
+            isFinished = false;
+            tutorialProgressBar.fillAmount = FillAmount = 0.0f;
+            OnReset();
         }
     }
 }

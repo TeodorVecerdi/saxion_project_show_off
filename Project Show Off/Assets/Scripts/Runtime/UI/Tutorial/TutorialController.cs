@@ -65,6 +65,10 @@ namespace Runtime.Tutorial {
             switch (eventData) {
                 case EmptyEvent {Type: EventType.ResetTutorial}: {
                     var activeTutorial = allTutorials.First(slide => slide.gameObject.activeSelf);
+                    foreach (var tutorialSlide in allTutorials) {
+                        tutorialSlide.ResetTutorial();
+                    }
+                    
                     activeTutorial.Hide(0.0f).OnComplete(() => {
                         activeTutorial.gameObject.SetActive(false);
                         

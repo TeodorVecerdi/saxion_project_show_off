@@ -34,5 +34,9 @@ namespace Runtime.Tutorial {
             if(totalRotated >= rotationRequired)
                 FinishTutorial();
         }
+
+        protected override void OnReset() {
+            totalRotated = 0.0f;
+        }
     }
 }

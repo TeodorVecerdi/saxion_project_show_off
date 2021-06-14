@@ -31,6 +31,10 @@ namespace Runtime.Tutorial {
                 FinishTutorial();
         }
 
+        protected override void OnReset() {
+            totalTimeMoved = 0.0f;
+        }
+
         private void OnPlayerMoveStarted(InputAction.CallbackContext obj) {
             isMoving = true;
         }

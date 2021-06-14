@@ -25,6 +25,10 @@ namespace Runtime.Tutorial {
             DOTween.To(value => FillAmount = value, 0.0f, 1.0f, 0.25f).OnComplete(FinishTutorial);
         }
 
+        protected override void OnReset() {
+            completed = false;
+        }
+
         /// <summary>
         /// <para>Receives an event from the Event Queue</para>
         /// </summary>

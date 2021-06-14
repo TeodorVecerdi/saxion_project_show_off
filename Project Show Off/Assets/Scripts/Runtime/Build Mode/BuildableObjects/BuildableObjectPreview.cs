@@ -7,13 +7,9 @@ using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
     public class BuildableObjectPreview : MonoBehaviour, IEventSubscriber {
-        [Header("Settings")]
-        [SerializeField] private string objectName;
-
         [Header("References")]
         [SerializeField] private GameObject objectContainer;
 
-        private MaterialInventory requirements;
         private IDisposable performBuildEventUnsubscribeToken;
         private List<Collider> colliders;
 
@@ -34,10 +30,6 @@ namespace Runtime {
             performBuildEventUnsubscribeToken.Dispose();
         }
 
-        public void Initialize(BuildableObject buildableObject) {
-            requirements = buildableObject.ConstructionRequirements;
-        }
-
         /// <summary>
         /// <para>Receives an event from the Event Queue</para>
         /// </summary>
@@ -50,6 +42,7 @@ namespace Runtime {
                         collider.enabled = true;
                     }
                     objectContainer.transform.SetParent(null);
+                    objectContainer.name = performBuildEvent.BuildableObject.Name;
                     Destroy(gameObject);
                     return false;
                 }

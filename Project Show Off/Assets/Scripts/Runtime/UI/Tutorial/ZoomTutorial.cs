@@ -24,5 +24,10 @@ namespace Runtime.Tutorial {
             if (currentZoomed >= zoomRequired)
                 FinishTutorial();
         }
+
+        protected override void OnReset() {
+            totalZoomed = 0.0f;
+            currentZoomed = 0.0f;
+        }
     }
 }

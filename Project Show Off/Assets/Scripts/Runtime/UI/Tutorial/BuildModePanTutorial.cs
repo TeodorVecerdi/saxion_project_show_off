@@ -47,5 +47,9 @@ namespace Runtime.Tutorial {
             if(totalMoved >= realRequirement)
                 FinishTutorial();
         }
+
+        protected override void OnReset() {
+            totalMoved = 0.0f;
+        }
     }
 }
