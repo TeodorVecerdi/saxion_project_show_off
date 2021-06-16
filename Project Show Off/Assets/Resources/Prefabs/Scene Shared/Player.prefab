@@ -608,11 +608,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb6dc3a93a5d623449ee536d9061732e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EventPath: event:/Player/Footsteps
-  m_Grass: 0
-  m_Gravel: 0
-  m_StepDistance: 2
-  m_Debug: 0
+  eventPath: event:/Player/Footsteps
+  stepDistance: 2
+  raycastDistance: 0.6
+  debug: 0
 --- !u!1 &7557779074489486734
 GameObject:
   m_ObjectHideFlags: 0
