@@ -119,9 +119,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff8d6375338e455d9cbc8706202a6442, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  from: {x: 184, y: 3.02, z: 124.7}
-  to: {x: 252.29, y: 3, z: 166.3}
-  worldMaxHeight: 11.4
+  from: {x: -69.1, y: 3.02, z: 185.5}
+  to: {x: 44, y: 3, z: 258.7}
+  worldMaxHeight: 62.7
   spawnInterval: 10
   trashScaleUpDuration: 0.1
   initialTrashCount: 50
