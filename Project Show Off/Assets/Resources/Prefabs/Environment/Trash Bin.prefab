@@ -44,8 +44,8 @@ LODGroup:
   serializedVersion: 2
   m_LocalReferencePoint: {x: 0, y: 0.6154, z: 0}
   m_Size: 1.231078
-  m_FadeMode: 0
-  m_AnimateCrossFading: 0
+  m_FadeMode: 1
+  m_AnimateCrossFading: 1
   m_LastLODIsBillboard: 0
   m_LODs:
   - screenRelativeHeight: 0.21951136
@@ -109,7 +109,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5985356849000059054}
-  m_Mesh: {fileID: 564649877497805629, guid: 0abc0f4fd7679524ab3a523a945a7f2a, type: 3}
+  m_Mesh: {fileID: 564649877497805629, guid: c9dd29060528142469f3748e16055c6d, type: 3}
 --- !u!23 &4492410850320798616
 MeshRenderer:
   m_ObjectHideFlags: 0

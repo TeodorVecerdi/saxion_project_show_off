@@ -10298,41 +10298,9 @@ MonoBehaviour:
   m_Mesh: {fileID: 0}
   m_VersionIndex: 13
   m_IsSelectable: 1
-  m_SelectedFaces: b2000000b5000000b7000000b8000000
-  m_SelectedEdges:
-  - a: 606
-    b: 607
-  - a: 607
-    b: 608
-  - a: 608
-    b: 609
-  - a: 609
-    b: 606
-  - a: 618
-    b: 619
-  - a: 619
-    b: 620
-  - a: 620
-    b: 621
-  - a: 621
-    b: 618
-  - a: 626
-    b: 627
-  - a: 627
-    b: 628
-  - a: 628
-    b: 629
-  - a: 629
-    b: 626
-  - a: 630
-    b: 631
-  - a: 631
-    b: 632
-  - a: 632
-    b: 633
-  - a: 633
-    b: 630
-  m_SelectedVertices: 5e0200005f02000060020000610200006a0200006b0200006c0200006d0200007202000073020000740200007502000076020000770200007802000079020000
+  m_SelectedFaces: 
+  m_SelectedEdges: []
+  m_SelectedVertices: 
 --- !u!1 &6769300985026641451
 GameObject:
   m_ObjectHideFlags: 0
