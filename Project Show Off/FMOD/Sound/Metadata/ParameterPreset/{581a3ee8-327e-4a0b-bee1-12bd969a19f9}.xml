@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="ParameterPreset" id="{581a3ee8-327e-4a0b-bee1-12bd969a19f9}">
+		<property name="name">
+			<value>Gravel</value>
+		</property>
+		<relationship name="folder">
+			<destination>{2cb677b3-05a3-4f59-a4bd-d6a9aaf5f26e}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{977e4e6f-a5de-4103-8cb1-1e164f0b171e}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{977e4e6f-a5de-4103-8cb1-1e164f0b171e}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

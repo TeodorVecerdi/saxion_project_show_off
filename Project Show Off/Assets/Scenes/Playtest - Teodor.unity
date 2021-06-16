@@ -20000,7 +20000,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2029155590080418563, guid: 02715c8f47e4a7e47b1a6bbd031f9d0a, type: 3}
   m_PrefabInstance: {fileID: 1614876351519599161}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1614876351519599162}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 63d744a51a1d4280882ff30bc9878415, type: 3}
@@ -20130,6 +20130,42 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 02715c8f47e4a7e47b1a6bbd031f9d0a, type: 3}
+--- !u!1 &1614876351519599162 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2029155590080418574, guid: 02715c8f47e4a7e47b1a6bbd031f9d0a, type: 3}
+  m_PrefabInstance: {fileID: 1614876351519599161}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1614876351519599163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1614876351519599162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb6dc3a93a5d623449ee536d9061732e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventPath: event:/Player/Footsteps
+  m_Grass: 0
+  m_Gravel: 0
+  m_StepDistance: 2
+  m_Debug: 0
+--- !u!114 &1614876351519599164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1614876351519599162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 0}
+  ListenerNumber: -1
 --- !u!4 &4151913154943351103
 Transform:
   m_ObjectHideFlags: 0
