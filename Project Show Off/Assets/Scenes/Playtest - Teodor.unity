@@ -5140,6 +5140,53 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 9192739437841155720, guid: 3290a5cd393d9af4d8af7a05ead2486c, type: 3}
   m_PrefabInstance: {fileID: 638009772}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &647561974
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 647561976}
+  - component: {fileID: 647561975}
+  m_Layer: 0
+  m_Name: Bush
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &647561975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 647561974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2377720db3ad422dbdc6f0c39278023c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  count: 0
+  spacing: -0.5
+  hedgePrefab: {fileID: 9192739437841155720, guid: 3290a5cd393d9af4d8af7a05ead2486c, type: 3}
+  hedges: []
+--- !u!4 &647561976
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 647561974}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 182.46, y: 0, z: 197.87}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &678915929
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7711,6 +7758,54 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.9854927, y: 14.980961, z: 1}
   m_Center: {x: 0.60269314, y: 6.990408, z: -0.0000032811877}
+--- !u!1 &919037095
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 919037097}
+  - component: {fileID: 919037096}
+  m_Layer: 0
+  m_Name: Fence
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &919037096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919037095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dde68f160c1848308f48748533a81629, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  count: 0
+  fenceOpenPrefab: {fileID: 2058674498244687650, guid: 2cf4d839da27b594f9cba08a447c099f, type: 3}
+  fenceClosedPrefab: {fileID: 8935085489786391269, guid: 3b642f2a38bac8943bc559f563e88fd0, type: 3}
+  fenceClosed: {fileID: 0}
+  openFences: []
+--- !u!4 &919037097
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919037095}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 185.9, y: 0, z: 195.9}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &921434492
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20033,11 +20128,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb6dc3a93a5d623449ee536d9061732e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EventPath: event:/Player/Footsteps
-  m_Grass: 0
-  m_Gravel: 0
-  m_StepDistance: 2
-  m_Debug: 0
+  eventPath: event:/Player/Footsteps
+  stepDistance: 2
+  raycastDistance: 1
+  debug: 0
 --- !u!114 &1614876351519599164
 MonoBehaviour:
   m_ObjectHideFlags: 0
