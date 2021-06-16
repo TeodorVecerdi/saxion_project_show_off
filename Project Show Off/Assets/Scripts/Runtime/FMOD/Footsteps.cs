@@ -84,11 +84,10 @@ public class Footsteps : MonoBehaviour {
 
         //Initialise member variables
         m_StepRand = Random.Range(0.0f, 0.5f);
-        m_PrevPos = transform.position;
-        m_LinePos = transform.position;
+        m_LinePos = m_PrevPos = transform.position;
     }
 
-    void Update() {
+    private void Update() {
         m_DistanceTravelled += (transform.position - m_PrevPos).magnitude;
         if (m_DistanceTravelled >= m_StepDistance + m_StepRand) //TODO: Play footstep sound based on position from headbob script
         {
@@ -107,7 +106,7 @@ public class Footsteps : MonoBehaviour {
         }
     }
 
-    void PlayFootstepSound() {
+    private void PlayFootstepSound() {
         m_Grass = 1.0f;
         m_Gravel = 0.0f;
 
@@ -132,8 +131,10 @@ public class Footsteps : MonoBehaviour {
             //0.0f is full dirt texture, 1.0f is full sand texture, 0.5f is half of each.
             var vertexColor = GetVertexColor(hit, mesh);
 
-            m_Grass = vertexColor.a;
-            m_Gravel = 1.0f - vertexColor.a;
+            // Grass is none
+            // Gravel is alpha
+            m_Grass = 1.0f - vertexColor.a;
+            m_Gravel = vertexColor.a;
         } else {
             //If the ray hits somethign other than the ground, we assume it hit a wooden prop (This is specific to the Viking Village scene) - and set the parameter values for wood.
             m_Grass = 0.0f;
@@ -163,25 +164,5 @@ public class Footsteps : MonoBehaviour {
         var vertIndex3 = mesh.triangles[hit.triangleIndex * 3 + 2];
         var avgColor = (mesh.colors[vertIndex1] + mesh.colors[vertIndex2] + mesh.colors[vertIndex3]) / 3.0f;
         return avgColor;
-    }
-
-    int GetMaterialIndex(RaycastHit hit) {
-        Mesh m = hit.collider.gameObject.GetComponent<MeshFilter>().mesh;
-        int[] triangle = new int[] {
-            m.triangles[hit.triangleIndex * 3 + 0],
-            m.triangles[hit.triangleIndex * 3 + 1],
-            m.triangles[hit.triangleIndex * 3 + 2]
-        };
-        for (int i = 0; i < m.subMeshCount; ++i) {
-            int[] triangles = m.GetTriangles(i);
-            for (int j = 0; j < triangles.Length; j += 3) {
-                if (triangles[j + 0] == triangle[0] &&
-                    triangles[j + 1] == triangle[1] &&
-                    triangles[j + 2] == triangle[2])
-                    return i;
-            }
-        }
-
-        return -1;
     }
 }
