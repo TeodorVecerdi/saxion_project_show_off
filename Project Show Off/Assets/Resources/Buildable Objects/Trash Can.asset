@@ -23,4 +23,4 @@ MonoBehaviour:
     - trashMaterial: {fileID: 11400000, guid: 2484c42e7f6c4d949b8bb98b18aedf0b, type: 2}
       mass: 2.5
   buildAreas:
-  - {fileID: 11400000, guid: 220a25687d895a94f9fd2d9970bac940, type: 2}
+  - {fileID: 11400000, guid: 8b23daebf3ef6aa40914e40ae4444ef8, type: 2}
