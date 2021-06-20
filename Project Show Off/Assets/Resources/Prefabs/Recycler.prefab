@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7585335422270238320}
   - component: {fileID: 7585335422270238321}
   m_Layer: 0
-  m_Name: Deposit
+  m_Name: Recycler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
