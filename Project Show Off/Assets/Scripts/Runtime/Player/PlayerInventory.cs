@@ -6,7 +6,7 @@ using UnityEngine;
 using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
-    public class PlayerInventory : MonoBehaviour, IEventSubscriber {
+    public sealed class PlayerInventory : MonoBehaviour, IEventSubscriber {
         [SerializeField] private float maximumCarryMass = 50.0f;
         [SerializeField] private MaterialInventory materialInventory;
 
@@ -21,6 +21,7 @@ namespace Runtime {
                 this.Subscribe(EventType.DepositMaterialsRequest), 
                 this.Subscribe(EventType.TrashPickupSpaceRequest)
             };
+            materialInventory ??= new MaterialInventory();
         }
 
         private void OnDestroy() {

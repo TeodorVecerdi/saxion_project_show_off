@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace Runtime {
-    public class DepositItemView : MonoBehaviour {
+    public sealed class DepositItemView : MonoBehaviour {
         [Header("References")]
         [SerializeField] private Image icon;
         [SerializeField] private TextMeshProUGUI countText;

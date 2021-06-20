@@ -5,7 +5,7 @@ using UnityEngine;
 using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
-    public class UIManager : MonoBehaviour, IEventSubscriber {
+    public sealed class UIManager : MonoBehaviour, IEventSubscriber {
         [SerializeField] private List<GameObject> gameModeObjects;
         [SerializeField] private List<GameObject> buildModeObjects;
         

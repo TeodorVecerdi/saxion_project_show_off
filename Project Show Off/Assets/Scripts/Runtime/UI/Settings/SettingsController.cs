@@ -11,7 +11,7 @@ using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
     [RequireComponent(typeof(CanvasGroup))]
-    public class SettingsController : MonoBehaviour {
+    public sealed class SettingsController : MonoBehaviour {
         [SerializeField] private TMP_Dropdown qualityLevelDropdown;
         [SerializeField] private Toggle motionBlurToggle;
         [SerializeField] private Slider sfxVolumeSlider;

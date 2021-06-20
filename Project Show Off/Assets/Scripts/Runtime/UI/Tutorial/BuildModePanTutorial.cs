@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Runtime.Tutorial {
-    public class BuildModePanTutorial : TutorialSlide {
+    public sealed class BuildModePanTutorial : TutorialSlide {
         public override string TutorialKey => "build_mode_pan";
         
         [HorizontalLine(color: EColor.Orange, order = -10000), Header("Build Mode Pan/Move Tutorial", order = -20000)]

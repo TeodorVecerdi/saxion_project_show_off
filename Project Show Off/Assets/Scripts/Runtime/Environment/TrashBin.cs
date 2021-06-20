@@ -8,7 +8,7 @@ using UnityEngine;
 using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
-    public class TrashBin : MonoBehaviour, IEventSubscriber {
+    public sealed class TrashBin : MonoBehaviour, IEventSubscriber {
         [SerializeField] public float CollectionRadius = 3.0f;
         private List<IDisposable> eventUnsubscribeTokens;
 

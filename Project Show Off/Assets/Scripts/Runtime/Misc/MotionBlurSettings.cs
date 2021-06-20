@@ -7,7 +7,7 @@ using UnityEngine.Rendering.HighDefinition;
 using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
-    public class MotionBlurSettings : MonoBehaviour, IEventSubscriber {
+    public sealed class MotionBlurSettings : MonoBehaviour, IEventSubscriber {
         [SerializeField, Required] private Volume globalSettingsVolume;
 
         private MotionBlur motionBlurComponent;

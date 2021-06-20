@@ -7,7 +7,7 @@ using UnityEngine;
 using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
-    public class TrashSpawner : MonoBehaviour {
+    public sealed class TrashSpawner : MonoBehaviour {
         [Header("Location")]
         [SerializeField] private Vector3 from;
         [SerializeField] private Vector3 to;

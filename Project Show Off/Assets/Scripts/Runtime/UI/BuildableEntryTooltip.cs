@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 
 namespace Runtime {
-    public class BuildableEntryTooltip : MonoBehaviour {
+    public sealed class BuildableEntryTooltip : MonoBehaviour {
         [SerializeField] private TextMeshProUGUI objectNameText;
         [SerializeField] private TextMeshProUGUI objectDescriptionText;
         [Space]

@@ -4,7 +4,7 @@ using UnityEngine;
 using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
-    public class GeneralInput : MonoBehaviour, IEventSubscriber {
+    public sealed class GeneralInput : MonoBehaviour, IEventSubscriber {
         private static bool isBuildModeActive;
 
         private IDisposable gameModeChangeEventUnsubscribeToken;

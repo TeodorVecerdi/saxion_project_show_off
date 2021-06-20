@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace Runtime {
     [RequireComponent(typeof(Animation))]
-    public class MainMenuController : MonoBehaviour {
+    public sealed class MainMenuController : MonoBehaviour {
         [Header("References")]
         [SerializeField] private CanvasGroup settingsContainer;
         [SerializeField] private CanvasGroup buttonContainer;

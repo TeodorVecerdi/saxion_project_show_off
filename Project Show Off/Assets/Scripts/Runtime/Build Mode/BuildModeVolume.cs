@@ -6,7 +6,7 @@ using UnityEngine.Rendering.HighDefinition;
 using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
-    public class BuildModeVolume : MonoBehaviour, IEventSubscriber {
+    public sealed class BuildModeVolume : MonoBehaviour, IEventSubscriber {
         private Volume volume;
         private HDShadowSettings shadowSettings;
         private IDisposable gameModeToggleEventUnsubscribeToken;

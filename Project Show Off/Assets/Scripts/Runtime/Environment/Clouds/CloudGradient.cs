@@ -2,7 +2,7 @@
 
 namespace Runtime {
     [ExecuteInEditMode]
-    public class CloudGradient : MonoBehaviour {
+    public sealed class CloudGradient : MonoBehaviour {
         [Header("Settings")]
         [SerializeField] private Gradient lutGradient;
         [SerializeField] private Vector2Int lutTextureSize;

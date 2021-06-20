@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
-    public class BuildModeTransition : MonoBehaviour, IEventSubscriber {
+    public sealed class BuildModeTransition : MonoBehaviour, IEventSubscriber {
         [Header("Settings")]
         [SerializeField] private float fadeDuration = 0.25f;
 

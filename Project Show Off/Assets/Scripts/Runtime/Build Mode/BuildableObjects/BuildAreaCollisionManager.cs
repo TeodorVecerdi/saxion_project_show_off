@@ -6,7 +6,7 @@ using UnityEngine;
 using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
-    public class BuildAreaCollisionManager : MonoBehaviour, IEventSubscriber {
+    public sealed class BuildAreaCollisionManager : MonoBehaviour, IEventSubscriber {
         private List<MeshCollider> inactiveColliders;
         private List<MeshCollider> activeColliders;
         private List<IDisposable> eventUnsubscribeTokens;

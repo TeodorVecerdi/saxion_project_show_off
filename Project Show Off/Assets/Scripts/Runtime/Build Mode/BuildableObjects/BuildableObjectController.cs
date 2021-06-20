@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
-    public class BuildableObjectController : MonoBehaviour, IEventSubscriber {
+    public sealed class BuildableObjectController : MonoBehaviour, IEventSubscriber {
         [Header("Settings")]
         [SerializeField] private float buildableRotationSpeed = 45.0f;
         [SerializeField] private float buildableRotationTime = 5.0f;

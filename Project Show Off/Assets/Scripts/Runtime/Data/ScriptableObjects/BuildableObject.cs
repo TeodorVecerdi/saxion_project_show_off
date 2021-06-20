@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Runtime.Data {
     [CreateAssetMenu(fileName = "NewBuildableObject", menuName = "Data/Buildable Object", order = 0)]
-    public class BuildableObject : ScriptableObject {
+    public sealed class BuildableObject : ScriptableObject {
         [SerializeField] private string objectName;
         [SerializeField, Multiline] private string objectDescription;
         [SerializeField] private Sprite objectSprite;

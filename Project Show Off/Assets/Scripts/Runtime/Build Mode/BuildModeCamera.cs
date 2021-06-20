@@ -9,7 +9,7 @@ using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
     [RequireComponent(typeof(CameraBoundaries))]
-    public class BuildModeCamera : MonoBehaviour, IEventSubscriber {
+    public sealed class BuildModeCamera : MonoBehaviour, IEventSubscriber {
         // ReSharper disable InconsistentNaming
         [HorizontalLine(color: EColor.Green, order = 1), Header("General")]
         [SerializeField, OnValueChanged("OnTimeSettingsChanged")]

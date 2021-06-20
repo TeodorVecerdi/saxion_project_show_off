@@ -6,7 +6,7 @@ using UnityEngine;
 using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
-    public class BuildableObjectPreview : MonoBehaviour, IEventSubscriber {
+    public sealed class BuildableObjectPreview : MonoBehaviour, IEventSubscriber {
         [Header("References")]
         [SerializeField] private GameObject directionIndicator;
 

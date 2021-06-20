@@ -7,7 +7,7 @@ using UnityEngine.Rendering;
 using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
-    public class PollutionVolumeTransition : MonoBehaviour, IEventSubscriber {
+    public sealed class PollutionVolumeTransition : MonoBehaviour, IEventSubscriber {
         [SerializeField] private Volume dirtyVolume;
         [SerializeField] private AnimationCurve pollutionCurve;
 

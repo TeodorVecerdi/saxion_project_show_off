@@ -7,7 +7,7 @@ using UnityEngine;
 using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
-    public class MouseLook : CinemachineExtension, IEventSubscriber {
+    public sealed class MouseLook : CinemachineExtension, IEventSubscriber {
         [SerializeField] private float clampAngle = 80.0f;
         [SerializeField] private Vector2 minMaxMouseSensitivity = new Vector2(100.0f, 700.0f);
         [SerializeField] private Transform lookForwardTransform;

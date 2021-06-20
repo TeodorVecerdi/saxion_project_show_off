@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Runtime {
-    public class OpenSettingsInGame : MonoBehaviour {
+    public sealed class OpenSettingsInGame : MonoBehaviour {
         [SerializeField] private SettingsController settingsController;
 
         private CanvasGroup settingsCanvasGroup;

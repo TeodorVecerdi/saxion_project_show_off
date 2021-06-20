@@ -6,7 +6,7 @@ using UnityEngine;
 using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
-    public class TestPollutionDisplay : MonoBehaviour, IEventSubscriber {
+    public sealed  class TestPollutionDisplay : MonoBehaviour, IEventSubscriber {
         [SerializeField] private TextMeshProUGUI pollutionText;
         private IDisposable pollutionUpdateEventUnsubscribeToken;
         

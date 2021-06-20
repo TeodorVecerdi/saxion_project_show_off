@@ -9,7 +9,7 @@ using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
     [RequireComponent(typeof(VisualEffect))]
-    public class VFXPollutionController : MonoBehaviour, IEventSubscriber {
+    public sealed class VFXPollutionController : MonoBehaviour, IEventSubscriber {
         [InfoBox("Effectors get applied top-to-bottom, meaning the last effector will overwrite the first one if they are affecting the same property")]
         [SerializeField] private List<VFXPollutionEffector> effectors;
         private VisualEffect visualEffect;
