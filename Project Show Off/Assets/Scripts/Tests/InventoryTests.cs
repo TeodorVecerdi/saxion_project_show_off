@@ -152,5 +152,15 @@ namespace Tests {
             Assert.Zero(inventory.GetTrashMaterialMass(trash[Plastic]));
             Assert.Zero(inventory.TotalMass);
         }
+
+        [Test] public void ItemStack_EqualityCorrect() {
+            var itemStack1 = new ItemStack(trash[Plastic], 100);
+            var itemStack2 = new ItemStack(trash[Plastic], 150);
+            var itemStack3 = new ItemStack(trash[Metal], 150);
+            
+            Assert.IsTrue(itemStack1 == itemStack2);
+            Assert.IsFalse(itemStack1 == itemStack3);
+            Assert.IsFalse(itemStack2 == itemStack3);
+        }
     }
 }
