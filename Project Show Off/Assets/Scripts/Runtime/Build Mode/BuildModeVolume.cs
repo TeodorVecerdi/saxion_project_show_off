@@ -6,11 +6,10 @@ using UnityEngine.Rendering.HighDefinition;
 using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
-    public class BuildModeVolume : MonoBehaviour, IEventSubscriber {
+    public sealed class BuildModeVolume : MonoBehaviour, IEventSubscriber {
         private Volume volume;
         private HDShadowSettings shadowSettings;
         private IDisposable gameModeToggleEventUnsubscribeToken;
-        private bool isBuildMode;
 
         [SerializeField] private float shadowDistanceMultiplier = 20;
 #if UNITY_EDITOR
@@ -27,7 +26,6 @@ namespace Runtime {
 #if UNITY_EDITOR
             originalShadowDistance = shadowSettings.maxShadowDistance.value;
 #endif
-            isBuildMode = false;
         }
 
         private void OnDestroy() {
@@ -53,8 +51,7 @@ namespace Runtime {
         public bool OnEvent(EventData eventData) {
             switch (eventData) {
                 case EmptyEvent {Type: EventType.GameModeToggle}: {
-                    isBuildMode = !isBuildMode;
-                    volume.weight = isBuildMode ? 1.0f : 0.0f;
+                    volume.weight = GeneralInput.IsBuildModeActive ? 1.0f : 0.0f;
                     return false;
                 }
                 default: return false;

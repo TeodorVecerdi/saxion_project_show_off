@@ -1,20 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using DG.Tweening;
-using Runtime.Data;
 using Runtime.Event;
 using UnityEngine;
 using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
-    public class BuildableToolbarController : MonoBehaviour, IEventSubscriber {
+    public sealed class BuildableToolbarController : MonoBehaviour, IEventSubscriber {
         [Header("Settings")]
         [SerializeField] private float transitionDuration = 0.25f;
         [Header("References")]
         [SerializeField] private Transform buildableEntryContainer;
         [SerializeField] private BuildableEntry buildableEntryPrefab;
 
-        private List<BuildableObject> buildableObjects;
         private List<BuildableEntry> entries;
         private List<IDisposable> eventUnsubscribeTokens;
         private RectTransform rectTransform;
@@ -24,7 +22,6 @@ namespace Runtime {
         private void Awake() {
             rectTransform = (RectTransform) transform;
             width = rectTransform.sizeDelta.x;
-            buildableObjects = new List<BuildableObject>(Resources.LoadAll<BuildableObject>("Buildable Objects"));
 
             eventUnsubscribeTokens = new List<IDisposable> {
                 this.Subscribe(EventType.BeginBuild),
@@ -49,10 +46,10 @@ namespace Runtime {
             rectTransform.DOKill();
             rectTransform.DOAnchorPosX(isVisible ? 0.0f : -width, transitionDuration);
             
-            foreach (var buildableObject in buildableObjects) {
+            foreach (var buildableObject in ResourcesProvider.BuildableObjects) {
                 var buildableEntry = Instantiate(buildableEntryPrefab, buildableEntryContainer);
                 entries.Add(buildableEntry);
-                buildableEntry.BuildUI(buildableObject);
+                buildableEntry.LoadUI(buildableObject);
             }
         }
 
@@ -65,7 +62,7 @@ namespace Runtime {
             if (!isVisible) return;
             
             foreach (var buildableEntry in entries) {
-                buildableEntry.gameObject.SetActive(false);
+                buildableEntry.SetEnabled(false);
             }
 
             EventQueue.QueueEvent(new EmptyEvent(this, EventType.DepositInventoryRequest));
@@ -92,7 +89,7 @@ namespace Runtime {
                     var inventory = inventoryResponseEvent.Inventory;
                     foreach (var buildableEntry in entries) {
                         if(!inventory.Contains(buildableEntry.Requirements)) continue;
-                        buildableEntry.gameObject.SetActive(true);
+                        buildableEntry.SetEnabled(true);
                     }
                     return false;
                 }

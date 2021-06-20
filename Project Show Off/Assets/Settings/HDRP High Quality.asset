@@ -61,10 +61,10 @@ MonoBehaviour:
     materialQuality: 0
   m_RenderPipelineSettings:
     supportShadowMask: 0
-    supportSSR: 0
-    supportSSRTransparent: 0
+    supportSSR: 1
+    supportSSRTransparent: 1
     supportSSAO: 1
-    supportSSGI: 0
+    supportSSGI: 1
     supportSubsurfaceScattering: 1
     sssSampleBudget:
       m_Values: 140000002800000050000000
@@ -137,9 +137,9 @@ MonoBehaviour:
       maxPlanarReflectionOnScreen: 16
       maxLightsPerClusterCell: 8
     hdShadowInitParams:
-      maxShadowRequests: 128
+      maxShadowRequests: 256
       directionalShadowsDepthBits: 16
-      shadowFilteringQuality: 2
+      shadowFilteringQuality: 1
       punctualLightShadowAtlas:
         shadowAtlasResolution: 4096
         shadowAtlasDepthBits: 16
@@ -175,7 +175,7 @@ MonoBehaviour:
       perChannelMask: 1
     postProcessSettings:
       m_LutSize: 32
-      lutFormat: 48
+      lutFormat: 52
       bufferFormat: 74
     dynamicResolutionSettings:
       enabled: 0

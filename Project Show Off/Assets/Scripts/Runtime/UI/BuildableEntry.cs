@@ -9,17 +9,20 @@ using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
     [RequireComponent(typeof(Button), typeof(Image))]
-    public class BuildableEntry : MonoBehaviour, IEventSubscriber {
+    public sealed class BuildableEntry : MonoBehaviour, IEventSubscriber {
         [Header("Settings")]
         [SerializeField] private Color selectedColor;
         [SerializeField] private float selectedColorTransitionDuration = 0.125f;
         [Header("References")]
         [SerializeField] private Image buildableImage;
+        [SerializeField] private Image disabledImage;
+        [SerializeField] private BuildableEntryTooltip tooltip;
         
         private Button button;
         private Image borderImage;
         private BuildableObject buildableObject;
         private List<IDisposable> eventUnsubscribeTokens;
+        private bool isEnabled;
 
         public MaterialInventory Requirements => buildableObject.ConstructionRequirements;
 
@@ -42,12 +45,30 @@ namespace Runtime {
             eventUnsubscribeTokens.Clear();
         }
 
-        public void BuildUI(BuildableObject buildableObject) {
+        public void LoadUI(BuildableObject buildableObject) {
             this.buildableObject = buildableObject;
             buildableImage.sprite = buildableObject.ObjectSprite;
+            
+            tooltip.LoadUI(buildableObject);
+        }
+
+        public void SetEnabled(bool isEnabled) {
+            this.isEnabled = isEnabled;
+            var color = disabledImage.color;
+            color.a = isEnabled ? 0.0f : 0.8f;
+            disabledImage.color = color;
+        }
+
+        public void OnPointerEnter() {
+            tooltip.Show(true);
+        }
+
+        public void OnPointerExit() {
+            tooltip.Show(false);
         }
 
         private void OnBuildClicked() {
+            if(!isEnabled) return;
             SetSelection(true);
             SoundManager.PlaySound("Click");
             EventQueue.QueueEvent(new BeginBuildEvent(this, buildableObject));

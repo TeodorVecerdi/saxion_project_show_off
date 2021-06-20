@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 namespace Runtime {
-    public class CameraBoundaries : MonoBehaviour {
+    public sealed class CameraBoundaries : MonoBehaviour {
         public Vector3 MinimumPosition {
             get => minimumPosition;
             set => minimumPosition = value;

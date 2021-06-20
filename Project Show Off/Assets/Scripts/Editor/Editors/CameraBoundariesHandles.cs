@@ -73,30 +73,13 @@ namespace Editor {
         private void LoadSettings() {
             if (!EditorPrefs.HasKey("CAMERA_BOUNDARIES_EDIT_MODE")) EditorPrefs.SetBool("CAMERA_BOUNDARIES_EDIT_MODE", enableEditMode);
             else enableEditMode = EditorPrefs.GetBool("CAMERA_BOUNDARIES_EDIT_MODE");
-            if (!EditorPrefs.HasKey("CAMERA_BOUNDARIES_RECT_COLOR")) EditorPrefs.SetInt("CAMERA_BOUNDARIES_RECT_COLOR", PackColor(rectangleColor));
-            else rectangleColor = UnpackColor(EditorPrefs.GetInt("CAMERA_BOUNDARIES_RECT_COLOR"));
+            if (!EditorPrefs.HasKey("CAMERA_BOUNDARIES_RECT_COLOR")) EditorPrefs.SetInt("CAMERA_BOUNDARIES_RECT_COLOR", Utilities.PackColor(rectangleColor));
+            else rectangleColor = Utilities.UnpackColor(EditorPrefs.GetInt("CAMERA_BOUNDARIES_RECT_COLOR"));
         }
 
         private void SaveSettings() {
             EditorPrefs.SetBool("CAMERA_BOUNDARIES_EDIT_MODE", enableEditMode);
-            EditorPrefs.SetInt("CAMERA_BOUNDARIES_RECT_COLOR", PackColor(rectangleColor));
-        }
-
-        private static int PackColor(Color32 color) {
-            var colorInt = 0;
-            colorInt |= (color.r & 255) << 24;
-            colorInt |= (color.g & 255) << 16;
-            colorInt |= (color.b & 255) << 8;
-            colorInt |= (color.a & 255);
-            return colorInt;
-        }
-
-        private static Color32 UnpackColor(int colorInt) {
-            var r = (byte) ((colorInt >> 24) & 255);
-            var g = (byte) ((colorInt >> 16) & 255);
-            var b = (byte) ((colorInt >> 8) & 255);
-            var a = (byte) (colorInt & 255);
-            return new Color32(r, g, b, a);
+            EditorPrefs.SetInt("CAMERA_BOUNDARIES_RECT_COLOR", Utilities.PackColor(rectangleColor));
         }
 
         private void RecalculateRectVertices() {

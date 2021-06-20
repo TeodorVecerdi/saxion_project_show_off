@@ -6,14 +6,10 @@ using UnityEngine;
 using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
-    public class BuildableObjectPreview : MonoBehaviour, IEventSubscriber {
-        [Header("Settings")]
-        [SerializeField] private string objectName;
-
+    public sealed class BuildableObjectPreview : MonoBehaviour, IEventSubscriber {
         [Header("References")]
-        [SerializeField] private GameObject objectContainer;
+        [SerializeField] private GameObject directionIndicator;
 
-        private MaterialInventory requirements;
         private IDisposable performBuildEventUnsubscribeToken;
         private List<Collider> colliders;
 
@@ -23,7 +19,7 @@ namespace Runtime {
 
         private void Start() {
             colliders = new List<Collider>();
-            objectContainer.GetComponentsInChildren(true, colliders);
+            gameObject.GetComponentsInChildren(true, colliders);
             foreach (var collider in colliders) {
                 collider.enabled = false;
             }
@@ -32,10 +28,6 @@ namespace Runtime {
 
         private void OnDestroy() {
             performBuildEventUnsubscribeToken.Dispose();
-        }
-
-        public void Initialize(BuildableObject buildableObject) {
-            requirements = buildableObject.ConstructionRequirements;
         }
 
         /// <summary>
@@ -49,8 +41,9 @@ namespace Runtime {
                     foreach (var collider in colliders) {
                         collider.enabled = true;
                     }
-                    objectContainer.transform.SetParent(null);
-                    Destroy(gameObject);
+                    Destroy(directionIndicator);
+                    Destroy(this);
+                    gameObject.name = performBuildEvent.BuildableObject.Name;
                     return false;
                 }
                 default: return false;

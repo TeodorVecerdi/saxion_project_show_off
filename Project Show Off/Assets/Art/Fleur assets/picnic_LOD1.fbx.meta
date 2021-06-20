@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: lambert1
-    second: {fileID: 2100000, guid: 1060aa0d57ab3474cb48da0460913205, type: 2}
+      name: standardSurface3
+    second: {fileID: 2100000, guid: f20928f0031735d499c8fa0804ab51e2, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -71,8 +71,8 @@ ModelImporter:
     useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
-    normalImportMode: 0
-    tangentImportMode: 0
+    normalImportMode: 1
+    tangentImportMode: 3
     normalCalculationMode: 4
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1

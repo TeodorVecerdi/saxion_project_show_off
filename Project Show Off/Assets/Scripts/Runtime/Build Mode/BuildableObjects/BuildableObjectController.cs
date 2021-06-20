@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using DG.Tweening;
 using Runtime.Data;
 using Runtime.Event;
@@ -9,7 +8,7 @@ using UnityEngine.InputSystem;
 using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
-    public class BuildableObjectController : MonoBehaviour, IEventSubscriber {
+    public sealed class BuildableObjectController : MonoBehaviour, IEventSubscriber {
         [Header("Settings")]
         [SerializeField] private float buildableRotationSpeed = 45.0f;
         [SerializeField] private float buildableRotationTime = 5.0f;
@@ -18,9 +17,9 @@ namespace Runtime {
         [SerializeField] private Color buildIndicatorInvalidColor;
         [Header("References")]
         [SerializeField] private Transform buildModeCenter;
-        [SerializeField] private Camera buildModeCamera;
         [SerializeField] private Material buildLocationIndicator;
         
+        private Camera buildModeCamera;
         private BuildableObject currentBuildable;
         private BuildableObjectPreview currentObject;
         private Transform currentTransform;
@@ -46,6 +45,7 @@ namespace Runtime {
                 this.Subscribe(EventType.BeginBuild), 
                 this.Subscribe(EventType.GameModeChange)
             };
+            buildModeCamera = ResourcesProvider.MainCamera;
             y180deg = Quaternion.Euler(180.0f * Vector3.up);
         }
 

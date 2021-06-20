@@ -4,13 +4,16 @@ using UnityEngine;
 using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
-    public class GeneralInput : MonoBehaviour, IEventSubscriber {
-        private bool isBuildModeActive;
+    public sealed class GeneralInput : MonoBehaviour, IEventSubscriber {
+        private static bool isBuildModeActive;
 
         private IDisposable gameModeChangeEventUnsubscribeToken;
 
+        public static bool IsBuildModeActive => isBuildModeActive;
+
         private void Awake() {
             gameModeChangeEventUnsubscribeToken = this.Subscribe(EventType.GameModeChange);
+            isBuildModeActive = false;
         }
 
         private void OnDestroy() {

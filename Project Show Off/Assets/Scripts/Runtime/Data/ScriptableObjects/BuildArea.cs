@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Runtime.Data {
     [CreateAssetMenu(fileName = "New Build Area", menuName = "Data/Build Area", order = 0)]
-    public class BuildArea : ScriptableObject {
+    public sealed class BuildArea : ScriptableObject {
         [SerializeField] private List<Quad> quads;
         [SerializeField, ReadOnly] private Mesh bakedMesh;
         [SerializeField, HideInInspector] private bool isBakeDirty = true;

@@ -19,8 +19,12 @@
         TrashPickupRequest,
         TrashPickupSpaceRequest,
         TrashPickupSpaceResponse,
+        TrashPickupBin,
         
         PollutionUpdate,
         PollutionChange,
+        
+        SettingsChanged,
+        ResetTutorial
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine;
 using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
-    public class DepositInventoryView : MonoBehaviour, IEventSubscriber {
+    public sealed class DepositInventoryView : MonoBehaviour, IEventSubscriber {
         [Header("References"), SerializeField] private RectTransform itemViewsContainer;
         [SerializeField] private DepositItemView itemViewPrefab;
         

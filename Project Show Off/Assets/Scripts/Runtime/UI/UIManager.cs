@@ -5,12 +5,11 @@ using UnityEngine;
 using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
-    public class UIManager : MonoBehaviour, IEventSubscriber {
+    public sealed class UIManager : MonoBehaviour, IEventSubscriber {
         [SerializeField] private List<GameObject> gameModeObjects;
         [SerializeField] private List<GameObject> buildModeObjects;
         
         private IDisposable gameModeToggleEventUnsubscribeToken;
-        private bool isBuildModeActive;
 
         private void Awake() {
             gameModeToggleEventUnsubscribeToken = this.Subscribe(EventType.GameModeToggle);
@@ -35,8 +34,7 @@ namespace Runtime {
         }
 
         private void OnGameModeToggle() {
-            isBuildModeActive = !isBuildModeActive;
-            if (isBuildModeActive) EnableBuildModeUI();
+            if (GeneralInput.IsBuildModeActive) EnableBuildModeUI();
             else DisableBuildModeUI();
         }
 

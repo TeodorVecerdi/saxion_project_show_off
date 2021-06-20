@@ -5,7 +5,7 @@ using UnityCommons;
 using UnityEngine;
 
 namespace Runtime {
-    public class UIHintController : MonoSingleton<UIHintController> {
+    public sealed class UIHintController : MonoSingleton<UIHintController> {
         [SerializeField] private TextMeshProUGUI hintText;
         [SerializeField] private float hintDuration;
         [SerializeField] /*debug:*/ private bool debug;

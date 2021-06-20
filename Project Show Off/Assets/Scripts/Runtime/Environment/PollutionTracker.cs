@@ -6,8 +6,8 @@ using UnityEngine;
 using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
-    public class PollutionTracker : MonoBehaviour, IEventSubscriber {
-        [InfoBox("The amount with which raw pollution gets divided. Basically controls how much pollution is necessary to reach 'max' pollution.\nA value of 100 means 100 pollution = 100% polluted")]
+    public sealed class PollutionTracker : MonoBehaviour, IEventSubscriber {
+        [InfoBox("The amount by which to divide raw pollution. \nBasically controls how much pollution is necessary to reach 'max' pollution.\nA value of 100 means 100 pollution = 100% polluted")]
         [SerializeField] private float pollutionMultiplier = 100;
         
         private float rawPollution;
@@ -41,13 +41,18 @@ namespace Runtime {
         /// <returns><c>true</c> if event propagation should be stopped, <c>false</c> otherwise.</returns>
         public bool OnEvent(EventData eventData) {
             switch (eventData) {
-                case TrashPickupEvent {Type: EventType.TrashSpawn} trashSpawnEvent: {
+                case TrashEvent {Type: EventType.TrashSpawn} trashSpawnEvent: {
                     rawPollution += trashSpawnEvent.Pickup.TrashPickup.PollutionAmount;
                     UpdatePollution();
                     return false;
                 }
-                case TrashPickupEvent {Type: EventType.TrashPickupSuccess} trashPickupSuccessEvent: {
+                case TrashEvent {Type: EventType.TrashPickupSuccess} trashPickupSuccessEvent: {
                     rawPollution -= trashPickupSuccessEvent.Pickup.TrashPickup.PollutionAmount;
+                    UpdatePollution();
+                    return false;
+                }
+                case TrashPickupBinEvent trashPickupBinEvent: {
+                    rawPollution -= trashPickupBinEvent.TrashPickup.PollutionAmount;
                     UpdatePollution();
                     return false;
                 }

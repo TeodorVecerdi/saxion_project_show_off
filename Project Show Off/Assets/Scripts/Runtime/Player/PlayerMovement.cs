@@ -1,8 +1,7 @@
 using UnityEngine;
 
 namespace Runtime {
-    public class PlayerMovement : MonoBehaviour {
-
+    public sealed class PlayerMovement : MonoBehaviour {
         [SerializeField] private float speed;
         [SerializeField] private float gravity;
         [SerializeField] private float jumpHeight;

@@ -9,13 +9,12 @@ using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
     [RequireComponent(typeof(CameraBoundaries))]
-    public class BuildModeCamera : MonoBehaviour, IEventSubscriber {
+    public sealed class BuildModeCamera : MonoBehaviour, IEventSubscriber {
         // ReSharper disable InconsistentNaming
         [HorizontalLine(color: EColor.Green, order = 1), Header("General")]
         [SerializeField, OnValueChanged("OnTimeSettingsChanged")]
         private bool unlinkTimeVariables;
         [SerializeField, Required] private CinemachineVirtualCamera virtualCamera;
-        [SerializeField, Required] private Camera actualCamera;
         [SerializeField, Required] private BuildModeVolume buildModeVolume;
 
         [HorizontalLine(color: EColor.Blue, order = 1), Header("Movement")]
@@ -61,7 +60,6 @@ namespace Runtime {
         private CameraBoundaries cameraBoundaries;
         private Plane dragPlane;
         private Mouse mouse;
-        private bool isEnabled;
         private IDisposable gameModeToggleEventUnsubscribeToken;
 
         private void Awake() {
@@ -87,7 +85,7 @@ namespace Runtime {
         }
 
         private void Update() {
-            if (!isEnabled) return;
+            if (!GeneralInput.IsBuildModeActive || !InputManager.BuildModeActions.enabled) return;
 
             if (InputManager.IsBoosting) {
                 movementSpeed = boostMovementSpeed;
@@ -109,14 +107,14 @@ namespace Runtime {
 
             // Pan / Move
             if (mouse.leftButton.wasPressedThisFrame) {
-                var ray = actualCamera.ScreenPointToRay(mousePosition);
+                var ray = ResourcesProvider.MainCamera.ScreenPointToRay(mousePosition);
                 if (dragPlane.Raycast(ray, out var distance)) {
                     dragStartPosition = ray.GetPoint(distance);
                 }
             }
 
             if (mouse.leftButton.isPressed) {
-                var ray = actualCamera.ScreenPointToRay(mousePosition);
+                var ray = ResourcesProvider.MainCamera.ScreenPointToRay(mousePosition);
                 if (dragPlane.Raycast(ray, out var distance)) {
                     dragCurrentPosition = ray.GetPoint(distance);
                     newPosition = transform.position + dragStartPosition - dragCurrentPosition;
@@ -164,7 +162,6 @@ namespace Runtime {
         }
 
         private void EnableBuildMode() {
-            isEnabled = true;
             //!! reason: repeated property access of built in component is inefficient
             var baseTransform = transform;  
             newPosition = baseTransform.position;
@@ -176,7 +173,6 @@ namespace Runtime {
         }
 
         private void DisableBuildMode() {
-            isEnabled = false;
             virtualCamera.Priority = 0;
         }
 
@@ -192,8 +188,8 @@ namespace Runtime {
         }
 
         private void ToggleCameraMode() {
-            if (isEnabled) DisableBuildMode();
-            else EnableBuildMode();
+            if (GeneralInput.IsBuildModeActive) EnableBuildMode();
+            else DisableBuildMode();
         }
         
         private void OnDeviceChanged(InputDevice device, InputDeviceChange change) {

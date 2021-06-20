@@ -7,7 +7,7 @@ using UnityEditor;
 #endif
 
 namespace Runtime.Tools {
-    public class FencePlacer : MonoBehaviour {
+    public sealed class FencePlacer : MonoBehaviour {
         [SerializeField, Min(0)] private int count;
 
         private const float initialSpacing = 1.849f;

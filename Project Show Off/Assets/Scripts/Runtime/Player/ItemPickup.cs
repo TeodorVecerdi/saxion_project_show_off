@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using DG.Tweening;
-using NaughtyAttributes;
 using Runtime.Event;
 using TMPro;
 using UnityEngine;
@@ -10,7 +9,7 @@ using UnityEngine.UI;
 using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
-    public class ItemPickup : MonoBehaviour, IEventSubscriber {
+    public sealed class ItemPickup : MonoBehaviour, IEventSubscriber {
         [SerializeField] /*debug:*/ private TextMeshProUGUI text;
         [SerializeField] private Transform cameraTransform;
         [SerializeField] private Image pickupIndicatorImage;
@@ -70,7 +69,7 @@ namespace Runtime {
                 pickupIndicatorImage.fillAmount = fillAmount;
                 
                 if (fillAmount >= 1.0f) {
-                    EventQueue.QueueEvent(new TrashPickupEvent(this, EventType.TrashPickupRequest, pickupUnderMouse));
+                    EventQueue.QueueEvent(new TrashEvent(this, EventType.TrashPickupRequest, pickupUnderMouse));
                     StopPickup();
                 }
             } else {
@@ -98,7 +97,7 @@ namespace Runtime {
                     StopPickup();
 
                 pickupUnderMouse = pickup;
-                text.text = $"{pickupUnderMouse.TrashPickup.ItemName} ({pickupUnderMouse.TrashPickup.TrashCategory.CategoryName})";
+                text.text = $"{pickupUnderMouse.TrashPickup.ItemName} ({pickupUnderMouse.TrashPickup.TrashMaterial.MaterialName})";
             } else {
                 if (pickupUnderMouse != null && isPickingUp)
                     StopPickup();
@@ -142,7 +141,7 @@ namespace Runtime {
         /// <returns><c>true</c> if event propagation should be stopped, <c>false</c> otherwise.</returns>
         public bool OnEvent(EventData eventData) {
             switch (eventData) {
-                case TrashPickupEvent {Type: EventType.TrashPickupSuccess} itemPickupSuccessEvent: {
+                case TrashEvent {Type: EventType.TrashPickupSuccess} itemPickupSuccessEvent: {
                     Destroy(itemPickupSuccessEvent.Pickup.gameObject);
                     pickupUnderMouse = null;
                     shouldRaycast = true;

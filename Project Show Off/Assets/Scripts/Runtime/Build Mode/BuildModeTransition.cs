@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
-    public class BuildModeTransition : MonoBehaviour, IEventSubscriber {
+    public sealed class BuildModeTransition : MonoBehaviour, IEventSubscriber {
         [Header("Settings")]
         [SerializeField] private float fadeDuration = 0.25f;
 
@@ -15,7 +15,6 @@ namespace Runtime {
 
         private IDisposable gameModeToggleEventUnsubscribeToken;
         private bool waitingToSendEvent;
-        private bool isBuildMode;
 
         private void Awake() {
             gameModeToggleEventUnsubscribeToken = this.Subscribe(EventType.GameModeChange);
@@ -30,8 +29,6 @@ namespace Runtime {
         }
 
         private void StartFade() {
-            isBuildMode = !isBuildMode;
-            
             if (waitingToSendEvent) {
                 // if mid-fade wasn't reached it would cause build-mode states to become de-synced
                 EventQueue.RaiseEventImmediately(new EmptyEvent(this, EventType.GameModeToggle));
@@ -39,7 +36,7 @@ namespace Runtime {
             }
             waitingToSendEvent = true;
             
-            if (isBuildMode) EnterBuildMode();
+            if (GeneralInput.IsBuildModeActive) EnterBuildMode();
             else ExitBuildMode();
         }
 
