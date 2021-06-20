@@ -5,6 +5,7 @@ using System.Linq;
 using NUnit.Framework;
 using Runtime;
 using Runtime.Event;
+using UnityCommons;
 using UnityEngine;
 using UnityEngine.TestTools;
 using EventType = Runtime.Event.EventType;
@@ -20,7 +21,7 @@ namespace Tests {
             assertionTestSubscriber = new AssertionTestSubscriber();
         }
 
-        [UnityTest] public IEnumerator EventQueue_RaiseImmediatelyReceived() {
+        [UnityTest] public IEnumerator RaiseImmediatelyReceived() {
             assertionTestSubscriber.Clean();
             assertionTestSubscriber.Prepare(EventType.BeginBuild, EventType.CancelBuild, EventType.PerformBuild);
             
@@ -33,7 +34,7 @@ namespace Tests {
             yield return AssertReceivedEvent(EventType.PerformBuild, 0);
         }
         
-        [UnityTest] public IEnumerator EventQueue_RaiseImmediatelyNotReceived() {
+        [UnityTest] public IEnumerator RaiseImmediatelyNotReceived() {
             assertionTestSubscriber.Clean();
             assertionTestSubscriber.Prepare(EventType.BeginBuild, EventType.CancelBuild, EventType.PerformBuild);
             
@@ -46,7 +47,7 @@ namespace Tests {
             yield return AssertNotReceivedEvent(EventType.DepositInventoryResponse, 0);
         }
         
-        [UnityTest] public IEnumerator EventQueue_QueueReceived() {
+        [UnityTest] public IEnumerator QueueReceived() {
             assertionTestSubscriber.Clean();
             assertionTestSubscriber.Prepare(EventType.BeginBuild, EventType.CancelBuild, EventType.PerformBuild);
             
@@ -59,7 +60,7 @@ namespace Tests {
             yield return AssertReceivedEvent(EventType.PerformBuild);
         }
         
-        [UnityTest] public IEnumerator EventQueue_QueueNotReceived() {
+        [UnityTest] public IEnumerator QueueNotReceived() {
             assertionTestSubscriber.Clean();
             assertionTestSubscriber.Prepare(EventType.BeginBuild, EventType.CancelBuild, EventType.PerformBuild);
             
@@ -70,6 +71,43 @@ namespace Tests {
             yield return AssertNotReceivedEvent(EventType.DepositInventoryUpdate);
             yield return AssertNotReceivedEvent(EventType.DepositInventoryRequest);
             yield return AssertNotReceivedEvent(EventType.DepositInventoryResponse);
+        }
+
+        [UnityTest] public IEnumerator EventDataPreserved() {
+            assertionTestSubscriber.Clean();
+            assertionTestSubscriber.Prepare(EventType.ChangeMouseLock, EventType.GameModeChange, EventType.SettingsChanged);
+            var event1 = new ChangeMouseLockEvent(this, Rand.Bool);
+            var event2 = new EmptyEvent(this, EventType.GameModeChange);
+            var event3 = new SettingsChangedEvent(this, Rand.Bool, Rand.Float, Rand.Float, Rand.Float);
+            EventQueue.QueueEvent(event1);
+            EventQueue.QueueEvent(event2);
+            EventQueue.QueueEvent(event3);
+
+            yield return AssertReceivedExactEvent(event1);
+            yield return AssertReceivedExactEvent(event2);
+            yield return AssertReceivedExactEvent(event3);
+        }
+
+        [UnityTest] public IEnumerator SubscribeWorks() {
+            assertionTestSubscriber.Clean();
+            EventQueue.RaiseEventImmediately(new EmptyEvent(this, EventType.BeginBuild));
+            yield return AssertNotReceivedEvent(EventType.BeginBuild, 0);
+            assertionTestSubscriber.ReceivedEvents.Clear();
+            using (assertionTestSubscriber.Subscribe(EventType.BeginBuild)) {
+                EventQueue.RaiseEventImmediately(new EmptyEvent(this, EventType.BeginBuild));
+                yield return AssertReceivedEvent(EventType.BeginBuild, 0);
+            }
+        }
+        
+        [UnityTest] public IEnumerator UnsubscribeWorks() {
+            assertionTestSubscriber.Clean();
+            using (assertionTestSubscriber.Subscribe(EventType.BeginBuild)) {
+                EventQueue.RaiseEventImmediately(new EmptyEvent(this, EventType.BeginBuild));
+                yield return AssertReceivedEvent(EventType.BeginBuild, 0);
+            }
+            assertionTestSubscriber.ReceivedEvents.Clear();
+            EventQueue.RaiseEventImmediately(new EmptyEvent(this, EventType.BeginBuild));
+            yield return AssertNotReceivedEvent(EventType.BeginBuild, 0);
         }
         
 
@@ -85,6 +123,13 @@ namespace Tests {
                 yield return null;
             }
             Assert.False(assertionTestSubscriber.ReceivedEvents.Any(data => data.Type == type), $"Expected to not receive any event of type {type}, but received");
+        }
+        
+        private IEnumerator AssertReceivedExactEvent(EventData @event, int waitFrames = 1) {
+            for (var i = 0; i < waitFrames; i++) {
+                yield return null;
+            }
+            Assert.True(assertionTestSubscriber.ReceivedEvents.Any(data => data == @event), $"Expected to receive an exact event (of type {@event.Type}), but did not.");
         }
 
         private class AssertionTestSubscriber : IEventSubscriber {
