@@ -3,7 +3,7 @@ using UnityCommons;
 using UnityEngine;
 
 namespace Runtime {
-    public class Pickup : MonoBehaviour {
+    public sealed class Pickup : MonoBehaviour {
         public TrashPickup TrashPickup { get; private set; }
         public float Mass { get; private set; }
 

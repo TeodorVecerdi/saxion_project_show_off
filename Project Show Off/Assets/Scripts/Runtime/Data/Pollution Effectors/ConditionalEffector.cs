@@ -5,7 +5,7 @@ using UnityEngine.VFX;
 
 namespace Runtime.Data {
     [CreateAssetMenu(fileName = "NewConditionalEffector", menuName = "Data/VFX Pollution/Conditional", order = 0)]
-    public class ConditionalEffector : VFXPollutionEffector {
+    public sealed class ConditionalEffector : VFXPollutionEffector {
         [InfoBox("Applies 'If True' is the pollution percentage matches the condition and value, and applies 'If False' otherwise.\n\nYou can use this, for example, to activate a certain VFX if the pollution is over a certain value")]
         [SerializeField, Range(0.0f, 1.0f)] private float value = 0.5f;
         [SerializeField] private Condition condition;

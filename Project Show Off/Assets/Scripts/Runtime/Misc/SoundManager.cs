@@ -7,7 +7,7 @@ using UnityEngine;
 using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
-    public class SoundManager : MonoSingleton<SoundManager>, IEventSubscriber {
+    public sealed class SoundManager : MonoSingleton<SoundManager>, IEventSubscriber {
         
         private float sfxVolume = 1f;
         private float musicVolume = 1f;

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace Runtime {
-    public class InventoryMaterialView : MonoBehaviour {
+    public sealed class InventoryMaterialView : MonoBehaviour {
         [SerializeField] private Image patternImage;
         [SerializeField] private Image transitionImage;
         

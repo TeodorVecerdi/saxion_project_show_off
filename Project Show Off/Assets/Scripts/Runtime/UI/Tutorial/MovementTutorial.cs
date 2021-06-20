@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Runtime.Tutorial {
-    public class MovementTutorial : TutorialSlide {
+    public sealed class MovementTutorial : TutorialSlide {
         public override string TutorialKey => "movement";
         
         [HorizontalLine(color: EColor.Orange, order = -10000), Header("Movement Tutorial", order = -20000)]

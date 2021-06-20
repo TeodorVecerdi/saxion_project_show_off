@@ -2,7 +2,7 @@
 using UnityEngine;
 
 namespace Runtime.Tutorial {
-    public class ZoomTutorial : TutorialSlide {
+    public sealed class ZoomTutorial : TutorialSlide {
         public override string TutorialKey => "build_mode_zoom";
         
         [HorizontalLine(color: EColor.Orange, order = -10000), Header("Movement Tutorial", order = -20000)]

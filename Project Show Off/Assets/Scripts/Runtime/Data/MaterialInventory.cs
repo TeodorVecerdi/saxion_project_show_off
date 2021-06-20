@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Runtime.Data {
     [Serializable]
-    public class MaterialInventory : IEnumerable, IEquatable<MaterialInventory> {
+    public sealed class MaterialInventory : IEnumerable, IEquatable<MaterialInventory> {
         [SerializeField] private List<ItemStack> contents;
 
         private float totalMass;

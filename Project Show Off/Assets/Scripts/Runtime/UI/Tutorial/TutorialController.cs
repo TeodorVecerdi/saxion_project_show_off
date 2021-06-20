@@ -8,7 +8,7 @@ using UnityEngine;
 using EventType = Runtime.Event.EventType;
 
 namespace Runtime.Tutorial {
-    public class TutorialController : MonoBehaviour, IEventSubscriber {
+    public sealed class TutorialController : MonoBehaviour, IEventSubscriber {
         [SerializeField] private List<TutorialSlide> allTutorials;
         [SerializeField] private float transitionFromX;
         [SerializeField] private float transitionToX;

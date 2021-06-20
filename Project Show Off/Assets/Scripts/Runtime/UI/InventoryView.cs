@@ -6,7 +6,7 @@ using UnityEngine;
 using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
-    public class InventoryView : MonoBehaviour, IEventSubscriber {
+    public sealed class InventoryView : MonoBehaviour, IEventSubscriber {
         [SerializeField] private PlayerInventory playerInventory;
         [SerializeField] private RectTransform inventoryItemContainer;
         [SerializeField] private InventoryMaterialView materialViewPrefab;

@@ -41,7 +41,7 @@ using UnityEngine.Serialization;
 //When playing a footstep sound, this script will cast a ray downwards.
 //If that ray hits the ground terrain mesh, it will retreive material values to determine the surface at the current position.
 //If that ray does not hit the ground terrain mesh, we assume it has hit a wooden prop and set the surface values for wood.
-public class Footsteps : MonoBehaviour {
+public sealed class Footsteps : MonoBehaviour {
     //FMOD Studio variables
     //The FMOD Studio Event path.
     //This script is designed for use with an event that has a game parameter for each of the surface variables, but it will still compile and run if they are not present.

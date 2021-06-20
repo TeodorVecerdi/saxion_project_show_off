@@ -9,7 +9,7 @@ using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
     [RequireComponent(typeof(Button), typeof(Image))]
-    public class BuildableEntry : MonoBehaviour, IEventSubscriber {
+    public sealed class BuildableEntry : MonoBehaviour, IEventSubscriber {
         [Header("Settings")]
         [SerializeField] private Color selectedColor;
         [SerializeField] private float selectedColorTransitionDuration = 0.125f;

@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Runtime {
-    public class ResourcesProvider : MonoSingleton<ResourcesProvider> {
+    public sealed class ResourcesProvider : MonoSingleton<ResourcesProvider> {
         [SerializeField] private string trashMaterialsFolder;
         [SerializeField] private string trashPickupsFolder;
         [SerializeField] private string buildableObjectsFolder;

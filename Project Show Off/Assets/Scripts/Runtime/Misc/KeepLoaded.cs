@@ -2,7 +2,7 @@
 using UnityEngine;
 
 namespace Runtime {
-    public class KeepLoaded : MonoBehaviour {
+    public sealed class KeepLoaded : MonoBehaviour {
         private void Awake() {
             DontDestroyOnLoad(gameObject);
         }

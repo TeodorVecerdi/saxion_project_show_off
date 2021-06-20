@@ -2,7 +2,7 @@
 
 namespace Runtime {
     [ExecuteInEditMode]
-    public class CloudSettings : MonoBehaviour {
+    public sealed class CloudSettings : MonoBehaviour {
         [Header("Settings")]
         [SerializeField] private int cloudResolution = 20;
         [SerializeField] private float cloudHeight;

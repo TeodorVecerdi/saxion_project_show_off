@@ -6,7 +6,7 @@ using UnityEngine;
 using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
-    public class BuildableToolbarController : MonoBehaviour, IEventSubscriber {
+    public sealed class BuildableToolbarController : MonoBehaviour, IEventSubscriber {
         [Header("Settings")]
         [SerializeField] private float transitionDuration = 0.25f;
         [Header("References")]

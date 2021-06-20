@@ -7,7 +7,7 @@ using UnityEditor;
 #endif
 
 namespace Runtime.Tools {
-    public class HedgePlacer : MonoBehaviour {
+    public sealed class HedgePlacer : MonoBehaviour {
         [SerializeField, Min(0)] private int count;
         [SerializeField] private float spacing = 0.0f;
 

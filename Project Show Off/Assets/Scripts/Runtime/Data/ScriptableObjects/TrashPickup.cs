@@ -2,7 +2,7 @@
 
 namespace Runtime.Data {
     [CreateAssetMenu(fileName = "NewItem", menuName = "Data/Trash Pickup", order = 0)]
-    public class TrashPickup : ScriptableObject {
+    public sealed class TrashPickup : ScriptableObject {
         [SerializeField] private string itemName;
         [SerializeField] private TrashMaterial trashMaterial;
         [SerializeField] private float minimumMass;

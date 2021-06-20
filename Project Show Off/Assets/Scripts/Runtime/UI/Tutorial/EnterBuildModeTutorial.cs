@@ -3,7 +3,7 @@ using DG.Tweening;
 using Runtime.Event;
 
 namespace Runtime.Tutorial {
-    public class EnterBuildModeTutorial : TutorialSlide, IEventSubscriber {
+    public sealed class EnterBuildModeTutorial : TutorialSlide, IEventSubscriber {
         public override string TutorialKey => "enter_build_mode";
 
         private IDisposable gameModeChangeEventUnsubscribeToken;

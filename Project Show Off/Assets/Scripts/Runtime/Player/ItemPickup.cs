@@ -9,7 +9,7 @@ using UnityEngine.UI;
 using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
-    public class ItemPickup : MonoBehaviour, IEventSubscriber {
+    public sealed class ItemPickup : MonoBehaviour, IEventSubscriber {
         [SerializeField] /*debug:*/ private TextMeshProUGUI text;
         [SerializeField] private Transform cameraTransform;
         [SerializeField] private Image pickupIndicatorImage;

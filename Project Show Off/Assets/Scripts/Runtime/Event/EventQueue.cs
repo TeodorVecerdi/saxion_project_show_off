@@ -6,7 +6,7 @@ using UnityCommons;
 using UnityEngine;
 
 namespace Runtime.Event {
-    public class EventQueue : MonoSingleton<EventQueue> {
+    public sealed class EventQueue : MonoSingleton<EventQueue> {
         private static readonly bool debug = false;
         private readonly Dictionary<EventType, List<IEventSubscriber>> subscribers = new Dictionary<EventType, List<IEventSubscriber>>();
         private readonly Queue<EventData> eventQueue = new Queue<EventData>();

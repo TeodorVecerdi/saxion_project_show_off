@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Runtime.Tutorial {
-    public class BuildModeRotateTutorial : TutorialSlide {
+    public sealed class BuildModeRotateTutorial : TutorialSlide {
         public override string TutorialKey => "build_mode_rotate";
         
         [HorizontalLine(color: EColor.Orange, order = -10000), Header("Build Mode Rotate Tutorial", order = -20000)]

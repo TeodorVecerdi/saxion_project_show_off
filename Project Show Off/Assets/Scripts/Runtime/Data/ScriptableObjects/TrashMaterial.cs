@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Runtime.Data {
     [CreateAssetMenu(fileName = "NewTrashMaterial", menuName = "Data/Trash Material")]
-    public class TrashMaterial : ScriptableObject {
+    public sealed class TrashMaterial : ScriptableObject {
         [SerializeField] private string materialName;
         [SerializeField] private Sprite icon;
         [SerializeField] private Sprite verticalPattern;

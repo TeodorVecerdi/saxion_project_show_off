@@ -6,7 +6,7 @@ using NaughtyAttributes;
 using Newtonsoft.Json;
 using UnityEngine;
 
-public class AWSScoreboardTest : MonoBehaviour {
+public sealed class AWSScoreboardTest : MonoBehaviour {
     public int QueryCount = 4;
 
     public int AddScore;

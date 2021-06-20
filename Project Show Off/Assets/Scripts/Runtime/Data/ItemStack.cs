@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Runtime.Data {
     [Serializable]
-    public class ItemStack : IEquatable<ItemStack> {
+    public sealed class ItemStack : IEquatable<ItemStack> {
         [SerializeField] private TrashMaterial trashMaterial;
         [SerializeField] private float mass;
         
