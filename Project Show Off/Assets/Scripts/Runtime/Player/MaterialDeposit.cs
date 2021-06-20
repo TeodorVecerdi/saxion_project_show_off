@@ -18,6 +18,8 @@ namespace Runtime {
         [SerializeField] private CanvasGroup depositUICanvasGroup;
         [SerializeField] private MaterialInventory inventory;
 
+        public MaterialInventory Inventory => inventory;
+        
         private List<IDisposable> eventUnsubscribeTokens;
         private bool canRecycle;
 
@@ -27,7 +29,11 @@ namespace Runtime {
                 this.Subscribe(EventType.PerformBuild),
                 this.Subscribe(EventType.TrashPickupBin)
             };
-            depositUICanvasGroup.alpha = 0.0f;
+            
+            inventory ??= new MaterialInventory();
+            
+            if(depositUICanvasGroup != null)
+                depositUICanvasGroup.alpha = 0.0f;
         }
 
         private void OnDestroy() {

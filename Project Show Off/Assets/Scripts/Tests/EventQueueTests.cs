@@ -15,10 +15,16 @@ namespace Tests {
         private GameObject utilityObject;
         private AssertionTestSubscriber assertionTestSubscriber;
         
-        [OneTimeSetUp]
+        [OneTimeSetUp, UnitySetUp]
         public void Setup() {
             utilityObject = new GameObject("Utility GameObject", typeof(EventQueue));
             assertionTestSubscriber = new AssertionTestSubscriber();
+        }
+        
+        [OneTimeTearDown, UnityTearDown]
+        public void TearDown() {
+            GameObject.DestroyImmediate(utilityObject);
+            assertionTestSubscriber.Clean();
         }
 
         [UnityTest] public IEnumerator RaiseImmediatelyReceived() {

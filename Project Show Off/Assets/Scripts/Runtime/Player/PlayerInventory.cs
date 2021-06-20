@@ -21,6 +21,7 @@ namespace Runtime {
                 this.Subscribe(EventType.DepositMaterialsRequest), 
                 this.Subscribe(EventType.TrashPickupSpaceRequest)
             };
+            materialInventory ??= new MaterialInventory();
         }
 
         private void OnDestroy() {

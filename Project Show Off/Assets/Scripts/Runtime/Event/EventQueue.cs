@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DG.Tweening.Core;
 using JetBrains.Annotations;
 using UnityCommons;
 using UnityEngine;
@@ -79,13 +80,15 @@ namespace Runtime.Event {
         /// <param name="eventData">Event data that is raised</param>
         private void EmitEvent(EventData eventData) {
             if (!subscribers.ContainsKey(eventData.Type) || subscribers[eventData.Type].Count == 0) {
-                // Debug.LogWarning($"An event of type {eventData.Type} was raised but there is no subscriber for that event type");
+                if (debug) {
+                    Debug.LogWarning($"An event of type {eventData.Type} was raised but there is no subscriber for that event type");
+                }
                 return;
             }
             
             foreach (var subscriber in subscribers[eventData.Type]) {
                 if (debug) {
-                    Debug.Log($"Sent event {eventData} from {eventData.Sender} to {subscriber}");
+                    Debug.Log($"Sent event {eventData}[Type={eventData.Type}] from {eventData.Sender} to {subscriber}");
                 }
                 if (subscriber.OnEvent(eventData)) {
                     // stop propagation if event was consumed
@@ -124,6 +127,10 @@ namespace Runtime.Event {
             public void Dispose() {
                 if (disposed) {
                     return;
+                }
+
+                if (debug) {
+                    Debug.Log($"Unsubscribed {owner} from receiving events of type {eventType}");
                 }
 
                 source.Unsubscribe(owner, eventType);
