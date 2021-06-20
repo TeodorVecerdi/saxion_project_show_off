@@ -11,13 +11,13 @@ using UnityEngine.TestTools;
 using EventType = Runtime.Event.EventType;
 
 namespace Tests {
-    public class EventQueueTests {
+    public class EventQueue {
         private GameObject utilityObject;
         private AssertionTestSubscriber assertionTestSubscriber;
         
         [OneTimeSetUp, UnitySetUp]
         public void Setup() {
-            utilityObject = new GameObject("Utility GameObject", typeof(EventQueue));
+            utilityObject = new GameObject("Utility GameObject", typeof(Runtime.Event.EventQueue));
             assertionTestSubscriber = new AssertionTestSubscriber();
         }
         
@@ -31,9 +31,9 @@ namespace Tests {
             assertionTestSubscriber.Clean();
             assertionTestSubscriber.Prepare(EventType.BeginBuild, EventType.CancelBuild, EventType.PerformBuild);
             
-            EventQueue.RaiseEventImmediately(new EmptyEvent(this, EventType.BeginBuild));
-            EventQueue.RaiseEventImmediately(new EmptyEvent(this, EventType.CancelBuild));
-            EventQueue.RaiseEventImmediately(new EmptyEvent(this, EventType.PerformBuild));
+            Runtime.Event.EventQueue.RaiseEventImmediately(new EmptyEvent(this, EventType.BeginBuild));
+            Runtime.Event.EventQueue.RaiseEventImmediately(new EmptyEvent(this, EventType.CancelBuild));
+            Runtime.Event.EventQueue.RaiseEventImmediately(new EmptyEvent(this, EventType.PerformBuild));
             
             yield return AssertReceivedEvent(EventType.BeginBuild, 0);
             yield return AssertReceivedEvent(EventType.CancelBuild, 0);
@@ -44,9 +44,9 @@ namespace Tests {
             assertionTestSubscriber.Clean();
             assertionTestSubscriber.Prepare(EventType.BeginBuild, EventType.CancelBuild, EventType.PerformBuild);
             
-            EventQueue.RaiseEventImmediately(new EmptyEvent(this, EventType.DepositInventoryUpdate));
-            EventQueue.RaiseEventImmediately(new EmptyEvent(this, EventType.DepositInventoryRequest));
-            EventQueue.RaiseEventImmediately(new EmptyEvent(this, EventType.DepositInventoryResponse));
+            Runtime.Event.EventQueue.RaiseEventImmediately(new EmptyEvent(this, EventType.DepositInventoryUpdate));
+            Runtime.Event.EventQueue.RaiseEventImmediately(new EmptyEvent(this, EventType.DepositInventoryRequest));
+            Runtime.Event.EventQueue.RaiseEventImmediately(new EmptyEvent(this, EventType.DepositInventoryResponse));
             
             yield return AssertNotReceivedEvent(EventType.DepositInventoryUpdate, 0);
             yield return AssertNotReceivedEvent(EventType.DepositInventoryRequest, 0);
@@ -57,9 +57,9 @@ namespace Tests {
             assertionTestSubscriber.Clean();
             assertionTestSubscriber.Prepare(EventType.BeginBuild, EventType.CancelBuild, EventType.PerformBuild);
             
-            EventQueue.QueueEvent(new EmptyEvent(this, EventType.BeginBuild));
-            EventQueue.QueueEvent(new EmptyEvent(this, EventType.CancelBuild));
-            EventQueue.QueueEvent(new EmptyEvent(this, EventType.PerformBuild));
+            Runtime.Event.EventQueue.QueueEvent(new EmptyEvent(this, EventType.BeginBuild));
+            Runtime.Event.EventQueue.QueueEvent(new EmptyEvent(this, EventType.CancelBuild));
+            Runtime.Event.EventQueue.QueueEvent(new EmptyEvent(this, EventType.PerformBuild));
             
             yield return AssertReceivedEvent(EventType.BeginBuild);
             yield return AssertReceivedEvent(EventType.CancelBuild);
@@ -70,9 +70,9 @@ namespace Tests {
             assertionTestSubscriber.Clean();
             assertionTestSubscriber.Prepare(EventType.BeginBuild, EventType.CancelBuild, EventType.PerformBuild);
             
-            EventQueue.QueueEvent(new EmptyEvent(this, EventType.DepositInventoryUpdate));
-            EventQueue.QueueEvent(new EmptyEvent(this, EventType.DepositInventoryRequest));
-            EventQueue.QueueEvent(new EmptyEvent(this, EventType.DepositInventoryResponse));
+            Runtime.Event.EventQueue.QueueEvent(new EmptyEvent(this, EventType.DepositInventoryUpdate));
+            Runtime.Event.EventQueue.QueueEvent(new EmptyEvent(this, EventType.DepositInventoryRequest));
+            Runtime.Event.EventQueue.QueueEvent(new EmptyEvent(this, EventType.DepositInventoryResponse));
             
             yield return AssertNotReceivedEvent(EventType.DepositInventoryUpdate);
             yield return AssertNotReceivedEvent(EventType.DepositInventoryRequest);
@@ -85,9 +85,9 @@ namespace Tests {
             var event1 = new ChangeMouseLockEvent(this, Rand.Bool);
             var event2 = new EmptyEvent(this, EventType.GameModeChange);
             var event3 = new SettingsChangedEvent(this, Rand.Bool, Rand.Float, Rand.Float, Rand.Float);
-            EventQueue.QueueEvent(event1);
-            EventQueue.QueueEvent(event2);
-            EventQueue.QueueEvent(event3);
+            Runtime.Event.EventQueue.QueueEvent(event1);
+            Runtime.Event.EventQueue.QueueEvent(event2);
+            Runtime.Event.EventQueue.QueueEvent(event3);
 
             yield return AssertReceivedExactEvent(event1);
             yield return AssertReceivedExactEvent(event2);
@@ -96,11 +96,11 @@ namespace Tests {
 
         [UnityTest] public IEnumerator SubscribeWorks() {
             assertionTestSubscriber.Clean();
-            EventQueue.RaiseEventImmediately(new EmptyEvent(this, EventType.BeginBuild));
+            Runtime.Event.EventQueue.RaiseEventImmediately(new EmptyEvent(this, EventType.BeginBuild));
             yield return AssertNotReceivedEvent(EventType.BeginBuild, 0);
             assertionTestSubscriber.ReceivedEvents.Clear();
             using (assertionTestSubscriber.Subscribe(EventType.BeginBuild)) {
-                EventQueue.RaiseEventImmediately(new EmptyEvent(this, EventType.BeginBuild));
+                Runtime.Event.EventQueue.RaiseEventImmediately(new EmptyEvent(this, EventType.BeginBuild));
                 yield return AssertReceivedEvent(EventType.BeginBuild, 0);
             }
         }
@@ -108,11 +108,11 @@ namespace Tests {
         [UnityTest] public IEnumerator UnsubscribeWorks() {
             assertionTestSubscriber.Clean();
             using (assertionTestSubscriber.Subscribe(EventType.BeginBuild)) {
-                EventQueue.RaiseEventImmediately(new EmptyEvent(this, EventType.BeginBuild));
+                Runtime.Event.EventQueue.RaiseEventImmediately(new EmptyEvent(this, EventType.BeginBuild));
                 yield return AssertReceivedEvent(EventType.BeginBuild, 0);
             }
             assertionTestSubscriber.ReceivedEvents.Clear();
-            EventQueue.RaiseEventImmediately(new EmptyEvent(this, EventType.BeginBuild));
+            Runtime.Event.EventQueue.RaiseEventImmediately(new EmptyEvent(this, EventType.BeginBuild));
             yield return AssertNotReceivedEvent(EventType.BeginBuild, 0);
         }
         

@@ -10,7 +10,7 @@ using Runtime.Data;
 using static Runtime.Data.TrashMaterial.Types;
 
 namespace Tests {
-    public class InventoryTests {
+    public class Inventory {
         private Dictionary<TrashMaterial.Types, TrashMaterial> trash;
 
         [OneTimeSetUp]

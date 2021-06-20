@@ -14,7 +14,7 @@ using static Runtime.Data.TrashMaterial.Types;
 using EventType = Runtime.Event.EventType;
 
 namespace Tests {
-    public class DepositTests {
+    public class Deposit {
         private GameObject utilityObject;
         private GameObject testObject;
 
@@ -27,7 +27,7 @@ namespace Tests {
 
         [OneTimeSetUp, UnitySetUp]
         public void Setup() {
-            utilityObject = new GameObject("Utility Scripts", typeof(EventQueue));
+            utilityObject = new GameObject("Utility Scripts", typeof(Runtime.Event.EventQueue));
 
             LogAssert.ignoreFailingMessages = true;
             testObject = new GameObject("GameObject");
@@ -68,7 +68,7 @@ namespace Tests {
             assertionTestSubscriber.Clean();
             assertionTestSubscriber.Prepare(EventType.DepositInventoryUpdate);
             
-            EventQueue.QueueEvent(new PerformBuildEvent(this, buildable));
+            Runtime.Event.EventQueue.QueueEvent(new PerformBuildEvent(this, buildable));
             
             yield return AssertReceivedEvent(EventType.DepositInventoryUpdate, 2);
             Assert.IsTrue(expectedMaterials.Equals(materialDeposit.Inventory), "expectedMaterials.Equals(materialDeposit.Inventory)");
@@ -91,7 +91,7 @@ namespace Tests {
             assertionTestSubscriber.Clean();
             assertionTestSubscriber.Prepare(EventType.DepositInventoryUpdate);
 
-            EventQueue.QueueEvent(new TrashPickupBinEvent(this, pickup, mass));
+            Runtime.Event.EventQueue.QueueEvent(new TrashPickupBinEvent(this, pickup, mass));
             
             yield return AssertReceivedEvent(EventType.DepositInventoryUpdate, 2);
             Assert.IsTrue(expectedMaterials.Equals(materialDeposit.Inventory), "expectedMaterials.Equals(materialDeposit.Inventory)");

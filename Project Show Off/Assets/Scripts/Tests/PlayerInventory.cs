@@ -13,11 +13,11 @@ using static Runtime.Data.TrashMaterial.Types;
 using EventType = Runtime.Event.EventType;
 
 namespace Tests {
-    public class InventoryAndDepositTests {
+    public class PlayerInventory {
         private GameObject utilityObject;
         private GameObject testObject;
 
-        private PlayerInventory playerInventory;
+        private Runtime.PlayerInventory playerInventory;
 
         private AssertionTestSubscriber assertionTestSubscriber;
         private List<TrashPickup> pickups;
@@ -25,12 +25,12 @@ namespace Tests {
 
         [OneTimeSetUp, UnitySetUp]
         public void Setup() {
-            utilityObject = new GameObject("Utility Scripts", typeof(EventQueue));
+            utilityObject = new GameObject("Utility Scripts", typeof(Runtime.Event.EventQueue));
 
             LogAssert.ignoreFailingMessages = true;
-            testObject = new GameObject("GameObject", typeof(PlayerInventory));
+            testObject = new GameObject("GameObject", typeof(Runtime.PlayerInventory));
 
-            playerInventory = testObject.GetComponent<PlayerInventory>();
+            playerInventory = testObject.GetComponent<Runtime.PlayerInventory>();
 
             assertionTestSubscriber = new AssertionTestSubscriber();
 
@@ -54,10 +54,10 @@ namespace Tests {
             assertionTestSubscriber.Clean();
             assertionTestSubscriber.Prepare(EventType.TrashPickupSpaceResponse);
 
-            EventQueue.QueueEvent(spaceRequestEvent0);
+            Runtime.Event.EventQueue.QueueEvent(spaceRequestEvent0);
             yield return AssertReceivedAndMatches(eventData => eventData is TrashPickupSpaceResponse {CanPickUp: true}, 2);
 
-            EventQueue.QueueEvent(spaceRequestEvent1);
+            Runtime.Event.EventQueue.QueueEvent(spaceRequestEvent1);
             yield return AssertReceivedAndMatches(eventData => eventData is TrashPickupSpaceResponse {CanPickUp: true}, 2);
 
             assertionTestSubscriber.Clean();
@@ -71,7 +71,7 @@ namespace Tests {
             assertionTestSubscriber.Clean();
             assertionTestSubscriber.Prepare(EventType.TrashPickupSpaceResponse);
 
-            EventQueue.QueueEvent(spaceRequestEvent);
+            Runtime.Event.EventQueue.QueueEvent(spaceRequestEvent);
             yield return AssertReceivedAndMatches(eventData => eventData is TrashPickupSpaceResponse {CanPickUp: false}, 2);
 
             assertionTestSubscriber.Clean();
@@ -92,7 +92,7 @@ namespace Tests {
             var oldPlayerMass = playerInventory.MaterialInventory.TotalMass;
             var oldDepositMass = depositInventory.TotalMass;
 
-            EventQueue.QueueEvent(new DepositMaterialsRequestEvent(this, depositInventory));
+            Runtime.Event.EventQueue.QueueEvent(new DepositMaterialsRequestEvent(this, depositInventory));
 
             yield return AssertReceivedAndMatches(data => data is MaterialInventoryUpdateEvent updateEvent && updateEvent.Inventory == playerInventory.MaterialInventory, 2);
             yield return AssertReceivedAndMatches(data => data is DepositInventoryUpdateEvent updateEvent && updateEvent.Inventory == depositInventory, 0);
@@ -116,7 +116,7 @@ namespace Tests {
             assertionTestSubscriber.Clean();
             assertionTestSubscriber.Prepare(EventType.TrashPickupSuccess, EventType.InventoryUpdate);
             var trashEvent = new TrashEvent(this, EventType.TrashPickupRequest, trashPickup);
-            EventQueue.QueueEvent(trashEvent);
+            Runtime.Event.EventQueue.QueueEvent(trashEvent);
 
             yield return AssertNotReceivedEvent(EventType.TrashPickupSuccess, 2);
             yield return AssertNotReceivedEvent(EventType.InventoryUpdate, 0);
@@ -138,7 +138,7 @@ namespace Tests {
             assertionTestSubscriber.Prepare(EventType.TrashPickupSuccess, EventType.InventoryUpdate);
 
             var trashEvent = new TrashEvent(this, EventType.TrashPickupRequest, trashPickup);
-            EventQueue.QueueEvent(trashEvent);
+            Runtime.Event.EventQueue.QueueEvent(trashEvent);
 
             yield return AssertReceivedEvent(EventType.TrashPickupSuccess, 2);
             yield return AssertReceivedEvent(EventType.InventoryUpdate, 0);
