@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1530412168510422208}
   - component: {fileID: 1926826746783033694}
   - component: {fileID: 6095519457039093064}
+  - component: {fileID: 6941025842888497731}
   m_Layer: 0
   m_Name: bridge_LOD1(Clone)
   m_TagString: Untagged
@@ -67,7 +68,7 @@ MeshRenderer:
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
+  m_ScaleInLightmap: 1.0739863
   m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
@@ -82,6 +83,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &6941025842888497731
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1204354608977085205}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -7178129058636131089, guid: eaa87de6c09c45142aa891a3e8180b6c, type: 3}
 --- !u!1 &1427933108496045344
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,6 +108,7 @@ GameObject:
   - component: {fileID: 2218976064348134133}
   - component: {fileID: 5446757085801123057}
   - component: {fileID: 6349504836858189766}
+  - component: {fileID: 635254473247734}
   m_Layer: 0
   m_Name: bridge_LOD2(Clone)
   m_TagString: Untagged
@@ -149,7 +165,7 @@ MeshRenderer:
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
+  m_ScaleInLightmap: 0.810496
   m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
@@ -164,6 +180,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &635254473247734
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1427933108496045344}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 3922117870020909590, guid: 6d242e701187dd24ea69045f34ac7522, type: 3}
 --- !u!1 &7625158933730047002
 GameObject:
   m_ObjectHideFlags: 0
@@ -174,7 +204,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8369532293877723983}
   - component: {fileID: 3779342635709734101}
-  - component: {fileID: 6707513743796514558}
   m_Layer: 0
   m_Name: Bridge
   m_TagString: Untagged
@@ -207,39 +236,25 @@ LODGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7625158933730047002}
   serializedVersion: 2
-  m_LocalReferencePoint: {x: 0, y: -0.042539835, z: 0.0000010728836}
+  m_LocalReferencePoint: {x: 0, y: 1.1454601, z: 0.0000010728836}
   m_Size: 6.303179
   m_FadeMode: 0
   m_AnimateCrossFading: 0
   m_LastLODIsBillboard: 0
   m_LODs:
-  - screenRelativeHeight: 0.53699315
+  - screenRelativeHeight: 0.49562275
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 5228948707088219323}
-  - screenRelativeHeight: 0.202624
+  - screenRelativeHeight: 0.101463534
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 6095519457039093064}
-  - screenRelativeHeight: 0.013993753
+  - screenRelativeHeight: 0.009350411
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 6349504836858189766}
   m_Enabled: 1
---- !u!64 &6707513743796514558
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7625158933730047002}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
 --- !u!1 &8347471971445713919
 GameObject:
   m_ObjectHideFlags: 0
