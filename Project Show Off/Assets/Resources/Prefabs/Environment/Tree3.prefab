@@ -10,12 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 744520761023022667}
   - component: {fileID: 5737260653731495758}
+  - component: {fileID: 7392393052182214042}
   m_Layer: 0
   m_Name: Tree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &744520761023022667
 Transform:
@@ -47,6 +48,22 @@ CapsuleCollider:
   m_Height: 4.58
   m_Direction: 1
   m_Center: {x: 0, y: 2.29, z: 0}
+--- !u!208 &7392393052182214042
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 80714171928157425}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.48, y: 2.65, z: 0.48}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 2.3, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &1913028752411343116
 GameObject:
   m_ObjectHideFlags: 0
@@ -63,7 +80,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &2250607943453597883
 Transform:
@@ -145,7 +162,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &4559910835662944119
 Transform:
