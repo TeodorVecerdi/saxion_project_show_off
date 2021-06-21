@@ -124,6 +124,12 @@
 		</relationship>
 	</object>
 	<object class="MultiSound" id="{4a7d84d3-16c4-48a7-a6a4-5d2adb9e900d}">
+		<property name="length">
+			<value>0.35000000000000003</value>
+		</property>
+		<property name="volume">
+			<value>-13.5</value>
+		</property>
 		<relationship name="modulators">
 			<destination>{a9f9d62f-31ac-4939-821a-bb18cdc04321}</destination>
 			<destination>{e337b868-1c31-41d8-bc63-4e3543567e1b}</destination>
@@ -158,6 +164,9 @@
 		</relationship>
 	</object>
 	<object class="MultiSound" id="{9d41fad5-071d-46bc-8104-ec00e6b4b8b0}">
+		<property name="length">
+			<value>0.42999999999999999</value>
+		</property>
 		<relationship name="modulators">
 			<destination>{7ae9d493-4330-4f96-ac4f-cff301d8bdfe}</destination>
 			<destination>{807e1a07-a1d9-461b-b5e9-f9f0b29d125c}</destination>
@@ -330,7 +339,7 @@
 			<value>1</value>
 		</property>
 		<property name="value">
-			<value>0</value>
+			<value>-14</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{fd9f645d-6e2c-4793-913f-913d0aabb2fc}">
@@ -349,7 +358,7 @@
 			<value>0.99999999999999989</value>
 		</property>
 		<property name="value">
-			<value>0</value>
+			<value>-14</value>
 		</property>
 	</object>
 </objects>

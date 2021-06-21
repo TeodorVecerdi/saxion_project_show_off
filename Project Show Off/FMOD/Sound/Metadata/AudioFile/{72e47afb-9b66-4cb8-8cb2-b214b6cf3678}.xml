@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{72e47afb-9b66-4cb8-8cb2-b214b6cf3678}">
+		<property name="assetPath">
+			<value>Ambience2.mp3</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>123.264</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{efd13fe1-f121-4e48-8c7f-d8777c0fa473}</destination>
+		</relationship>
+	</object>
+</objects>
