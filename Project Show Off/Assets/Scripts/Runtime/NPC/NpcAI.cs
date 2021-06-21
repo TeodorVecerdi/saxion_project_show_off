@@ -72,19 +72,18 @@ namespace Runtime {
         private IEnumerator GetNextState() {
             if (aiState == AIState.ApproachBin) {
                 aiState = AIState.ThrowTrashBin;
-                return ThrowTrash(false);
+                return ThrowTrash(true);
             }
 
             if (aiState != AIState.ApproachBin && trashQueue > 0) {
                 agent.isStopped = true;
-
                 if (TrashBinInRadius(out var trashBinPosition)) {
                     aiState = AIState.ApproachBin;
                     return ApproachBin(trashBinPosition);
                 }
 
                 aiState = AIState.ThrowTrashGround;
-                return ThrowTrash(true);
+                return ThrowTrash(false);
             }
 
             aiState = AIState.Wander;
@@ -93,24 +92,8 @@ namespace Runtime {
 
         private IEnumerator Wander() {
             while (true) {
-                var stoppingDistance = Mathf.Max(agent.stoppingDistance, 0.25f);
-                var newLocation = Rand.InsideUnitSphere * wanderDistance;
-
-                NavMesh.SamplePosition(newLocation + transform.position, out var navMeshHit, wanderDistance, -1);
-                agent.SetDestination(navMeshHit.position);
-
-                if (debug) Debug.Log($"Chose new wander position {navMeshHit.position}");
-
-                yield return new WaitUntil(() => {
-                    wanderTimer += Time.deltaTime;
-                    if (shouldChangeState) return true;
-                    if (wanderTimer >= wanderTime) {
-                        wanderTimer = 0.0f;
-                        return true;
-                    }
-
-                    return agent.remainingDistance <= stoppingDistance;
-                });
+                yield return WanderFor(wanderTime - wanderTimer);
+                wanderTimer = 0.0f;
                 if (shouldChangeState) yield break;
             }
         }
@@ -118,8 +101,11 @@ namespace Runtime {
         private IEnumerator ApproachBin(Vector3 trashBinPosition) {
             //TODO: Speed up (agent + animator)
             NavMesh.SamplePosition(trashBinPosition, out var navMeshHit, 1.0f, -1);
+           
+            // Couldn't find a path to the bin, bail out and just throw normal trash
             if (!navMeshHit.hit) {
                 SpawnTrash(false);
+                trashQueue--;
                 aiState = AIState.ThrowTrashGround;
                 shouldChangeState = true;
                 yield break;
@@ -133,11 +119,32 @@ namespace Runtime {
 
         private IEnumerator ThrowTrash(bool isAtTrashBin) {
             // wait a bit while stopped
-            if (!isAtTrashBin) yield return new WaitForSeconds(Rand.Range(minMaxTrashWaitTime2));
+            if (!isAtTrashBin) yield return WanderFor(Rand.Range(minMaxTrashWaitTime2));
             SpawnTrash(isAtTrashBin);
             trashQueue--;
+            shouldChangeState = true;
         }
-        
+
+        private IEnumerator WanderFor(float duration) {
+            var stoppingDistance = Mathf.Max(agent.stoppingDistance, 0.25f);
+            var newLocation = Rand.InsideUnitSphere * wanderDistance;
+
+            NavMesh.SamplePosition(newLocation + transform.position, out var navMeshHit, wanderDistance, -1);
+            agent.SetDestination(navMeshHit.position);
+
+            if (debug) Debug.Log($"Chose new wander position {navMeshHit.position}");
+            var timer = 0.0f;
+            yield return new WaitUntil(() => {
+                timer += Time.deltaTime;
+                if (shouldChangeState) return true;
+                if (timer >= duration) {
+                    return true;
+                }
+
+                return agent.remainingDistance <= stoppingDistance;
+            });
+        }
+
         private bool TrashBinInRadius(out Vector3 trashBinPosition) {
             var bins = Physics.SphereCastAll(transform.position, trashBinSearchDistance, Vector3.left, float.MaxValue).Where(hit => hit.transform.CompareTag("TrashBin")).ToList();
 
@@ -186,11 +193,12 @@ namespace Runtime {
 
                     var trash = Instantiate(choice.Prefab, new Vector3(position.x, spawnY, position.z), Quaternion.Euler(0, Rand.Float * 360.0f, 0));
                     trash.Load(choice);
-                    trash.transform.localScale = Vector3.zero;
+                    trash.transform.localScale = Vector3.one * 0.01f;
                     
                     if (!isAtTrashBin) trash.transform.DOScale(Vector3.one, ResourcesProvider.TrashSettings.TrashScaleUpDuration);
 
                     EventQueue.QueueEvent(new TrashEvent(this, EventType.TrashSpawn, trash));
+                    return;
                 }
             }
         }

@@ -12,3 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a0d20b58eab4f2caad3f739f7b12ae1, type: 3}
   m_Name: Trash Spawning Settings
   m_EditorClassIdentifier: 
+  trashScaleUpDuration: 0.1
+  spawnYOffset: 0.25
+  worldMaxHeight: 100
+  baseSpawnInterval: 10
