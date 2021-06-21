@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 854997876876658465}
   - component: {fileID: 2369017580762180419}
   - component: {fileID: 2383713629182515668}
+  - component: {fileID: -319291705623902852}
   m_Layer: 0
   m_Name: Trash Bin
   m_TagString: Untagged
@@ -70,6 +71,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.3, y: 1.23, z: 0.43}
   m_Center: {x: 0, y: 0.6154, z: 0}
+--- !u!208 &-319291705623902852
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5242860545743977804}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.25, y: 0.75, z: 0.25}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.6154, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &5985356849000059054
 GameObject:
   m_ObjectHideFlags: 0
