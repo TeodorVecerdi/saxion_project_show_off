@@ -76,6 +76,7 @@ MonoBehaviour:
   buildableObjectsFolder: Buildable Objects
   cameraName: Game Camera
   soundSettings: {fileID: 11400000, guid: 1471740d16e47344fb06b3e097b7614c, type: 2}
+  trashSettings: {fileID: 11400000, guid: f69e2a06067f2164e922e7653dc78c1a, type: 2}
 --- !u!114 &5804722098805764743
 MonoBehaviour:
   m_ObjectHideFlags: 0

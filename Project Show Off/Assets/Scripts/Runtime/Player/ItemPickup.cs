@@ -13,6 +13,7 @@ namespace Runtime {
         [SerializeField] /*debug:*/ private TextMeshProUGUI text;
         [SerializeField] private Transform cameraTransform;
         [SerializeField] private Image pickupIndicatorImage;
+        [SerializeField] private Image glowImage;
         [SerializeField] private Transform vacuumEndTransform;
         [Space]
         [SerializeField] private AnimationCurve movementCurve;
@@ -93,14 +94,18 @@ namespace Runtime {
             var ray = new Ray(cameraTransform.position, cameraTransform.forward);
             if (Physics.Raycast(ray, out var hitInfo, 10, LayerMask.GetMask("Pickup"))) {
                 var pickup = hitInfo.transform.GetComponent<Pickup>();
-                if (pickup != pickupUnderMouse && isPickingUp)
+                if(pickupUnderMouse == null)
+                    glowImage.DOFade(1.0f, 0.25f);
+                if (pickup != pickupUnderMouse && isPickingUp) 
                     StopPickup();
 
                 pickupUnderMouse = pickup;
                 text.text = $"{pickupUnderMouse.TrashPickup.ItemName} ({pickupUnderMouse.TrashPickup.TrashMaterial.MaterialName})";
             } else {
-                if (pickupUnderMouse != null && isPickingUp)
+                if (pickupUnderMouse != null && isPickingUp) 
                     StopPickup();
+                
+                glowImage.DOFade(0.0f, 0.25f);
 
                 pickupUnderMouse = null;
                 text.text = "None";
