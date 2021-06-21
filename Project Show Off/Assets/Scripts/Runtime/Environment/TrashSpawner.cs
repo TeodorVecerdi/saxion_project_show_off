@@ -28,7 +28,9 @@ namespace Runtime {
             spawnTimer += Time.deltaTime;
             if (spawnTimer >= spawnInterval) {
                 spawnTimer -= spawnInterval;
-                SpawnTrash();
+                // SpawnTrash();
+                
+                EventQueue.QueueEvent(new EmptyEvent(this, EventType.NpcThrowTrash));
             }
         }
 

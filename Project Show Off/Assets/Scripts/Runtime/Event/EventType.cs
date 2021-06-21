@@ -20,6 +20,7 @@
         TrashPickupSpaceRequest,
         TrashPickupSpaceResponse,
         TrashPickupBin,
+        NpcThrowTrash,
         
         PollutionUpdate,
         PollutionChange,
