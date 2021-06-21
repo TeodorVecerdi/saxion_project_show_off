@@ -659,9 +659,25 @@ PrefabInstance:
       propertyPath: depositUICanvasGroup
       value: 
       objectReference: {fileID: 18860719}
+    - target: {fileID: 7585335422270238321, guid: 38af3bd24c41f8949854e6a187817f4b, type: 3}
+      propertyPath: inventory.contents.Array.data[0].mass
+      value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7585335422270238321, guid: 38af3bd24c41f8949854e6a187817f4b, type: 3}
+      propertyPath: inventory.contents.Array.data[1].mass
+      value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7585335422270238321, guid: 38af3bd24c41f8949854e6a187817f4b, type: 3}
+      propertyPath: inventory.contents.Array.data[2].mass
+      value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7585335422270238321, guid: 38af3bd24c41f8949854e6a187817f4b, type: 3}
+      propertyPath: inventory.contents.Array.data[3].mass
+      value: 10000
+      objectReference: {fileID: 0}
     - target: {fileID: 7585335422270238322, guid: 38af3bd24c41f8949854e6a187817f4b, type: 3}
       propertyPath: m_Name
-      value: Deposit
+      value: Recycler
       objectReference: {fileID: 0}
     - target: {fileID: 7585335422310949863, guid: 38af3bd24c41f8949854e6a187817f4b, type: 3}
       propertyPath: m_Mesh

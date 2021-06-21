@@ -20,6 +20,7 @@ namespace Runtime {
         private void Start() {
             colliders = new List<Collider>();
             gameObject.GetComponentsInChildren(true, colliders);
+            colliders.AddRange(gameObject.GetComponents<Collider>());
             foreach (var collider in colliders) {
                 collider.enabled = false;
             }

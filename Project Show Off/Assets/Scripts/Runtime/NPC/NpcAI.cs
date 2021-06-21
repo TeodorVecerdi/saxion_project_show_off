@@ -76,7 +76,6 @@ namespace Runtime {
             }
 
             if (aiState != AIState.ApproachBin && trashQueue > 0) {
-                agent.isStopped = true;
                 if (TrashBinInRadius(out var trashBinPosition)) {
                     aiState = AIState.ApproachBin;
                     return ApproachBin(trashBinPosition);
