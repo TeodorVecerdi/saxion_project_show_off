@@ -306,6 +306,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game HUD
       objectReference: {fileID: 0}
+    - target: {fileID: 6808244742033333762, guid: 4c695e73426f6d04c96cb95d9ae730fe, type: 3}
+      propertyPath: m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6808244742033333762, guid: 4c695e73426f6d04c96cb95d9ae730fe, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -5380081296339493511, guid: f3ff511885e33a0469b41fd220d8d36e, type: 3}
+    - target: {fileID: 6808244742033333762, guid: 4c695e73426f6d04c96cb95d9ae730fe, type: 3}
+      propertyPath: m_Color.b
+      value: 0.1981132
+      objectReference: {fileID: 0}
+    - target: {fileID: 6808244742033333762, guid: 4c695e73426f6d04c96cb95d9ae730fe, type: 3}
+      propertyPath: m_Color.g
+      value: 0.1981132
+      objectReference: {fileID: 0}
+    - target: {fileID: 6808244742033333762, guid: 4c695e73426f6d04c96cb95d9ae730fe, type: 3}
+      propertyPath: m_Color.r
+      value: 0.1981132
+      objectReference: {fileID: 0}
+    - target: {fileID: 6808244742033333762, guid: 4c695e73426f6d04c96cb95d9ae730fe, type: 3}
+      propertyPath: m_PixelsPerUnitMultiplier
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 7899320339382238092, guid: 4c695e73426f6d04c96cb95d9ae730fe, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c695e73426f6d04c96cb95d9ae730fe, type: 3}
 --- !u!1 &8665863473500532799 stripped
@@ -444,9 +472,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1565523223787411116}
     m_Modifications:
+    - target: {fileID: 399323409452128353, guid: 6c1b629c0bd664e44b68c50ae56c1279, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2320833436124797034, guid: 6c1b629c0bd664e44b68c50ae56c1279, type: 3}
+      propertyPath: m_Alpha
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5533749116926445615, guid: 6c1b629c0bd664e44b68c50ae56c1279, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5749393550392241190, guid: 6c1b629c0bd664e44b68c50ae56c1279, type: 3}
       propertyPath: allTutorials.Array.size
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6162015729080100129, guid: 6c1b629c0bd664e44b68c50ae56c1279, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6192749728812268032, guid: 6c1b629c0bd664e44b68c50ae56c1279, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6292469753081509378, guid: 6c1b629c0bd664e44b68c50ae56c1279, type: 3}
       propertyPath: m_Pivot.x
@@ -535,6 +583,10 @@ PrefabInstance:
     - target: {fileID: 6292469753081509406, guid: 6c1b629c0bd664e44b68c50ae56c1279, type: 3}
       propertyPath: m_Name
       value: Shared Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8803127383895725285, guid: 6c1b629c0bd664e44b68c50ae56c1279, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c1b629c0bd664e44b68c50ae56c1279, type: 3}

@@ -14,12 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - Key: Click
+    IsMusic: 0
     HasVariations: 0
     Sound: {fileID: 8300000, guid: 0d0282974e9bd93479d7df0c5694a223, type: 3}
     Variations: []
     HasPitchVariation: 0
     PitchVariationMinMax: {x: 0, y: 0}
   - Key: Build
+    IsMusic: 0
     HasVariations: 0
     Sound: {fileID: 8300000, guid: ade9a0bb429115848a674d9b8bc7dde0, type: 3}
     Variations:
@@ -28,6 +30,7 @@ MonoBehaviour:
     HasPitchVariation: 1
     PitchVariationMinMax: {x: -0.3, y: 0.3}
   - Key: Vacuum
+    IsMusic: 0
     HasVariations: 1
     Sound: {fileID: 8300000, guid: 68c74bb96f0c3c1439e3eeb59f15a048, type: 3}
     Variations:

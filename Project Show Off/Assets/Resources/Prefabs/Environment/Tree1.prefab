@@ -92,6 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 433669733221287993}
   - component: {fileID: 6721821918272505294}
+  - component: {fileID: 2201327872322296573}
   m_Layer: 0
   m_Name: Tree1
   m_TagString: Untagged
@@ -129,6 +130,22 @@ CapsuleCollider:
   m_Height: 5.6
   m_Direction: 1
   m_Center: {x: 0, y: 2.8, z: 0}
+--- !u!208 &2201327872322296573
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 959096294260740739}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.5, y: 3.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 2.8, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &5021760709416960799
 GameObject:
   m_ObjectHideFlags: 0
@@ -140,6 +157,7 @@ GameObject:
   - component: {fileID: 5613018308884500024}
   - component: {fileID: 6801540013231873289}
   - component: {fileID: 4984732971722943641}
+  - component: {fileID: 8870431616256590625}
   m_Layer: 0
   m_Name: Leaves
   m_TagString: Untagged
@@ -211,3 +229,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8870431616256590625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5021760709416960799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 013e1bcf3f73464aa5eaa771e84f15ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectors:
+  - {fileID: 11400000, guid: 60c2f0d0eff2e2f4783687bf73f93bcb, type: 2}
+  effectors2:
+  - Effector: {fileID: 11400000, guid: 60c2f0d0eff2e2f4783687bf73f93bcb, type: 2}
+    Target: {fileID: 5613018308884500024}
+    GetLastTarget: 0
+  target: {fileID: 5613018308884500024}

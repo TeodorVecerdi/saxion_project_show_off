@@ -16,6 +16,7 @@ namespace Runtime {
         [Header("Scene Transition References")]
         [SerializeField] private Image fadeImage;
         [SerializeField] private GameObject eventSystemGameObject;
+        [SerializeField] private GameObject mainLightObject;
 
         private SettingsController settingsController;
         private Animation animation;
@@ -78,6 +79,7 @@ namespace Runtime {
             yield return new WaitForSeconds(delay);
             var operation = SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive);
             yield return operation;
+            DestroyImmediate(mainLightObject);
             if (!operation.isDone) Debug.Log("Loading not done");
 
             var unloadOperation = SceneManager.UnloadSceneAsync(0);

@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5804722098805764739
 Transform:
   m_ObjectHideFlags: 0
@@ -28,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5804722098805764744}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -76,6 +76,7 @@ MonoBehaviour:
   buildableObjectsFolder: Buildable Objects
   cameraName: Game Camera
   soundSettings: {fileID: 11400000, guid: 1471740d16e47344fb06b3e097b7614c, type: 2}
+  trashSettings: {fileID: 11400000, guid: f69e2a06067f2164e922e7653dc78c1a, type: 2}
 --- !u!114 &5804722098805764743
 MonoBehaviour:
   m_ObjectHideFlags: 0

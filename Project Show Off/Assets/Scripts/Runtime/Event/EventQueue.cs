@@ -19,7 +19,10 @@ namespace Runtime.Event {
         /// </summary>
         /// <param name="subscriber">The subscriber which wants to receive events</param>
         /// <param name="eventType">The type of event that the subscriber wants to receive</param>
-        /// <returns>An IDisposable that allows the subscriber to unsubscribe from the Event Queue by calling <c>Dispose()</c></returns>
+        /// <returns>
+        /// An IDisposable that allows the subscriber to unsubscribe
+        /// from the Event Queue by calling <c>Dispose()</c>
+        /// </returns>
         [MustUseReturnValue] public static IDisposable Subscribe(IEventSubscriber subscriber, EventType eventType) => Instance.SubscribeWithPriority_Impl(subscriber, eventType, int.MaxValue);
 
         

@@ -19,7 +19,6 @@ namespace Runtime {
         [SerializeField] private Transform buildModeCenter;
         [SerializeField] private Material buildLocationIndicator;
         
-        private Camera buildModeCamera;
         private BuildableObject currentBuildable;
         private BuildableObjectPreview currentObject;
         private Transform currentTransform;
@@ -45,7 +44,6 @@ namespace Runtime {
                 this.Subscribe(EventType.BeginBuild), 
                 this.Subscribe(EventType.GameModeChange)
             };
-            buildModeCamera = ResourcesProvider.MainCamera;
             y180deg = Quaternion.Euler(180.0f * Vector3.up);
         }
 
@@ -82,7 +80,7 @@ namespace Runtime {
             if(Mouse.current == null) return;
             
             var mousePosition = Mouse.current.position.ReadValue();
-            var ray = buildModeCamera.ScreenPointToRay(mousePosition);
+            var ray = ResourcesProvider.MainCamera.ScreenPointToRay(mousePosition);
             if (Physics.Raycast(ray, out var hit, 100_000.0f, LayerMask.GetMask("Ground"))) {
                 if ((currentTransform.position - hit.point).sqrMagnitude > 0.001f) {
                     IsValidSpot = Physics.Raycast(ray, 100_000.0f, LayerMask.GetMask("Build Area"));

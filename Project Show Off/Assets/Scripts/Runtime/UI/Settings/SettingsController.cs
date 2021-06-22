@@ -124,5 +124,9 @@ namespace Runtime {
             EventQueue.QueueEvent(new EmptyEvent(this, EventType.ResetTutorial));
             SoundManager.PlaySound("Click");
         }
+
+        public void OnExitClicked() {
+            Application.Quit();
+        }
     }
 }
