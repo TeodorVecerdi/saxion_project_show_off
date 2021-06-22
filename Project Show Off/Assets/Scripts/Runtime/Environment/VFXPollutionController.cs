@@ -11,7 +11,7 @@ namespace Runtime {
     [RequireComponent(typeof(VisualEffect))]
     public sealed class VFXPollutionController : MonoBehaviour, IEventSubscriber {
         [InfoBox("Effectors get applied top-to-bottom, meaning the last effector will overwrite the first one if they are affecting the same property")]
-        [SerializeField] private List<VFXPollutionEffector> effectors;
+        [SerializeField] private List<PollutionEffector> effectors;
         private VisualEffect visualEffect;
         private List<IDisposable> eventUnsubscribeTokens;
 
