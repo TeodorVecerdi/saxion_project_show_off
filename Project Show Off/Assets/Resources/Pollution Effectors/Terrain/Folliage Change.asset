@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b100fad8a5748be936b58bb8bf2f51c, type: 3}
-  m_Name: NewSetFloatValueEffector
+  m_Script: {fileID: 11500000, guid: 4d2d74f8d0fe4a4cb164d7491dda2c9f, type: 3}
+  m_Name: Folliage Change
   m_EditorClassIdentifier: 
-  setValueFunction:
-    m_PersistentCalls:
-      m_Calls: []
+  value: 0.5
+  condition: 0
+  ifTrue: {fileID: 11400000, guid: 31a8ee59806ddfb46ad7bc1665b3de5f, type: 2}
+  ifFalse: {fileID: 11400000, guid: 8aa36d6dce21a784dbf75feb66fd22d9, type: 2}

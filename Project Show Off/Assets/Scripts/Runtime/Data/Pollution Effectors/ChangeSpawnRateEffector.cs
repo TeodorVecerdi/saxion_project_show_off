@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.VFX;
 
 namespace Runtime.Data {
-    [CreateAssetMenu(fileName = "NewSpawnRateEffector", menuName = "Data/VFX Pollution/Change Spawn Rate", order = 0)]
+    [CreateAssetMenu(fileName = "NewSpawnRateEffector", menuName = "Data/Pollution Effectors/Change Spawn Rate", order = 0)]
     public sealed class ChangeSpawnRateEffector : VFXPollutionEffector {
         [InfoBox("Sets the spawn rate of a VFX Graph according to the current pollution percentage based on the Curve.\n'Max Value' means the maximum value that the VFX Graph supports for Spawn Rate, which for Bees and Flies is 50")]
         [SerializeField] private AnimationCurve curve;

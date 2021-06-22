@@ -6,17 +6,17 @@ using Runtime.Event;
 using UnityEngine;
 using UnityEngine.VFX;
 using EventType = Runtime.Event.EventType;
+using Object = UnityEngine.Object;
 
 namespace Runtime {
-    [RequireComponent(typeof(VisualEffect))]
-    public sealed class VFXPollutionController : MonoBehaviour, IEventSubscriber {
+    public sealed class PollutionEffectorController : MonoBehaviour, IEventSubscriber {
         [InfoBox("Effectors get applied top-to-bottom, meaning the last effector will overwrite the first one if they are affecting the same property")]
         [SerializeField] private List<PollutionEffector> effectors;
-        private VisualEffect visualEffect;
+        [SerializeField] private Object target;
+        
         private List<IDisposable> eventUnsubscribeTokens;
 
         private void Awake() {
-            visualEffect = GetComponent<VisualEffect>();
             eventUnsubscribeTokens = new List<IDisposable> {
                 this.Subscribe(EventType.PollutionUpdate)
             };
@@ -38,7 +38,7 @@ namespace Runtime {
             switch (eventData) {
                 case PollutionUpdateEvent pollutionUpdateEvent: {
                     foreach (var vfxPollutionEffector in effectors) {
-                        vfxPollutionEffector.Apply(visualEffect, pollutionUpdateEvent.RawPollution, pollutionUpdateEvent.PollutionRatio);
+                        vfxPollutionEffector.Apply(target, pollutionUpdateEvent.RawPollution, pollutionUpdateEvent.PollutionRatio);
                     }
 
                     return false;
