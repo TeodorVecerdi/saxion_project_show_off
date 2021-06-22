@@ -28,7 +28,7 @@ ehthumbs.db
 # Unity generated
 # ===============
 [Oo]bj/
-[Bb]uild
+Builds/
 sysinfo.txt
 *.stackdump
 
