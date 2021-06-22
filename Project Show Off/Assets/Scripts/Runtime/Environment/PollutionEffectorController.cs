@@ -12,9 +12,7 @@ using Object = UnityEngine.Object;
 namespace Runtime {
     public sealed class PollutionEffectorController : MonoBehaviour, IEventSubscriber {
         [InfoBox("Effectors get applied top-to-bottom, meaning the last effector will overwrite the first one if they are affecting the same property")]
-        [SerializeField] private List<PollutionEffector> effectors;
         [SerializeField] private List<EffectorData> effectors2;
-        [SerializeField] private Object target;
         
         private List<IDisposable> eventUnsubscribeTokens;
 
