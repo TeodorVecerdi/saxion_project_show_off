@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class BusControlFMOD : MonoBehaviour
 {
@@ -11,18 +12,15 @@ public class BusControlFMOD : MonoBehaviour
     private string busPath;
 
 
-    [SerializeField]
-    [Range(-80f, 10f)]
-    private float busVolume;
-    private float volume;
+    [SerializeField, Range(0f,1f)]
+    private float volume = 1.0f;
 
-    void Start()
-    {
+    private void Awake() {
         bus = FMODUnity.RuntimeManager.GetBus(busPath);
+        bus.setVolume(volume);
     }
-    void Update()
-    {
-        volume = Mathf.Pow(10.0f, busVolume / 20f);
+
+    public void SetVolume(float volume) {
         bus.setVolume(volume);
     }
 

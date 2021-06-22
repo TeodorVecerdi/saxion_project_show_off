@@ -189,13 +189,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 013e1bcf3f73464aa5eaa771e84f15ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectors:
-  - {fileID: 11400000, guid: 1a31494ae7341ab4da89cf7ebf80e915, type: 2}
   effectors2:
   - Effector: {fileID: 11400000, guid: 1a31494ae7341ab4da89cf7ebf80e915, type: 2}
     Target: {fileID: 34408235446601439}
     GetLastTarget: 0
-  target: {fileID: 34408235446601439}
 --- !u!1 &34408235474451469
 GameObject:
   m_ObjectHideFlags: 0
@@ -2508,13 +2505,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 013e1bcf3f73464aa5eaa771e84f15ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectors:
-  - {fileID: 11400000, guid: 953e64023ffd5924692858063414e5bb, type: 2}
   effectors2:
   - Effector: {fileID: 11400000, guid: 953e64023ffd5924692858063414e5bb, type: 2}
     Target: {fileID: 34408236079904318}
     GetLastTarget: 0
-  target: {fileID: 34408236079904318}
 --- !u!1 &34408236082239475
 GameObject:
   m_ObjectHideFlags: 0
