@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Main Menu.unity
     guid: c8d181972f0088141a66ad3540422939
   - enabled: 1
+    path: Assets/Scenes/Playtest - Joqum.unity
+    guid: e714120cd97b7ff48bff7ac21448c81e
+  - enabled: 1
     path: Assets/Scenes/Playtest - Teodor.unity
     guid: 7f5cb295d7a51874da5a550d4f3f91ae
   m_configObjects: {}
