@@ -161,6 +161,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectors:
   - {fileID: 11400000, guid: 60c2f0d0eff2e2f4783687bf73f93bcb, type: 2}
+  effectors2:
+  - Effector: {fileID: 11400000, guid: 60c2f0d0eff2e2f4783687bf73f93bcb, type: 2}
+    Target: {fileID: 2250607943453597883}
+    GetLastTarget: 0
   target: {fileID: 2250607943453597883}
 --- !u!1 &2416297593319790981
 GameObject:

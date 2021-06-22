@@ -330,6 +330,10 @@ PrefabInstance:
       propertyPath: m_PixelsPerUnitMultiplier
       value: 0.01
       objectReference: {fileID: 0}
+    - target: {fileID: 7899320339382238092, guid: 4c695e73426f6d04c96cb95d9ae730fe, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c695e73426f6d04c96cb95d9ae730fe, type: 3}
 --- !u!1 &8665863473500532799 stripped
@@ -470,6 +474,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 399323409452128353, guid: 6c1b629c0bd664e44b68c50ae56c1279, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2320833436124797034, guid: 6c1b629c0bd664e44b68c50ae56c1279, type: 3}
+      propertyPath: m_Alpha
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5533749116926445615, guid: 6c1b629c0bd664e44b68c50ae56c1279, type: 3}
