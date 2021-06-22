@@ -1,13 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
+using JetBrains.Annotations;
 using NaughtyAttributes;
 using UnityEditor;
 using UnityEngine;
 
 public class SaveRenderTexture : MonoBehaviour {
+    #if UNITY_EDITOR
     public RenderTexture RenderTexture;
 
-    [Button]
+    [Button, UsedImplicitly]
     public void Save() {
         var camera = GetComponent<Camera>();
         var tempRT = new RenderTexture(2048, 1024, 24, RenderTextureFormat.Default);
@@ -23,4 +23,5 @@ public class SaveRenderTexture : MonoBehaviour {
         var path = $"{Application.dataPath.Substring(0, Application.dataPath.LastIndexOf('/'))}/{AssetDatabase.GetAssetPath(RenderTexture)}.png";
         System.IO.File.WriteAllBytes(path, bytes);        
     }
+    #endif
 }
