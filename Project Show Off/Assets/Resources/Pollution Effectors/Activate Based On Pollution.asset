@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Activate Based On Pollution
   m_EditorClassIdentifier: 
   value: 0.2
+  doOnChange: 1
   condition: 0
   ifTrue: {fileID: 11400000, guid: 5a25efa76ebe33f43aaa7911fcf4de58, type: 2}
   ifFalse: {fileID: 11400000, guid: c06f9cbf9d326a84e9cf92a5e59f74b3, type: 2}

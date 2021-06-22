@@ -115,7 +115,8 @@ MonoBehaviour:
       Value: 0
       HasValue: 0
     Plugins:
-      Value: []
+      Value:
+      - OculusSpatializerFMOD
       HasValue: 1
     StaticPlugins:
       Value: []
@@ -342,10 +343,10 @@ MonoBehaviour:
   m_Name: FMODStudioSettings
   m_EditorClassIdentifier: 
   SwitchSettingsMigration: 1
-  HasSourceProject: 1
-  HasPlatforms: 1
+  HasSourceProject: 0
+  HasPlatforms: 0
   sourceProjectPath: FMOD/Sound/Sound.fspro
-  sourceBankPath: FMOD/Sound/Build
+  sourceBankPath: Assets/FMOD_Build/Desktop
   SourceBankPathUnformatted: 
   BankRefreshCooldown: 1
   ShowBankRefreshWindow: 1
@@ -368,6 +369,7 @@ MonoBehaviour:
   Plugins: []
   MasterBanks:
   - Master
+  - Desktop/Desktop/Master
   Banks: []
   BanksToLoad: []
   LiveUpdatePort: 9264

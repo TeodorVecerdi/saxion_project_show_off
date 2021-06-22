@@ -1,11 +1,13 @@
-﻿using DG.Tweening;
+﻿using System.Collections.Generic;
+using DG.Tweening;
 using JetBrains.Annotations;
 using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.Rendering;
 using Object = UnityEngine.Object;
 
 namespace Runtime.Data {
-    [CreateAssetMenu(fileName = "NewSetFloatValueEffector", menuName = "Data/Pollution Effectors/Tween Material Float", order = 8)]
+    [CreateAssetMenu(fileName = "NewTweenFloatMaterialEffector", menuName = "Data/Pollution Effectors/Tween Material Float", order = 8)]
     public class TweenFloatMaterialProperty : PollutionEffector {
         [SerializeField] private bool specificMaterial = true;
         [SerializeField, ShowIf("nattr__SpecificMaterial")] private Material material;
@@ -22,7 +24,7 @@ namespace Runtime.Data {
         // ReSharper restore InconsistentNaming IdentifierTypo UnusedMember.Local=
 #endif
 
-        public override void Apply(Object target, float rawPollution, float pollutionRatio) {
+        public override void Apply(Object target, Dictionary<string, object> extraData, float rawPollution, float pollutionRatio) {
             var mat = material;
             if (!specificMaterial || mat == null) mat = target as Material;
             if (mat == null) return;

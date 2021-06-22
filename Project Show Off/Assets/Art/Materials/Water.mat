@@ -13,6 +13,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 11
+--- !u!114 &-4880632233464720432
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa486462e6be1764e89c788ba30e61f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_DiffusionProfileReferences:
+  - {fileID: 11400000, guid: 26bdddf49760c61438938733f07fa2a2, type: 2}
+  m_MaterialReferences: []
 --- !u!21 &2100000
 Material:
   serializedVersion: 6
@@ -65,8 +80,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - Angle_Dimming: 0.68
-    - Normal_Tile: 0.65
+    - Angle_Dimming: 12.4
+    - Normal_Tile: 0.3
     - _AddPrecomputedVelocity: 0
     - _AlphaCutoffEnable: 0
     - _AlphaDstBlend: 10
@@ -77,13 +92,13 @@ Material:
     - _CullMode: 2
     - _CullModeForward: 2
     - _DepthOffsetEnable: 0
-    - _DiffusionProfileHash: 0
+    - _DiffusionProfileHash: 2.7317202
     - _DoubleSidedEnable: 0
     - _DoubleSidedNormalMode: 2
     - _DstBlend: 10
     - _EnableBlendModePreserveSpecularLighting: 1
     - _EnableFogOnTransparent: 1
-    - _FoamDistance: 106.1
+    - _FoamDistance: 12.84
     - _NormalStrenght: 0.3
     - _OpaqueCullMode: 2
     - _RayTracing: 0
@@ -106,10 +121,11 @@ Material:
     - _StencilWriteMaskDistortionVec: 4
     - _StencilWriteMaskGBuffer: 14
     - _StencilWriteMaskMV: 40
-    - _Strength: 0.0001
+    - _Strength: 0.005
     - _SupportDecals: 1
     - _SurfaceType: 1
-    - _Switch: 0
+    - _Switch: 0.5314999
+    - _Transparency: 0.75944996
     - _TransparentBackfaceEnable: 0
     - _TransparentCullMode: 2
     - _TransparentDepthPostpassEnable: 0
@@ -126,13 +142,13 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 0
     m_Colors:
-    - Color2: {r: 0, g: 0.05429767, b: 0.3490566, a: 0}
-    - FoamColorDirty: {r: 0.5584282, g: 0.8396226, b: 0.5584282, a: 0}
-    - _Color1: {r: 0.13679248, g: 0.8318275, b: 1, a: 0}
-    - _DiffusionProfileAsset: {r: 0, g: 0, b: 0, a: 0}
-    - _DirtyColor1: {r: 0.33962262, g: 0.18915805, b: 0.04645782, a: 1}
-    - _DirtyColor2: {r: 0.03066039, g: 0.5, b: 0.0656739, a: 1}
+    - Color2: {r: 0.096787095, g: 0.17069376, b: 0.8207547, a: 0}
+    - FoamColorDirty: {r: 0.2924528, g: 0.18135352, b: 0.06759523, a: 0}
+    - _Color1: {r: 0.1372549, g: 0.7578392, b: 1, a: 0}
+    - _DiffusionProfileAsset: {r: -1.405437e+32, g: 2.0030989e-26, b: 0.00000006313206, a: -4.4045647e-18}
+    - _DirtyColor1: {r: 0.38903713, g: 0.7830189, b: 0.2622375, a: 1}
+    - _DirtyColor2: {r: 0.3301887, g: 0.22522597, b: 0.10746708, a: 1}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Foam_Color: {r: 0.9622642, g: 0.9622642, b: 0.9622642, a: 1}
+    - _Foam_Color: {r: 0.2232111, g: 0.48050246, b: 0.8301887, a: 1}
   m_BuildTextureStacks: []

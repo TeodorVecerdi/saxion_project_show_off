@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Folliage Change
   m_EditorClassIdentifier: 
   value: 0.5
+  doOnChange: 1
   condition: 0
-  ifTrue: {fileID: 11400000, guid: 31a8ee59806ddfb46ad7bc1665b3de5f, type: 2}
-  ifFalse: {fileID: 11400000, guid: 8aa36d6dce21a784dbf75feb66fd22d9, type: 2}
+  ifTrue: {fileID: 11400000, guid: 1d1fcb119a6949d44954085426db3058, type: 2}
+  ifFalse: {fileID: 11400000, guid: fbe8d71972c31834494a00ec5add8b17, type: 2}

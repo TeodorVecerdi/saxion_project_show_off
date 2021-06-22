@@ -4,6 +4,7 @@ using NaughtyAttributes;
 using Runtime.Data;
 using Runtime.Event;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.VFX;
 using EventType = Runtime.Event.EventType;
 using Object = UnityEngine.Object;
@@ -12,6 +13,7 @@ namespace Runtime {
     public sealed class PollutionEffectorController : MonoBehaviour, IEventSubscriber {
         [InfoBox("Effectors get applied top-to-bottom, meaning the last effector will overwrite the first one if they are affecting the same property")]
         [SerializeField] private List<PollutionEffector> effectors;
+        [SerializeField] private List<EffectorData> effectors2;
         [SerializeField] private Object target;
         
         private List<IDisposable> eventUnsubscribeTokens;
@@ -20,6 +22,10 @@ namespace Runtime {
             eventUnsubscribeTokens = new List<IDisposable> {
                 this.Subscribe(EventType.PollutionUpdate)
             };
+
+            foreach (var effectorData in effectors2) {
+                effectorData.ExtraData = new Dictionary<string, object>();
+            }
         }
 
         private void OnDestroy() {
@@ -37,8 +43,13 @@ namespace Runtime {
         public bool OnEvent(EventData eventData) {
             switch (eventData) {
                 case PollutionUpdateEvent pollutionUpdateEvent: {
-                    foreach (var vfxPollutionEffector in effectors) {
-                        vfxPollutionEffector.Apply(target, pollutionUpdateEvent.RawPollution, pollutionUpdateEvent.PollutionRatio);
+                    Object lastValidTarget = null;
+                    foreach (var pollutionEffector in effectors2) {
+                        var currentTarget = pollutionEffector.Target;
+                        if (pollutionEffector.GetLastTarget) currentTarget = lastValidTarget != null ? lastValidTarget : pollutionEffector.Target;
+                        else lastValidTarget = currentTarget;
+                        
+                        pollutionEffector.Effector.Apply(currentTarget, pollutionEffector.ExtraData, pollutionUpdateEvent.RawPollution, pollutionUpdateEvent.PollutionRatio);
                     }
 
                     return false;
@@ -46,6 +57,14 @@ namespace Runtime {
                 
                 default: return false;
             }
+        }
+
+        [Serializable]
+        public class EffectorData {
+            public PollutionEffector Effector;
+            public Object Target;
+            public bool GetLastTarget;
+            public Dictionary<string, object> ExtraData;
         }
     }
 }
