@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d2d74f8d0fe4a4cb164d7491dda2c9f, type: 3}
   m_Name: Activate Based On Pollution
   m_EditorClassIdentifier: 
-  value: 0.3
+  value: 0.2
   condition: 0
   ifTrue: {fileID: 11400000, guid: 5a25efa76ebe33f43aaa7911fcf4de58, type: 2}
   ifFalse: {fileID: 11400000, guid: c06f9cbf9d326a84e9cf92a5e59f74b3, type: 2}
