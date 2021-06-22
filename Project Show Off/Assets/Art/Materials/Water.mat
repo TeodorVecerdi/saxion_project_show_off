@@ -124,8 +124,8 @@ Material:
     - _Strength: 0.005
     - _SupportDecals: 1
     - _SurfaceType: 1
-    - _Switch: 0.2915
-    - _Transparency: 0.68745
+    - _Switch: 0.283
+    - _Transparency: 0.6849
     - _TransparentBackfaceEnable: 0
     - _TransparentCullMode: 2
     - _TransparentDepthPostpassEnable: 0
