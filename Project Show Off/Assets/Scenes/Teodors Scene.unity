@@ -9847,7 +9847,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8573404978122709733, guid: baf922d5f1c59a044b2fb5f87876d9fb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 18.295
+      value: 18.249
       objectReference: {fileID: 0}
     - target: {fileID: 8573404978122709733, guid: baf922d5f1c59a044b2fb5f87876d9fb, type: 3}
       propertyPath: m_LocalPosition.z
@@ -12733,7 +12733,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2029155590080418568, guid: 02715c8f47e4a7e47b1a6bbd031f9d0a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 16.686
+      value: 16.78
       objectReference: {fileID: 0}
     - target: {fileID: 2029155590080418568, guid: 02715c8f47e4a7e47b1a6bbd031f9d0a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -17808,10 +17808,6 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8665863472389727844, guid: fd7068f616163634d9a4d3785013cadb, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8665863472951752764, guid: fd7068f616163634d9a4d3785013cadb, type: 3}
       propertyPath: playerInventory
       value: 
@@ -17822,10 +17818,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8665863473351776615, guid: fd7068f616163634d9a4d3785013cadb, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8665863473351776615, guid: fd7068f616163634d9a4d3785013cadb, type: 3}
-      propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8665863474012914693, guid: fd7068f616163634d9a4d3785013cadb, type: 3}
@@ -29327,7 +29319,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-2754
+  m_Name: pb_Mesh-614010
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
