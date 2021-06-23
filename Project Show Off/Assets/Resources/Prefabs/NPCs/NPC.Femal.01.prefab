@@ -260,8 +260,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2782925182744837491}
   - component: {fileID: 2730844896996259972}
+  - component: {fileID: 1709069498658533362}
+  - component: {fileID: 5797836648117512344}
   m_Layer: 0
-  m_Name: NPC.Femal
+  m_Name: NPC.Femal.01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -275,7 +277,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3302615278676797385}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.741, y: 16.811928, z: 246.054}
+  m_LocalPosition: {x: -10.741, y: 16.72, z: 246.054}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1459281886601633879}
@@ -302,6 +304,45 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!195 &1709069498658533362
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3302615278676797385}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 0.6
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 360
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1.7
+  m_BaseOffset: -0.05
+  m_WalkableMask: 1
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &5797836648117512344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3302615278676797385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b70bf1d165a04a92a7be64bd121079fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wanderTime: 10
+  wanderDistance: 30
+  trashBinSearchDistance: 15
+  minMaxTrashWaitTime: {x: 2, y: 5}
+  minMaxTrashWaitTime2: {x: 1, y: 3}
 --- !u!1 &4001583917790253721
 GameObject:
   m_ObjectHideFlags: 0
