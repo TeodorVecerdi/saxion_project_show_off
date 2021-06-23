@@ -439,7 +439,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6906677507291310646, guid: b6a1df0f008a1d547a3b56bc78e0bcff, type: 3}
       propertyPath: m_Name
-      value: Build HUD
+      value: Build UI
       objectReference: {fileID: 0}
     - target: {fileID: 6906677507578912578, guid: b6a1df0f008a1d547a3b56bc78e0bcff, type: 3}
       propertyPath: m_SizeDelta.y
