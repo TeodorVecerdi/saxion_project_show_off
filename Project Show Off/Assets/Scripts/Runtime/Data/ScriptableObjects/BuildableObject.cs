@@ -10,6 +10,8 @@ namespace Runtime.Data {
         [SerializeField] private BuildableObjectPreview prefab;
         [SerializeField] private MaterialInventory constructionRequirements;
         [SerializeField, Tooltip("Any location where the player can place this object")] private List<BuildArea> buildAreas;
+        [Space]
+        [SerializeField] private int buildScore = 10;
 
         public Sprite ObjectSprite => objectSprite;
         public BuildableObjectPreview Prefab => prefab;
@@ -17,5 +19,6 @@ namespace Runtime.Data {
         public List<BuildArea> BuildAreas => buildAreas;
         public string Name => objectName;
         public string Description => objectDescription;
+        public int BuildScore => buildScore;
     }
 }
