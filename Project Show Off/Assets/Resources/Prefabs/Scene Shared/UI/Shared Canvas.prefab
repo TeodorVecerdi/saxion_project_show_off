@@ -27,6 +27,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3988689720110260594}
   - component: {fileID: 1123328273071971533}
+  - component: {fileID: 4447024778592897624}
   - component: {fileID: 4089902089639952659}
   m_Layer: 5
   m_Name: Score Text
@@ -62,6 +63,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1443602072088432683}
   m_CullTransparentMesh: 1
+--- !u!114 &4447024778592897624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1443602072088432683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 492b14ee27334ea7b530a62dcdb847fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4089902089639952659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1440,14 +1453,14 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: affb120d3057f114596a336e2e40dfe4, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95f14aef8261af94ca7e61bc7947d8fc, type: 3}
---- !u!1 &5533749116926445615 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2182126994414169003, guid: 95f14aef8261af94ca7e61bc7947d8fc, type: 3}
-  m_PrefabInstance: {fileID: 5945784430891148164}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1836516086320179929 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5476155966388373853, guid: 95f14aef8261af94ca7e61bc7947d8fc, type: 3}
+  m_PrefabInstance: {fileID: 5945784430891148164}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5533749116926445615 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2182126994414169003, guid: 95f14aef8261af94ca7e61bc7947d8fc, type: 3}
   m_PrefabInstance: {fileID: 5945784430891148164}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8582887066499781378
