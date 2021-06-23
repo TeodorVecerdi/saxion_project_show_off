@@ -299,6 +299,7 @@ GameObject:
   - component: {fileID: 8143187896462500035}
   - component: {fileID: 6232283073313963743}
   - component: {fileID: 5668734790230620871}
+  - component: {fileID: 46095220438291800}
   m_Layer: 5
   m_Name: Tutorial
   m_TagString: Untagged
@@ -377,6 +378,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &46095220438291800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2182126994414169003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b439ceaabf2a43529552f84c8aa2ef7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialIcon: {fileID: 7897829740858081116}
+  tutorialProgressBar: {fileID: 952080204981716967}
+  tutorialLine1: {fileID: 7861227721344715957}
+  tutorialLine2: {fileID: 1767461960841372412}
+  line1Text: Press <b>Tab</b> at the recycler
+  line2Text: to enter <b>Build Mode</b>
+  tutorialSprite: {fileID: 21300000, guid: 1e2b2883b589fd944b43bc06b6463d98, type: 3}
 --- !u!1 &4081647475319519679
 GameObject:
   m_ObjectHideFlags: 0

@@ -178,7 +178,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1614876351368593875}
   m_LocalRotation: {x: -0, y: -0.9657449, z: -0, w: 0.25949338}
-  m_LocalPosition: {x: 0, y: 1.8, z: 0}
+  m_LocalPosition: {x: 0, y: 1.7999992, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1614876350941805804}
@@ -431,7 +431,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2029155590080418574}
-  m_LocalRotation: {x: -0, y: -0.89347994, z: -0, w: -0.44910315}
+  m_LocalRotation: {x: -0, y: -0.89348114, z: 0, w: -0.4491008}
   m_LocalPosition: {x: 177.92, y: 0.08456352, z: 168.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -514,6 +514,7 @@ MonoBehaviour:
   text: {fileID: 0}
   cameraTransform: {fileID: 0}
   pickupIndicatorImage: {fileID: 0}
+  glowImage: {fileID: 0}
   vacuumEndTransform: {fileID: 1614876351520201543}
   movementCurve:
     serializedVersion: 2

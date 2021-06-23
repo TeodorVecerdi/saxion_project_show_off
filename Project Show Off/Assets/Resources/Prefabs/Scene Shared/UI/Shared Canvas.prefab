@@ -556,6 +556,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7451082361652484712}
     m_Modifications:
+    - target: {fileID: 46095220438291800, guid: 95f14aef8261af94ca7e61bc7947d8fc, type: 3}
+      propertyPath: line1Text
+      value: Drag the <b>Left Mouse Button</b>
+      objectReference: {fileID: 0}
+    - target: {fileID: 46095220438291800, guid: 95f14aef8261af94ca7e61bc7947d8fc, type: 3}
+      propertyPath: line2Text
+      value: to move around the park!
+      objectReference: {fileID: 0}
+    - target: {fileID: 46095220438291800, guid: 95f14aef8261af94ca7e61bc7947d8fc, type: 3}
+      propertyPath: tutorialSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: affb120d3057f114596a336e2e40dfe4, type: 3}
     - target: {fileID: 1767461960841372412, guid: 95f14aef8261af94ca7e61bc7947d8fc, type: 3}
       propertyPath: m_text
       value: to move around the park!
@@ -918,6 +930,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7451082361652484712}
     m_Modifications:
+    - target: {fileID: 46095220438291800, guid: 95f14aef8261af94ca7e61bc7947d8fc, type: 3}
+      propertyPath: line1Text
+      value: Use the <b>Scroll Wheel</b>
+      objectReference: {fileID: 0}
+    - target: {fileID: 46095220438291800, guid: 95f14aef8261af94ca7e61bc7947d8fc, type: 3}
+      propertyPath: line2Text
+      value: to zoom in or out!
+      objectReference: {fileID: 0}
+    - target: {fileID: 46095220438291800, guid: 95f14aef8261af94ca7e61bc7947d8fc, type: 3}
+      propertyPath: tutorialSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: affb120d3057f114596a336e2e40dfe4, type: 3}
     - target: {fileID: 1767461960841372412, guid: 95f14aef8261af94ca7e61bc7947d8fc, type: 3}
       propertyPath: m_text
       value: to zoom in or out!
@@ -1318,6 +1342,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7451082361652484712}
     m_Modifications:
+    - target: {fileID: 46095220438291800, guid: 95f14aef8261af94ca7e61bc7947d8fc, type: 3}
+      propertyPath: line1Text
+      value: Drag the <b>Right Mouse Button</b>
+      objectReference: {fileID: 0}
+    - target: {fileID: 46095220438291800, guid: 95f14aef8261af94ca7e61bc7947d8fc, type: 3}
+      propertyPath: line2Text
+      value: to rotate around the park!
+      objectReference: {fileID: 0}
+    - target: {fileID: 46095220438291800, guid: 95f14aef8261af94ca7e61bc7947d8fc, type: 3}
+      propertyPath: tutorialSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: affb120d3057f114596a336e2e40dfe4, type: 3}
     - target: {fileID: 1767461960841372412, guid: 95f14aef8261af94ca7e61bc7947d8fc, type: 3}
       propertyPath: m_text
       value: to rotate around the park!
@@ -1497,6 +1533,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7451082361652484712}
     m_Modifications:
+    - target: {fileID: 46095220438291800, guid: 95f14aef8261af94ca7e61bc7947d8fc, type: 3}
+      propertyPath: line1Text
+      value: Press <b>W</b>, <b>A</b>, <b>S</b>, or <b>D</b>
+      objectReference: {fileID: 0}
+    - target: {fileID: 46095220438291800, guid: 95f14aef8261af94ca7e61bc7947d8fc, type: 3}
+      propertyPath: line2Text
+      value: to move!
+      objectReference: {fileID: 0}
+    - target: {fileID: 46095220438291800, guid: 95f14aef8261af94ca7e61bc7947d8fc, type: 3}
+      propertyPath: tutorialSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0a568b3f7c702ac4fba705b0b4c6862a, type: 3}
     - target: {fileID: 1767461960841372412, guid: 95f14aef8261af94ca7e61bc7947d8fc, type: 3}
       propertyPath: m_text
       value: to move!
