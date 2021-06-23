@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using DG.Tweening;
-using Runtime.Data;
 using Runtime.Event;
 using TMPro;
+using UnityCommons;
 using UnityEngine;
 using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
     [RequireComponent(typeof(TextMeshProUGUI))]
     public class ScoreUI : MonoBehaviour, IEventSubscriber {
+        [SerializeField] private float animationDuration = 0.25f;
+        
         private int score;
         private TextMeshProUGUI text;
         private List<IDisposable> eventUnsubscribeTokens;
@@ -40,9 +42,8 @@ namespace Runtime {
         }
 
         private void UpdateScore() {
-            text.rectTransform.DOPunchScale(Vector3.one * 0.5f, 0.2f).OnStepComplete(() => {
-                text.text = score.ToString();
-            });
+            text.rectTransform.DOPunchScale(Vector3.one * 0.5f, animationDuration);
+            Run.After(animationDuration * 0.5f, () => text.text = score.ToString());
         }
 
         /// <summary>
