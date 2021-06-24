@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using DG.Tweening;
 using UnityEngine;
@@ -15,8 +16,7 @@ namespace Runtime {
         
         [Header("Scene Transition References")]
         [SerializeField] private Image fadeImage;
-        [SerializeField] private GameObject eventSystemGameObject;
-        [SerializeField] private GameObject mainLightObject;
+        [SerializeField] private Story story;
 
         private SettingsController settingsController;
         private Animation animation;
@@ -44,11 +44,12 @@ namespace Runtime {
         public void OnPlayClicked() {
             // prevents buttons from being clicked
             fadeImage.raycastTarget = true;
-
-            Destroy(eventSystemGameObject);
+            
             
             animation.Play();
-            StartCoroutine(SwitchSceneAfter(animation.clip.length));
+            StartCoroutine(DoAfter(animation.clip.length, () => {
+                story.Begin();
+            }));
             SoundManager.PlaySound("Click");
         }
 
@@ -93,16 +94,9 @@ namespace Runtime {
             Application.Quit();
         }
 
-        private IEnumerator SwitchSceneAfter(float delay) {
-            Debug.Log($"Switching scene after {delay} seconds");
+        private IEnumerator DoAfter(float delay, Action action) {
             yield return new WaitForSeconds(delay);
-            var operation = SceneManager.LoadSceneAsync(2, LoadSceneMode.Additive);
-            yield return operation;
-            DestroyImmediate(mainLightObject);
-            if (!operation.isDone) Debug.Log("Loading not done");
-
-            var unloadOperation = SceneManager.UnloadSceneAsync(1);
-            yield return unloadOperation;
+            action();
         }
     }
 }

@@ -158,6 +158,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7369877028148361094}
   - component: {fileID: 5293725482974562654}
+  - component: {fileID: 6668469903249687466}
   m_Layer: 0
   m_Name: DuckModel
   m_TagString: Untagged
@@ -237,6 +238,25 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.056580767, y: 0.040900826, z: -0.0035110116}
     m_Extent: {x: 0.35290182, y: 0.29988745, z: 0.14261457}
   m_DirtyAABB: 0
+--- !u!95 &6668469903249687466
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2773115494881039708}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e4d9ba68ba3cbcb4ba7e1cebcf56bcc3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2795076480586834949
 GameObject:
   m_ObjectHideFlags: 0
