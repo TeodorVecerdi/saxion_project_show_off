@@ -210,6 +210,7 @@ GameObject:
   - component: {fileID: 3253161670020646184}
   - component: {fileID: 4569252622169977632}
   - component: {fileID: -3748919729093770057}
+  - component: {fileID: 3064034111648494476}
   m_Layer: 0
   m_Name: NPC_Male.02
   m_TagString: Untagged
@@ -291,6 +292,18 @@ MonoBehaviour:
   trashBinSearchDistance: 15
   minMaxTrashWaitTime: {x: 2, y: 5}
   minMaxTrashWaitTime2: {x: 1, y: 3}
+--- !u!114 &3064034111648494476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2442328257339377574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12dd127fe38b8c442a613d741af714d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2447804837101300922
 GameObject:
   m_ObjectHideFlags: 0
