@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using UnityEngine;
 
 namespace Runtime {
@@ -9,15 +10,22 @@ namespace Runtime {
 
         [SerializeField] private float animationDuration = 0.25f;
         [SerializeField] private float materialAlpha = 0.5f;
+        private Material material;
+
+        private void Start() {
+            material = new Material(previewMaterial);
+            var meshRenderer = GetComponentInChildren<MeshRenderer>();
+            meshRenderer.material = material;
+        }
 
         public void HideIndicator() {
-            previewMaterial.DOFade(0.0f, animationDuration)
-                           .OnComplete(() => previewObject.SetActive(false));
+            material.DOFade(0.0f, animationDuration)
+                    .OnComplete(() => previewObject.SetActive(false));
         }
 
         public void ShowIndicator() {
             previewObject.SetActive(true);
-            previewMaterial.DOFade(materialAlpha, animationDuration);
+            material.DOFade(materialAlpha, animationDuration);
         }
 
         public void Bulldoze() {
