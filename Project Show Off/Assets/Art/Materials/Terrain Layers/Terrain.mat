@@ -59,7 +59,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+<<<<<<< HEAD
     - GrassBlend: 0
+=======
+    - GrassBlend: 0.26299998
+>>>>>>> develop
     - Grass_Blend_Factor: 0
     - _AddPrecomputedVelocity: 0
     - _AlphaCutoffEnable: 0

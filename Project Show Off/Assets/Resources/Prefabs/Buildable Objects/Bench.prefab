@@ -304,6 +304,54 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 4647041509817338336, guid: 78659c211d80c0140bca6d538311dae5, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4647041509817338336, guid: 78659c211d80c0140bca6d538311dae5, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4647041509817338336, guid: 78659c211d80c0140bca6d538311dae5, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4647041509817338336, guid: 78659c211d80c0140bca6d538311dae5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4647041509817338336, guid: 78659c211d80c0140bca6d538311dae5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4647041509817338336, guid: 78659c211d80c0140bca6d538311dae5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6009933266051072545, guid: 78659c211d80c0140bca6d538311dae5, type: 3}
+      propertyPath: m_Size.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6009933266051072545, guid: 78659c211d80c0140bca6d538311dae5, type: 3}
+      propertyPath: m_Size.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6009933266051072545, guid: 78659c211d80c0140bca6d538311dae5, type: 3}
+      propertyPath: m_Size.z
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6009933266051072545, guid: 78659c211d80c0140bca6d538311dae5, type: 3}
+      propertyPath: m_Center.y
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 7150461790178418369, guid: 78659c211d80c0140bca6d538311dae5, type: 3}
+      propertyPath: m_Radius
+      value: 1.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 7150461790178418369, guid: 78659c211d80c0140bca6d538311dae5, type: 3}
+      propertyPath: m_Center.y
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78659c211d80c0140bca6d538311dae5, type: 3}
 --- !u!1 &6393172599133227750 stripped

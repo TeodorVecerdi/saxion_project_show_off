@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using DG.Tweening;
 using UnityEngine;
@@ -77,12 +76,12 @@ namespace Runtime {
         private IEnumerator SwitchSceneAfter(float delay) {
             Debug.Log($"Switching scene after {delay} seconds");
             yield return new WaitForSeconds(delay);
-            var operation = SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive);
+            var operation = SceneManager.LoadSceneAsync(2, LoadSceneMode.Additive);
             yield return operation;
             DestroyImmediate(mainLightObject);
             if (!operation.isDone) Debug.Log("Loading not done");
 
-            var unloadOperation = SceneManager.UnloadSceneAsync(0);
+            var unloadOperation = SceneManager.UnloadSceneAsync(1);
             yield return unloadOperation;
         }
     }

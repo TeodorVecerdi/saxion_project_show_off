@@ -5581,7 +5581,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 0.75
+  m_Speed: 0.46
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 360
@@ -5590,7 +5590,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1.7
-  m_BaseOffset: 0
+  m_BaseOffset: -0.06
   m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
 --- !u!1001 &322243788
@@ -7516,7 +7516,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 0.75
+  m_Speed: 0.46
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 360
@@ -7525,7 +7525,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1.7
-  m_BaseOffset: 0
+  m_BaseOffset: -0.06
   m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
 --- !u!114 &441679985
@@ -10193,7 +10193,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8573404978122709733, guid: baf922d5f1c59a044b2fb5f87876d9fb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 18.438
+      value: 18.107
       objectReference: {fileID: 0}
     - target: {fileID: 8573404978122709733, guid: baf922d5f1c59a044b2fb5f87876d9fb, type: 3}
       propertyPath: m_LocalPosition.z
@@ -10780,7 +10780,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 0.75
+  m_Speed: 0.46
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 360
@@ -10789,7 +10789,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1.8
-  m_BaseOffset: 0
+  m_BaseOffset: -0.06
   m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
 --- !u!114 &635659563
@@ -13104,7 +13104,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1614876351368593876, guid: 02715c8f47e4a7e47b1a6bbd031f9d0a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.7999992
+      value: 1.4689999
       objectReference: {fileID: 0}
     - target: {fileID: 2029155590080418560, guid: 02715c8f47e4a7e47b1a6bbd031f9d0a, type: 3}
       propertyPath: text
@@ -18165,6 +18165,10 @@ PrefabInstance:
       propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8665863473772503731, guid: fd7068f616163634d9a4d3785013cadb, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -24.00003
+      objectReference: {fileID: 0}
     - target: {fileID: 8665863474012914693, guid: fd7068f616163634d9a4d3785013cadb, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -19320,7 +19324,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 0.8
+  m_Speed: 0.46
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 360
@@ -19329,7 +19333,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1.8
-  m_BaseOffset: 0
+  m_BaseOffset: -0.06
   m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
 --- !u!114 &1114613955
@@ -23377,6 +23381,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 890338420647046771, guid: 54cf99860973f2543b2559083a046378, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54cf99860973f2543b2559083a046378, type: 3}
 --- !u!1001 &1357101654
@@ -24986,7 +24994,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 0.6
+  m_Speed: 0.46
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 360
@@ -24995,7 +25003,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1.7
-  m_BaseOffset: 0
+  m_BaseOffset: -0.06
   m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
 --- !u!114 &1430871172
@@ -26893,7 +26901,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 0.8
+  m_Speed: 0.46
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 360
@@ -26902,7 +26910,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1.8
-  m_BaseOffset: 0
+  m_BaseOffset: -0.06
   m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
 --- !u!4 &1572393830 stripped
@@ -28564,7 +28572,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 0.8
+  m_Speed: 0.46
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 360
@@ -28573,7 +28581,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1.8
-  m_BaseOffset: 0
+  m_BaseOffset: -0.06
   m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
 --- !u!1001 &1679388886
@@ -30323,7 +30331,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-470400
+  m_Name: pb_Mesh-295360
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

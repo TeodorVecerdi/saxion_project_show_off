@@ -1,11 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using Runtime.Event;
 using UnityEngine;
 using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
     public class FMODSoundSettings : MonoBehaviour, IEventSubscriber {
-        [SerializeField] private BusControlFMOD masterBus;
+        [SerializeField] private List<BusControlFMOD> sfxBusses;
+        [SerializeField] private List<BusControlFMOD> musicBusses;
 
         private IDisposable unsubscribeEventToken;
 
@@ -14,7 +16,8 @@ namespace Runtime {
         }
 
         private void Start() {
-            masterBus.SetVolume(PlayerPrefs.GetFloat("Settings_SfxVolume", 1.0f));
+            sfxBusses.ForEach(bus => bus.SetVolume(PlayerPrefs.GetFloat("Settings_SfxVolume", 1.0f)));
+            musicBusses.ForEach(bus => bus.SetVolume(PlayerPrefs.GetFloat("Settings_MusicVolume", 1.0f)));
         }
 
         private void OnDestroy() {
@@ -29,7 +32,8 @@ namespace Runtime {
         public bool OnEvent(EventData eventData) {
             switch (eventData) {
                 case SettingsChangedEvent settingsChangedEvent: {
-                    masterBus.SetVolume(settingsChangedEvent.SfxVolume);
+                    sfxBusses.ForEach(bus => bus.SetVolume(settingsChangedEvent.SfxVolume));
+                    musicBusses.ForEach(bus => bus.SetVolume(settingsChangedEvent.MusicVolume));
                     return false;
                 }
                 default: return false;
