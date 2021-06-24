@@ -10,16 +10,16 @@ namespace Runtime {
             self = GetComponent<CanvasGroup>();
         }
 
-        public void Show() {
-            self.DOFade(1.0f, 0.5f);
+        public void Show(float fadeTime) {
+            self.DOFade(1.0f, fadeTime);
         }
 
-        public void Hide() {
-            self.DOFade(0.0f, 0.5f);
+        public void Hide(float fadeTime) {
+            self.DOFade(0.0f, fadeTime);
         }
 
-        public void ShowTextBox() {
-            textBox.DOFade(1.0f, 0.5f);
+        public void ShowTextBox(float fadeTime) {
+            textBox.DOFade(1.0f, fadeTime);
         }
     }
 }
