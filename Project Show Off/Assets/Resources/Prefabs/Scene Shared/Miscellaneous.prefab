@@ -50,6 +50,7 @@ MonoBehaviour:
   - {fileID: -3748919729093770057, guid: 4f68d23ce8c693d4c8c7ae44b74e65ff, type: 3}
   minNpcCount: 8
   maxNpcCount: 30
+  spawnRadius: 5
 --- !u!1 &1987755476374715045
 GameObject:
   m_ObjectHideFlags: 0
@@ -173,7 +174,7 @@ MonoBehaviour:
   from: {x: -69.1, y: 3.02, z: 199.5}
   to: {x: 39.9, y: 3, z: 227.6}
   worldMaxHeight: 62.7
-  spawnInterval: 10
+  spawnInterval: 60
   trashScaleUpDuration: 0.1
   initialTrashCount: 50
   yOffset: 0.25

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using DG.Tweening;
+using DG.Tweening.Core.Easing;
 using Runtime.Event;
 using TMPro;
 using UnityCommons;
@@ -23,6 +24,7 @@ namespace Runtime {
 
             eventUnsubscribeTokens = new List<IDisposable> {
                 this.Subscribe(EventType.TrashPickupSuccess),
+                this.Subscribe(EventType.TrashPickupBin),
                 this.Subscribe(EventType.PerformBuild)
             };
         }
@@ -44,6 +46,7 @@ namespace Runtime {
         }
 
         private void UpdateScore() {
+            text.rectTransform.DOKill(true);
             text.rectTransform.DOPunchScale(Vector3.one * 0.5f, animationDuration);
             Run.After(animationDuration * 0.5f, () => text.text = score.ToString());
         }
@@ -61,6 +64,10 @@ namespace Runtime {
                 }
                 case TrashEvent {Type: EventType.TrashPickupSuccess} trashPickupSuccessEvent: {
                     AddScore(trashPickupSuccessEvent.Pickup.TrashPickup.PickupScore);
+                    return false;
+                }
+                case TrashPickupBinEvent trashPickupBinEvent: {
+                    AddScore(trashPickupBinEvent.TrashPickup.PickupScore);
                     return false;
                 }
                 default: return false;

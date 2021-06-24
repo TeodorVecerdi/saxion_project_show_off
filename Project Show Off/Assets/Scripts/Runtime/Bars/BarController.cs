@@ -55,7 +55,6 @@ namespace Runtime.Bars {
         private void UpdateFill(Image image, float fillAmount) {
             image.DOKill();
             image.DOFillAmount(fillAmount, fillAnimationDuration);
-            Debug.Log($"Updating {image} fillAmount to [{fillAmount}] from [{image.fillAmount}]");
         }
 
         /// <summary>
@@ -98,15 +97,15 @@ namespace Runtime.Bars {
             peopleFillAmount = pollution + CalcHalfFull_BuildingValue(totalBuiltPeople, TotalBuildingRequiredPeople);
             biodiversityFillAmount = pollution + CalcHalfFull_BuildingValue(totalBuiltBiodiversity, TotalBuildingRequiredBiodiversity);
 
-            if (peopleFillAmount <= 0.0f || biodiversityFillAmount <= 0.0f) {
-                // TODO: Lose
+            if (peopleFillAmount <= 0.01f || biodiversityFillAmount <= 0.01f) {
                 PlayerPrefs.SetInt("Score", scoreUI.Score);
                 PlayerPrefs.Save();
+                Time.timeScale = 1.0f;
                 SceneManager.LoadScene(3);
-            } else if (peopleFillAmount >= 1.0f || biodiversityFillAmount >= 1.0f) {
-                // TODO: Win
+            } else if (peopleFillAmount >= 0.99f && biodiversityFillAmount >= 0.99f) {
                 PlayerPrefs.SetInt("Score", scoreUI.Score);
                 PlayerPrefs.Save();
+                Time.timeScale = 1.0f;
                 SceneManager.LoadScene(4);
             }
             

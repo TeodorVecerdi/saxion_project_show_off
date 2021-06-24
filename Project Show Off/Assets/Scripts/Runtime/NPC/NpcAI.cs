@@ -73,6 +73,8 @@ namespace Runtime {
         private void Update() {
             if (shouldChangeState) {
                 shouldChangeState = false;
+                if(currentCoroutine != null)
+                    StopCoroutine(currentCoroutine);
                 currentCoroutine = StartCoroutine(GetNextState());
             }
         }
@@ -85,7 +87,6 @@ namespace Runtime {
 
         private IEnumerator GetNextState() {
             if (IsDespawning) {
-                aiState = AIState.Despawning;
                 return WalkDespawn();
             }
             
@@ -110,6 +111,7 @@ namespace Runtime {
 
         private IEnumerator Wander() {
             while (true) {
+                aiState = AIState.Wander;
                 yield return WanderFor(wanderTime - wanderTimer);
                 wanderTimer = 0.0f;
                 if (shouldChangeState) yield break;
@@ -122,6 +124,7 @@ namespace Runtime {
            
             // Couldn't find a path to the bin, bail out and just throw normal trash
             if (!navMeshHit.hit) {
+                Debug.Log("Couldn't find a path to the bin, bail out and just throw normal trash", gameObject);
                 SpawnTrash(false);
                 trashQueue--;
                 aiState = AIState.ThrowTrashGround;
@@ -130,14 +133,17 @@ namespace Runtime {
             }
             
             agent.SetDestination(navMeshHit.position);
-            var stoppingDistance = Mathf.Max(agent.stoppingDistance, 0.25f);
-            yield return new WaitUntil(() => agent.speed < 0.1f || agent.remainingDistance < stoppingDistance);
+            var stoppingDistance = Mathf.Max(agent.stoppingDistance, 1.0f);
+            yield return new WaitUntil(() => {
+                aiState = AIState.ApproachBin;
+                return agent.remainingDistance < stoppingDistance;
+            });
             shouldChangeState = true;
         }
 
         private IEnumerator ThrowTrash(bool isAtTrashBin) {
             if (debug && debugText) Debug.Log($"[AI] Throwing trash | atBin = [{isAtTrashBin}]");
-            
+
             // wait a bit while stopped
             if (!isAtTrashBin) yield return WanderFor(Rand.Range(minMaxTrashWaitTime2));
             SpawnTrash(isAtTrashBin);
@@ -166,11 +172,15 @@ namespace Runtime {
         }
 
         private IEnumerator WalkDespawn() {
+            aiState = AIState.Despawning;
             if (debug && debugText) Debug.Log("[AI] Despawning");
             var stoppingDistance = Mathf.Max(agent.stoppingDistance, 2.0f);
             if (NavMesh.SamplePosition(DespawnPosition, out var navMeshHit, 5.0f, -1)) {
                 agent.SetDestination(navMeshHit.position);
-                yield return new WaitUntil(() => agent.remainingDistance <= stoppingDistance);
+                yield return new WaitUntil(() => {
+                    aiState = AIState.Despawning;
+                    return agent.remainingDistance <= stoppingDistance;
+                });
                 if (debug && debugText) Debug.Log("[AI] Despawned");
                 Destroy(gameObject);
             } else {
@@ -186,8 +196,10 @@ namespace Runtime {
 
             trashBinPosition = Vector3.zero;
             if (bins.Count <= 0) return false;
+
             
-            trashBinPosition = bins.QuickSorted((hit1, hit2) => hit1.distance.CompareTo(hit2.distance)).First().transform.position;
+            trashBinPosition = bins[0].transform.position;
+            Debug.Log($"Found bin at {bins[0].transform.position}");
             return true;
         }
 
@@ -210,7 +222,6 @@ namespace Runtime {
                     }
 
                     trashQueue++;
-                    Debug.Log("I should throw trash, but I wont cause im a good guy lmao");
                     return false;
                 }
                 default: return false;

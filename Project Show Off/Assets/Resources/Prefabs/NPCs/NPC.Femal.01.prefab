@@ -343,9 +343,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wanderTime: 10
   wanderDistance: 30
-  trashBinSearchDistance: 15
-  minMaxTrashWaitTime: {x: 2, y: 5}
-  minMaxTrashWaitTime2: {x: 1, y: 3}
+  trashBinSearchDistance: 20
+  minMaxTrashWaitTime: {x: 3, y: 8}
+  minMaxTrashWaitTime2: {x: 1, y: 5}
 --- !u!136 &5701753329029845232
 CapsuleCollider:
   m_ObjectHideFlags: 0

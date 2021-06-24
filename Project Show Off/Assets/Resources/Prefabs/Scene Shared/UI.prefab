@@ -725,6 +725,10 @@ PrefabInstance:
       value: Shared Canvas
       objectReference: {fileID: 0}
     - target: {fileID: 6952068218621436552, guid: 6c1b629c0bd664e44b68c50ae56c1279, type: 3}
+      propertyPath: scoreUI
+      value: 
+      objectReference: {fileID: 1344045716412699976}
+    - target: {fileID: 6952068218621436552, guid: 6c1b629c0bd664e44b68c50ae56c1279, type: 3}
       propertyPath: TotalBuildingRequiredPeople
       value: 12
       objectReference: {fileID: 0}
@@ -743,6 +747,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6292469753081509378, guid: 6c1b629c0bd664e44b68c50ae56c1279, type: 3}
   m_PrefabInstance: {fileID: 3391213872903479056}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1344045716412699976 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4447024778592897624, guid: 6c1b629c0bd664e44b68c50ae56c1279, type: 3}
+  m_PrefabInstance: {fileID: 3391213872903479056}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 492b14ee27334ea7b530a62dcdb847fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!225 &1091351853298911098 stripped
 CanvasGroup:
   m_CorrespondingSourceObject: {fileID: 2320833436124797034, guid: 6c1b629c0bd664e44b68c50ae56c1279, type: 3}
