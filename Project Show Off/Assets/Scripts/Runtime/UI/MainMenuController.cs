@@ -10,6 +10,7 @@ namespace Runtime {
     public sealed class MainMenuController : MonoBehaviour {
         [Header("References")]
         [SerializeField] private CanvasGroup settingsContainer;
+        [SerializeField] private CanvasGroup creditsContainer;
         [SerializeField] private CanvasGroup buttonContainer;
         
         [Header("Scene Transition References")]
@@ -20,6 +21,7 @@ namespace Runtime {
         private SettingsController settingsController;
         private Animation animation;
         private bool isSettingsMenuOpen;
+        private bool isCreditsMenuOpen;
 
         private void Awake() {
             animation = GetComponent<Animation>();
@@ -66,6 +68,24 @@ namespace Runtime {
             });
             settingsContainer.DOFade(showSettings ? 1.0f : 0.0f, 0.25f).OnComplete(() => {
                 if (!showSettings) settingsContainer.gameObject.SetActive(false);
+            });
+        }
+
+        public void OnCreditsClicked(bool showCredits) {
+            ShowCredits(showCredits);
+            SoundManager.PlaySound("Click");
+        }
+        
+        private void ShowCredits(bool showCredits) {
+            isCreditsMenuOpen = showCredits;
+            if (!showCredits) buttonContainer.gameObject.SetActive(true);
+            else creditsContainer.gameObject.SetActive(true);
+
+            creditsContainer.DOFade(showCredits ? 0.0f : 1.0f, 0.25f).OnComplete(() => {
+                if (showCredits) buttonContainer.gameObject.SetActive(false);
+            });
+            creditsContainer.DOFade(showCredits ? 1.0f : 0.0f, 0.25f).OnComplete(() => {
+                if (!showCredits) creditsContainer.gameObject.SetActive(false);
             });
         }
 

@@ -39,7 +39,6 @@ namespace Runtime.Bars {
 
             totalBuiltPeople = 0.0f;
             totalBuiltBiodiversity = 0.0f;
-            UpdateFillValue();
             UpdateFill(peopleFill, peopleFillAmount);
             UpdateFill(biodiversityFill, biodiversityFillAmount);
         }
@@ -101,10 +100,12 @@ namespace Runtime.Bars {
                 PlayerPrefs.SetInt("Score", scoreUI.Score);
                 PlayerPrefs.Save();
                 Time.timeScale = 1.0f;
+                EventQueue.RaiseEventImmediately(new ChangeMouseLockEvent(this, false));
                 SceneManager.LoadScene(3);
             } else if (peopleFillAmount >= 0.99f && biodiversityFillAmount >= 0.99f) {
                 PlayerPrefs.SetInt("Score", scoreUI.Score);
                 PlayerPrefs.Save();
+                EventQueue.RaiseEventImmediately(new ChangeMouseLockEvent(this, false));
                 Time.timeScale = 1.0f;
                 SceneManager.LoadScene(4);
             }
