@@ -95,6 +95,7 @@ namespace Runtime.Bars {
         private void UpdateFillValue() {
             peopleFillAmount = pollution + CalcHalfFull_BuildingValue(totalBuiltPeople, TotalBuildingRequiredPeople);
             biodiversityFillAmount = pollution + CalcHalfFull_BuildingValue(totalBuiltBiodiversity, TotalBuildingRequiredBiodiversity);
+            EventQueue.QueueEvent(new BarUpdateEvent(this, peopleFillAmount, biodiversityFillAmount));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
