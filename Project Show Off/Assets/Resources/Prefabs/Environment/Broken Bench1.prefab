@@ -42,8 +42,8 @@ LODGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2523930839504992448}
   serializedVersion: 2
-  m_LocalReferencePoint: {x: 4.656613e-10, y: 0.0061999997, z: 0}
-  m_Size: 0.02175976
+  m_LocalReferencePoint: {x: 0.000000059604645, y: 0.6129999, z: 0}
+  m_Size: 2.1759763
   m_FadeMode: 1
   m_AnimateCrossFading: 1
   m_LastLODIsBillboard: 0
@@ -67,11 +67,11 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 0.0125, y: 0.01, z: 0.0075}
+  m_Extents: {x: 1.25, y: 1, z: 1}
   m_MoveThreshold: 0.1
   m_Carve: 0
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0.008, z: 0}
+  m_Center: {x: 0, y: 0.8, z: 0}
   m_TimeToStationary: 0.5
 --- !u!1 &2526613084596644696
 GameObject:
@@ -100,8 +100,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2526613084596644696}
   m_LocalRotation: {x: -0, y: 0.70710677, z: -0, w: 0.7071069}
-  m_LocalPosition: {x: 0, y: 0.0062, z: 0}
-  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_LocalPosition: {x: 0, y: 0.613, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4786323074235225042}
   m_RootOrder: 0
@@ -197,8 +197,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4151644658053788451}
   m_LocalRotation: {x: -0, y: 0.70710677, z: -0, w: 0.7071069}
-  m_LocalPosition: {x: 0, y: 0.0062, z: 0}
-  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_LocalPosition: {x: 0, y: 0.613, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4786323074235225042}
   m_RootOrder: 1
