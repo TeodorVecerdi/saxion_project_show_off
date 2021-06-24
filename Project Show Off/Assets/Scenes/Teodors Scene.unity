@@ -3882,6 +3882,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5b83f88421aa3c41b2cc8399677fd17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NpcPrefabs: []
+  minNpcCount: 8
+  maxNpcCount: 40
 --- !u!1001 &247080513
 PrefabInstance:
   m_ObjectHideFlags: 0
