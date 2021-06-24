@@ -1,4 +1,6 @@
-﻿using DG.Tweening;
+﻿using System;
+using System.Collections.Generic;
+using DG.Tweening;
 using NaughtyAttributes;
 using Runtime.Event;
 using UnityCommons;
@@ -7,7 +9,7 @@ using UnityEngine;
 using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
-    public sealed class TrashSpawner : MonoBehaviour {
+    public sealed class TrashSpawner : MonoBehaviour, IEventSubscriber {
         [Header("Location")]
         [SerializeField] private Vector3 from;
         [SerializeField] private Vector3 to;
@@ -17,8 +19,29 @@ namespace Runtime {
         [SerializeField] private float trashScaleUpDuration = 0.1f;
         [SerializeField, MinValue(0)] private int initialTrashCount = 20;
         [SerializeField] private float yOffset = 0.25f;
+        [Space]
+        [SerializeField] private float difficultyTimeMultiplier = 20.0f;
 
         private float spawnTimer;
+        private float spawnTime;
+        private float difficultyMultiplier;
+        private List<IDisposable> eventUnsubscribeTokens;
+ 
+        private void Awake() {
+            eventUnsubscribeTokens = new List<IDisposable> {
+                this.Subscribe(EventType.DifficultyAdjustment)
+            };
+            
+            difficultyMultiplier = 1.0f;
+            ApplyDifficulty();
+        }
+
+        private void OnDestroy() {
+            foreach (var eventUnsubscribeToken in eventUnsubscribeTokens) {
+                eventUnsubscribeToken.Dispose();
+            }
+            eventUnsubscribeTokens.Clear();
+        }
 
         private void Start() {
             SpawnInitialTrash();
@@ -26,13 +49,11 @@ namespace Runtime {
 
         private void Update() {
             spawnTimer += Time.deltaTime;
-            if (spawnTimer >= spawnInterval) {
-                spawnTimer -= spawnInterval;
-                // #if !ENABLE_NPCS
-                    // SpawnTrash();
-                // #else
+            if (spawnTimer >= spawnTime) {
+                spawnTimer = 0.0f;
+                
+                // SpawnTrash(); !! old 
                 EventQueue.QueueEvent(new EmptyEvent(this, EventType.NpcThrowTrash));
-                // #endif
             }
         }
 
@@ -67,6 +88,26 @@ namespace Runtime {
             }
 
             return 0.0f;
+        }
+
+        private void ApplyDifficulty() {
+            spawnTime = spawnInterval + -difficultyMultiplier * difficultyTimeMultiplier;
+        }
+
+        /// <summary>
+        /// <para>Receives an event from the Event Queue</para>
+        /// </summary>
+        /// <param name="eventData">Event data raised</param>
+        /// <returns><c>true</c> if event propagation should be stopped, <c>false</c> otherwise.</returns>
+        public bool OnEvent(EventData eventData) {
+            switch (eventData) {
+                case DifficultyAdjustmentEvent difficultyAdjustmentEvent: {
+                    difficultyMultiplier = difficultyAdjustmentEvent.Difficulty;
+                    ApplyDifficulty();
+                    return false;
+                }
+                default: return false;
+            }
         }
 
         private void OnDrawGizmosSelected() {

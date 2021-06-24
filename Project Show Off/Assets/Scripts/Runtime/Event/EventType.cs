@@ -28,6 +28,8 @@
         SettingsChanged,
         ResetTutorial,
         
-        BarUpdate
+        BarUpdate,
+        
+        DifficultyAdjustment
     }
 }
