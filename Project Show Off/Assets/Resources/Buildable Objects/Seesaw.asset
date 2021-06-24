@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57635ac4f96b4d2d9cb732e4878bbe7b, type: 3}
   m_Name: Seesaw
   m_EditorClassIdentifier: 
-  objectName: Trash Can
+  objectName: Seesaw
   objectDescription: Another description. This one should say something about making
     people less likely to throw their trash on the ground and use this instead. You
     can also pick up trash from it.
-  objectSprite: {fileID: 21300000, guid: 2c3ab1a8d183d884aad20f81f2ddc5dd, type: 3}
+  objectSprite: {fileID: 21300000, guid: 282a268db74536d40867efa4c5411595, type: 3}
   prefab: {fileID: 2989257595510482479, guid: d4bb156347d99de43b43fce2f6f36616, type: 3}
   constructionRequirements:
     contents:

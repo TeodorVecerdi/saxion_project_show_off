@@ -205,6 +205,7 @@ GameObject:
   - component: {fileID: 3183516254022431402}
   - component: {fileID: 4447758316013366681}
   - component: {fileID: 2035503761196821015}
+  - component: {fileID: 8198293253852154525}
   m_Layer: 0
   m_Name: Sandbox
   m_TagString: Untagged
@@ -267,3 +268,23 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0.33, z: 0}
   m_TimeToStationary: 0.5
+--- !u!114 &8198293253852154525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595154510141987665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 705c14aa9ecaa274289972381f471367, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprite0: {fileID: 21300000, guid: a3ba8b5dfc243514881955613928e1e4, type: 3}
+  prefab0: {fileID: 1595154510141987665}
+  nest1:
+    sprite1: {fileID: 0}
+    prefab1: {fileID: 0}
+    nest2:
+      sprite2: {fileID: 0}
+      prefab2: {fileID: 0}

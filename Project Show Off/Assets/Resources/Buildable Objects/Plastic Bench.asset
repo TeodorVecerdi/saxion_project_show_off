@@ -15,7 +15,7 @@ MonoBehaviour:
   objectName: Plastic Bench
   objectDescription: Some kind of description for the plastic bench. Should say something
     about attracting more visitors when built.
-  objectSprite: {fileID: 21300000, guid: 8bf70e12719241d498b6c890c70c70ea, type: 3}
+  objectSprite: {fileID: 21300000, guid: f910110703ce6224fa26e39a631c7194, type: 3}
   prefab: {fileID: 6393172599133227736, guid: 49b734ea413d9b742a241b15d20991e9, type: 3}
   constructionRequirements:
     contents:
