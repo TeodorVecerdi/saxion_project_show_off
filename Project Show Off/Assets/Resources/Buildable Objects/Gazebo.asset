@@ -21,7 +21,7 @@ MonoBehaviour:
   constructionRequirements:
     contents:
     - trashMaterial: {fileID: 11400000, guid: 2484c42e7f6c4d949b8bb98b18aedf0b, type: 2}
-      mass: 2.5
+      mass: 10
   buildAreas:
   - {fileID: 11400000, guid: 8b23daebf3ef6aa40914e40ae4444ef8, type: 2}
-  buildScore: 10
+  buildScore: 200
