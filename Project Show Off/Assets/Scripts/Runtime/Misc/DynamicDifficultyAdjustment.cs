@@ -57,11 +57,16 @@ namespace Runtime {
         }
 
         private void Adjust() {
-            var ratio = pickedUp / (float) spawned;
+            if (spawned == 0 || pickedUp == 0) {
+                spawned++;
+                pickedUp++;
+            }
+            var ratio = 0.1f * (pickedUp / (float) spawned);
+            
             if (ratio < 1.0f) {
                 currentDifficulty -= ratio;
-            } else if (ratio > 1.0f) {
-                currentDifficulty += 1 - ratio;
+            } else if (ratio >= 1.0f) {
+                currentDifficulty += ratio;
             }
 
             pickedUp = 0;
@@ -71,11 +76,15 @@ namespace Runtime {
         }
 
         private void AdjustMajor() {
+            if (totalPickedUp == 0 || totalSpawned == 0) {
+                totalSpawned++;
+                totalPickedUp++;
+            } 
             var ratio = totalPickedUp / (float) totalSpawned;
             if (ratio < 1.0f) {
                 extraDifficultyChange -= ratio;
             } else if (ratio > 1.0f) {
-                extraDifficultyChange += 1 - ratio;
+                extraDifficultyChange += ratio;
             }
 
             totalPickedUp = 0;

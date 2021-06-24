@@ -32,7 +32,7 @@ namespace Runtime {
                 this.Subscribe(EventType.DifficultyAdjustment)
             };
             
-            difficultyMultiplier = 1.0f;
+            difficultyMultiplier = 0.0f;
             ApplyDifficulty();
         }
 
