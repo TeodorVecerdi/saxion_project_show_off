@@ -26,6 +26,8 @@
         PollutionChange,
         
         SettingsChanged,
-        ResetTutorial
+        ResetTutorial,
+        
+        BarUpdate
     }
 }

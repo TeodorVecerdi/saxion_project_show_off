@@ -9,12 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ad30c4e4b964f698f466740a1161991, type: 3}
-  m_Name: Show Folliage
+  m_Script: {fileID: 11500000, guid: b350afb2ed4f46e4b8f18cadeaab1ee8, type: 3}
+  m_Name: Enable
   m_EditorClassIdentifier: 
-  specificTarget: 0
-  transform: {fileID: 0}
-  from: {x: 0, y: 0, z: 0}
-  to: {x: 1, y: 1, z: 1}
-  duration: 0.2
-  operation: 0
+  enabled: 1

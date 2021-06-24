@@ -16,13 +16,12 @@ namespace Runtime.Tutorial {
         
         private const float baseTransitionDuration = 0.5f;
         private RectTransform rectTransform;
-        private float transitionFromX;
-        private float transitionToX;
+        private float transitionFromY;
+        private float transitionToY;
         private bool isFinished;
         private TutorialContent tutorialContent;
 
         protected float FillAmount;
-        protected TutorialContent TutorialContent => tutorialContent;
         public abstract string TutorialKey { get; }
         protected abstract void Process();
         protected abstract void OnReset();
@@ -46,8 +45,6 @@ namespace Runtime.Tutorial {
 
         private void Awake() {
             rectTransform = (RectTransform) transform;
-            transitionFromX = -8.0f;
-            transitionToX = rectTransform.sizeDelta.x + 8.0f;
             tutorialContent = GetComponent<TutorialContent>();
             OnAwake();
         }
@@ -60,20 +57,20 @@ namespace Runtime.Tutorial {
         }
 
         public void LoadTransitionSettings(float transitionFrom, float transitionTo) {
-            transitionFromX = transitionFrom;
-            transitionToX = transitionTo;
+            transitionFromY = transitionFrom;
+            transitionToY = transitionTo;
         }
 
         public Tweener Hide(float delay) {
             var realDuration = overrideTransitionSettings ? transitionDuration : baseTransitionDuration;
             var realDelay = overrideTransitionSettings ? transitionDelay : delay;
-            return rectTransform.DOAnchorPosX(transitionToX, realDuration).From(new Vector2(transitionFromX, -8.0f)).SetDelay(realDelay);
+            return rectTransform.DOAnchorPosY(transitionToY, realDuration).From(new Vector2(0.0f, transitionFromY)).SetDelay(realDelay);
         }
 
         public Tweener Show(float delay) {
             var realDuration = overrideTransitionSettings ? transitionDuration : baseTransitionDuration;
             var realDelay = overrideTransitionSettings ? transitionDelay : delay;
-            return rectTransform.DOAnchorPosX(transitionFromX, realDuration).From(new Vector2(transitionToX, -8.0f)).SetDelay(realDelay);
+            return rectTransform.DOAnchorPosY(transitionFromY, realDuration).From(new Vector2(0.0f, transitionToY)).SetDelay(realDelay);
         }
 
         public void ResetTutorial() {

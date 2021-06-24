@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4d2d74f8d0fe4a4cb164d7491dda2c9f, type: 3}
-  m_Name: Folliage Change Reverse
+  m_Name: Hide Transform On Pollution
   m_EditorClassIdentifier: 
   value: 0.5
   doOnChange: 1

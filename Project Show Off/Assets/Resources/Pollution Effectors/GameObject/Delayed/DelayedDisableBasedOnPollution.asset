@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4d2d74f8d0fe4a4cb164d7491dda2c9f, type: 3}
-  m_Name: Folliage Change
+  m_Name: DelayedDisableBasedOnPollution
   m_EditorClassIdentifier: 
   value: 0.5
   doOnChange: 1
-  condition: 0
-  ifTrue: {fileID: 11400000, guid: 1d1fcb119a6949d44954085426db3058, type: 2}
-  ifFalse: {fileID: 11400000, guid: fbe8d71972c31834494a00ec5add8b17, type: 2}
+  condition: 3
+  ifTrue: {fileID: 11400000, guid: 7bb825c867f66084ca324559ed999cb3, type: 2}
+  ifFalse: {fileID: 11400000, guid: 3272b84d115b67e4c9d120f874b555db, type: 2}
