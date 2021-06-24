@@ -6,11 +6,13 @@ using Runtime.Data;
 using Runtime.Event;
 using UnityCommons;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using EventType = Runtime.Event.EventType;
 
 namespace Runtime.Bars {
     public class BarController : MonoBehaviour, IEventSubscriber {
+        [SerializeField] private ScoreUI scoreUI;
         [SerializeField] private Image peopleFill;
         [SerializeField] private Image biodiversityFill;
         [SerializeField] private float fillAnimationDuration = 0.25f;
@@ -95,6 +97,19 @@ namespace Runtime.Bars {
         private void UpdateFillValue() {
             peopleFillAmount = pollution + CalcHalfFull_BuildingValue(totalBuiltPeople, TotalBuildingRequiredPeople);
             biodiversityFillAmount = pollution + CalcHalfFull_BuildingValue(totalBuiltBiodiversity, TotalBuildingRequiredBiodiversity);
+
+            if (peopleFillAmount <= 0.0f || biodiversityFillAmount <= 0.0f) {
+                // TODO: Lose
+                PlayerPrefs.SetInt("Score", scoreUI.Score);
+                PlayerPrefs.Save();
+                SceneManager.LoadScene(3);
+            } else if (peopleFillAmount >= 1.0f || biodiversityFillAmount >= 1.0f) {
+                // TODO: Win
+                PlayerPrefs.SetInt("Score", scoreUI.Score);
+                PlayerPrefs.Save();
+                SceneManager.LoadScene(4);
+            }
+            
             EventQueue.QueueEvent(new BarUpdateEvent(this, peopleFillAmount, biodiversityFillAmount));
         }
 
@@ -104,11 +119,6 @@ namespace Runtime.Bars {
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private float CalcPollution(float pollutionRatio)
-                // invert                                             
-            => ((1.0f - pollutionRatio)
-                // reduce
-              - maxPollutionContribution)
-                // clamp to maxContribution
-                .Clamped(0.0f, maxPollutionContribution.Clamped01());
+            => (1.0f - pollutionRatio - maxPollutionContribution).Clamped(0.0f, maxPollutionContribution);
     }
 }

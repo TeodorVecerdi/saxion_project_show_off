@@ -16,6 +16,8 @@ namespace Runtime {
         private TextMeshProUGUI text;
         private List<IDisposable> eventUnsubscribeTokens;
 
+        public int Score => score;
+
         private void Awake() {
             text = GetComponent<TextMeshProUGUI>();
 
