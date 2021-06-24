@@ -13,18 +13,16 @@ MonoBehaviour:
   m_Name: Bughotel
   m_EditorClassIdentifier: 
   objectName: Bug Hotel
-  objectDescription: A hotel for many tiny insects to stay inside. You might even
-    find other animals in here like frogs or hedgehogs
+  objectDescription: A hotel for many tiny insects to live in safely. You might even
+    find other animals in here like frogs or hedgehogs.
   objectSprite: {fileID: 21300000, guid: bafffbaff1426cc4c9f7526446bee943, type: 3}
   prefab: {fileID: 6393172599133227736, guid: 63ea33177dfc0284d92bbd5479c97654, type: 3}
   constructionRequirements:
     contents:
     - trashMaterial: {fileID: 11400000, guid: fec93a18793254344b0eb7b9c697fd84, type: 2}
-      mass: 2.5
-    - trashMaterial: {fileID: 11400000, guid: 2484c42e7f6c4d949b8bb98b18aedf0b, type: 2}
-      mass: 2.5
+      mass: 8.25
   buildAreas:
   - {fileID: 11400000, guid: 8b23daebf3ef6aa40914e40ae4444ef8, type: 2}
   buildScore: 60
   peopleHappinessAmount: 0
-  biodiversityHappinessAmount: 0.75
+  biodiversityHappinessAmount: 0.825

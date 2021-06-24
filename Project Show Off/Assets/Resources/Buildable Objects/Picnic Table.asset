@@ -13,19 +13,18 @@ MonoBehaviour:
   m_Name: Picnic Table
   m_EditorClassIdentifier: 
   objectName: Picnic Table
-  objectDescription: Another description. This one should say something about making
-    people less likely to throw their trash on the ground and use this instead. You
-    can also pick up trash from it.
+  objectDescription: An outdoor table with benches attached to it. Often used by
+    families for outdoor dining
   objectSprite: {fileID: 21300000, guid: f9aa7e7eb7ed3c740aa48dbae93d5977, type: 3}
   prefab: {fileID: 6393172599133227736, guid: 23dedd18afe0cf840a36f1415affcf78, type: 3}
   constructionRequirements:
     contents:
     - trashMaterial: {fileID: 11400000, guid: 2484c42e7f6c4d949b8bb98b18aedf0b, type: 2}
-      mass: 2.5
+      mass: 6.04
     - trashMaterial: {fileID: 11400000, guid: 4bce4b42e3e7157439edede8569afc9e, type: 2}
-      mass: 2.5
+      mass: 12.59
   buildAreas:
   - {fileID: 11400000, guid: 8b23daebf3ef6aa40914e40ae4444ef8, type: 2}
   buildScore: 80
-  peopleHappinessAmount: 0.8
-  biodiversityHappinessAmount: 0
+  peopleHappinessAmount: 0.865
+  biodiversityHappinessAmount: 0.035
