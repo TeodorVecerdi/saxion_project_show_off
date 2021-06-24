@@ -753,7 +753,7 @@ MonoBehaviour:
   m_AdvancedMode: 0
   quality:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 3
   enable:
     m_OverrideState: 1
     m_Value: 1
@@ -936,7 +936,7 @@ MonoBehaviour:
       m_Bits: 4294967295
   m_StepCount:
     m_OverrideState: 1
-    m_Value: 16
+    m_Value: 8
     min: 2
     max: 32
   m_FullResolution:
@@ -944,7 +944,7 @@ MonoBehaviour:
     m_Value: 1
   m_MaximumRadiusInPixels:
     m_OverrideState: 1
-    m_Value: 80
+    m_Value: 20
     min: 16
     max: 256
   m_BilateralUpsample:

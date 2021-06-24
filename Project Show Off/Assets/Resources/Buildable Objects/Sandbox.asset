@@ -17,7 +17,7 @@ MonoBehaviour:
     people less likely to throw their trash on the ground and use this instead. You
     can also pick up trash from it.
   objectSprite: {fileID: 21300000, guid: e88864c0c1e3f2841b1ffa80b6788f46, type: 3}
-  prefab: {fileID: 2989257595510482479, guid: d4bb156347d99de43b43fce2f6f36616, type: 3}
+  prefab: {fileID: 6393172599133227736, guid: 93c55463be609444dab25d0c9fe236d4, type: 3}
   constructionRequirements:
     contents:
     - trashMaterial: {fileID: 11400000, guid: 2484c42e7f6c4d949b8bb98b18aedf0b, type: 2}
