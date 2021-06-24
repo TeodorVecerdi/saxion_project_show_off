@@ -305,8 +305,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 41.99996, y: -145.32117}
-  m_SizeDelta: {x: -498.7809, y: 79.1547}
+  m_AnchoredPosition: {x: 41.804756, y: -145.32117}
+  m_SizeDelta: {x: -498.3905, y: 79.1547}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &3638780496332102086
 CanvasRenderer:
@@ -638,13 +638,14 @@ GameObject:
   m_Component:
   - component: {fileID: 3638780496487118881}
   - component: {fileID: 3638780496487118883}
+  - component: {fileID: 5598628418830673303}
   m_Layer: 5
   m_Name: Credits Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3638780496487118881
 RectTransform:
   m_ObjectHideFlags: 0
@@ -674,6 +675,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3638780496487118880}
   m_CullTransparentMesh: 1
+--- !u!225 &5598628418830673303
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3638780496487118880}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &3638780496539814994
 GameObject:
   m_ObjectHideFlags: 0
@@ -848,8 +861,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 42, y: -11.999939}
-  m_SizeDelta: {x: -498.7809, y: -276.5367}
+  m_AnchoredPosition: {x: 42, y: -11.134155}
+  m_SizeDelta: {x: -498.7809, y: -278.2683}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3638780496644877854
 CanvasRenderer:
@@ -2324,8 +2337,8 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: Runtime.MainMenuController, Game.Runtime
-          m_MethodName: 
-          m_Mode: 1
+          m_MethodName: OnCreditsClicked
+          m_Mode: 6
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

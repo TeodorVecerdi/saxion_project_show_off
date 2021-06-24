@@ -178,6 +178,7 @@ MonoBehaviour:
   trashScaleUpDuration: 0.1
   initialTrashCount: 50
   yOffset: 0.25
+  difficultyTimeMultiplier: 20
 --- !u!1 &8410512925163984027
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,3 +322,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55486e601db44b1b9b92b45a24deac2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  adjustmentFrequency: 5
+  majorAdjustmentFrequency: 60
