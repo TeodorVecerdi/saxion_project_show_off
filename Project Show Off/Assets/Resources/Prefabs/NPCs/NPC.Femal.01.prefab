@@ -262,8 +262,9 @@ GameObject:
   - component: {fileID: 2730844896996259972}
   - component: {fileID: 1709069498658533362}
   - component: {fileID: 5797836648117512344}
-  - component: {fileID: 2934971996566777699}
   - component: {fileID: 5701753329029845232}
+  - component: {fileID: -8146401373559819812}
+  - component: {fileID: -3331648573724146513}
   m_Layer: 0
   m_Name: NPC.Femal.01
   m_TagString: Untagged
@@ -316,8 +317,8 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 0.529
-  m_Acceleration: 1
+  m_Speed: 0.5
+  m_Acceleration: 100
   avoidancePriority: 50
   m_AngularSpeed: 360
   m_StoppingDistance: 0
@@ -345,18 +346,6 @@ MonoBehaviour:
   trashBinSearchDistance: 15
   minMaxTrashWaitTime: {x: 2, y: 5}
   minMaxTrashWaitTime2: {x: 1, y: 3}
---- !u!114 &2934971996566777699
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3302615278676797385}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12dd127fe38b8c442a613d741af714d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!136 &5701753329029845232
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -371,6 +360,34 @@ CapsuleCollider:
   m_Height: 1.8
   m_Direction: 1
   m_Center: {x: 0, y: 0.9, z: 0}
+--- !u!54 &-8146401373559819812
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3302615278676797385}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &-3331648573724146513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3302615278676797385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12dd127fe38b8c442a613d741af714d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4001583917790253721
 GameObject:
   m_ObjectHideFlags: 0

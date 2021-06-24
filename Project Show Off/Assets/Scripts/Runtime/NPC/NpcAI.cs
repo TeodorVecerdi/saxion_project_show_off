@@ -25,20 +25,28 @@ namespace Runtime {
         /*debug:*/
         [ShowNativeProperty, UsedImplicitly] private string Status => aiState.ToString();
         [ShowNonSerializedField] private static bool debug;
+        [ShowNonSerializedField] private static bool debugText;
 
         private NavMeshAgent agent;
 
         private AIState aiState;
         private bool shouldChangeState;
         private float wanderTimer;
-
         private int trashQueue;
-
+        private Coroutine currentCoroutine;
         private List<IDisposable> eventUnsubscribeTokens;
+
+        [NonSerialized] public Vector3 DespawnPosition;
+        public bool IsDespawning { get; private set; }
 
         [Button, UsedImplicitly]
         private void ToggleDebug() {
             debug = !debug;
+        }
+        
+        [Button, UsedImplicitly]
+        private void ToggleDebugText() {
+            debugText = !debugText;
         }
 
         private void Awake() {
@@ -65,11 +73,22 @@ namespace Runtime {
         private void Update() {
             if (shouldChangeState) {
                 shouldChangeState = false;
-                StartCoroutine(GetNextState());
+                currentCoroutine = StartCoroutine(GetNextState());
             }
         }
 
+        public void Despawn() {
+            IsDespawning = true;
+            shouldChangeState = true;
+            StopCoroutine(currentCoroutine);
+        }
+
         private IEnumerator GetNextState() {
+            if (IsDespawning) {
+                aiState = AIState.Despawning;
+                return WalkDespawn();
+            }
+            
             if (aiState == AIState.ApproachBin) {
                 aiState = AIState.ThrowTrashBin;
                 return ThrowTrash(true);
@@ -98,7 +117,7 @@ namespace Runtime {
         }
 
         private IEnumerator ApproachBin(Vector3 trashBinPosition) {
-            //TODO: Speed up (agent + animator)
+            if (debug && debugText) Debug.Log($"[AI] Approach bin | binPosition = [{trashBinPosition}]");
             NavMesh.SamplePosition(trashBinPosition, out var navMeshHit, 1.0f, -1);
            
             // Couldn't find a path to the bin, bail out and just throw normal trash
@@ -117,6 +136,8 @@ namespace Runtime {
         }
 
         private IEnumerator ThrowTrash(bool isAtTrashBin) {
+            if (debug && debugText) Debug.Log($"[AI] Throwing trash | atBin = [{isAtTrashBin}]");
+            
             // wait a bit while stopped
             if (!isAtTrashBin) yield return WanderFor(Rand.Range(minMaxTrashWaitTime2));
             SpawnTrash(isAtTrashBin);
@@ -131,7 +152,7 @@ namespace Runtime {
             NavMesh.SamplePosition(newLocation + transform.position, out var navMeshHit, wanderDistance, -1);
             agent.SetDestination(navMeshHit.position);
 
-            if (debug) Debug.Log($"Chose new wander position {navMeshHit.position}");
+            if (debug && debugText) Debug.Log($"[AI] Chose new wander position {navMeshHit.position}");
             var timer = 0.0f;
             yield return new WaitUntil(() => {
                 timer += Time.deltaTime;
@@ -144,8 +165,24 @@ namespace Runtime {
             });
         }
 
+        private IEnumerator WalkDespawn() {
+            if (debug && debugText) Debug.Log("[AI] Despawning");
+            var stoppingDistance = Mathf.Max(agent.stoppingDistance, 2.0f);
+            if (NavMesh.SamplePosition(DespawnPosition, out var navMeshHit, 5.0f, -1)) {
+                agent.SetDestination(navMeshHit.position);
+                yield return new WaitUntil(() => agent.remainingDistance <= stoppingDistance);
+                if (debug && debugText) Debug.Log("[AI] Despawned");
+                Destroy(gameObject);
+            } else {
+                Destroy(gameObject);
+                Debug.LogError("Could not find suitable despawn location");
+            }
+        }
+        
         private bool TrashBinInRadius(out Vector3 trashBinPosition) {
-            var bins = Physics.SphereCastAll(transform.position, trashBinSearchDistance, Vector3.left, float.MaxValue).Where(hit => hit.transform.CompareTag("TrashBin")).ToList();
+            var bins = Physics.SphereCastAll(transform.position, trashBinSearchDistance, Vector3.left, float.MaxValue)
+                              .Where(hit => hit.transform.CompareTag("TrashBin") && hit.transform.GetComponent<BuildableObjectPreview>() == null)
+                              .ToList();
 
             trashBinPosition = Vector3.zero;
             if (bins.Count <= 0) return false;
@@ -206,7 +243,8 @@ namespace Runtime {
             Wander,
             ThrowTrashGround,
             ApproachBin,
-            ThrowTrashBin
+            ThrowTrashBin,
+            Despawning
         }
 
 #if UNITY_EDITOR
