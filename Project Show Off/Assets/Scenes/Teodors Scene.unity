@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 796.9917, g: 2924.5352, b: 5051.4453, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -579,6 +579,26 @@ PrefabInstance:
     - target: {fileID: 34408236079904313, guid: c5228e484dec7a046b074a08b600d833, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 34408236082239472, guid: c5228e484dec7a046b074a08b600d833, type: 3}
+      propertyPath: m_ColorTemperature
+      value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 34408236082239479, guid: c5228e484dec7a046b074a08b600d833, type: 3}
+      propertyPath: m_PenumbraTint
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 34408236082239479, guid: c5228e484dec7a046b074a08b600d833, type: 3}
+      propertyPath: m_UseContactShadow.m_Level
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 34408236082239479, guid: c5228e484dec7a046b074a08b600d833, type: 3}
+      propertyPath: m_UseContactShadow.m_Override
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 34408236082239479, guid: c5228e484dec7a046b074a08b600d833, type: 3}
+      propertyPath: m_UseContactShadow.m_UseOverride
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 38336145254295243, guid: c5228e484dec7a046b074a08b600d833, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -8799,16 +8819,12 @@ PrefabInstance:
       value: Game Camera
       objectReference: {fileID: 0}
     - target: {fileID: 8573404978122709731, guid: baf922d5f1c59a044b2fb5f87876d9fb, type: 3}
-      propertyPath: stopNaNs
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8573404978122709731, guid: baf922d5f1c59a044b2fb5f87876d9fb, type: 3}
-      propertyPath: dithering
-      value: 1
+      propertyPath: SMAAQuality
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8573404978122709731, guid: baf922d5f1c59a044b2fb5f87876d9fb, type: 3}
       propertyPath: antialiasing
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8573404978122709733, guid: baf922d5f1c59a044b2fb5f87876d9fb, type: 3}
       propertyPath: m_RootOrder
@@ -11201,18 +11217,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1614876351368593876, guid: 02715c8f47e4a7e47b1a6bbd031f9d0a, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1614876351368593876, guid: 02715c8f47e4a7e47b1a6bbd031f9d0a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.4689999
-      objectReference: {fileID: 0}
-    - target: {fileID: 1614876351368593876, guid: 02715c8f47e4a7e47b1a6bbd031f9d0a, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2029155590080418560, guid: 02715c8f47e4a7e47b1a6bbd031f9d0a, type: 3}
       propertyPath: text
       value: 
@@ -15813,6 +15817,10 @@ PrefabInstance:
     - target: {fileID: 6046915000412124252, guid: fd7068f616163634d9a4d3785013cadb, type: 3}
       propertyPath: m_Name
       value: UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 7414308251523061367, guid: fd7068f616163634d9a4d3785013cadb, type: 3}
+      propertyPath: m_Alpha
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8665863472196901638, guid: fd7068f616163634d9a4d3785013cadb, type: 3}
       propertyPath: m_SizeDelta.x

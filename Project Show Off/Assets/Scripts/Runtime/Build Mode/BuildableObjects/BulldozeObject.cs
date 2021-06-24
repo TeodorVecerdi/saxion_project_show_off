@@ -14,7 +14,7 @@ namespace Runtime {
 
         private void Start() {
             material = new Material(previewMaterial);
-            var meshRenderer = GetComponentInChildren<MeshRenderer>();
+            var meshRenderer = GetComponentInChildren<MeshRenderer>(true);
             meshRenderer.material = material;
         }
 

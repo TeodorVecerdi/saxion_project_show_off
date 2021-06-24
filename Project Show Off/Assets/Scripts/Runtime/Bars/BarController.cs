@@ -37,6 +37,9 @@ namespace Runtime.Bars {
 
             totalBuiltPeople = 0.0f;
             totalBuiltBiodiversity = 0.0f;
+            UpdateFillValue();
+            UpdateFill(peopleFill, peopleFillAmount);
+            UpdateFill(biodiversityFill, biodiversityFillAmount);
         }
 
         private void OnDestroy() {
@@ -50,6 +53,7 @@ namespace Runtime.Bars {
         private void UpdateFill(Image image, float fillAmount) {
             image.DOKill();
             image.DOFillAmount(fillAmount, fillAnimationDuration);
+            Debug.Log($"Updating {image} fillAmount to [{fillAmount}] from [{image.fillAmount}]");
         }
 
         /// <summary>
@@ -72,8 +76,8 @@ namespace Runtime.Bars {
         }
 
         private void UpdateBasedOnBuild(BuildableObject buildableObject) {
-            peopleFillAmount += buildableObject.PeopleHappinessAmount;
-            biodiversityFillAmount += buildableObject.BiodiversityHappinessAmount;
+            totalBuiltPeople += buildableObject.PeopleHappinessAmount;
+            totalBuiltBiodiversity += buildableObject.BiodiversityHappinessAmount;
             
             UpdateFillValue();
             UpdateFill(peopleFill, peopleFillAmount);
@@ -99,6 +103,11 @@ namespace Runtime.Bars {
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private float CalcPollution(float pollutionRatio)
-            => (1.0f - pollutionRatio).Clamped(0.0f, maxPollutionContribution.Clamped01());
+                // invert                                             
+            => ((1.0f - pollutionRatio)
+                // reduce
+              - maxPollutionContribution)
+                // clamp to maxContribution
+                .Clamped(0.0f, maxPollutionContribution.Clamped01());
     }
 }

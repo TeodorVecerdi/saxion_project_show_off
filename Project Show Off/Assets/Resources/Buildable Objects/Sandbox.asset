@@ -31,3 +31,5 @@ MonoBehaviour:
   buildAreas:
   - {fileID: 11400000, guid: 8b23daebf3ef6aa40914e40ae4444ef8, type: 2}
   buildScore: 140
+  peopleHappinessAmount: 1
+  biodiversityHappinessAmount: 0
