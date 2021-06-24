@@ -5,13 +5,12 @@ using DG.Tweening;
 using NaughtyAttributes;
 using Runtime.Event;
 using UnityEngine;
-using UnityEngine.Serialization;
 using EventType = Runtime.Event.EventType;
 
 namespace Runtime.Tutorial {
     public sealed class TutorialController : MonoBehaviour, IEventSubscriber {
         [SerializeField] private List<TutorialSlide> allTutorials;
-        [SerializeField] private float transitionFromY = -8.0f;
+        [SerializeField] private float transitionFromY = 0.0f;
         [SerializeField] private float transitionToY = 384.0f;
         
         private Dictionary<string, TutorialSlide> tutorialDictionary;
@@ -48,7 +47,7 @@ namespace Runtime.Tutorial {
         private void Start() {
             if(activeTutorialSlide == null) return;
 
-            activeTutorialSlide.GetComponent<RectTransform>().anchoredPosition = new Vector2(transitionToY, -8.0f);
+            activeTutorialSlide.GetComponent<RectTransform>().anchoredPosition = new Vector2(0.0f, transitionToY);
             activeTutorialSlide.gameObject.SetActive(true);
             activeTutorialSlide.Show(2.0f);
         }
@@ -65,16 +64,24 @@ namespace Runtime.Tutorial {
         public bool OnEvent(EventData eventData) {
             switch (eventData) {
                 case EmptyEvent {Type: EventType.ResetTutorial}: {
-                    var activeTutorial = allTutorials.First(slide => slide.gameObject.activeSelf);
                     foreach (var tutorialSlide in allTutorials) {
                         tutorialSlide.ResetTutorial();
+                    }
+
+                    var activeTutorial = allTutorials.FirstOrDefault(slide => slide.gameObject.activeSelf);
+                    if (activeTutorial == null) {
+                        activeTutorialSlide = allTutorials[0];
+                        activeTutorialSlide.GetComponent<RectTransform>().anchoredPosition = new Vector2(0.0f, transitionToY);
+                        activeTutorialSlide.gameObject.SetActive(true);
+                        activeTutorialSlide.Show(2.0f);
+                        return true;
                     }
                     
                     activeTutorial.Hide(0.0f).OnComplete(() => {
                         activeTutorial.gameObject.SetActive(false);
                         
                         activeTutorialSlide = allTutorials[0];
-                        activeTutorialSlide.GetComponent<RectTransform>().anchoredPosition = new Vector2(transitionToY, -8.0f);
+                        activeTutorialSlide.GetComponent<RectTransform>().anchoredPosition = new Vector2(0.0f, transitionToY);
                         activeTutorialSlide.gameObject.SetActive(true);
                         activeTutorialSlide.Show(2.0f);
                     });
