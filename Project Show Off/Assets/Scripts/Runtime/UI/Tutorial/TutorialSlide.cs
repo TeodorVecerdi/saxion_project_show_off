@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using NaughtyAttributes;
 using TMPro;
 using UnityCommons;
@@ -75,7 +76,12 @@ namespace Runtime.Tutorial {
 
         public void ResetTutorial() {
             isFinished = false;
-            tutorialContent.TutorialProgressBar.fillAmount = FillAmount = 0.0f;
+            FillAmount = 0.0f;
+            try {
+                tutorialContent.TutorialProgressBar.fillAmount = 0.0f;
+            } catch (Exception e) {
+                Debug.LogError(e);
+            }
             OnReset();
         }
     }

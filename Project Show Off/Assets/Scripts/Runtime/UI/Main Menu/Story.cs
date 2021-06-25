@@ -13,14 +13,10 @@ namespace Runtime {
         [SerializeField] private GameObject mainLightObject;
         [Space]
         [SerializeField] private float fadeTime = 0.75f;
-        [SerializeField] private float storyTime = 8.0f;
-        [SerializeField] private float textBoxTime = 4.0f;
 
         private CanvasGroup canvasGroup;
         private int currentStory;
         private bool started;
-        private bool showedTextBox;
-        private float storyTimer;
 
         private void Awake() {
             canvasGroup = GetComponent<CanvasGroup>();
@@ -31,7 +27,6 @@ namespace Runtime {
             canvasGroup.DOFade(1.0f, fadeTime).OnComplete(() => {
                 currentStory = 0;
                 started = true;
-                storyTimer = 0.0f;
                 stories[currentStory].Show(fadeTime); 
             });
         }
@@ -39,27 +34,18 @@ namespace Runtime {
         private void Update() {
             if (!started) return;
 
-            storyTimer += Time.unscaledDeltaTime;
-            if (storyTimer >= textBoxTime && !showedTextBox) {
-                showedTextBox = true;
-                stories[currentStory].ShowTextBox(fadeTime);
-            }
-
-            if (storyTimer >= storyTime) {
-                storyTimer = 0.0f;
+            if (stories[currentStory].Done) {
                 stories[currentStory].Hide(fadeTime);
-                showedTextBox = false;
                 currentStory++;
-
-                if (currentStory >= stories.Count) {
-                    skipButton.DOFade(0.0f, 0.5f);
+                if (currentStory < stories.Count) {
+                    stories[currentStory].Show(fadeTime);
+                } else {
+                    skipButton.DOFade(0.0f, fadeTime);
                     started = false;
                     Destroy(eventSystemGameObject);
                     StartCoroutine(SwitchSceneAfter(1.0f));
                     return;
                 }
-
-                stories[currentStory].Show(fadeTime);
             }
         }
 
