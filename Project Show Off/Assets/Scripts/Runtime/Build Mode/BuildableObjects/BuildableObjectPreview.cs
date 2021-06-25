@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Runtime.Data;
 using Runtime.Event;
 using UnityEngine;
+using UnityEngine.AI;
 using EventType = Runtime.Event.EventType;
 
 namespace Runtime {
@@ -12,6 +12,7 @@ namespace Runtime {
 
         private IDisposable performBuildEventUnsubscribeToken;
         private List<Collider> colliders;
+        private List<NavMeshObstacle> obstacles;
 
         private void Awake() {
             performBuildEventUnsubscribeToken = this.Subscribe(EventType.PerformBuild);
@@ -23,6 +24,13 @@ namespace Runtime {
             colliders.AddRange(gameObject.GetComponents<Collider>());
             foreach (var collider in colliders) {
                 collider.enabled = false;
+            }
+
+            obstacles = new List<NavMeshObstacle>();
+            gameObject.GetComponentsInChildren(true, obstacles);
+            obstacles.AddRange(gameObject.GetComponents<NavMeshObstacle>());
+            foreach (var navMeshObstacle in obstacles) {
+                navMeshObstacle.enabled = false;
             }
         }
         
@@ -41,6 +49,9 @@ namespace Runtime {
                 case PerformBuildEvent performBuildEvent: {
                     foreach (var collider in colliders) {
                         collider.enabled = true;
+                    }
+                    foreach (var navMeshObstacle in obstacles) {
+                        navMeshObstacle.enabled = true;
                     }
                     Destroy(directionIndicator);
                     Destroy(this);

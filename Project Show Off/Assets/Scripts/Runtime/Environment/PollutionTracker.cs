@@ -19,6 +19,7 @@ namespace Runtime {
             eventUnsubscribeTokens = new List<IDisposable> {
                 this.Subscribe(EventType.TrashPickupSuccess), 
                 this.Subscribe(EventType.TrashSpawn),
+                this.Subscribe(EventType.TrashPickupBin),
                 this.Subscribe(EventType.PollutionChange)
             };
         }

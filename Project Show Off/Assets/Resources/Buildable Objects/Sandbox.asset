@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57635ac4f96b4d2d9cb732e4878bbe7b, type: 3}
+  m_Name: Sandbox
+  m_EditorClassIdentifier: 
+  objectName: Sand Box
+  objectDescription: A box full of sand. Kids use it to build sand castles or digging
+    for treasure, the soft sand makes it safe for them to play in.
+  objectSprite: {fileID: 21300000, guid: e88864c0c1e3f2841b1ffa80b6788f46, type: 3}
+  prefab: {fileID: 6393172599133227736, guid: 93c55463be609444dab25d0c9fe236d4, type: 3}
+  constructionRequirements:
+    contents:
+    - trashMaterial: {fileID: 11400000, guid: 2484c42e7f6c4d949b8bb98b18aedf0b, type: 2}
+      mass: 6.01
+    - trashMaterial: {fileID: 11400000, guid: fec93a18793254344b0eb7b9c697fd84, type: 2}
+      mass: 12.2
+    - trashMaterial: {fileID: 11400000, guid: fec93a18793254344b0eb7b9c697fd84, type: 2}
+      mass: 2.5
+    - trashMaterial: {fileID: 11400000, guid: 4bce4b42e3e7157439edede8569afc9e, type: 2}
+      mass: 10.6
+  buildAreas:
+  - {fileID: 11400000, guid: 8b23daebf3ef6aa40914e40ae4444ef8, type: 2}
+  buildScore: 140
+  peopleHappinessAmount: 1
+  biodiversityHappinessAmount: 0.04

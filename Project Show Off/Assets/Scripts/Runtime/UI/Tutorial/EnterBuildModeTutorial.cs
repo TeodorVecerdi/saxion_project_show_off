@@ -15,6 +15,7 @@ namespace Runtime.Tutorial {
 
         private void OnDestroy() {
             gameModeChangeEventUnsubscribeToken?.Dispose();
+            gameModeChangeEventUnsubscribeToken = null;
         }
 
         protected override void Process() {
@@ -22,11 +23,13 @@ namespace Runtime.Tutorial {
             
             completed = false;
             gameModeChangeEventUnsubscribeToken?.Dispose();
+            gameModeChangeEventUnsubscribeToken = null;
             DOTween.To(value => FillAmount = value, 0.0f, 1.0f, 0.25f).OnComplete(FinishTutorial);
         }
 
         protected override void OnReset() {
             completed = false;
+            if(gameModeChangeEventUnsubscribeToken == null) gameModeChangeEventUnsubscribeToken = this.Subscribe(EventType.GameModeChange);
         }
 
         /// <summary>

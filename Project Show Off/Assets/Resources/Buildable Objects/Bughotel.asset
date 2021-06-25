@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57635ac4f96b4d2d9cb732e4878bbe7b, type: 3}
+  m_Name: Bughotel
+  m_EditorClassIdentifier: 
+  objectName: Bug Hotel
+  objectDescription: A hotel for many tiny insects to live in safely. You might even
+    find other animals in here like frogs or hedgehogs.
+  objectSprite: {fileID: 21300000, guid: bafffbaff1426cc4c9f7526446bee943, type: 3}
+  prefab: {fileID: 6393172599133227736, guid: 63ea33177dfc0284d92bbd5479c97654, type: 3}
+  constructionRequirements:
+    contents:
+    - trashMaterial: {fileID: 11400000, guid: fec93a18793254344b0eb7b9c697fd84, type: 2}
+      mass: 8.25
+  buildAreas:
+  - {fileID: 11400000, guid: 8b23daebf3ef6aa40914e40ae4444ef8, type: 2}
+  buildScore: 60
+  peopleHappinessAmount: 0
+  biodiversityHappinessAmount: 0.825

@@ -19,3 +19,4 @@ MonoBehaviour:
   pickupDuration: 0.45
   pollutionAmount: 0.9
   prefab: {fileID: 2346935513933802946, guid: f69176e800a44d14996a0a1ff93b82c5, type: 3}
+  pickupScore: 12

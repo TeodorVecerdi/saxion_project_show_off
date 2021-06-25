@@ -1,5 +1,56 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &240900919
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 240900920}
+  - component: {fileID: 240900921}
+  m_Layer: 0
+  m_Name: NPC
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &240900920
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 240900919}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -73.736, y: 16.836, z: 231.021}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 224304522586422646}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &240900921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 240900919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5b83f88421aa3c41b2cc8399677fd17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NpcPrefabs:
+  - {fileID: 5797836648117512344, guid: 9217930e0a7f57c42bc7dd16abab38b6, type: 3}
+  - {fileID: 7461235872852294541, guid: 58ffa2b0a7a0220499582f0fff92dbff, type: 3}
+  - {fileID: 4360861932388085081, guid: 54cf99860973f2543b2559083a046378, type: 3}
+  - {fileID: -3748919729093770057, guid: 4f68d23ce8c693d4c8c7ae44b74e65ff, type: 3}
+  minNpcCount: 8
+  maxNpcCount: 30
+  spawnRadius: 5
 --- !u!1 &1987755476374715045
 GameObject:
   m_ObjectHideFlags: 0
@@ -30,6 +81,7 @@ Transform:
   - {fileID: 8410512923989255050}
   - {fileID: 8410512925163984021}
   - {fileID: 8410512925077591084}
+  - {fileID: 240900920}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -122,10 +174,11 @@ MonoBehaviour:
   from: {x: -69.1, y: 3.02, z: 199.5}
   to: {x: 39.9, y: 3, z: 227.6}
   worldMaxHeight: 62.7
-  spawnInterval: 10
+  spawnInterval: 60
   trashScaleUpDuration: 0.1
   initialTrashCount: 50
   yOffset: 0.25
+  difficultyTimeMultiplier: 20
 --- !u!1 &8410512925163984027
 GameObject:
   m_ObjectHideFlags: 0
@@ -140,6 +193,7 @@ GameObject:
   - component: {fileID: 8410512925163984017}
   - component: {fileID: 8410512925163984019}
   - component: {fileID: 274167229499031252}
+  - component: {fileID: 6056455597912789605}
   m_Layer: 0
   m_Name: Scripts
   m_TagString: Untagged
@@ -256,3 +310,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88f3fb188cd547cb8ea977ab1d50e2e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6056455597912789605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8410512925163984027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55486e601db44b1b9b92b45a24deac2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjustmentFrequency: 5
+  majorAdjustmentFrequency: 60

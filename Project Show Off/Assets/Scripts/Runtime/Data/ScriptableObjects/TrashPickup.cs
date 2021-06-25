@@ -10,6 +10,8 @@ namespace Runtime.Data {
         [SerializeField, Tooltip("In seconds")] private float pickupDuration = 1.0f;
         [SerializeField] private float pollutionAmount = 1.0f;
         [SerializeField] private Pickup prefab;
+        [Space]
+        [SerializeField] private int pickupScore = 1;
 
         public string ItemName => itemName;
         public TrashMaterial TrashMaterial => trashMaterial;
@@ -18,5 +20,6 @@ namespace Runtime.Data {
         public float PickupDuration => pickupDuration;
         public float PollutionAmount => pollutionAmount;
         public Pickup Prefab => prefab;
+        public int PickupScore => pickupScore;
     }
 }

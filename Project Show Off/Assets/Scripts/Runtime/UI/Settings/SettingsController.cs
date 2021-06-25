@@ -6,6 +6,7 @@ using TMPro;
 using UnityCommons;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using EventType = Runtime.Event.EventType;
 
@@ -126,7 +127,8 @@ namespace Runtime {
         }
 
         public void OnExitClicked() {
-            Application.Quit();
+            Time.timeScale = 1.0f;
+            SceneManager.LoadSceneAsync(1);
         }
     }
 }

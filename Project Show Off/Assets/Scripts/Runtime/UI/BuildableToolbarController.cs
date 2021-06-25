@@ -21,7 +21,7 @@ namespace Runtime {
 
         private void Awake() {
             rectTransform = (RectTransform) transform;
-            width = rectTransform.sizeDelta.x;
+            width = rectTransform.sizeDelta.x + 128.0f;
 
             eventUnsubscribeTokens = new List<IDisposable> {
                 this.Subscribe(EventType.BeginBuild),
@@ -53,7 +53,11 @@ namespace Runtime {
             }
         }
 
-        private void SetViewVisible(bool visible) {
+        public void OverrideVisible(bool newVisible) {
+            isVisible = newVisible;
+        }
+
+        public void SetViewVisible(bool visible) {
             if (isVisible == visible) return;
             isVisible = visible;
             rectTransform.DOKill();

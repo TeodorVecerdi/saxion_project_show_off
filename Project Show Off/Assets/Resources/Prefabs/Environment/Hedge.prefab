@@ -44,13 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 013e1bcf3f73464aa5eaa771e84f15ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectors:
-  - {fileID: 11400000, guid: 60c2f0d0eff2e2f4783687bf73f93bcb, type: 2}
   effectors2:
   - Effector: {fileID: 11400000, guid: 60c2f0d0eff2e2f4783687bf73f93bcb, type: 2}
     Target: {fileID: 2129437604129065399}
     GetLastTarget: 0
-  target: {fileID: 2129437604129065399}
 --- !u!1 &8542381766718673742
 GameObject:
   m_ObjectHideFlags: 0
@@ -96,13 +93,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 013e1bcf3f73464aa5eaa771e84f15ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectors:
-  - {fileID: 11400000, guid: d0770b9e698a2244fa081104bd77ada4, type: 2}
   effectors2:
   - Effector: {fileID: 11400000, guid: d0770b9e698a2244fa081104bd77ada4, type: 2}
     Target: {fileID: 6877491601508864149}
     GetLastTarget: 0
-  target: {fileID: 6877491601508864149}
 --- !u!1 &9192739437841155720
 GameObject:
   m_ObjectHideFlags: 0

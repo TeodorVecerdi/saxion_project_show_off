@@ -6,9 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/_Preloader.unity
+    guid: 19b6b9f2d5bd3eb40b8978d2f3c83d26
+  - enabled: 1
     path: Assets/Scenes/Main Menu.unity
     guid: c8d181972f0088141a66ad3540422939
   - enabled: 1
     path: Assets/Scenes/Teodors Scene.unity
     guid: 23fcd04de5ec595419d092f77fcb3c6e
+  - enabled: 1
+    path: Assets/Scenes/LoseScreen.unity
+    guid: 91b96349fe228da4abe5e2b9dd83460d
+  - enabled: 1
+    path: Assets/Scenes/WinScreen.unity
+    guid: 5f5996395a4c0b5439218cdee9169aa6
   m_configObjects: {}

@@ -107,6 +107,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6407123586696090803}
   - component: {fileID: 5635075646527767708}
+  - component: {fileID: 5955048367262721843}
   m_Layer: 0
   m_Name: Gate
   m_TagString: Untagged
@@ -153,6 +154,22 @@ LODGroup:
     renderers:
     - renderer: {fileID: 1489704638036172805}
   m_Enabled: 1
+--- !u!208 &5955048367262721843
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6026234494665379337}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 2.415, y: 1.855, z: 0.76}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 1.86, z: 0.33}
+  m_TimeToStationary: 0.5
 --- !u!1 &7976170071161786546
 GameObject:
   m_ObjectHideFlags: 0
